@@ -4,7 +4,7 @@
   "author": "wso2",
   "license": "Apache-2.0",
   "summary": "puppet module",
-  "source": "https://github.com/wso2/puppet-apim",
+  "source": "https://github.com/wso2/puppet-apim.git",
   "project_page": "http://wso2.com/api-management/",
   "operatingsystem_support": [
     {
