@@ -1,0 +1,78 @@
+# Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+wso2::hostname: wso2am-api-publisher
+wso2::mgt_hostname: wso2am-api-publisher
+
+wso2::apim_keymanager:
+  host: wso2am-api-key-manager
+  port: 9443
+  username: admin
+  password: admin
+
+wso2::apim_gateway:
+  host: wso2am-gateway-manager
+# Publisher component calls Gateway admin service internally (via K8S service) to create Synapse artifacts
+# Therefore, admin service port should point to corresponding K8S service target port
+  port: 9443
+  api_endpoint_host: wso2am-gateway-manager
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+  api_token_revoke_endpoint_port: 8280
+  secure_api_token_revoke_endpoint_port: 8243
+  username: admin
+  password: admin
+
+wso2::apim_store:
+  host: wso2am-api-store
+# This port is used to generate the Store app URL to which the browser is redirected when accessing the Store from Publisher
+# Therefore, it should point to the corresponding K8S service NodePort
+  port: 32019
+
+wso2::apim_publisher:
+  host: wso2am-api-publisher
+# This port is used to generate the Publisher app URL. It should point to the corresponding K8S service NodePort
+  port: 32017
+
+wso2::clustering:
+  enabled: true
+  domain: pub.store.am.wso2.domain
+  sub_domain: worker
+  membership_scheme: kubernetes
+  local_member_port: 4000
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2am-api-publisher,wso2am-api-store
+
+# In Kubernetes proxy ports need to be configured to match with node ports.
+# Following ports have been defined for servlet HTTP and HTTPS transports.
+wso2::ports:
+  proxyPort:
+    http: 32016
+    https: 32017
+
+wso2::registry_mounts:
+  wso2_config_db:
+    path: /_system/config
+    target_path: /_system/config/api-publisher
+    read_only: false
+    registry_root: /
+    enable_cache: true
+
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: false
+    registry_root: /
+    enable_cache: true

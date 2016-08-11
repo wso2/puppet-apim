@@ -1,0 +1,67 @@
+# Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+wso2::hostname: wso2am-api-key-manager
+wso2::mgt_hostname: wso2am-api-key-manager
+
+wso2::apim_keymanager:
+  host: wso2am-api-key-manager
+  port: 9443
+  username: admin
+  password: admin
+
+wso2::apim_gateway:
+  host: wso2am-gateway-manager
+  port: 9443
+  api_endpoint_host: wso2am-gateway-manager
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+# Store and Gateway components may call revoke API internally (via K8S service) to invalidate access tokens
+# Therefore, api token revoke port should point to corresponding K8S service target port
+  api_token_revoke_endpoint_port: 8280
+  secure_api_token_revoke_endpoint_port: 8243
+  username: admin
+  password: admin
+
+wso2::clustering:
+  enabled: true
+  domain: km.am.wso2.domain
+  sub_domain: worker
+  membership_scheme: kubernetes
+  local_member_port: 4000
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2am-api-key-manager
+
+# In Kubernetes proxy ports need to be configured to match with node ports.
+# Following ports have been defined for servlet HTTP and HTTPS transports.
+wso2::ports:
+  proxyPort:
+    http: 32013
+    https: 32014
+
+wso2::registry_mounts:
+  wso2_config_db:
+    path: /_system/config
+    target_path: /_system/config/api-key-manager
+    read_only: false
+    registry_root: /
+    enable_cache: true
+
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: false
+    registry_root: /
+    enable_cache: true
