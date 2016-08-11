@@ -85,6 +85,7 @@
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
+                        <version>0.12</version>
                         <configuration>
                             <licenses>
                                 <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
