@@ -20,7 +20,7 @@
 *.tar
 *.jar
 
-target/
+pkg/
 
 # Vagrant user data
 .vagrant/

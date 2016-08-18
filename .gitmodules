@@ -1,3 +1,0 @@
-[submodule "modules/wso2base"]
-	path = modules/wso2base
-	url = https://github.com/wso2/puppet-base
