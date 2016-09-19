@@ -1,0 +1,78 @@
+# Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+wso2::mgt_hostname: store.dev.wso2.org
+wso2::hostname: store.dev.wso2.org
+
+wso2::clustering:
+  enabled: true
+  domain: pub.store.am.wso2.domain
+  sub_domain: worker
+  local_member_host: "%{::ipaddress}"
+  local_member_port: 4000
+# WKA membership scheme
+  membership_scheme: wka
+  wka:
+    members:
+      -
+        hostname: 192.168.100.3
+        port: 4000
+      -
+        hostname: 192.168.100.4
+        port: 4000
+# AWS membership scheme
+#   membership_scheme: aws
+#   aws:
+#     access_key: access-key
+#     secret_key: secret-key
+#     security_group: security-group 
+#     host_header: host-header
+#     region: region
+#     tag_key: tag-key
+#     tag_value: tag-value
+
+wso2::registry_mounts:
+ wso2_config_db:
+   path: /_system/config
+   target_path: /_system/config/apim-store
+   read_only: false
+   registry_root: /
+   enable_cache: true
+
+ wso2_gov_db:
+   path: /_system/governance
+   target_path: /_system/governance
+   read_only: false
+   registry_root: /
+   enable_cache: true
+
+# SSO Configuration
+wso2::sso_authentication:
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2am-store
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://store.dev.wso2.org:9443/acs
+
+wso2::file_list:
+  - "repository/resources/security/%{hiera('wso2::trust_store')}"
+
+wso2::enable_thrift_server: false
+wso2::enable_advance_throttling: true
+wso2::enable_data_publisher: false
+wso2::enable_block_condition: false
+wso2::enable_jms_connection_details: false
+wso2::enable_traffic_manager_specific_axis2_configurations: false
+wso2::enable_traffic_manager_specific_registry_configurations: false
