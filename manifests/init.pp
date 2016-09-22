@@ -15,45 +15,146 @@
 # ------------------------------------------------------------------------------
 
 # Manages WSO2 API Manager deployment
-class wso2am inherits wso2base {
-  $am_datasources     = hiera('wso2::am_datasources')
-  $apim_gateway       = hiera('wso2::apim_gateway')
-  $apim_keymanager    = hiera('wso2::apim_keymanager')
-  $apim_publisher     = hiera('wso2::apim_publisher')
-  $apim_store         = hiera('wso2::apim_store')
-  $apim_traffic_manager    = hiera('wso2::apim_traffic_manager', { })
-  $is_datasource      = hiera('wso2::is_datasource')
-  $am_datasource     = hiera('wso2::am_datasource')
-  $enable_advance_throttling = hiera('wso2::enable_advance_throttling', { })
-  $key_validator_client_type = hiera('wso2::key_validator_client_type', { })
-  $enable_thrift_server = hiera('wso2::enable_thrift_server', { })
-  $thrift_server_host = hiera('wso2::thrift_server_host', { })
-  $key_store = hiera('wso2::key_store', { })
-  $trust_store = hiera('wso2::trust_store', { })
-  $enable_data_publisher = hiera('wso2::enable_data_publisher', { })
-  $enable_block_condition = hiera('wso2::enable_block_condition', { })
-  $enable_jms_connection_details = hiera('wso2::enable_jms_connection_details', { })
-  $apim_gateway_disble_jms_connection_parameters = hiera('wso2::apim_gateway_disble_jms_connection_parameters', "false")
+class wso2am (
+  # wso2am specific configuration data
+  $is_datasource          = $wso2am::params::is_datasource,
+  $am_datasource          = $wso2am::params::am_datasource,
+  $am_datasources           = $wso2am::params::am_datasources,
+  $service_name             = $wso2am::params::service_name,
+  $hostname                 = $wso2am::params::hostname,
+  $mgt_hostname             = $wso2am::params::mgt_hostname,
+  $apim_traffic_manager     = $wso2am::params::apim_traffic_manager,
+  $apim_gateway             = $wso2am::params::apim_gateway,
+  $apim_keymanager          = $wso2am::params::apim_keymanager,
+  $apim_store               = $wso2am::params::apim_store,
+  $apim_publisher           = $wso2am::params::apim_publisher,
+  $enable_advance_throttling = $wso2am::params::enable_advance_throttling,
+  $enable_thrift_server      = $wso2am::params::enable_thrift_server,
+  $thrift_server_host        = $wso2am::params::thrift_server_host,
+  $key_validator_client_type = $wso2am::params::key_validator_client_type,
+  $enable_data_publisher     = $wso2am::params::enable_data_publisher,
+  $enable_block_condition    = $wso2am::params::enable_block_condition,
+  $enable_jms_connection_details = $wso2am::params::enable_jms_connection_details,
+  $apim_gateway_disable_jms_event_parameters = $wso2am::params::apim_gateway_disable_jms_event_parameters,
+  $enable_traffic_manager_specific_axis2_configurations = $wso2am::params::enable_traffic_manager_specific_axis2_configurations,
+  $enable_traffic_manager_specific_registry_configurations = $wso2am::params::enable_traffic_manager_specific_registry_configurations,
 
-  wso2base::server { $wso2base::carbon_home:
-    maintenance_mode    => $wso2base::maintenance_mode,
-    pack_filename       => $wso2base::pack_filename,
-    pack_dir            => $wso2base::pack_dir,
-    carbon_home_symlink => $wso2base::carbon_home_symlink,
-    install_mode        => $wso2base::install_mode,
-    install_dir         => $wso2base::install_dir,
-    pack_extracted_dir  => $wso2base::pack_extracted_dir,
-    wso2_user           => $wso2base::wso2_user,
-    wso2_group          => $wso2base::wso2_group,
-    patches_dir         => $wso2base::patches_dir,
-    service_name        => $wso2base::service_name,
-    service_template    => $wso2base::service_template,
-    hosts_template      => $wso2base::hosts_template,
-    template_list       => $wso2base::template_list,
-    directory_list      => $wso2base::directory_list,
-    file_list           => $wso2base::file_list,
-    system_file_list    => $wso2base::system_file_list,
-    enable_secure_vault => $wso2base::enable_secure_vault,
-    key_store_password  => $wso2base::key_store_password
+  $packages               = $wso2am::params::packages,
+  $template_list          = $wso2am::params::template_list,
+  $file_list              = $wso2am::params::file_list,
+  $patch_list             = $wso2am::params::patch_list,
+  $cert_list              = $wso2am::params::cert_list,
+  $system_file_list       = $wso2am::params::system_file_list,
+  $directory_list         = $wso2am::params::directory_list,
+  $hosts_mapping          = $wso2am::params::hosts_mapping,
+  $java_home              = $wso2am::params::java_home,
+  $java_prefs_system_root = $wso2am::params::java_prefs_system_root,
+  $java_prefs_user_root   = $wso2am::params::java_prefs_user_root,
+  $vm_type                = $wso2am::params::vm_type,
+  $wso2_user              = $wso2am::params::wso2_user,
+  $wso2_group             = $wso2am::params::wso2_group,
+  $product_name           = $wso2am::params::product_name,
+  $product_version        = $wso2am::params::product_version,
+  $platform_version       = $wso2am::params::platform_version,
+  $carbon_home_symlink    = $wso2am::params::carbon_home_symlink,
+  $remote_file_url        = $wso2am::params::remote_file_url,
+  $maintenance_mode       = $wso2am::params::maintenance_mode,
+  $install_mode           = $wso2am::params::install_mode,
+  $install_dir            = $wso2am::params::install_dir,
+  $pack_dir               = $wso2am::params::pack_dir,
+  $pack_filename          = $wso2am::params::pack_filename,
+  $pack_extracted_dir     = $wso2am::params::pack_extracted_dir,
+  $patches_dir            = $wso2am::params::patches_dir,
+  $service_name           = $wso2am::params::service_name,
+  $service_template       = $wso2am::params::service_template,
+  $ipaddress              = $wso2am::params::ipaddress,
+  $enable_secure_vault    = $wso2am::params::enable_secure_vault,
+  $secure_vault_configs   = $wso2am::params::secure_vault_configs,
+  $key_stores             = $wso2am::params::key_stores,
+  $carbon_home            = $wso2am::params::carbon_home,
+  $pack_file_abs_path     = $wso2am::params::pack_file_abs_path,
+
+  # Templated configuration parameters
+  $master_datasources     = $wso2am::params::master_datasources,
+  $registry_mounts        = $wso2am::params::registry_mounts,
+  $hostname               = $wso2am::params::hostname,
+  $mgt_hostname           = $wso2am::params::mgt_hostname,
+  $worker_node            = $wso2am::params::worker_node,
+  $usermgt_datasource     = $wso2am::params::usermgt_datasource,
+  $local_reg_datasource   = $wso2am::params::local_reg_datasource,
+  $clustering             = $wso2am::params::clustering,
+  $dep_sync               = $wso2am::params::dep_sync,
+  $ports                  = $wso2am::params::ports,
+  $jvm                    = $wso2am::params::jvm,
+  $fqdn                   = $wso2am::params::fqdn,
+  $sso_authentication     = $wso2am::params::sso_authentication,
+  $user_management        = $wso2am::params::user_management
+) inherits wso2am::params {
+
+  validate_string($is_datasource)
+
+  validate_hash($master_datasources)
+  if $registry_mounts != undef {
+    validate_hash($registry_mounts)
   }
+  validate_string($hostname)
+  validate_string($mgt_hostname)
+  validate_bool($worker_node)
+  validate_string($usermgt_datasource)
+  validate_string($local_reg_datasource)
+  validate_hash($clustering)
+  validate_hash($dep_sync)
+  validate_hash($ports)
+  validate_hash($jvm)
+  validate_string($fqdn)
+  validate_hash($sso_authentication)
+  validate_hash($user_management)
+
+  class { '::wso2base':
+    packages               => $packages,
+    template_list          => $template_list,
+    file_list              => $file_list,
+    patch_list             => $patch_list,
+    cert_list              => $cert_list,
+    system_file_list       => $system_file_list,
+    directory_list         => $directory_list,
+    hosts_mapping          => $hosts_mapping,
+    java_home              => $java_home,
+    java_prefs_system_root => $java_prefs_system_root,
+    java_prefs_user_root   => $java_prefs_user_root,
+    vm_type                => $vm_type,
+    wso2_user              => $wso2_user,
+    wso2_group             => $wso2_group,
+    product_name           => $product_name,
+    product_version        => $product_version,
+    platform_version       => $platform_version,
+    carbon_home_symlink    => $carbon_home_symlink,
+    remote_file_url        => $remote_file_url,
+    maintenance_mode       => $maintenance_mode,
+    install_mode           => $install_mode,
+    install_dir            => $install_dir,
+    pack_dir               => $pack_dir,
+    pack_filename          => $pack_filename,
+    pack_extracted_dir     => $pack_extracted_dir,
+    patches_dir            => $patches_dir,
+    service_name           => $service_name,
+    service_template       => $service_template,
+    ipaddress              => $ipaddress,
+    enable_secure_vault    => $enable_secure_vault,
+    secure_vault_configs   => $secure_vault_configs,
+    key_stores             => $key_stores,
+    carbon_home            => $carbon_home,
+    pack_file_abs_path     => $pack_file_abs_path
+  }
+
+  contain wso2base
+  contain wso2base::system
+  contain wso2base::clean
+  contain wso2base::install
+  contain wso2base::configure
+  contain wso2base::service
+
+  Class['::wso2base'] -> Class['::wso2base::system']
+  -> Class['::wso2base::clean'] -> Class['::wso2base::install']
+  -> Class['::wso2base::configure'] ~> Class['::wso2base::service']
 }
