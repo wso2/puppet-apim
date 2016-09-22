@@ -27,9 +27,6 @@ class wso2am::params {
     $is_datasource            = hiera('wso2::is_datasource')
     $am_datasource            = hiera('wso2::am_datasource')
     $am_datasources           = hiera_hash('wso2::am_datasources')
-    $service_name             = hiera('wso2::service_name')
-    $hostname                 = hiera('wso2::hostname')
-    $mgt_hostname             = hiera('wso2::mgt_hostname')
     $apim_traffic_manager     = hiera_hash('wso2::apim_traffic_manager')
     $apim_gateway             = hiera_hash('wso2::apim_gateway')
     $apim_keymanager          = hiera_hash('wso2::apim_keymanager')
@@ -121,10 +118,6 @@ class wso2am::params {
         validation_interval  => '30000'
       }
     }
-
-    $service_name             = 'wso2am'
-    $hostname                 = 'am.dev.wso2.org'
-    $mgt_hostname             = 'am.dev.wso2.org'
 
     $apim_traffic_manager     ={
       host                 => 'am.dev.wso2.org',
