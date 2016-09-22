@@ -206,7 +206,7 @@ class wso2am::params {
     }
 
     $master_datasources       = {
-      wso2_carbon_db => {
+      wso2_carbon_db   => {
         name                => 'WSO2_CARBON_DB',
         description         => 'The datasource used for registry and user manager',
         driver_class_name   => 'org.h2.Driver',
@@ -220,6 +220,21 @@ class wso2am::params {
         default_auto_commit => false,
         validation_query    => 'SELECT 1',
         validation_interval => '30000'
+      },
+      wso2_mb_store_db => {
+        name                => 'WSO2_MB_STORE_DB',
+        description         => 'The datasource used for message broker database',
+        driver_class_name   => 'org.h2.Driver',
+        url                 => 'jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000',
+        username            => 'wso2carbon',
+        password            => 'wso2carbon',
+        jndi_config         => 'WSO2MBStoreDB',
+        max_active          => '50',
+        max_wait            => '60000',
+        test_on_borrow      => true,
+        default_auto_commit => false,
+        validation_query    => 'SELECT 1',
+        validation_interval => '30000',
       }
     }
 
