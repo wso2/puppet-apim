@@ -13,8 +13,8 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: gw.dev.wso2.org
-wso2::hostname: gw.dev.wso2.org
+wso2::mgt_hostname: mgt.gw.dev.wso2.org
+wso2::hostname: mgt.gw.dev.wso2.org
 
 wso2::apim_traffic_manager:
   host: tm.dev.wso2.org

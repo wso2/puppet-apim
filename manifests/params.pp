@@ -55,7 +55,7 @@ class wso2am::params {
     $patch_list               = hiera('wso2::patch_list', undef)
     $system_file_list         = hiera_hash('wso2::system_file_list', undef)
     $directory_list           = hiera_array('wso2::directory_list', undef)
-    $cert_list                = hiera_hash('wso2::cert_list', undef)
+    $cert_list                = hiera_array('wso2::cert_list', undef)
     $hosts_mapping            = hiera_hash('wso2::hosts_mapping')
 
     $master_datasources       = hiera_hash('wso2::master_datasources')
