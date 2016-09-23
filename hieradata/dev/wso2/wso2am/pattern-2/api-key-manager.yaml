@@ -17,7 +17,7 @@ wso2::mgt_hostname: km.dev.wso2.org
 wso2::hostname: km.dev.wso2.org
 
 wso2::apim_traffic_manager:
-  host: km.dev.wso2.org
+  host: tm.dev.wso2.org
   port: 9443
   receiver_url_port: 9611
   auth_url_port: 9711

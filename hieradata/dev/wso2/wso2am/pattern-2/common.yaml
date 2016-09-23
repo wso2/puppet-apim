@@ -27,10 +27,10 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-wso2::ports:
-  proxyPort:
-    http: 80
-    https: 443
+#wso2::ports:
+#  proxyPort:
+#    http: 80
+#    https: 443
 
 wso2::file_list:
   - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
@@ -47,7 +47,7 @@ wso2::hostname: am.dev.wso2.org
 wso2::mgt_hostname: am.dev.wso2.org
 
 wso2::apim_traffic_manager:
-  host: am.dev.wso2.org
+  host: tm.dev.wso2.org
   port: 9443
   receiver_url_port: 9611
   auth_url_port: 9711
@@ -56,7 +56,7 @@ wso2::apim_traffic_manager:
   password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_gateway:
-  host: am.dev.wso2.org
+  host: gw.dev.wso2.org
   port: 9443
   api_endpoint_host: am.dev.wso2.org
   api_endpoint_port: 8280
@@ -67,17 +67,17 @@ wso2::apim_gateway:
   password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_keymanager:
-  host: am.dev.wso2.org
+  host: km.dev.wso2.org
   port: 9443
   username: "%{hiera('wso2::super_admin::username')}"
   password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_store:
-  host: am.dev.wso2.org
+  host: store.dev.wso2.org
   port: 9443
 
 wso2::apim_publisher:
-  host: am.dev.wso2.org
+  host: pub.dev.wso2.org
   port: 9443
 
 wso2::registry_mounts:
