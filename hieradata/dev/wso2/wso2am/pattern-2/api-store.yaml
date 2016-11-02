@@ -18,7 +18,7 @@ wso2::hostname: store.dev.wso2.org
 
 wso2::clustering:
   enabled: true
-  domain: pub.store.am.wso2.domain
+  domain: wso2.pub.store.domain
   sub_domain: worker
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
@@ -26,9 +26,6 @@ wso2::clustering:
   membership_scheme: wka
   wka:
     members:
-      -
-        hostname: 192.168.100.3
-        port: 4000
       -
         hostname: 192.168.100.4
         port: 4000
@@ -69,7 +66,7 @@ wso2::sso_authentication:
 wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
 
-wso2::enable_thrift_server: false
+wso2::enable_thrift_server: true
 wso2::enable_advance_throttling: true
 wso2::enable_data_publisher: false
 wso2::enable_block_condition: false

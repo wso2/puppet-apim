@@ -27,7 +27,7 @@ wso2::apim_traffic_manager:
 
 wso2::clustering:
   enabled: true
-  domain: gw.am.wso2.domain
+  domain: wso2.am.domain
   sub_domain: worker
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
@@ -35,9 +35,6 @@ wso2::clustering:
   membership_scheme: wka
   wka:
     members:
-      -
-        hostname: 192.168.100.5
-        port: 4000
       -
         hostname: 192.168.100.6
         port: 4000
@@ -53,7 +50,7 @@ wso2::clustering:
 #     tag_value: tag-value
 
 wso2::dep_sync:
-  enabled: false
+  enabled: true
   auto_checkout: true
   auto_commit: false
   repository_type: svn
@@ -78,7 +75,6 @@ wso2::registry_mounts:
    registry_root: /
    enable_cache: true
 
-wso2::enable_thrift_server: false
 wso2::thrift_server_host: localhost
 wso2::key_validator_client_type: WSClient
 
@@ -86,5 +82,7 @@ wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
 
 wso2::apim_gateway_disable_jms_event_parameters: true
+wso2::apim_gateway_disable_jms_event_publisher_parameters: true
 wso2::enable_traffic_manager_specific_axis2_configurations: false
 wso2::enable_traffic_manager_specific_registry_configurations: false
+wso2::enable_advance_throttling: true

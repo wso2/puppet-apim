@@ -19,6 +19,7 @@ classes:
 wso2::template_list:
   - repository/conf/datasources/am-datasources.xml
   - repository/conf/api-manager.xml
+#  - repository/conf/log4j.properties
   - repository/conf/identity/identity.xml
   - repository/conf/identity/application-authentication.xml
   - repository/conf/identity/EndpointConfig.properties
@@ -58,7 +59,7 @@ wso2::apim_traffic_manager:
 wso2::apim_gateway:
   host: gw.dev.wso2.org
   port: 9443
-  api_endpoint_host: am.dev.wso2.org
+  api_endpoint_host: gw.dev.wso2.org
   api_endpoint_port: 8280
   secure_api_endpoint_port: 8243
   api_token_revoke_endpoint_port: 8280
@@ -69,6 +70,15 @@ wso2::apim_gateway:
 wso2::apim_keymanager:
   host: km.dev.wso2.org
   port: 9443
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
+wso2::apim_analytics:
+  enabled: true
+  host: analytics.dev.wso2.org
+  port: 9443
+  receiver_url_port: 7611
+  auth_url_port: 7711
   username: "%{hiera('wso2::super_admin::username')}"
   password: "%{hiera('wso2::super_admin::password')}"
 
@@ -123,7 +133,6 @@ wso2::am_datasource: wso2_am_db
 ## Uncomment the following key_store and trust_store to include the certificate of keymanager in gateway in a clustered setup
 #wso2::key_store: wso2carbon.jks
 #wso2::trust_store: client-truststore.jks
-
 
 wso2::am_datasources:
   wso2_am_db:
@@ -208,8 +217,9 @@ wso2::thrift_server_host: localhost
 wso2::key_validator_client_type: ThriftClient
 wso2::enable_data_publisher: false
 wso2::enable_block_condition: true
-wso2::enable_jms_connection_details: false
+wso2::enable_jms_connection_details: true
 wso2::apim_gateway_disable_jms_event_parameters: false
+wso2::apim_gateway_disable_jms_event_publisher_parameters: false
 wso2::enable_traffic_manager_specific_axis2_configurations: false
 wso2::enable_traffic_manager_specific_registry_configurations: false
 wso2::key_store: wso2carbon.jks

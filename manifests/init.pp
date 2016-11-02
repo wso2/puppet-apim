@@ -26,6 +26,7 @@ class wso2am (
   $apim_traffic_manager     = $wso2am::params::apim_traffic_manager,
   $apim_gateway             = $wso2am::params::apim_gateway,
   $apim_keymanager          = $wso2am::params::apim_keymanager,
+  $apim_analytics           = $wso2am::params::apim_analytics,
   $apim_store               = $wso2am::params::apim_store,
   $apim_publisher           = $wso2am::params::apim_publisher,
   $enable_advance_throttling = $wso2am::params::enable_advance_throttling,
@@ -36,6 +37,7 @@ class wso2am (
   $enable_block_condition    = $wso2am::params::enable_block_condition,
   $enable_jms_connection_details = $wso2am::params::enable_jms_connection_details,
   $apim_gateway_disable_jms_event_parameters = $wso2am::params::apim_gateway_disable_jms_event_parameters,
+  $apim_gateway_disable_jms_event_publisher_parameters = $wso2am::params::apim_gateway_disable_jms_event_publisher_parameters,
   $enable_traffic_manager_specific_axis2_configurations = $wso2am::params::enable_traffic_manager_specific_axis2_configurations,
   $enable_traffic_manager_specific_registry_configurations = $wso2am::params::enable_traffic_manager_specific_registry_configurations,
 

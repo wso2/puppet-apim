@@ -19,18 +19,18 @@ wso2::hostname: pub.dev.wso2.org
 wso2::template_list:
   - repository/conf/jndi.properties
 
-wso2::apim_traffic_manager:
-  host: tm.dev.wso2.org
-  port: 9443
-  receiver_url_port: 9611
-  auth_url_port: 9711
-  jms_url_port: 5672
-  username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::password')}"
+#wso2::apim_traffic_manager:
+#  host: tm.dev.wso2.org
+#  port: 9443
+#  receiver_url_port: 9611
+#  auth_url_port: 9711
+#  jms_url_port: 5672
+#  username: "%{hiera('wso2::super_admin::username')}"
+#  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::clustering:
   enabled: true
-  domain: pub.store.am.wso2.domain
+  domain: wso2.pub.store.domain
   sub_domain: worker
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
@@ -40,9 +40,6 @@ wso2::clustering:
     members:
       -
         hostname: 192.168.100.3
-        port: 4000
-      -
-        hostname: 192.168.100.4
         port: 4000
 # AWS membership scheme
 #   membership_scheme: aws
@@ -81,7 +78,7 @@ wso2::sso_authentication:
 wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
 
-wso2::enable_thrift_server: false
+wso2::enable_thrift_server: true
 wso2::enable_advance_throttling: true
 wso2::enable_data_publisher: false
 wso2::enable_block_condition: false

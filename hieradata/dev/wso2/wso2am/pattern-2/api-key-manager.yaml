@@ -27,7 +27,7 @@ wso2::apim_traffic_manager:
 
 wso2::clustering:
   enabled: true
-  domain: km.am.wso2.domain
+  domain: wso2.am.domain
   sub_domain: worker
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
