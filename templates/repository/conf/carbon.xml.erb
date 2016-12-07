@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
 <!--
  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 
@@ -60,7 +59,6 @@
     <!-- MgtHostName>mgt.wso2.org</MgtHostName-->
 <% end %>
 
-
     <!--
         The URL of the back end server. This is where the admin services are hosted and
         will be used by the clients in the front end server.
@@ -85,7 +83,6 @@
     <ServerRoles>
         <Role>APIManager</Role>
     </ServerRoles>
-
 
     <!-- uncommnet this line to subscribe to a bam instance automatically -->
     <!--<BamServerURL>https://bamhost:bamport/services/</BamServerURL>-->
@@ -612,7 +609,7 @@
         </Processor>
     </HttpGetRequestProcessors>
 
-    <!-- Deployment Synchronizer Configuration. t Enabled value to true when running with "svn based" dep sync.
+    <!-- Deployment Synchronizer Configuration. Enable value to true when running with "svn based" dep sync.
 	In master nodes you need to set both AutoCommit and AutoCheckout to true
 	and in  worker nodes set only AutoCheckout to true.
     -->

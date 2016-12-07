@@ -30,6 +30,7 @@ class wso2am::params {
     $apim_traffic_manager     = hiera_hash('wso2::apim_traffic_manager')
     $apim_gateway             = hiera_hash('wso2::apim_gateway')
     $apim_keymanager          = hiera_hash('wso2::apim_keymanager')
+    $apim_analytics           = hiera_hash('wso2::apim_analytics')
     $apim_store               = hiera_hash('wso2::apim_store')
     $apim_publisher           = hiera_hash('wso2::apim_publisher')
     $enable_advance_throttling = hiera('wso2::enable_advance_throttling')
@@ -40,9 +41,9 @@ class wso2am::params {
     $enable_block_condition    = hiera('wso2::enable_block_condition')
     $enable_jms_connection_details = hiera('wso2::enable_jms_connection_details')
     $apim_gateway_disable_jms_event_parameters = hiera('wso2::apim_gateway_disable_jms_event_parameters')
+    $apim_gateway_disable_jms_event_publisher_parameters = hiera('wso2::apim_gateway_disable_jms_event_publisher_parameters')
     $enable_traffic_manager_specific_axis2_configurations = hiera('wso2::enable_traffic_manager_specific_axis2_configurations')
     $enable_traffic_manager_specific_registry_configurations = hiera('wso2::enable_traffic_manager_specific_registry_configurations')
-
 
     $java_prefs_system_root   = hiera('java_prefs_system_root')
     $java_prefs_user_root     = hiera('java_prefs_user_root')
@@ -169,6 +170,7 @@ class wso2am::params {
     $apim_gateway_disable_jms_event_parameters = false
     $enable_traffic_manager_specific_axis2_configurations = false
     $enable_traffic_manager_specific_registry_configurations = false
+    $apim_gateway_disable_jms_event_publisher_parameters = true
 
 
 

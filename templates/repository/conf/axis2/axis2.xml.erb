@@ -543,9 +543,7 @@
                 <Password><%= @key_stores['trust_store']['password'] %></Password>
             </TrustStore>
         </parameter>
-
         <parameter name="HostnameVerifier">AllowAll</parameter>
-        <!--<parameter name="HostnameVerifier">DefaultAndLocalhost</parameter>-->
             <!--supports Strict|AllowAll|DefaultAndLocalhost or the default if none specified -->
     </transportSender>
 
@@ -653,7 +651,6 @@
                     Service (GMS) using a TCP ping mechanism.
         -->
         <parameter name="membershipScheme"><%= @clustering['membership_scheme'] %></parameter>
-        <%= scope.function_template(["wso2base/clustering/#{@clustering['membership_scheme']}.erb"]) %>
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->
 
@@ -717,20 +714,7 @@
             <property name="subDomain" value="<%= @clustering['sub_domain'] %>"/>
         </parameter>
 
-        <!--
-           The list of static or well-known members. These entries will only be valid if the
-           "membershipScheme" above is set to "wka"
-        -->
-<%- if @clustering['membership_scheme'] == 'wka' -%>
-        <members>
-   <%- @clustering['wka']['members'].each do |member| -%>
-            <member>
-                <hostName><%= member['hostname'] %></hostName>
-                <port><%= member['port'] %></port>
-            </member>
-   <%- end -%>
-        </members>
-<%- end -%>
+        <%= scope.function_template(["wso2base/clustering/#{@clustering['membership_scheme']}.erb"]) %>
 
         <!--
         Enable the groupManagement entry if you need to run this node as a cluster manager.

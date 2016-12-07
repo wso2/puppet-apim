@@ -42,7 +42,6 @@
         <%- else -%>
            <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
         <%- end -%>
-
         <!--
             Admin username for the Authentication manager.
         -->
@@ -59,11 +58,11 @@
         <%- else -%>
           <Password>${admin.password}</Password>
         <%- end -%>
-	<!--
-	   Indicates whether the permissions checking of the user (on the Publisher and Store) should be done
-	   via a remote service. The check will be done on the local server when false.
-	-->
-	<CheckPermissionsRemotely>false</CheckPermissionsRemotely>
+        <!--
+           Indicates whether the permissions checking of the user (on the Publisher and Store) should be done
+           via a remote service. The check will be done on the local server when false.
+        -->
+        <CheckPermissionsRemotely>false</CheckPermissionsRemotely>
     </AuthManager>
 
     <!--
@@ -190,14 +189,17 @@
         <!--TagCacheDuration>120000</TagCacheDuration-->
     </CacheConfigurations>
 
-
     <!--
         API usage tracker configuration used by the DAS data publisher and
         Google Analytics publisher in API gateway.
     -->
     <Analytics>
         <!-- Enable Analytics for API Manager -->
+        <%- if @apim_analytics and @apim_analytics['enabled'] -%>
+        <Enabled><%= @apim_analytics['enabled'] %></Enabled>
+        <%- else -%>
         <Enabled>false</Enabled>
+        <%- end -%>
 
         <!-- Server URL of the remote DAS/CEP server used to collect statistics. Must
              be specified in protocol://hostname:port/ format.
@@ -209,20 +211,49 @@
 
              Ex - Multiple Receiver Groups with two receivers each
              {tcp://localhost:7612/,tcp://localhost:7613},{tcp://localhost:7712/,tcp://localhost:7713/} -->
+        <%- if @apim_analytics and @apim_analytics['enabled'] and @apim_analytics['host'] and @apim_analytics['receiver_url_port'] -%>
+        <DASServerURL>tcp://<%= @apim_analytics['host'] %>:<%= @apim_analytics['receiver_url_port'] %></DASServerURL>
+        <%- else -%>
         <DASServerURL>{tcp://localhost:7612}</DASServerURL>
+        <%- end -%>
+
+        <%- if @apim_analytics and @apim_analytics['enabled'] and @apim_analytics['host'] and @apim_analytics['auth_url_port'] -%>
+        <DASAuthServerURL>ssl://<%= @apim_analytics['host'] %>:<%= @apim_analytics['auth_url_port'] %></DASAuthServerURL>
+        <%- else -%>
         <!--DASAuthServerURL>{ssl://localhost:7712}</DASAuthServerURL-->
+        <%- end -%>
         <!-- Administrator username to login to the remote DAS server. -->
+        <%- if @apim_analytics and @apim_analytics['enabled'] and @apim_analytics['username']  -%>
+        <DASUsername><%= @apim_analytics['username'] %></DASUsername>
+        <%- else -%>
         <DASUsername>${admin.username}</DASUsername>
+        <%- end -%>
         <!-- Administrator password to login to the remote DAS server. -->
+        <%- if @apim_analytics and @apim_analytics['enabled'] and @apim_analytics['password']  -%>
+        <DASPassword><%= @apim_analytics['password'] %></DASPassword>
+        <%- else -%>
         <DASPassword>${admin.password}</DASPassword>
+        <%- end -%>
 
         <!-- For APIM implemented Statistic client for RDBMS -->
         <StatsProviderImpl>org.wso2.carbon.apimgt.usage.client.impl.APIUsageStatisticsRdbmsClientImpl</StatsProviderImpl>
 
         <!-- DAS REST API configuration -->
+        <%- if @apim_analytics and @apim_analytics['enabled'] and @apim_analytics['host'] and @apim_analytics['port'] -%>
+        <DASRestApiURL>https://<%= @apim_analytics['host'] %>:<%= @apim_analytics['port'] %></DASRestApiURL>
+        <%- else -%>
         <DASRestApiURL>https://localhost:9444</DASRestApiURL>
+        <%- end -%>
+        <%- if @apim_analytics and @apim_analytics['enabled'] and @apim_analytics['username'] -%>
+        <DASRestApiUsername><%= @apim_analytics['username'] %></DASRestApiUsername>
+        <%- else -%>
         <DASRestApiUsername>${admin.username}</DASRestApiUsername>
+        <%- end -%>
+        <%- if @apim_analytics and @apim_analytics['enabled'] and @apim_analytics['password'] -%>
+        <DASRestApiPassword><%= @apim_analytics['password'] %></DASRestApiPassword>
+        <%- else -%>
         <DASRestApiPassword>${admin.password}</DASRestApiPassword>
+        <%- end -%>
 
         <!-- Below property is used to skip trying to connect to event receiver nodes when publishing events even if
             the stats enabled flag is set to true. -->
@@ -324,12 +355,7 @@
         </ConnectionPool-->
         <!-- Specifies the implementation to be used for KeyValidationHandler. Steps for validating a token can be controlled by plugging in a
              custom KeyValidation Handler -->
-
         <KeyValidationHandlerClassName>org.wso2.carbon.apimgt.keymgt.handlers.DefaultKeyValidationHandler</KeyValidationHandlerClassName>
-
-
-
-
     </APIKeyValidator>
 
     <!--
@@ -399,35 +425,44 @@
 	<CompareCaseInsensitively>true</CompareCaseInsensitively>
         <DisplayURL>false</DisplayURL>
         <%- if @apim_store and @apim_store['host'] and @apim_store['port'] -%>
-          <URL>https://<%= @apim_store['host'] %>:<%= @apim_store['port'] %>/store</URL>
+        <URL>https://<%= @apim_store['host'] %>:<%= @apim_store['port'] %>/store</URL>
         <%- else -%>
-           <URL>https://${carbon.local.ip}:${mgt.transport.https.port}/store</URL>
+        <URL>https://${carbon.local.ip}:${mgt.transport.https.port}/store</URL>
         <%- end -%>
         <!--
             Server URL of the API Store.
         -->
-
-        <ServerURL>https://<%= @am_subdomain %>.<%= @domain %>/services/</ServerURL>
+        <%- if @apim_store and @apim_store['host'] and @apim_store['port'] -%>
+        <ServerURL>https://<%= @apim_store['host'] %>:<%= @apim_store['port'] %>/services/</ServerURL>
+        <%- else -%>
+        <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
+        <%- end -%>
         <!--
             Admin username for API Store.
         -->
-        <Username>admin</Username>
+        <%- if @apim_store and @apim_store['username'] -%>
+        <Username><%=  @apim_store['username'] %></Username>
+        <%- else -%>
+        <Username>${admin.username}</Username>
+        <%- end -%>
 
         <!--
             Admin password for API Store.
         -->
-        <Password>admin</Password>
+        <%- if @apim_store and @apim_store['password'] -%>
+        <Password><%=  @apim_store['password'] %></Password>
+        <%- else -%>
+        <Password>${admin.password}</Password>
+        <%- end -%>
         <!--
             This parameter specifies whether to display multiple versions of same
             API or only showing the latest version of an API.
-
         -->
         <DisplayMultipleVersions>false</DisplayMultipleVersions>
         <!--
             This parameter specifies whether to display all the APIs
             [which are having DEPRECATED/PUBLISHED status] or only display the APIs
             with having their status is as 'PUBLISHED'
-
         -->
         <DisplayAllAPIs>false</DisplayAllAPIs>
         <!--
@@ -457,9 +492,9 @@
     <APIPublisher>
         <DisplayURL>false</DisplayURL>
         <%- if @apim_publisher and @apim_publisher['host'] and @apim_publisher['port'] -%>
-          <URL>https://<%= @apim_publisher['host'] %>:<%= @apim_publisher['port'] %>/publisher</URL>
+        <URL>https://<%= @apim_publisher['host'] %>:<%= @apim_publisher['port'] %>/publisher</URL>
         <%- else -%>
-          <URL>https://${carbon.local.ip}:${mgt.transport.https.port}/publisher</URL>
+        <URL>https://${carbon.local.ip}:${mgt.transport.https.port}/publisher</URL>
         <%- end -%>
         <!--
                This parameter specifies enabling the capability of setting API documentation level granular visibility levels.
@@ -720,6 +755,16 @@
                 <JobQueueSize>10</JobQueueSize>
             </JMSTaskManager>
         </JMSConnectionDetails>
+        <%- if @apim_gateway_disable_jms_event_publisher_parameters -%>
+        <!--JMSEventPublisherParameters>
+                <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
+                <java.naming.provider.url>repository/conf/jndi.properties</java.naming.provider.url>
+                <transport.jms.DestinationType>topic</transport.jms.DestinationType>
+                <transport.jms.Destination>throttleData</transport.jms.Destination>
+                <transport.jms.ConcurrentPublishers>allow</transport.jms.ConcurrentPublishers>
+                <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
+        </JMSEventPublisherParameters-->
+        <%- else -%>
         <JMSEventPublisherParameters>
                 <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
                 <java.naming.provider.url>repository/conf/jndi.properties</java.naming.provider.url>
@@ -728,6 +773,7 @@
                 <transport.jms.ConcurrentPublishers>allow</transport.jms.ConcurrentPublishers>
                 <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
         </JMSEventPublisherParameters>
+        <%- end -%>
         <!--DefaultLimits>
             <SubscriptionTierLimits>
                 <Gold>5000</Gold>

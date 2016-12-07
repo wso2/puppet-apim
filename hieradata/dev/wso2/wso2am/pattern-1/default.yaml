@@ -62,6 +62,15 @@ wso2::apim_keymanager:
   username: "%{hiera('wso2::super_admin::username')}"
   password: "%{hiera('wso2::super_admin::password')}"
 
+wso2::apim_analytics:
+  enabled: false
+  host: am.dev.wso2.org
+  port: 9443
+  receiver_url_port: 7611
+  auth_url_port: 7711
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
 wso2::apim_store:
   host: am.dev.wso2.org
   port: 9443
@@ -118,8 +127,10 @@ wso2::enable_data_publisher: false
 wso2::enable_block_condition: true
 wso2::enable_jms_connection_details: false
 wso2::apim_gateway_disable_jms_event_parameters: false
+wso2::apim_gateway_disable_jms_event_publisher_parameters: false
 wso2::enable_traffic_manager_specific_axis2_configurations: false
 wso2::enable_traffic_manager_specific_registry_configurations: false
+wso2::apim_gateway_disable_jms_event_publisher_parameters: false
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true
