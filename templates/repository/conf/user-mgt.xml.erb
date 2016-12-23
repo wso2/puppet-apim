@@ -27,6 +27,7 @@
             </AdminUser>
             <EveryOneRoleName>everyone</EveryOneRoleName> <!-- By default users in this role sees the registry root -->
             <Property name="isCascadeDeleteEnabled">true</Property>
+	    <Property name="initializeNewClaimManager">true</Property>
             <Property name="dataSource"><%= @master_datasources[@usermgt_datasource]['jndi_config'] %></Property>
         </Configuration>
 
@@ -73,6 +74,7 @@
             <Property name="ConnectionURL">ldap://localhost:10389</Property>
             <Property name="ConnectionName">uid=admin,ou=system</Property>
             <Property name="ConnectionPassword">admin</Property>
+            <Property name="AnonymousBind">false</Property>
             <Property name="UserSearchBase">ou=system</Property>
             <Property name="UserNameAttribute">uid</Property>
             <Property name="UserNameSearchFilter">(&amp;(objectClass=person)(uid=?))</Property>
@@ -116,6 +118,7 @@
             <Property name="ConnectionURL">ldaps://10.100.1.100:636</Property> 
             <Property name="ConnectionName">CN=admin,CN=Users,DC=WSO2,DC=Com</Property>
             <Property name="ConnectionPassword">A1b2c3d4</Property>
+            <Property name="AnonymousBind">false</Property>
             <Property name="UserSearchBase">CN=Users,DC=WSO2,DC=Com</Property>
             <Property name="UserEntryObjectClass">user</Property>
             <Property name="UserNameAttribute">cn</Property>
@@ -171,6 +174,7 @@
             <Property name="ConnectionURL">ldap://localhost:${Ports.EmbeddedLDAP.LDAPServerPort}</Property>
             <Property name="ConnectionName">uid=admin,ou=system</Property>
             <Property name="ConnectionPassword">admin</Property>
+            <Property name="AnonymousBind">false</Property>
             <Property name="UserSearchBase">ou=Users,dc=wso2,dc=org</Property>
             <Property name="UserEntryObjectClass">identityPerson</Property>
             <Property name="UserNameAttribute">uid</Property>
@@ -209,7 +213,6 @@
             <Property name="ReadTimeout"/>
             <Property name="RetryAttempts"/>
         </ISUserStoreManager-->
-
         <AuthorizationManager class="org.wso2.carbon.user.core.authorization.JDBCAuthorizationManager">
             <Property name="AdminRoleManagementPermissions">/permission</Property>
             <Property name="AuthorizationCacheEnabled">true</Property>
@@ -217,7 +220,6 @@
         </AuthorizationManager>
     </Realm>
 </UserManager>
-
 <!--
 
 ************* Description of some of the configuration properties used in user-mgt.xml *********************************

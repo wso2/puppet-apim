@@ -37,7 +37,7 @@
     <!--
        Product Version
     -->
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
 
     <!--
        Host name or IP address of the machine hosting this server
@@ -178,12 +178,7 @@
         JNDI Configuration
     -->
     <JNDI>
-		<!--
-             If we use multiple usertsore with tenants, we might need to use following initialContextfactory implementation to do datasource lookup
-		 -->
-		<DefaultInitialContextFactory>org.wso2.carbon.tomcat.jndi.CarbonJavaURLContextFactory</DefaultInitialContextFactory>
-
-        <!--
+        <!-- 
              The fully qualified name of the default initial context factory
         -->
         <DefaultInitialContextFactory>org.wso2.carbon.tomcat.jndi.CarbonJavaURLContextFactory</DefaultInitialContextFactory>
@@ -478,23 +473,6 @@
                 <!--Pattern></Pattern-->
             </Patterns>
         </XSSPreventionConfig>
-
-        <!-- Configurations to avoid Cross Site Request Forgery vulnerabilities -->
-        <CSRFPreventionConfig>
-            <!-- CSRFPreventionFilter configurations that adopts Synchronizer Token Pattern -->
-            <CSRFPreventionFilter>
-                <!-- Set below to true to enable the CSRFPreventionFilter -->
-                <Enabled>false</Enabled>
-                <!-- Url Pattern to skip application of CSRF protection-->
-                <SkipUrlPattern>(.*)(/images|/css|/js|/docs)(.*)</SkipUrlPattern>
-            </CSRFPreventionFilter>
-        </CSRFPreventionConfig>
-
-        <!-- Configuration to enable or disable CR and LF sanitization filter-->
-        <CRLFPreventionConfig>
-            <!--Set below to true to enable the CRLFPreventionFilter-->
-            <Enabled>true</Enabled>
-        </CRLFPreventionConfig>
     </Security>
 
     <!--
