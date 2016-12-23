@@ -543,6 +543,7 @@
                 <Password><%= @key_stores['trust_store']['password'] %></Password>
             </TrustStore>
         </parameter>
+        <parameter name="HostnameVerifier">AllowAll</parameter>
         <!--<parameter name="HostnameVerifier">DefaultAndLocalhost</parameter>-->
             <!--supports Strict|AllowAll|DefaultAndLocalhost or the default if none specified -->
     </transportSender>
