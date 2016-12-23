@@ -333,7 +333,7 @@ class wso2am::params {
   }
 
   $product_name               = 'wso2am'
-  $product_version            = '2.0.0'
+  $product_version            = '2.1.0-SNAPSHOT'
   $platform_version           = '4.4.0'
   $carbon_home                = "${install_dir}/${product_name}-${product_version}"
   $pack_file_abs_path         = "${pack_dir}/${pack_filename}"
