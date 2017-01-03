@@ -230,6 +230,11 @@ wso2::registry_mounts:
 
 wso2::usermgt_datasource: wso2_user_db
 
+wso2::file_list:
+  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+
+wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
+
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:
