@@ -228,7 +228,7 @@ class wso2am::params {
         url                 => 'jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000',
         username            => 'wso2carbon',
         password            => 'wso2carbon',
-        jndi_config         => 'WSO2MBStoreDB',
+        jndi_config         => 'WSO2_MB_STORE_DB',
         max_active          => '50',
         max_wait            => '60000',
         test_on_borrow      => true,
