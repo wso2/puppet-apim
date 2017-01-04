@@ -88,7 +88,8 @@ class wso2am (
   $jvm                    = $wso2am::params::jvm,
   $fqdn                   = $wso2am::params::fqdn,
   $sso_authentication     = $wso2am::params::sso_authentication,
-  $user_management        = $wso2am::params::user_management
+  $user_management        = $wso2am::params::user_management,
+  $mb_store_datasource    = $wso2am::params::mb_store_datasource
 ) inherits wso2am::params {
 
   validate_string($is_datasource)
@@ -109,6 +110,7 @@ class wso2am (
   validate_string($fqdn)
   validate_hash($sso_authentication)
   validate_hash($user_management)
+  validate_string($mb_store_datasource)
 
   class { '::wso2base':
     packages               => $packages,

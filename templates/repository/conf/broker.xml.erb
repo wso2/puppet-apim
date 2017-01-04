@@ -173,7 +173,7 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
         <!-- RDBMS MB Store Configuration -->
 
         <messageStore class="org.wso2.andes.store.rdbms.RDBMSMessageStoreImpl">
-            <property name="dataSource"><%= @master_datasources[@wso2_mb_store_db]['jndi_config'] %></property>
+            <property name="dataSource"><%= @master_datasources[@mb_store_datasource]['jndi_config'] %></property>
             <property name="storeUnavailableSQLStateClasses">08</property>
             <property name="integrityViolationSQLStateClasses">23,27,44</property>
             <property name="dataErrorSQLStateClasses">21,22</property>
@@ -181,7 +181,7 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
         </messageStore>
 
         <contextStore class="org.wso2.andes.store.rdbms.RDBMSAndesContextStoreImpl">
-            <property name="dataSource"><%= @master_datasources[@wso2_mb_store_db]['jndi_config'] %></property>
+            <property name="dataSource"><%= @master_datasources[@mb_store_datasource]['jndi_config'] %></property>
             <property name="storeUnavailableSQLStateClasses">08</property>
             <property name="integrityViolationSQLStateClasses">23,27,44</property>
             <property name="dataErrorSQLStateClasses">21,22</property>

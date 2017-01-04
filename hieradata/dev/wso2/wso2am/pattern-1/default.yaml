@@ -230,6 +230,7 @@ wso2::registry_mounts:
    enable_cache: true
 
 wso2::usermgt_datasource: wso2_user_db
+wso2::mb_store_datasource: wso2_mb_store_db
 
 wso2::file_list:
   - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"

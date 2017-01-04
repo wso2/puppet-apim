@@ -89,6 +89,7 @@ class wso2am::params {
     $sso_authentication       = hiera('wso2::sso_authentication')
     $user_management          = hiera('wso2::user_management')
     $enable_secure_vault      = hiera('wso2::enable_secure_vault')
+    $mb_store_datasource      = hiera('wso2::mb_store_datasource')
 
     if $enable_secure_vault {
       $secure_vault_configs   = hiera('wso2::secure_vault_configs')
@@ -256,6 +257,7 @@ class wso2am::params {
     $service_template         = 'wso2base/wso2service.erb'
     $usermgt_datasource       = 'wso2_carbon_db'
     $local_reg_datasource     = 'wso2_carbon_db'
+    $mb_store_datasource      = 'wso2_mb_store_db'
 
     $clustering               = {
       enabled           => false,
