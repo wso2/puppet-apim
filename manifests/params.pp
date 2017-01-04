@@ -195,7 +195,7 @@ class wso2am::params {
       'repository/conf/api-manager.xml',
       'repository/conf/identity/identity.xml',
       'repository/conf/identity/application-authentication.xml',
-      'repository/conf/identity/EndpointConfig.properties'
+      'repository/conf/identity/EndpointConfig.properties',
       'repository/conf/broker.xml'
     ]
 
