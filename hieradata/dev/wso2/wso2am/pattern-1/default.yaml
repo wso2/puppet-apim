@@ -22,6 +22,7 @@ wso2::template_list:
   - repository/conf/identity/identity.xml
   - repository/conf/identity/application-authentication.xml
   - repository/conf/identity/EndpointConfig.properties
+  - repository/conf/broker.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
