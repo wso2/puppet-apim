@@ -217,7 +217,7 @@ wso2::enable_traffic_manager_specific_registry_configurations: false
 wso2::registry_mounts:
  wso2_config_db:
    path: /_system/config
-   target_path: /_system/config/apim-km
+   target_path: /_system/config
    read_only: false
    registry_root: /
    enable_cache: true

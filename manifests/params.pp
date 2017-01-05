@@ -52,6 +52,7 @@ class wso2am::params {
     $packages                 = hiera_array('packages')
     $template_list            = hiera_array('wso2::template_list')
     $file_list                = hiera_array('wso2::file_list', undef)
+    $remove_file_list         = hiera_array('wso2::remove_file_list', undef)
     $patch_list               = hiera('wso2::patch_list', undef)
     $system_file_list         = hiera_hash('wso2::system_file_list', undef)
     $directory_list           = hiera_array('wso2::directory_list', undef)

@@ -36,7 +36,10 @@ wso2::file_list:
   - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
   - "repository/resources/security/%{hiera('wso2::key_store')}"
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
-
+wso2::remove_file_list:
+  - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
+  - "repository/deployment/server/synapse-configs/default/sequences/dispatchSeq.xml"
+  - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 
 #wso2::cert_list:
