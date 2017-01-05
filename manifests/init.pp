@@ -73,7 +73,7 @@ class wso2am (
   $key_stores             = $wso2am::params::key_stores,
   $carbon_home            = $wso2am::params::carbon_home,
   $pack_file_abs_path     = $wso2am::params::pack_file_abs_path,
-  $remove_file_list       = $wso2am::params::remove_file_list,
+  $remove_file_list       = $wso2am::params::remove_file_list
 
   # Templated configuration parameters
   $master_datasources     = $wso2am::params::master_datasources,
