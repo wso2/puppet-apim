@@ -160,7 +160,7 @@ wso2::master_datasources:
 
     wso2_gov_db:
       name: WSO2_GOV_DB
-      description: The datasource used for config registry
+      description: The datasource used for gov registry
       driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
       url: jdbc:mysql://192.168.57.210:3306/govregdb?autoReconnect=true
       username: "%{hiera('wso2::datasources::mysql::username')}"
