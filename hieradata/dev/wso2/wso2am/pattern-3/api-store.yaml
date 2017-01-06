@@ -76,3 +76,8 @@ wso2::enable_block_condition: false
 wso2::enable_jms_connection_details: false
 wso2::enable_traffic_manager_specific_axis2_configurations: false
 wso2::enable_traffic_manager_specific_registry_configurations: false
+
+wso2::remove_file_list:
+  - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
+  - "repository/deployment/server/synapse-configs/default/sequences/dispatchSeq.xml"
+  - "repository/deployment/server/synapse-configs/default/sequences/outDispatchSeq.xml"
