@@ -67,7 +67,7 @@ wso2::dep_sync:
 wso2::registry_mounts:
  wso2_config_db:
    path: /_system/config
-   target_path: /_system/config/apim-gw
+   target_path: /_system/config
    read_only: false
    registry_root: /
    enable_cache: true
@@ -102,3 +102,21 @@ wso2::enable_jms_connection_details: true
 wso2::apim_gateway_disable_jms_event_parameters: true
 wso2::enable_traffic_manager_specific_axis2_configurations: false
 wso2::enable_traffic_manager_specific_registry_configurations: false
+
+wso2::am_datasources:
+  wso2_am_db:
+    name: WSO2_AM_DB
+    description: The datasource used for API Manager database
+    driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
+    url: jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/WSO2AM_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+wso2::am_datasource: wso2_am_db

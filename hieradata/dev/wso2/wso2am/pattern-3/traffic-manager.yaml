@@ -35,3 +35,21 @@ wso2::remove_file_list:
   - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
   - "repository/deployment/server/synapse-configs/default/sequences/dispatchSeq.xml"
   - "repository/deployment/server/synapse-configs/default/sequences/outDispatchSeq.xml"
+
+wso2::master_datasources:
+  wso2_mb_store_db:
+    name: WSO2_MB_STORE_DB
+    description: The datasource used for message broker database
+    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+    url: jdbc:mysql://192.168.57.210:3306/mbstoredb?autoReconnect=true
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
+    jndi_config: jdbc/WSO2_MB_STORE_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+wso2::mb_store_datasource: wso2_mb_store_db
