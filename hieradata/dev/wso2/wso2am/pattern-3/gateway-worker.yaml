@@ -36,10 +36,10 @@ wso2::clustering:
   wka:
     members:
       -
-        hostname: 192.168.100.5
+        hostname: 192.168.57.216
         port: 4000
       -
-        hostname: 192.168.100.6
+        hostname: 192.168.57.247
         port: 4000
 # AWS membership scheme
 #   membership_scheme: aws
@@ -106,3 +106,8 @@ wso2::am_datasources:
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::am_datasource: wso2_am_db
+
+wso2::ports:
+  proxyPort:
+    http: 80
+    https: 443

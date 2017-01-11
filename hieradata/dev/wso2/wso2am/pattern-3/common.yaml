@@ -98,13 +98,13 @@ wso2::registry_mounts:
 
 wso2::hosts_mapping:
   apim_keymanager:
-    ip: 192.168.100.2
+    ip: 192.168.57.186
     name: km.dev.wso2.org
   apim_store:
-    ip: 192.168.100.3
+    ip: 192.168.57.21
     name: store.dev.wso2.org
   apim_publisher:
-    ip: 192.168.100.4
+    ip: 192.168.57.219
     name: pub.dev.wso2.org
   apim_gateway:
     ip: 192.168.100.5
