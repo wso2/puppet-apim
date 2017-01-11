@@ -91,7 +91,7 @@ wso2::enable_thrift_server: false
 
 wso2::thrift_server_host: localhost
 
-wso2::key_validator_client_type: ThriftClient
+wso2::key_validator_client_type: WSClient
 
 wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
