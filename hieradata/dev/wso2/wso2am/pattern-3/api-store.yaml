@@ -145,7 +145,6 @@ wso2::master_datasources:
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::usermgt_datasource: wso2_user_db
-wso2::am_datasource: wso2_am_db
 wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
 

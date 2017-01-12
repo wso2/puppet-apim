@@ -116,10 +116,9 @@ wso2::hosts_mapping:
     ip: 192.168.100.1
     name: svn.gw.am.dev.wso2.org
 
-#wso2::usermgt_datasource: wso2_user_db
-
 wso2::is_datasource: wso2_am_db
-#wso2::am_datasource: wso2_am_db
+wso2::am_datasource: wso2_am_db
+wso2::usermgt_datasource: wso2_user_db
 
 ## Uncomment the following key_store and trust_store to include the certificate of keymanager in gateway in a clustered setup
 #wso2::key_store: wso2carbon.jks

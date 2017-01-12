@@ -105,8 +105,6 @@ wso2::am_datasources:
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::am_datasource: wso2_am_db
-
 wso2::ports:
   proxyPort:
     http: 80

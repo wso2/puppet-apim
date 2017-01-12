@@ -73,7 +73,6 @@ wso2::sso_authentication:
   consumer_service_url: https://km.dev.wso2.org:9443/acs
 
 wso2::usermgt_datasource: wso2_user_db
-wso2::am_datasource: wso2_am_db
 wso2::enable_thrift_server: false
 
 # Uncomment for a distributed setup without a load balancer (when using ThriftClient)
