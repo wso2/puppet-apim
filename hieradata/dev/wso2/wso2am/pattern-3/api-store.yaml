@@ -67,68 +67,7 @@ wso2::sso_authentication:
   consumer_service_url: https://store.dev.wso2.org:9443/acs
 
 #datasource configurations
-wso2::am_datasources:
-   wso2_am_db:
-      name: WSO2_AM_DB
-      description: The datasource used for API Manager database
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://192.168.57.210:3306/apimgtdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2AM_DB
-      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
 wso2::master_datasources:
-    wso2_config_db:
-      name: WSO2_CONFIG_DB
-      description: The datasource used for config registry
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://192.168.57.210:3306/configdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2_CONFIG_DB
-      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-    wso2_gov_db:
-      name: WSO2_GOV_DB
-      description: The datasource used for gov registry
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://192.168.57.210:3306/govregdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2_GOV_DB
-      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-    wso2_user_db:
-      name: WSO2_USER_DB
-      description: The datasource is used for user mangement and userstore
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://192.168.57.210:3306/userdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2_USER_DB
-      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
     wso2_stat_db:
       name: WSO2_STAT_DB
       description: The datasource is used for stats
@@ -144,7 +83,6 @@ wso2::master_datasources:
       validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::usermgt_datasource: wso2_user_db
 wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
 
