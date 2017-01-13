@@ -16,6 +16,9 @@
 wso2::mgt_hostname: tm.dev.wso2.org
 wso2::hostname: tm.dev.wso2.org
 
+wso2::template_list:
+  - repository/conf/broker.xml
+
 wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::key_store')}"
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
@@ -51,5 +54,3 @@ wso2::master_datasources:
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-wso2::mb_store_datasource: wso2_mb_store_db
