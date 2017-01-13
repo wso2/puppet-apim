@@ -47,32 +47,6 @@ wso2::service_name: wso2am
 wso2::hostname: am.dev.wso2.org
 wso2::mgt_hostname: am.dev.wso2.org
 
-wso2::apim_traffic_manager:
-  host: tm.dev.wso2.org
-  port: 9443
-  receiver_url_port: 9611
-  auth_url_port: 9711
-  jms_url_port: 5672
-  username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::password')}"
-
-wso2::apim_gateway:
-  host: gw.dev.wso2.org
-  port: 9443
-  api_endpoint_host: am.dev.wso2.org
-  api_endpoint_port: 8280
-  secure_api_endpoint_port: 8243
-  api_token_revoke_endpoint_port: 8280
-  secure_api_token_revoke_endpoint_port: 8243
-  username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::password')}"
-
-wso2::apim_keymanager:
-  host: km.dev.wso2.org
-  port: 9443
-  username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::password')}"
-
 wso2::apim_store:
   host: store.dev.wso2.org
   port: 9443
@@ -80,21 +54,6 @@ wso2::apim_store:
 wso2::apim_publisher:
   host: pub.dev.wso2.org
   port: 9443
-
-wso2::registry_mounts:
-  wso2_config_db:
-     path: /_system/config
-     target_path: /_system/config/apim
-     read_only: false
-     registry_root: /
-     enable_cache: true
-
-  wso2_gov_db:
-     path: /_system/governance
-     target_path: /_system/governance
-     read_only: false
-     registry_root: /
-     enable_cache: true
 
 wso2::hosts_mapping:
   apim_keymanager:

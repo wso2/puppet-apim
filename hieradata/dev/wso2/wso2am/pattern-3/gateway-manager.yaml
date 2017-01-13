@@ -25,6 +25,12 @@ wso2::apim_traffic_manager:
   username: "%{hiera('wso2::super_admin::username')}"
   password: "%{hiera('wso2::super_admin::password')}"
 
+wso2::apim_keymanager:
+  host: km.dev.wso2.org
+  port: 9443
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
 wso2::clustering:
   enabled: true
   domain: gw.am.wso2.domain
