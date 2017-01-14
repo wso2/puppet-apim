@@ -55,6 +55,10 @@ wso2::apim_publisher:
   host: pub.dev.wso2.org
   port: 9443
 
+wso2::apim_traffic_manager: {}
+wso2::apim_gateway: {}
+wso2::apim_keymanager: {}
+
 wso2::hosts_mapping:
   apim_keymanager:
     ip: 192.168.57.186
