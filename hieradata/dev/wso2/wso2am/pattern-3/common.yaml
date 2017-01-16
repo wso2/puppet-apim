@@ -71,6 +71,9 @@ wso2::hosts_mapping:
     name: pub.dev.wso2.org
   apim_gateway:
     ip: 192.168.57.216
+    name: mgt.gw.dev.wso2.org
+  apim_gateway_worker:
+    ip: 192.168.57.247
     name: gw.dev.wso2.org
   apim_traffic_manager:
     ip: 192.168.57.35
