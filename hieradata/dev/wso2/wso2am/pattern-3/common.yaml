@@ -70,10 +70,10 @@ wso2::hosts_mapping:
     ip: 192.168.57.219
     name: pub.dev.wso2.org
   apim_gateway:
-    ip: 192.168.100.5
+    ip: 192.168.57.216
     name: gw.dev.wso2.org
   apim_traffic_manager:
-    ip: 192.168.100.6
+    ip: 192.168.57.35
     name: tm.dev.wso2.org
   svn:
     ip: 192.168.100.1
@@ -86,7 +86,6 @@ wso2::usermgt_datasource: wso2_user_db
 ## Uncomment the following key_store and trust_store to include the certificate of keymanager in gateway in a clustered setup
 #wso2::key_store: wso2carbon.jks
 #wso2::trust_store: client-truststore.jks
-
 #datasource configurations
 wso2::am_datasources:
    wso2_am_db:
