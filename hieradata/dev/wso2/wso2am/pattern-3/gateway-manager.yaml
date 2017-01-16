@@ -60,12 +60,12 @@ wso2::clustering:
 #     tag_value: tag-value
 
 wso2::dep_sync:
-  enabled: false
+  enabled: true
   auto_checkout: true
   auto_commit: true
   repository_type: svn
   svn:
-    url: http://svn.gw.am.dev.wso2.org/gateway-artifacts
+    url: https://svn.wso2.com/wso2/svn/people/samitha/depsyncrepo
     user: svnuser
     password: password
     append_tenant_id: true
