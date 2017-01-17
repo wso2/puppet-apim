@@ -366,8 +366,9 @@
              In distributed deployment we should configure this property in key manager node by pointing
              gateway https( /http, we recommend users to use 'https' endpoints for security purpose) url.
              Also please note that we should point gateway revoke service to key manager -->
-        <%- if @apim_gateway and @apim_gateway['host'] and @apim_gateway['port']-%>
-            <RevokeAPIURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['secure_api_token_revoke_endpoint_port'] %>/revoke</RevokeAPIURL>
+        <%- if @product_profile == 'api_key-manager' and @apim_gateway and @apim_gateway['api_endpoint_host'] and
+        @apim_gateway['port']-%>
+            <RevokeAPIURL>https://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['secure_api_token_revoke_endpoint_port'] %>/revoke</RevokeAPIURL>
         <%- else -%>
             <RevokeAPIURL>https://${carbon.local.ip}:${https.nio.port}/revoke</RevokeAPIURL>
         <%- end -%>
@@ -407,7 +408,7 @@
             Server URL of the API Store.
         -->
 
-        <ServerURL>https://<%= @am_subdomain %>.<%= @domain %>/services/</ServerURL>
+        <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
         <!--
             Admin username for API Store.
         -->

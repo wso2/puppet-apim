@@ -16,6 +16,12 @@
 wso2::mgt_hostname: mgt.gw.dev.wso2.org
 wso2::hostname: mgt.gw.dev.wso2.org
 
+wso2::template_list:
+  - repository/deployment/server/synapse-configs/default/api/_AuthorizeAPI_.xml
+  - repository/deployment/server/synapse-configs/default/api/_RevokeAPI_.xml
+  - repository/deployment/server/synapse-configs/default/api/_TokenAPI_.xml
+  - repository/deployment/server/synapse-configs/default/api/_UserInfoAPI_.xml
+
 wso2::apim_traffic_manager:
   host: tm.dev.wso2.org
   port: 9443

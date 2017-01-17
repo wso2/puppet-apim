@@ -56,10 +56,10 @@ wso2::clustering:
   wka:
     members:
       -
-        hostname: 192.168.100.3
+        hostname: 192.168.57.219
         port: 4000
       -
-        hostname: 192.168.100.4
+        hostname: 192.168.57.21
         port: 4000
 # AWS membership scheme
 #   membership_scheme: aws
