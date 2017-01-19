@@ -39,10 +39,13 @@ class wso2am::params {
     $enable_data_publisher     = hiera('wso2::enable_data_publisher')
     $enable_block_condition    = hiera('wso2::enable_block_condition')
     $enable_jms_connection_details = hiera('wso2::enable_jms_connection_details')
-    $apim_gateway_disable_jms_event_parameters = hiera('wso2::apim_gateway_disable_jms_event_parameters')
+    $disable_jms_event_parameters = hiera('wso2::disable_jms_event_parameters')
     $enable_traffic_manager_specific_axis2_configurations = hiera('wso2::enable_traffic_manager_specific_axis2_configurations')
     $enable_traffic_manager_specific_registry_configurations = hiera('wso2::enable_traffic_manager_specific_registry_configurations')
     $apply_key_manager_specific_configurations = hiera('wso2::apply_key_manager_specific_configurations')
+    $apply_publisher_specific_configurations = hiera('wso2::apply_publisher_specific_configurations')
+    $apply_store_specific_configurations = hiera('wso2::apply_store_specific_configurations')
+    $apply_gateway_specific_configurations = hiera('wso2::apply_gateway_specific_configurations')
 
     $java_prefs_system_root   = hiera('java_prefs_system_root')
     $java_prefs_user_root     = hiera('java_prefs_user_root')
@@ -168,11 +171,13 @@ class wso2am::params {
     $enable_data_publisher     = false
     $enable_block_condition    = true
     $enable_jms_connection_details = false
-    $apim_gateway_disable_jms_event_parameters = false
+    $disable_jms_event_parameters = false
     $enable_traffic_manager_specific_axis2_configurations = false
     $enable_traffic_manager_specific_registry_configurations = false
     $apply_key_manager_specific_configurations = false
-
+    $apply_publisher_specific_configurations = false
+    $apply_store_specific_configurations = false
+    $apply_gateway_specific_configurations = false
 
     $java_prefs_system_root   = '/home/wso2user/.java'
     $java_prefs_user_root     = '/home/wso2user/.java/.systemPrefs'

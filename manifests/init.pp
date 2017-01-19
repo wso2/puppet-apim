@@ -35,10 +35,13 @@ class wso2am (
   $enable_data_publisher     = $wso2am::params::enable_data_publisher,
   $enable_block_condition    = $wso2am::params::enable_block_condition,
   $enable_jms_connection_details = $wso2am::params::enable_jms_connection_details,
-  $apim_gateway_disable_jms_event_parameters = $wso2am::params::apim_gateway_disable_jms_event_parameters,
+  $disable_jms_event_parameters = $wso2am::params::disable_jms_event_parameters,
   $enable_traffic_manager_specific_axis2_configurations = $wso2am::params::enable_traffic_manager_specific_axis2_configurations,
   $enable_traffic_manager_specific_registry_configurations = $wso2am::params::enable_traffic_manager_specific_registry_configurations,
   $apply_key_manager_specific_configurations = $wso2am::params::apply_key_manager_specific_configurations,
+  $apply_publisher_specific_configurations = $wso2am::params::apply_publisher_specific_configurations,
+  $apply_store_specific_configurations = $wso2am::params::apply_store_specific_configurations,
+  $apply_gateway_specific_configurations = $wso2am::params::apply_gateway_specific_configurations,
 
   $packages               = $wso2am::params::packages,
   $template_list          = $wso2am::params::template_list,
@@ -114,6 +117,9 @@ class wso2am (
   validate_hash($user_management)
   validate_string($mb_store_datasource)
   validate_bool($apply_key_manager_specific_configurations)
+  validate_bool($apply_publisher_specific_configurations)
+  validate_bool($apply_store_specific_configurations)
+  validate_bool($apply_gateway_specific_configurations)
 
   class { '::wso2base':
     packages               => $packages,

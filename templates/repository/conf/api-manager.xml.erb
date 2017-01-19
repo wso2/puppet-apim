@@ -37,7 +37,7 @@
         <!--
             Server URL of the Authentication service
         -->
-        <%- if @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
+        <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
           <ServerURL>https://<%= @apim_keymanager['host'] %>:<%= @apim_keymanager['port'] %>/services/</ServerURL>
         <%- else -%>
            <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
@@ -135,7 +135,8 @@
                         <!--
                                 Server URL of the API gateway.
                         -->
-                        <%- if @apim_gateway and @apim_gateway['host'] and @apim_gateway['port']-%>
+                        <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and
+                        @apim_gateway and @apim_gateway['host'] and @apim_gateway['port']-%>
                           <ServerURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['port'] %>/services/</ServerURL>
                         <%- else -%>
                           <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
@@ -143,7 +144,8 @@
                         <!--
                             Admin username for the API gateway.
                         -->
-                        <%- if @apim_gateway and @apim_gateway['username'] -%>
+                        <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and
+                        @apim_gateway and @apim_gateway['username'] -%>
                           <Username><%= @apim_gateway['username'] %></Username>
                         <%- else -%>
                           <Username>${admin.username}</Username>
@@ -151,16 +153,18 @@
                         <!--
                             Admin password for the API gateway.
                         -->
-                        <%- if @apim_gateway and @apim_gateway['password'] -%>
+                        <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and
+                        @apim_gateway and @apim_gateway['password'] -%>
                           <Password><%= @apim_gateway['password'] %></Password>
                         <%- else -%>
                            <Password>${admin.password}</Password>
                         <%- end -%>
 
-    			              <!--
-                			    Endpoint URLs for the APIs hosted in this API gateway.
-            		        -->
-            		        <%- if @apim_gateway and @apim_gateway['api_endpoint_host'] and
+    			        <!--
+                			Endpoint URLs for the APIs hosted in this API gateway.
+            		    -->
+            		    <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and
+            		    @apim_gateway and @apim_gateway['api_endpoint_host'] and
             		        @apim_gateway['api_endpoint_port'] and  @apim_gateway['secure_api_endpoint_port']-%>
                           <GatewayEndpoint>http://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['api_endpoint_port'] %>,https://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['secure_api_endpoint_port'] %></GatewayEndpoint>
                         <%- else -%>
@@ -277,7 +281,8 @@
         <!--
             Server URL of the API key manager
         -->
-        <%- if @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
+        <%- if (@apply_store_specific_configurations or @apply_gateway_specific_configurations) and
+            @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
           <ServerURL>https://<%= @apim_keymanager['host'] %>:<%= @apim_keymanager['port'] %>/services/</ServerURL>
         <%- else -%>
            <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
@@ -286,7 +291,8 @@
         <!--
             Admin username for API key manager.
         -->
-        <%- if @apim_keymanager and @apim_keymanager['username'] -%>
+        <%- if (@apply_store_specific_configurations or @apply_gateway_specific_configurations) and
+            @apim_keymanager and @apim_keymanager['username'] -%>
           <Username><%= @apim_keymanager['username'] %></Username>
         <%- else -%>
           <Username>${admin.username}</Username>
@@ -295,7 +301,8 @@
         <!--
             Admin password for API key manager.
         -->
-        <%- if @apim_keymanager and @apim_keymanager['password'] -%>
+        <%- if (@apply_store_specific_configurations or @apply_gateway_specific_configurations) and
+            @apim_keymanager and @apim_keymanager['password'] -%>
           <Password><%= @apim_keymanager['password'] %></Password>
         <%- else -%>
           <Password>${admin.password}</Password>
@@ -735,22 +742,24 @@
         <DataPublisher>
             <Enabled><%= @enable_data_publisher %></Enabled>
             <Type>Binary</Type>
-            <%- if @apim_traffic_manager and @apim_traffic_manager['host'] and @apim_traffic_manager['receiver_url_port'] -%>
+            <%- if @apply_gateway_specific_configurations and @apim_traffic_manager and @apim_traffic_manager['host'] and
+                @apim_traffic_manager['receiver_url_port'] -%>
                 <ReceiverUrlGroup>tcp://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['receiver_url_port'] %></ReceiverUrlGroup>
             <%- else -%>
                 <ReceiverUrlGroup>tcp://${carbon.local.ip}:${receiver.url.port}</ReceiverUrlGroup>
             <%- end -%>
-            <%- if @apim_traffic_manager and @apim_traffic_manager['host'] and @apim_traffic_manager['auth_url_port'] -%>
+            <%- if @apply_gateway_specific_configurations and @apim_traffic_manager and @apim_traffic_manager['host'] and
+                @apim_traffic_manager['auth_url_port'] -%>
                 <AuthUrlGroup>ssl://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['auth_url_port'] %></AuthUrlGroup>
             <%- else -%>
                 <AuthUrlGroup>ssl://${carbon.local.ip}:${auth.url.port}</AuthUrlGroup>
             <%- end -%>
-            <%- if @apim_traffic_manager and @apim_traffic_manager['username'] -%>
+            <%- if @apply_gateway_specific_configurations and @apim_traffic_manager and @apim_traffic_manager['username'] -%>
                 <Username><%= @apim_traffic_manager['username'] %></Username>
             <%- else -%>
                 <Username>${admin.username}</Username>
             <%- end -%>
-            <%- if @apim_traffic_manager and @apim_traffic_manager['password'] -%>
+            <%- if @apply_gateway_specific_configurations and @apim_traffic_manager and @apim_traffic_manager['password'] -%>
                 <Password><%= @apim_traffic_manager['password'] %></Password>
             <%- else -%>
                 <Password>${admin.password}</Password>
@@ -766,17 +775,20 @@
             </DataPublisherThreadPool>
         </DataPublisher>
         <PolicyDeployer>
-        <%- if @apim_traffic_manager and @apim_traffic_manager['host'] and @apim_traffic_manager['port'] -%>
+        <%- if (@apply_publisher_specific_configurations or @apply_gateway_specific_configurations) and @apim_traffic_manager and
+        @apim_traffic_manager['host'] and @apim_traffic_manager['port'] -%>
             <ServiceURL>https://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['port'] %>/services/</ServiceURL>
         <%- else -%>
             <ServiceURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServiceURL>
         <%- end -%>
-        <%- if @apim_traffic_manager and @apim_traffic_manager['username'] -%>
+        <%- if (@apply_publisher_specific_configurations or @apply_gateway_specific_configurations) and
+        @apim_traffic_manager and @apim_traffic_manager['username'] -%>
             <Username><%= @apim_traffic_manager['username'] %></Username>
         <%- else -%>
             <Username>${admin.username}</Username>
         <%- end -%>
-        <%- if @apim_traffic_manager and @apim_traffic_manager['password'] -%>
+        <%- if (@apply_publisher_specific_configurations or @apply_gateway_specific_configurations) and
+        @apim_traffic_manager and @apim_traffic_manager['password'] -%>
           <Password><%= @apim_traffic_manager['password'] %></Password>
         <%- else -%>
             <Password>${admin.password}</Password>
@@ -807,7 +819,7 @@
             <Destination>throttleData</Destination>
             <!--InitDelay>300000</InitDelay-->
             <!-- JMSConnectionParameters must be commented in Gateway(s) in distributed setup -->
-            <%- if @apim_gateway_disble_jms_connection_parameters -%>
+            <%- if @disble_jms_connection_parameters -%>
                 <!--
                     <JMSConnectionParameters>
                         <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
@@ -831,7 +843,7 @@
                 <JobQueueSize>10</JobQueueSize>
             </JMSTaskManager>
         </JMSConnectionDetails>
-        <%- if @product_profile == 'gateway-manager' || @product_profile == 'gateway-worker' -%>
+        <%- if @disable_jms_event_parameters -%>
         <!--<JMSEventPublisherParameters>
                 <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
                 <java.naming.provider.url>repository/conf/jndi.properties</java.naming.provider.url>

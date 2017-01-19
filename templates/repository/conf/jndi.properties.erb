@@ -16,7 +16,12 @@
 
 # register some connection factories
 # connectionfactory.[jndiname] = [ConnectionURL]
+<%- if @apply_publisher_specific_configurations -%>
 connectionfactory.TopicConnectionFactory = amqp://admin:admin@clientid/carbon?brokerlist='tcp://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['jms_url_port'] %>'
+topic.throttleData = throttleData
+<%- else -%>
+connectionfactory.TopicConnectionFactory = amqp://admin:admin@clientid/carbon?brokerlist='tcp://localhost:5672'
+<%- end -%>
 connectionfactory.QueueConnectionFactory = amqp://admin:admin@clientID/test?brokerlist='tcp://localhost:5672'
 
 # register some queues in JNDI using the form
