@@ -38,6 +38,7 @@ class wso2am (
   $apim_gateway_disable_jms_event_parameters = $wso2am::params::apim_gateway_disable_jms_event_parameters,
   $enable_traffic_manager_specific_axis2_configurations = $wso2am::params::enable_traffic_manager_specific_axis2_configurations,
   $enable_traffic_manager_specific_registry_configurations = $wso2am::params::enable_traffic_manager_specific_registry_configurations,
+  $apply_key_manager_specific_configurations = $wso2am::params::apply_key_manager_specific_configurations,
 
   $packages               = $wso2am::params::packages,
   $template_list          = $wso2am::params::template_list,
@@ -112,6 +113,7 @@ class wso2am (
   validate_hash($sso_authentication)
   validate_hash($user_management)
   validate_string($mb_store_datasource)
+  validate_bool($apply_key_manager_specific_configurations)
 
   class { '::wso2base':
     packages               => $packages,

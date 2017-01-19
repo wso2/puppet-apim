@@ -31,6 +31,17 @@ wso2::registry_mounts:
    registry_root: /
    enable_cache: true
 
+wso2::apim_gateway:
+  host: mgt.gw.dev.wso2.org
+  port: 9443
+  api_endpoint_host: gw.dev.wso2.org
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+  api_token_revoke_endpoint_port: 8280
+  secure_api_token_revoke_endpoint_port: 8243
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
 # SSO Configuration
 wso2::sso_authentication:
   enabled: false
@@ -52,3 +63,5 @@ wso2::file_list:
 
 wso2::remove_file_list:
   - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
+
+wso2::apply_key_manager_specific_configurations: true
