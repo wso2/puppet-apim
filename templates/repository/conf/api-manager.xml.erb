@@ -800,17 +800,18 @@
         </BlockCondition>
         <JMSConnectionDetails>
             <Enabled><%= @enable_jms_connection_details %></Enabled>
-            <%- if @apim_traffic_manager and @apim_traffic_manager['host'] and @apim_traffic_manager['jms_url_port'] -%>
+            <%- if @enable_jms_connection_details and @apim_traffic_manager and @apim_traffic_manager['host'] and
+            @apim_traffic_manager['jms_url_port'] -%>
                 <ServiceURL>tcp://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['jms_url_port'] %></ServiceURL>
             <%- else -%>
                 <ServiceURL>tcp://${carbon.local.ip}:${jms.port}</ServiceURL>
             <%- end -%>
-            <%- if @apim_traffic_manager and @apim_traffic_manager['username'] -%>
+            <%- if @enable_jms_connection_details and @apim_traffic_manager and @apim_traffic_manager['username'] -%>
                 <Username><%= @apim_traffic_manager['username'] %></Username>
             <%- else -%>
                 <Username>${admin.username}</Username>
             <%- end -%>
-            <%- if @apim_traffic_manager and @apim_traffic_manager['password'] -%>
+            <%- if @enable_jms_connection_details and @apim_traffic_manager and @apim_traffic_manager['password'] -%>
                 <Password><%= @apim_traffic_manager['password'] %></Password>
             <%- else -%>
                 <Password>${admin.password}</Password>

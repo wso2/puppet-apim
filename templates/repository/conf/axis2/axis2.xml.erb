@@ -1430,6 +1430,10 @@
             <property name="backendServerURL" value="https://${hostName}:${httpsPort}/services/"/>
             <property name="mgtConsoleURL" value="https://${hostName}:${httpsPort}/"/>
             <property name="subDomain" value="<%= @clustering['sub_domain'] %>"/>
+        <%- if @apply_gateway_specific_configurations and @clustering['sub_domain'] == 'mgt' -%>
+            <property name="port.mapping.80" value="9763"/>
+            <property name="port.mapping.443" value="9443"/>
+        <%- end -%>
         </parameter>
 
         <!--
