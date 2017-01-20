@@ -802,19 +802,19 @@
             <Enabled><%= @enable_jms_connection_details %></Enabled>
             <%- if @enable_jms_connection_details and @apim_traffic_manager and @apim_traffic_manager['host'] and
             @apim_traffic_manager['jms_url_port'] -%>
-                <ServiceURL>tcp://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['jms_url_port'] %></ServiceURL>
+            <ServiceURL>tcp://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['jms_url_port'] %></ServiceURL>
             <%- else -%>
-                <ServiceURL>tcp://${carbon.local.ip}:${jms.port}</ServiceURL>
+            <ServiceURL>tcp://${carbon.local.ip}:${jms.port}</ServiceURL>
             <%- end -%>
             <%- if @enable_jms_connection_details and @apim_traffic_manager and @apim_traffic_manager['username'] -%>
-                <Username><%= @apim_traffic_manager['username'] %></Username>
+            <Username><%= @apim_traffic_manager['username'] %></Username>
             <%- else -%>
-                <Username>${admin.username}</Username>
+            <Username>${admin.username}</Username>
             <%- end -%>
             <%- if @enable_jms_connection_details and @apim_traffic_manager and @apim_traffic_manager['password'] -%>
-                <Password><%= @apim_traffic_manager['password'] %></Password>
+            <Password><%= @apim_traffic_manager['password'] %></Password>
             <%- else -%>
-                <Password>${admin.password}</Password>
+            <Password>${admin.password}</Password>
             <%- end -%>
             <Destination>throttleData</Destination>
             <!--InitDelay>300000</InitDelay-->
