@@ -373,8 +373,7 @@
              In distributed deployment we should configure this property in key manager node by pointing
              gateway https( /http, we recommend users to use 'https' endpoints for security purpose) url.
              Also please note that we should point gateway revoke service to key manager -->
-        <%- if @apply_key_manager_specific_configurations and  @apim_gateway and
-        @apim_gateway['api_endpoint_host'] and @apim_gateway['port']-%>
+        <%- if @apply_store_specific_configurations and  @apim_gateway and @apim_gateway['api_endpoint_host'] and @apim_gateway['port']-%>
             <RevokeAPIURL>https://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['secure_api_token_revoke_endpoint_port'] %>/revoke</RevokeAPIURL>
         <%- else -%>
             <RevokeAPIURL>https://${carbon.local.ip}:${https.nio.port}/revoke</RevokeAPIURL>
@@ -818,24 +817,13 @@
             <%- end -%>
             <Destination>throttleData</Destination>
             <!--InitDelay>300000</InitDelay-->
-            <!-- JMSConnectionParameters must be commented in Gateway(s) in distributed setup -->
-            <%- if @disble_jms_connection_parameters -%>
-                <!--
-                    <JMSConnectionParameters>
-                        <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
-                        <transport.jms.DestinationType>topic</transport.jms.DestinationType>
-                        <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
-                        <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
-                    </JMSConnectionParameters>
-                -->
-            <%- else -%>
-                <JMSConnectionParameters>
-                    <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
-                    <transport.jms.DestinationType>topic</transport.jms.DestinationType>
-                    <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
-                    <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
-                </JMSConnectionParameters>
-            <%- end -%>
+
+            <JMSConnectionParameters>
+                <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
+                <transport.jms.DestinationType>topic</transport.jms.DestinationType>
+                <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
+                <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
+            </JMSConnectionParameters>
             <JMSTaskManager>
                 <MinThreadPoolSize>20</MinThreadPoolSize>
                 <MaxThreadPoolSize>100</MaxThreadPoolSize>
