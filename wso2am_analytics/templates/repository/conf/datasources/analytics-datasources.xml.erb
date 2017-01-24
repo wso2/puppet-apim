@@ -25,8 +25,6 @@
     </providers>
 
     <datasources>
-
-
         <%- @analytics_datasources.each do |datasource_name, datasource| -%>
         <datasource>
             <name><%= datasource['name'] %></name>
@@ -43,9 +41,6 @@
                     <validationQuery><%= datasource['validation_query'] %></validationQuery>
                     <validationInterval><%= datasource['validation_interval'] %></validationInterval>
                     <defaultAutoCommit><%= datasource['default_auto_commit'] %></defaultAutoCommit>
-                    <initialSize><%= datasource['initial_size'] %></initialSize>
-                    <testWhileIdle><%= datasource['test_while_idle'] %></testWhileIdle>
-                    <minEvictableIdleTimeMillis><%= datasource['min_evictable_idle_time_millis'] %></minEvictableIdleTimeMillis>
                 </configuration>
             </definition>
         </datasource>
@@ -111,4 +106,3 @@
     </datasources>
 
 </datasources-configuration>
-

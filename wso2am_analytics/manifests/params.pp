@@ -31,6 +31,7 @@ class wso2am_analytics::params {
     $single_node_deployment   = hiera('wso2::single_node_deployment')
     $ha_deployment            = hiera('wso2::ha_deployment')
     $portal                   = hiera('wso2::portal')
+    $type_mapping_string_type_mysql = $wso2am_analytics::params::type_mapping_string_type_mysql,
 
     $java_prefs_system_root   = hiera('java_prefs_system_root')
     $java_prefs_user_root     = hiera('java_prefs_user_root')
@@ -352,6 +353,8 @@ class wso2am_analytics::params {
         key_password => 'wso2carbon'
       }
     }
+    $type_mapping_string_type_mysql = 'VARCHAR(254)
+
   }
 
   $product_name               = 'wso2am-analytics'

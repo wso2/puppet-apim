@@ -24,6 +24,7 @@ class wso2am_analytics (
   $single_node_deployment = $wso2am_analytics::params::single_node_deployment,
   $ha_deployment          = $wso2am_analytics::params::ha_deployment,
   $portal                 = $wso2am_analytics::params::portal,
+  $type_mapping_string_type_mysql = $wso2am_analytics::params::type_mapping_string_type_mysql,
 
   $packages               = $wso2am_analytics::params::packages,
   $template_list          = $wso2am_analytics::params::template_list,
