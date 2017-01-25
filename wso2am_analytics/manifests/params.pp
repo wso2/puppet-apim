@@ -25,13 +25,13 @@ class wso2am_analytics::params {
   if $::use_hieradata == 'true' {
 
     $analytics_datasources    = hiera('wso2::analytics_datasources')
-    $metrics_datasources      = hiera('wso2::metrics_datasources')
+    #$metrics_datasources      = hiera('wso2::metrics_datasources')
     $spark                    = hiera('wso2::spark')
     $is_datasource            = hiera('wso2::is_datasource', undef)
     $single_node_deployment   = hiera('wso2::single_node_deployment')
-    $ha_deployment            = hiera('wso2::ha_deployment')
+    #$ha_deployment            = hiera('wso2::ha_deployment')
     $portal                   = hiera('wso2::portal')
-    $type_mapping_string_type_mysql = $wso2am_analytics::params::type_mapping_string_type_mysql,
+    $type_mapping_string_type_mysql = hiera('wso2::type_mapping_string_type_mysql')
 
     $java_prefs_system_root   = hiera('java_prefs_system_root')
     $java_prefs_user_root     = hiera('java_prefs_user_root')
@@ -76,7 +76,7 @@ class wso2am_analytics::params {
     $ports                    = hiera('wso2::ports')
     $jvm                      = hiera('wso2::jvm')
     $sso_authentication       = hiera('wso2::sso_authentication')
-    $oauth_authentication     = hiera('wso2::oauth_authentication')
+    #$oauth_authentication     = hiera('wso2::oauth_authentication')
     $user_management          = hiera('wso2::user_management')
     $enable_secure_vault      = hiera('wso2::enable_secure_vault')
 
@@ -310,9 +310,9 @@ class wso2am_analytics::params {
       enabled => false
     }
 
-    $oauth_authentication     = {
-      token_validation_endpoint => 'https://localhost:9443/services/OAuth2TokenValidationService'
-    }
+   # $oauth_authentication     = {
+   #   token_validation_endpoint => 'https://localhost:9443/services/OAuth2TokenValidationService'
+   # }
 
     $user_management          = {
       admin_role      => 'admin',
@@ -353,7 +353,7 @@ class wso2am_analytics::params {
         key_password => 'wso2carbon'
       }
     }
-    $type_mapping_string_type_mysql = 'VARCHAR(254)
+    $type_mapping_string_type_mysql = 'VARCHAR(254)'
 
   }
 

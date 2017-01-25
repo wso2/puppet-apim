@@ -15,6 +15,9 @@
 ---
 classes:
   - wso2am_analytics
+#If you are using MySQL 5.7 for external  is used, the value of following parameter should be changed to VARCHAR(100)
+wso2::type_mapping_string_type_mysql: VARCHAR(254)
+
 
 wso2::service_name: wso2am_analytics
 wso2::hostname: apim.analytics.dev.wso2.org
@@ -22,9 +25,7 @@ wso2::mgt_hostname: apim_analytics.dev.wso2.org
 wso2::pack_filename: wso2am-analytics-2.1.0.zip
 
 wso2::file_list:
-  - dbscripts/identity/h2.sql
-  - dbscripts/identity/mysql.sql
- - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 
 wso2::ports:
@@ -34,16 +35,8 @@ wso2::portal:
   hostname: apim.analytics.dev.wso2.org
 
 wso2::template_list:
-  - repository/conf/identity/identity.xml
   - repository/conf/datasources/analytics-datasources.xml
-  - repository/conf/datasources/metrics-datasources.xml
-  - repository/conf/analytics/spark/spark-defaults.conf
-  - repository/conf/event-processor.xml
-  - repository/deployment/server/jaggeryapps/portal/configs/designer.json
-#  - repository/conf/security/cipher-text.properties
-#  - repository/conf/security/cipher-tool.properties
-#  - bin/ciphertool.sh
-#  - password-tmp
+  - repository/conf/analytics/spark/spark-jdbc-config.xml
 
 wso2::directory_list:
   - dbscripts/identity
@@ -87,7 +80,7 @@ wso2::analytics_datasources:
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::stats_datasources
+wso2::stats_datasources:
   wso2_am_stats_db:
     name: WSO2AM_STATS_DB
     description: The datasource used for setting statistics to API Manager
@@ -102,8 +95,7 @@ wso2::stats_datasources
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-#If you are using MySQL 5.7 for external  is used, the value of following parameter should be changed to VARCHAR(100)
-wso2::type_mapping_string_type_mysql: VARCHAR(254)
+
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true

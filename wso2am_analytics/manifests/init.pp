@@ -18,7 +18,7 @@
 class wso2am_analytics (
   # wso2am_analytics specific configuration data
   $analytics_datasources  = $wso2am_analytics::params::analytics_datasources,
-  $metrics_datasources    = $wso2am_analytics::params::metrics_datasources,
+  #$metrics_datasources    = $wso2am_analytics::params::metrics_datasources,
   $spark                  = $wso2am_analytics::params::spark,
   $is_datasource          = $wso2am_analytics::params::is_datasource,
   $single_node_deployment = $wso2am_analytics::params::single_node_deployment,
@@ -75,17 +75,17 @@ class wso2am_analytics (
   $jvm                    = $wso2am_analytics::params::jvm,
   $fqdn                   = $wso2am_analytics::params::fqdn,
   $sso_authentication     = $wso2am_analytics::params::sso_authentication,
-  $oauth_authentication   = $wso2am_analytics::params::oauth_authentication,
+  #$oauth_authentication   = $wso2am_analytics::params::oauth_authentication,
   $user_management        = $wso2am_analytics::params::user_management
 ) inherits wso2am_analytics::params {
 
 
   validate_hash($analytics_datasources)
-  validate_hash($metrics_datasources)
+  #validate_hash($metrics_datasources)
   validate_hash($spark)
   validate_string($is_datasource)
   validate_hash($single_node_deployment)
-  validate_hash($ha_deployment)
+  #validate_hash($ha_deployment)
   validate_hash($portal)
 
   validate_hash($master_datasources)
@@ -103,7 +103,7 @@ class wso2am_analytics (
   validate_hash($jvm)
   validate_string($fqdn)
   validate_hash($sso_authentication)
-  validate_hash($oauth_authentication)
+  #validate_hash($oauth_authentication)
   validate_hash($user_management)
 
   class { '::wso2base':
