@@ -46,6 +46,8 @@ class wso2am::params {
     $apply_publisher_specific_configurations = hiera('wso2::apply_publisher_specific_configurations')
     $apply_store_specific_configurations = hiera('wso2::apply_store_specific_configurations')
     $apply_gateway_specific_configurations = hiera('wso2::apply_gateway_specific_configurations')
+    $analytics                 = hiera_hash('wso2::analytics')
+    $enable_log_analyzer       = hiera('wso2::enable_log_analyzer')
 
     $java_prefs_system_root   = hiera('java_prefs_system_root')
     $java_prefs_user_root     = hiera('java_prefs_user_root')
@@ -178,6 +180,7 @@ class wso2am::params {
     $apply_publisher_specific_configurations = false
     $apply_store_specific_configurations = false
     $apply_gateway_specific_configurations = false
+    $enable_log_analyzer      = false
 
     $java_prefs_system_root   = '/home/wso2user/.java'
     $java_prefs_user_root     = '/home/wso2user/.java/.systemPrefs'
@@ -338,6 +341,13 @@ class wso2am::params {
         password     => 'wso2carbon',
         key_password => 'wso2carbon'
       }
+    }
+    $analytics                  =    {
+        enabled             => false,
+        server_url          => '{tcp://localhost:7612}',
+        server_username     => '${admin.username}',
+        server_password     => '${admin.password}',
+        skip_event_receiver_connection => false
     }
   }
 

@@ -188,14 +188,14 @@ wso2::master_datasources:
       validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-    wso2_stat_db:
-      name: WSO2_STAT_DB
+    wso2_am_stats_db:
+      name: WSO2AM_STATS_DB
       description: The datasource is used for stats
       driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
       url: jdbc:mysql://192.168.57.210:3306/statdb?autoReconnect=true
       username: "%{hiera('wso2::datasources::mysql::username')}"
       password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2_STAT_DB
+      jndi_config: jdbc/WSO2AM_STATS_DB
       max_active: "%{hiera('wso2::datasources::common::max_active')}"
       max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
       test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -217,6 +217,7 @@ wso2::apply_key_manager_specific_configurations: false
 wso2::apply_publisher_specific_configurations: false
 wso2::apply_store_specific_configurations: false
 wso2::apply_gateway_specific_configurations: false
+wso2::enable_log_analyzer: false
 
 wso2::registry_mounts:
  wso2_config_db:
@@ -240,6 +241,8 @@ wso2::file_list:
   - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
+
+wso2::analytics: {}
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true

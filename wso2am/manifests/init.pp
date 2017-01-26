@@ -42,6 +42,8 @@ class wso2am (
   $apply_publisher_specific_configurations = $wso2am::params::apply_publisher_specific_configurations,
   $apply_store_specific_configurations = $wso2am::params::apply_store_specific_configurations,
   $apply_gateway_specific_configurations = $wso2am::params::apply_gateway_specific_configurations,
+  $analytics                 = $wso2am::params::analytics,
+  $enable_log_analyzer       = $wso2am::params::enable_log_analyzer,
 
   $packages               = $wso2am::params::packages,
   $template_list          = $wso2am::params::template_list,
@@ -120,6 +122,8 @@ class wso2am (
   validate_bool($apply_publisher_specific_configurations)
   validate_bool($apply_store_specific_configurations)
   validate_bool($apply_gateway_specific_configurations)
+  validate_hash($analytics)
+  validate_bool($enable_log_analyzer)
 
   class { '::wso2base':
     packages               => $packages,

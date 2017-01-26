@@ -201,8 +201,11 @@
     -->
     <Analytics>
         <!-- Enable Analytics for API Manager -->
+        <%- if @analytics and @analytics['enabled'] -%>
+        <Enabled><%= @analytics['enabled'] %></Enabled>
+        <%- else -%>
         <Enabled>false</Enabled>
-
+        <%- end -%>
         <!-- Server URL of the remote DAS/CEP server used to collect statistics. Must
              be specified in protocol://hostname:port/ format.
 
@@ -213,12 +216,24 @@
 
              Ex - Multiple Receiver Groups with two receivers each
              {tcp://localhost:7612/,tcp://localhost:7613},{tcp://localhost:7712/,tcp://localhost:7713/} -->
+        <%- if @analytics and @analytics['enabled'] and @analytics['server_host'] and @analytics['server_port'] -%>
+        <DASServerURL>{tcp://<%= @analytics['server_host'] %>:<%= @analytics['server_port'] %>}</DASServerURL>
+        <%- else -%>
         <DASServerURL>{tcp://localhost:7612}</DASServerURL>
+        <%- end -%>
         <!--DASAuthServerURL>{ssl://localhost:7712}</DASAuthServerURL-->
         <!-- Administrator username to login to the remote DAS server. -->
+        <%- if @analytics and @analytics['enabled'] and @analytics['server_username'] -%>
+        <DASUsername><%= @analytics['server_username'] %></DASUsername>
+        <%- else -%>
         <DASUsername>${admin.username}</DASUsername>
+        <%- end -%>
         <!-- Administrator password to login to the remote DAS server. -->
+        <%- if @analytics and @analytics['enabled'] and @analytics['server_password'] -%>
+        <DASPassword><%= @analytics['server_password'] %></DASPassword>
+        <%- else -%>
         <DASPassword>${admin.password}</DASPassword>
+        <%- end -%>
 
         <!-- For APIM implemented Statistic client for RDBMS -->
         <StatsProviderImpl>org.wso2.carbon.apimgt.usage.client.impl.APIUsageStatisticsRdbmsClientImpl</StatsProviderImpl>
@@ -230,8 +245,11 @@
 
         <!-- Below property is used to skip trying to connect to event receiver nodes when publishing events even if
             the stats enabled flag is set to true. -->
+        <%- if @analytics and @analytics['skip_event_receiver_connection'] -%>
+        <SkipEventReceiverConnection><%= @analytics['skip_event_receiver_connection'] %></SkipEventReceiverConnection>
+        <%- else -%>
         <SkipEventReceiverConnection>false</SkipEventReceiverConnection>
-
+        <%- end -%>
         <!-- API Usage Data Publisher. -->
         <PublisherClass>org.wso2.carbon.apimgt.usage.publisher.APIMgtUsageDataBridgeDataPublisher</PublisherClass>
 

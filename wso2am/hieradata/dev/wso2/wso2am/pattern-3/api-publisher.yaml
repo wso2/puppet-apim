@@ -71,14 +71,14 @@ wso2::sso_authentication:
 
 #datasource configurations
 wso2::master_datasources:
-    wso2_stat_db:
-      name: WSO2_STAT_DB
+    wso2_am_stats_db:
+      name: WSO2AM_STATS_DB
       description: The datasource is used for stats
       driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
       url: jdbc:mysql://192.168.57.210:3306/statdb?autoReconnect=true
       username: "%{hiera('wso2::datasources::mysql::username')}"
       password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2_STAT_DB
+      jndi_config: jdbc/WSO2AM_STATS_DB
       max_active: "%{hiera('wso2::datasources::common::max_active')}"
       max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
       test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -100,3 +100,7 @@ wso2::apply_publisher_specific_configurations: true
 
 wso2::remove_file_list:
   - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
+
+wso2::analytics:
+  enabled : true
+  skip_event_receiver_connection : true

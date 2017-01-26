@@ -110,6 +110,21 @@ wso2::master_datasources:
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
+  wso2_am_stats_db:
+    name: WSO2AM_STATS_DB
+    description: The datasource used for getting statistics to API Manager
+    driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
+    url: jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/WSO2AM_STATS_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
 wso2::enable_advance_throttling: false
 wso2::enable_thrift_server: true
 wso2::thrift_server_host: localhost
@@ -124,6 +139,7 @@ wso2::apply_key_manager_specific_configurations: false
 wso2::apply_publisher_specific_configurations: false
 wso2::apply_store_specific_configurations: false
 wso2::apply_gateway_specific_configurations: false
+wso2::enable_log_analyzer: false
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:

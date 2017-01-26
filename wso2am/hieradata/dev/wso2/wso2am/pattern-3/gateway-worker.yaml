@@ -94,3 +94,6 @@ wso2::ports:
   proxyPort:
     http: 80
     https: 443
+
+wso2::analytics:
+  enabled : true
