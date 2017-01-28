@@ -46,11 +46,11 @@ wso2::enable_thrift_server: false
 
 wso2::key_validator_client_type: WSClient
 
-wso2::file_list:
-  - "repository/resources/security/%{hiera('wso2::key_store')}"
-  - "repository/resources/security/%{hiera('wso2::trust_store')}"
+#wso2::file_list:
+ # - "repository/resources/security/%{hiera('wso2::key_store')}"
+ # - "repository/resources/security/%{hiera('wso2::trust_store')}"
 
-wso2::remove_file_list:
-  - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
+#wso2::remove_file_list:
+#  - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
 
 wso2::apply_key_manager_specific_configurations: true

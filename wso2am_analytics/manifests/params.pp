@@ -25,6 +25,7 @@ class wso2am_analytics::params {
   if $::use_hieradata == 'true' {
 
     $analytics_datasources    = hiera('wso2::analytics_datasources')
+    $stats_datasources        = hiera('wso2::stats_datasources')
     #$metrics_datasources      = hiera('wso2::metrics_datasources')
     $spark                    = hiera('wso2::spark')
     $is_datasource            = hiera('wso2::is_datasource', undef)
@@ -160,6 +161,24 @@ class wso2am_analytics::params {
         validation_query    => 'SELECT 1',
         validation_interval => '30000'
       }
+    }
+
+    $stats_datasources       = {
+      wso2_am_stats_db   => {
+        name                => 'WSO2AM_STATS_DB',
+        description         => 'The datasource used for setting statistics to API Manager',
+        driver_class_name   => 'org.h2.Driver',
+        url                 => 'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE',
+        username            => 'wso2carbon',
+        password            => 'wso2carbon',
+        jndi_config         => 'jdbc/WSO2AM_STATS_DB',
+        max_active          => '50',
+        max_wait            => '60000',
+        test_on_borrow      => true,
+        default_auto_commit => false,
+        validation_query    => 'SELECT 1',
+        validation_interval => '30000'
+       }
     }
 
     $spark      = {

@@ -19,6 +19,7 @@ class wso2am_analytics (
   # wso2am_analytics specific configuration data
   $analytics_datasources  = $wso2am_analytics::params::analytics_datasources,
   #$metrics_datasources    = $wso2am_analytics::params::metrics_datasources,
+  $stats_datasources      = $wso2am_analytics::params::stats_datasources,
   $spark                  = $wso2am_analytics::params::spark,
   $is_datasource          = $wso2am_analytics::params::is_datasource,
   $single_node_deployment = $wso2am_analytics::params::single_node_deployment,
@@ -81,6 +82,7 @@ class wso2am_analytics (
 
 
   validate_hash($analytics_datasources)
+  validate_hash($stats_datasources)
   #validate_hash($metrics_datasources)
   validate_hash($spark)
   validate_string($is_datasource)

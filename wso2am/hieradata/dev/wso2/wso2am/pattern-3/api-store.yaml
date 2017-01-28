@@ -83,8 +83,8 @@ wso2::master_datasources:
       validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::file_list:
-  - "repository/resources/security/%{hiera('wso2::trust_store')}"
+#wso2::file_list:
+#  - "repository/resources/security/%{hiera('wso2::trust_store')}"
 
 wso2::enable_thrift_server: false
 wso2::enable_advance_throttling: true
@@ -94,9 +94,6 @@ wso2::enable_jms_connection_details: false
 wso2::enable_traffic_manager_specific_axis2_configurations: false
 wso2::enable_traffic_manager_specific_registry_configurations: false
 wso2::apply_store_specific_configurations: true
-
-wso2::remove_file_list:
-  - "repository/deployment/server/synapse-configs/default/inbound-endpoints/WebSocketInboundEndpoint.xml"
 
 wso2::analytics:
   enabled : true

@@ -6,7 +6,7 @@
             <send>
                 <endpoint>
                      <%- if @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
-                     <http uri-template="<%= @apim_keymanager['host'] %>:<%= @apim_keymanager['port'] %>/oauth2/token">
+                     <http uri-template="https://<%= @apim_keymanager['host'] %>:<%= @apim_keymanager['port'] %>/oauth2/token">
                      <%- else -%>
                      <http uri-template="https://{uri.var.hostname}:{uri.var.portnum}/oauth2/token">
                      <%- end -%>
