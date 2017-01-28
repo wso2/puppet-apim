@@ -162,25 +162,25 @@
         <dataSource><%= @master_datasources[@local_reg_datasource]['jndi_config'] %></dataSource>
     </dbConfig>
 
-<% if @registry_mounts and !@registry_mounts.empty? -%>
+    <% if @registry_mounts and !@registry_mounts.empty? -%>
     <%- @registry_mounts.each do |datasource_name, registry_mount| -%>
-        <dbConfig name="<%= @master_datasources[datasource_name]['name'] %>">
-            <dataSource><%= @master_datasources[datasource_name]['jndi_config'] %></dataSource>
-        </dbConfig>
-        <remoteInstance url="https://localhost:9443/registry">
-            <id><%= @master_datasources[datasource_name]['name'] %></id>
-            <dbConfig><%= @master_datasources[datasource_name]['name'] %></dbConfig>
-            <readOnly><%= registry_mount['read_only'] %></readOnly>
-            <registryRoot><%= registry_mount['registry_root'] %></registryRoot>
-            <enableCache><%= registry_mount['enable_cache'] %></enableCache>
-            <cacheId><%= @master_datasources[datasource_name]['username'] %>@<%= @master_datasources[datasource_name]['url'] %></cacheId>
-        </remoteInstance>
-        <mount path="<%= registry_mount['path'] %>" overwrite="virtual">
-            <instanceId><%= @master_datasources[datasource_name]['name'] %></instanceId>
-            <targetPath><%= registry_mount['target_path'] %></targetPath>
-        </mount>
+    <dbConfig name="<%= @master_datasources[datasource_name]['name'] %>">
+        <dataSource><%= @master_datasources[datasource_name]['jndi_config'] %></dataSource>
+    </dbConfig>
+    <remoteInstance url="https://localhost:9443/registry">
+        <id><%= @master_datasources[datasource_name]['name'] %></id>
+        <dbConfig><%= @master_datasources[datasource_name]['name'] %></dbConfig>
+        <readOnly><%= registry_mount['read_only'] %></readOnly>
+        <registryRoot><%= registry_mount['registry_root'] %></registryRoot>
+        <enableCache><%= registry_mount['enable_cache'] %></enableCache>
+        <cacheId><%= @master_datasources[datasource_name]['username'] %>@<%= @master_datasources[datasource_name]['url'] %></cacheId>
+    </remoteInstance>
+    <mount path="<%= registry_mount['path'] %>" overwrite="virtual">
+        <instanceId><%= @master_datasources[datasource_name]['name'] %></instanceId>
+        <targetPath><%= registry_mount['target_path'] %></targetPath>
+    </mount>
     <%- end -%>
-<% end -%>
+    <% end -%>
 
     <!-- This handler provides the feature to add a simlink to a given resource -->
 

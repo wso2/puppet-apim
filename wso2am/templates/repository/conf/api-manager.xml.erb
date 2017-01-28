@@ -66,10 +66,6 @@
 	<CheckPermissionsRemotely>false</CheckPermissionsRemotely>
     </AuthManager>
 
-    <!--
-        Configuration parameters for the API authentication handler. This is an optional
-        configuration for the API Gateway component.
-    -->
     <JWTConfiguration>
         <!-- Enable/Disable JWT generation. Default is false. -->
         <!-- EnableJWTGeneration>false</EnableJWTGeneration-->
@@ -107,14 +103,14 @@
     <!-- Primary/secondary login configuration for APIstore. If user likes to keep two login attributes in a distributed setup, to login the APIstore,
 		he should configure this section. Primary login doesn't have a claimUri associated with it. But secondary login, which is a claim attribute,
 		is associated with a claimuri.-->
-    <!-- <LoginConfig>
+    <!--LoginConfig>
             <UserIdLogin  primary="true">
         <ClaimUri></ClaimUri>
         </UserIdLogin>
         <EmailLogin  primary="false">
             <ClaimUri>http://wso2.org/claims/emailaddress</ClaimUri>
         </EmailLogin>
-    </LoginConfig>-->
+    </LoginConfig-->
 
     <!--
         Credentials for the API gateway admin server. This configuration
@@ -163,8 +159,8 @@
     			        <!--
                 			Endpoint URLs for the APIs hosted in this API gateway.
             		    -->
-            		    <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and
-            		    @apim_gateway and @apim_gateway['api_endpoint_host'] and
+            		    <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations or
+            		    @single_node_deployment) and @apim_gateway and @apim_gateway['api_endpoint_host'] and
             		        @apim_gateway['api_endpoint_port'] and  @apim_gateway['secure_api_endpoint_port']-%>
                           <GatewayEndpoint>http://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['api_endpoint_port'] %>,https://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['secure_api_endpoint_port'] %></GatewayEndpoint>
                         <%- else -%>
@@ -363,7 +359,7 @@
     -->
 
     <!--APIKeyManager>
-        <KeyManagerClientImpl>org.wso2.carbon.apimgt.keymgt.AMDefaultKeyManagerImpl</KeyManagerClientImpl>
+        <KeyManagerClientImpl>org.wso2.carbon.apimgt.impl.AMDefaultKeyManagerImpl</KeyManagerClientImpl>
         <Configuration>
             <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
             <Username>${admin.username}</Username>
