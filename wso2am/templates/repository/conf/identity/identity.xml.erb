@@ -123,6 +123,8 @@
         <OAuth1AccessTokenUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oauth/access-token</OAuth1AccessTokenUrl>
         <OAuth2AuthzEPUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oauth2/authorize</OAuth2AuthzEPUrl>
         <OAuth2TokenEPUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oauth2/token</OAuth2TokenEPUrl>
+        <OAuth2RevokeEPUrll>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oauth2/revoke</OAuth2RevokeEPUrll>
+        <OAuth2IntrospectEPUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oauth2/introspect</OAuth2IntrospectEPUrl>
         <OAuth2UserInfoEPUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oauth2/userinfo</OAuth2UserInfoEPUrl>
         <OIDCCheckSessionEPUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oidc/checksession</OIDCCheckSessionEPUrl>
         <OIDCLogoutEPUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oidc/logout</OIDCLogoutEPUrl>
@@ -369,17 +371,17 @@
         <Question>
             <Password>
                 <Enable>false</Enable>
-                <NotifyStart>true</NotifyStart>
+                <NotifyStart>false</NotifyStart>
                 <Separator>!</Separator>
                 <MinAnswers>2</MinAnswers>
                 <ReCaptcha>
                     <Enable>true</Enable>
-                    <MaxFailedAttempts>3</MaxFailedAttempts>
+                    <MaxFailedAttempts>2</MaxFailedAttempts>
                 </ReCaptcha>
             </Password>
         </Question>
         <ExpiryTime>3</ExpiryTime>
-        <NotifySuccess>true</NotifySuccess>
+        <NotifySuccess>false</NotifySuccess>
         <AdminPasswordReset>
             <Offline>false</Offline>
             <OTP>false</OTP>
@@ -389,7 +391,7 @@
 
     <EmailVerification>
         <Enable>false</Enable>
-        <LockOnCreation>false</LockOnCreation>
+        <LockOnCreation>true</LockOnCreation>
         <Notification>
             <InternallyManage>true</InternallyManage>
         </Notification>
@@ -419,7 +421,7 @@
         <EventListener enable="true"
             name="org.wso2.carbon.identity.governance.listener.IdentityStoreEventListener"
             orderId="97" type="org.wso2.carbon.user.core.listener.UserOperationEventListener">
-            <Property name="Data.Store">org.wso2.carbon.identity.governance.store.UserStoreBasedIdentityDataStore</Property>
+            <Property name="Data.Store">org.wso2.carbon.identity.governance.store.JDBCIdentityDataStore</Property>
         </EventListener>
         <EventListener enable="false"
             name="org.wso2.carbon.identity.data.publisher.application.authentication.impl.DASLoginDataPublisherImpl"
@@ -471,15 +473,6 @@
                 name="IdPCacheByName" timeout="1"/>
         </CacheManager>
     </CacheConfig>
-    <ISAnalytics>
-        <DefaultValues>
-            <userName>NOT_AVAILABLE</userName>
-            <userStoreDomain>NOT_AVAILABLE</userStoreDomain>
-            <rolesCommaSeperated>NOT_AVAILABLE</rolesCommaSeperated>
-            <serviceprovider>NOT_AVAILABLE</serviceprovider>
-            <identityProvider>NOT_AVAILABLE</identityProvider>
-        </DefaultValues>
-    </ISAnalytics>
     <!--Cookies>
         <Cookie name="commonAuthId" domain="localhost" httpOnly="true" secure="true" />
     </Cookies-->

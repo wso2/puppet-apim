@@ -38,7 +38,7 @@ wso2::master_datasources:
     url: jdbc:mysql://192.168.57.210:3306/mbstoredb?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: jdbc/WSO2_MB_STORE_DB
+    jndi_config: WSO2MBStoreDB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
