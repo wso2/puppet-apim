@@ -24,8 +24,13 @@ wso2::hostname: analytics.dev.wso2.org
 wso2::mgt_hostname: analytics.dev.wso2.org
 wso2::pack_filename: wso2am-analytics-2.1.0.zip
 
+wso2::key_store: wso2carbon.jks
+wso2::trust_store: client-truststore.jks
+
 wso2::file_list:
   - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+  - "repository/resources/security/%{hiera('wso2::key_store')}"
+  - "repository/resources/security/%{hiera('wso2::trust_store')}"
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 
 wso2::ports:

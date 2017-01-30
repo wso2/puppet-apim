@@ -35,7 +35,7 @@ wso2::template_list:
 
 wso2::file_list:
   - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
- # - "repository/resources/security/%{hiera('wso2::key_store')}"
+  - "repository/resources/security/%{hiera('wso2::key_store')}"
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 
@@ -87,9 +87,6 @@ wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db
 wso2::usermgt_datasource: wso2_user_db
 
-## Uncomment the following key_store and trust_store to include the certificate of keymanager in gateway in a clustered setup
-#wso2::key_store: wso2carbon.jks
-#wso2::trust_store: client-truststore.jks
 #datasource configurations
 wso2::am_datasources:
    wso2_am_db:

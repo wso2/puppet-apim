@@ -75,9 +75,6 @@ wso2::apim_publisher:
 wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db
 
-## Uncomment the following key_store and trust_store to include the certificate of keymanager in gateway in a clustered setup
-#wso2::key_store: wso2carbon.jks
-#wso2::trust_store: client-truststore.jks
 wso2::key_store: wso2carbon.jks
 wso2::trust_store: client-truststore.jks
 #wso2::am_datasources:
