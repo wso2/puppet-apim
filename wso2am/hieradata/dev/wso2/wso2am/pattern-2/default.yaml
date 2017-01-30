@@ -247,7 +247,7 @@ wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 
 wso2::analytics:
   enabled : true
-  server_host : apim.analytics.dev.wso2.org
+  server_host : analytics.dev.wso2.org
   server_port : 7612
   server_username : admin
   server_password : admin

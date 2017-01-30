@@ -50,7 +50,7 @@ wso2::mgt_hostname: am.dev.wso2.org
 
 wso2::analytics:
   enabled : false
-  server_host : apim.analytics.dev.wso2.org
+  server_host : analytics.dev.wso2.org
   server_port : 7612
   server_username : admin
   server_password : admin
@@ -81,7 +81,7 @@ wso2::hosts_mapping:
     name: svn.gw.am.dev.wso2.org
   apim_analytics_server:
     ip: 192.168.57.29
-    name: apim.analytics.dev.wso2.org
+    name: analytics.dev.wso2.org
 
 wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db

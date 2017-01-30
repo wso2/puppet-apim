@@ -20,8 +20,8 @@ wso2::type_mapping_string_type_mysql: VARCHAR(254)
 
 
 wso2::service_name: wso2am_analytics
-wso2::hostname: apim.analytics.dev.wso2.org
-wso2::mgt_hostname: apim_analytics.dev.wso2.org
+wso2::hostname: analytics.dev.wso2.org
+wso2::mgt_hostname: analytics.dev.wso2.org
 wso2::pack_filename: wso2am-analytics-2.1.0.zip
 
 wso2::file_list:
@@ -32,7 +32,7 @@ wso2::ports:
   offset: 1
 
 wso2::portal:
-  hostname: apim.analytics.dev.wso2.org
+  hostname: analytics.dev.wso2.org
 
 wso2::template_list:
   - repository/conf/datasources/analytics-datasources.xml
