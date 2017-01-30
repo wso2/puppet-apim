@@ -240,8 +240,8 @@ wso2::mb_store_datasource: wso2_mb_store_db
 
 wso2::file_list:
   - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
-  - "repository/resources/security/%{hiera('wso2::trust_store')}"
-  - "repository/resources/security/%{hiera('wso2::key_store')}"
+#  - "repository/resources/security/%{hiera('wso2::trust_store')}"
+#  - "repository/resources/security/%{hiera('wso2::key_store')}"
 
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 

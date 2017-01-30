@@ -40,7 +40,7 @@
         <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
           <ServerURL>https://<%= @apim_keymanager['host'] %>:<%= @apim_keymanager['port'] %>/services/</ServerURL>
         <%- else -%>
-           <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
+           <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
         <%- end -%>
 
         <!--
@@ -135,7 +135,7 @@
                         @apim_gateway and @apim_gateway['host'] and @apim_gateway['port']-%>
                           <ServerURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['port'] %>/services/</ServerURL>
                         <%- else -%>
-                          <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
+                          <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
                         <%- end -%>
                         <!--
                             Admin username for the API gateway.
@@ -299,7 +299,7 @@
             @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
           <ServerURL>https://<%= @apim_keymanager['host'] %>:<%= @apim_keymanager['port'] %>/services/</ServerURL>
         <%- else -%>
-           <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
+           <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
         <%- end -%>
 
         <!--
@@ -361,7 +361,7 @@
     <!--APIKeyManager>
         <KeyManagerClientImpl>org.wso2.carbon.apimgt.impl.AMDefaultKeyManagerImpl</KeyManagerClientImpl>
         <Configuration>
-            <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
+            <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
             <Username>${admin.username}</Username>
             <Password>${admin.password}</Password>
             <TokenURL>https://${carbon.local.ip}:${https.nio.port}/token</TokenURL>
