@@ -39,16 +39,6 @@ wso2::clustering:
       -
         hostname: 192.168.57.247
         port: 4000
-# AWS membership scheme
-#   membership_scheme: aws
-#   aws:
-#     access_key: access-key
-#     secret_key: secret-key
-#     security_group: security-group
-#     host_header: host-header
-#     region: region
-#     tag_key: tag-key
-#     tag_value: tag-value
 
 wso2::dep_sync:
   enabled: true
@@ -91,7 +81,6 @@ wso2::thrift_server_host: localhost
 wso2::key_validator_client_type: WSClient
 
 wso2::file_list:
-#  - "repository/resources/security/%{hiera('wso2::trust_store')}"
    -  "repository/components/dropins/svnkit-all-1.8.7.wso2v1.jar"
    -  "repository/components/lib/trilead-ssh2-1.0.0-build215.jar"
 

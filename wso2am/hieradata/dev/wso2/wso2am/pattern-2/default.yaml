@@ -23,6 +23,8 @@ wso2::template_list:
   - repository/conf/identity/application-authentication.xml
   - repository/conf/identity/EndpointConfig.properties
   - repository/conf/broker.xml
+  - repository/conf/log4j.properties
+
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -249,6 +251,11 @@ wso2::analytics:
   server_username : admin
   server_password : admin
   skip_event_receiver_connection : false
+
+wso2::hosts_mapping:
+  apim_analytics_server:
+    ip: 192.168.57.29
+    name: analytics.dev.wso2.org
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true

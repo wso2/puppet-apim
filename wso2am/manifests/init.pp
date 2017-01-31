@@ -80,6 +80,8 @@ class wso2am (
   $carbon_home            = $wso2am::params::carbon_home,
   $pack_file_abs_path     = $wso2am::params::pack_file_abs_path,
   $remove_file_list       = $wso2am::params::remove_file_list,
+  $key_store              = $wso2am::params::key_store,
+  $trust_store            = $wso2am::params::trust_store,
 
   # Templated configuration parameters
   $master_datasources     = $wso2am::params::master_datasources,
@@ -124,6 +126,8 @@ class wso2am (
   validate_bool($apply_gateway_specific_configurations)
   validate_hash($analytics)
   validate_bool($enable_log_analyzer)
+  validate_string($key_store)
+  validate_string($trust_store)
 
   class { '::wso2base':
     packages               => $packages,

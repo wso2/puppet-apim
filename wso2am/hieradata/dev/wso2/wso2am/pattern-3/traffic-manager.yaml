@@ -19,10 +19,6 @@ wso2::hostname: tm.dev.wso2.org
 wso2::template_list:
   - repository/conf/broker.xml
 
-#wso2::file_list:
-#  - "repository/resources/security/%{hiera('wso2::key_store')}"
-#  - "repository/resources/security/%{hiera('wso2::trust_store')}"
-
 wso2::enable_traffic_manager_specific_axis2_configurations: true
 wso2::enable_traffic_manager_specific_registry_configurations: true
 

@@ -86,9 +86,6 @@ wso2::master_datasources:
       validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-#wso2::file_list:
-#  - "repository/resources/security/%{hiera('wso2::trust_store')}"
-
 wso2::enable_thrift_server: false
 wso2::enable_advance_throttling: true
 wso2::enable_data_publisher: false
