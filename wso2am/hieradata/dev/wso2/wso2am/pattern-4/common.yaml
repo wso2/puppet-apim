@@ -69,7 +69,7 @@ wso2::hosts_mapping:
     name: pub.dev.wso2.org
   apim_gateway:
     ip: 192.168.57.216
-    name: mgt-gw.dev.wso2.org
+    name: mgt.gw.dev.wso2.org
   apim_gateway_worker:
     ip: 192.168.57.247
     name: gw.dev.wso2.org
@@ -82,6 +82,12 @@ wso2::hosts_mapping:
   apim_analytics_server:
     ip: 192.168.57.29
     name: analytics.dev.wso2.org
+  apim_gateway_dmz:
+    ip: 192.168.57.28
+    name: dmzmgt.gw.dev.wso2.org
+  apim_gateway_worker_dmz:
+    ip: 192.168.57.218
+    name: dmzgw.dev.wso2.org
 
 wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db
@@ -205,6 +211,17 @@ wso2:environments:
     host: mgt-gw.dev.wso2.org
     port: 9443
     api_endpoint_host: gw.dev.wso2.org
+    api_endpoint_port: 8280
+    secure_api_endpoint_port: 8243
+    api_token_revoke_endpoint_port: 8280
+    secure_api_token_revoke_endpoint_port: 8243
+    username: "%{hiera('wso2::super_admin::username')}"
+    password: "%{hiera('wso2::super_admin::password')}"
+
+  wso2::apim_gateway_dmz:
+    host: dmz-mgt-gw.dev.wso2.org
+    port: 9443
+    api_endpoint_host: dmz-gw.dev.wso2.org
     api_endpoint_port: 8280
     secure_api_endpoint_port: 8243
     api_token_revoke_endpoint_port: 8280
