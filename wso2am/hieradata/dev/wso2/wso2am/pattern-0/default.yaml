@@ -38,6 +38,7 @@ wso2::template_list:
 wso2::service_name: wso2am
 wso2::hostname: am.dev.wso2.org
 wso2::mgt_hostname: am.dev.wso2.org
+wso2::product_profile: default
 
 wso2::apim_traffic_manager:
   host: am.dev.wso2.org
@@ -48,16 +49,17 @@ wso2::apim_traffic_manager:
   username: "%{hiera('wso2::super_admin::username')}"
   password: "%{hiera('wso2::super_admin::password')}"
 
-wso2::apim_gateway:
-  host: am.dev.wso2.org
-  port: 9443
-  api_endpoint_host: am.dev.wso2.org
-  api_endpoint_port: 8280
-  secure_api_endpoint_port: 8243
-  api_token_revoke_endpoint_port: 8280
-  secure_api_token_revoke_endpoint_port: 8243
-  username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::password')}"
+wso2::environments:
+  apim_gateway_lan:
+    host: am.dev.wso2.org
+    port: 9443
+    api_endpoint_host: am.dev.wso2.org
+    api_endpoint_port: 8280
+    secure_api_endpoint_port: 8243
+    api_token_revoke_endpoint_port: 8280
+    secure_api_token_revoke_endpoint_port: 8243
+    username: "%{hiera('wso2::super_admin::username')}"
+    password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_keymanager:
   host: am.dev.wso2.org
@@ -145,6 +147,8 @@ wso2::apply_publisher_specific_configurations: false
 wso2::apply_store_specific_configurations: false
 wso2::apply_gateway_specific_configurations: false
 wso2::enable_log_analyzer: false
+wso2::key_store: wso2carbon.jks
+wso2::trust_store: client-truststore.jks
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:

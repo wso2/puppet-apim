@@ -15,6 +15,7 @@
 ---
 wso2::mgt_hostname: tm.dev.wso2.org
 wso2::hostname: tm.dev.wso2.org
+wso2::product_profile: traffic-manager
 
 wso2::template_list:
   - repository/conf/broker.xml

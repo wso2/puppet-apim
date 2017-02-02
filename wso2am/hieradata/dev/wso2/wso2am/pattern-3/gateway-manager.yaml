@@ -15,6 +15,7 @@
 ---
 wso2::mgt_hostname: mgt-gw.dev.wso2.org
 wso2::hostname: mgt-gw.dev.wso2.org
+wso2::product_profile: gateway-manager
 
 wso2::template_list:
   - repository/deployment/server/synapse-configs/default/api/_AuthorizeAPI_.xml
@@ -83,6 +84,10 @@ wso2::key_validator_client_type: WSClient
 wso2::file_list:
    -  "repository/components/dropins/svnkit-all-1.8.7.wso2v1.jar"
    -  "repository/components/lib/trilead-ssh2-1.0.0-build215.jar"
+
+wso2::remove_file_list:
+   -  "repository/deployment/server/jaggeryapps"
+   -  "repository/deployment/server/webapps"
 
 wso2::enable_advance_throttling: true
 wso2::enable_data_publisher: true

@@ -15,6 +15,7 @@
 ---
 wso2::mgt_hostname: dmz-mgt-gw.dev.wso2.org
 wso2::hostname: dmz-gw.dev.wso2.org
+wso2::product_profile: gateway-worker
 
 wso2::apim_traffic_manager:
   host: tm.dev.wso2.org
@@ -81,6 +82,10 @@ wso2::key_validator_client_type: WSClient
 wso2::file_list:
    -  "repository/components/dropins/svnkit-all-1.8.7.wso2v1.jar"
    -  "repository/components/lib/trilead-ssh2-1.0.0-build215.jar"
+
+wso2::remove_file_list:
+   -  "repository/deployment/server/jaggeryapps"
+   -  "repository/deployment/server/webapps"
 
 wso2::enable_traffic_manager_specific_axis2_configurations: false
 wso2::enable_traffic_manager_specific_registry_configurations: false

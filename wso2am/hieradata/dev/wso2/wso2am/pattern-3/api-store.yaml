@@ -15,6 +15,7 @@
 ---
 wso2::mgt_hostname: store.dev.wso2.org
 wso2::hostname: store.dev.wso2.org
+wso2::product_profile: api-store
 
 wso2::clustering:
   enabled: true

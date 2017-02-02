@@ -15,6 +15,7 @@
 ---
 wso2::mgt_hostname: km.dev.wso2.org
 wso2::hostname: km.dev.wso2.org
+wso2::product_profile: api-key-manager
 
 wso2::registry_mounts:
  wso2_config_db:

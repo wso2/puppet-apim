@@ -119,16 +119,24 @@
     -->
     <APIGateway>
 	<!-- The environments to which an API will be published -->
-	<Environments>
+	    <Environments>
 		<!-- Environments can be of different types. Allowed values are 'hybrid', 'production' and 'sandbox'.
 		     An API deployed on a 'production' type gateway will only support production keys
 		     An API deployed on a 'sandbox' type gateway will only support sandbox keys
 		     An API deployed on a 'hybrid' type gateway will support both production and sandbox keys. -->
 		<!-- api-console element specifies whether the environment should be listed in API Console or not -->
                  <%- @environments.each do |environment_name, environment| -%>
-                        <Environment type="hybrid" api-console="true">
+                    <Environment type="hybrid" api-console="true">
+                        <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and environment['name'] -%>
+                          <Name><%= environment['name'] %></Name>
+                        <%- else -%>
                           <Name>Production and Sandbox</Name>
+                        <%- end -%>
+                        <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and environment['description'] -%>
+                          <Description><%= environment['description'] %></Description>
+                        <%- else -%>
                           <Description>This is a hybrid gateway that handles both production and sandbox token traffic.</Description>
+                        <%- end -%>
                         <!--
                                 Server URL of the API gateway.
                         -->
@@ -160,14 +168,13 @@
     			        <!--
                 			Endpoint URLs for the APIs hosted in this API gateway.
             		    -->
-                      <%- @environments.each do |env_name, env| -%>
-                        <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and env['api_endpoint_host'] and
-                          env['api_endpoint_port'] and  env['secure_api_endpoint_port']-%>
-                          <GatewayEndpoint>http://<%= env['api_endpoint_host'] %>:<%= env['api_endpoint_port'] %>,https://<%= env['api_endpoint_host'] %>:<%= env['secure_api_endpoint_port'] %></GatewayEndpoint>
+                        <%- if (@apply_publisher_specific_configurations or @apply_store_specific_configurations) and environment['api_endpoint_host'] and
+                          environment['api_endpoint_port'] and  environment['secure_api_endpoint_port']-%>
+                          <GatewayEndpoint>http://<%= environment['api_endpoint_host'] %>:<%= environment['api_endpoint_port'] %>,https://<%= environment['api_endpoint_host'] %>:<%= environment['secure_api_endpoint_port'] %></GatewayEndpoint>
                         <%- else -%>
                           <GatewayEndpoint>http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}</GatewayEndpoint>
                         <%- end -%>
-                      <%- end -%>
+                    </Environment>
                     <%- end -%>
         </Environments>
     </APIGateway>
@@ -391,9 +398,9 @@
              Also please note that we should point gateway revoke service to key manager -->
         <%- if @apply_store_specific_configurations and @environments and @environments['apim_gateway_lan']['api_endpoint_host'] and
         @environments['apim_gateway_lan']['port']-%>
-            <RevokeAPIURL>https://<%= @environments['apim_gateway_lan']['api_endpoint_host'] %>:<%= @environments['apim_gateway_lan']['secure_api_token_revoke_endpoint_port'] %>/revoke</RevokeAPIURL>
+        <RevokeAPIURL>https://<%= @environments['apim_gateway_lan']['api_endpoint_host'] %>:<%= @environments['apim_gateway_lan']['secure_api_token_revoke_endpoint_port'] %>/revoke</RevokeAPIURL>
         <%- else -%>
-            <RevokeAPIURL>https://${carbon.local.ip}:${https.nio.port}/revoke</RevokeAPIURL>
+        <RevokeAPIURL>https://${carbon.local.ip}:${https.nio.port}/revoke</RevokeAPIURL>
         <%- end -%>
         <!-- Whether to encrypt tokens when storing in the Database
         Note: If changing this value to true, change the value of <TokenPersistenceProcessor> to

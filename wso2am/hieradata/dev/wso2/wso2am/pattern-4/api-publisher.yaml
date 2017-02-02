@@ -15,6 +15,7 @@
 ---
 wso2::mgt_hostname: pub.dev.wso2.org
 wso2::hostname: pub.dev.wso2.org
+wso2::product_profile: api-publisher
 
 wso2::template_list:
   - repository/conf/jndi.properties
@@ -98,3 +99,17 @@ wso2::apply_publisher_specific_configurations: true
 wso2::analytics:
   enabled : true
   skip_event_receiver_connection : true
+
+wso2::environments:
+  apim_gateway_dmz:
+    name: Production and Sandbox environment for DMZ
+    description: This is a hybrid gateway that handles both production and sandbox token traffic, and this resides in the DMZ
+    host: dmz-mgt-gw.dev.wso2.org
+    port: 9443
+    api_endpoint_host: dmz-gw.dev.wso2.org
+    api_endpoint_port: 8280
+    secure_api_endpoint_port: 8243
+    api_token_revoke_endpoint_port: 8280
+    secure_api_token_revoke_endpoint_port: 8243
+    username: "%{hiera('wso2::super_admin::username')}"
+    password: "%{hiera('wso2::super_admin::password')}"

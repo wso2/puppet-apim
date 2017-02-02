@@ -15,6 +15,7 @@
 ---
 wso2::mgt_hostname: pub.dev.wso2.org
 wso2::hostname: pub.dev.wso2.org
+wso2::product_profile: api-publisher
 
 wso2::template_list:
   - repository/conf/jndi.properties

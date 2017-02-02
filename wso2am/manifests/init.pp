@@ -24,7 +24,7 @@ class wso2am (
   $hostname                 = $wso2am::params::hostname,
   $mgt_hostname             = $wso2am::params::mgt_hostname,
   $apim_traffic_manager     = $wso2am::params::apim_traffic_manager,
-  $apim_gateway             = $wso2am::params::apim_gateway,
+  $environments             = $wso2am::params::environments,
   $apim_keymanager          = $wso2am::params::apim_keymanager,
   $apim_store               = $wso2am::params::apim_store,
   $apim_publisher           = $wso2am::params::apim_publisher,
@@ -44,6 +44,7 @@ class wso2am (
   $apply_gateway_specific_configurations = $wso2am::params::apply_gateway_specific_configurations,
   $analytics                 = $wso2am::params::analytics,
   $enable_log_analyzer       = $wso2am::params::enable_log_analyzer,
+  $product_profile           = $wso2am::params::product_profile,
 
   $packages               = $wso2am::params::packages,
   $template_list          = $wso2am::params::template_list,

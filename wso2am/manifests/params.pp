@@ -28,7 +28,7 @@ class wso2am::params {
     $am_datasource            = hiera('wso2::am_datasource')
     $am_datasources           = hiera_hash('wso2::am_datasources')
     $apim_traffic_manager     = hiera_hash('wso2::apim_traffic_manager')
-    $apim_gateway             = hiera_hash('wso2::apim_gateway')
+    $environments             = hiera_hash('wso2::environments')
     $apim_keymanager          = hiera_hash('wso2::apim_keymanager')
     $apim_store               = hiera_hash('wso2::apim_store')
     $apim_publisher           = hiera_hash('wso2::apim_publisher')
@@ -48,6 +48,7 @@ class wso2am::params {
     $apply_gateway_specific_configurations = hiera('wso2::apply_gateway_specific_configurations')
     $analytics                 = hiera_hash('wso2::analytics')
     $enable_log_analyzer       = hiera('wso2::enable_log_analyzer')
+    $product_profile           = hiera('wso2::product_profile')
 
     $java_prefs_system_root   = hiera('java_prefs_system_root')
     $java_prefs_user_root     = hiera('java_prefs_user_root')
@@ -139,16 +140,18 @@ class wso2am::params {
 
     }
 
-    $apim_gateway             ={
-      host                                  => 'am.dev.wso2.org',
-      port                                  => '9443',
-      api_endpoint_host                     => 'am.dev.wso2.org',
-      api_endpoint_port                     => '8280',
-      secure_api_endpoint_port              => '8243',
-      api_token_revoke_endpoint_port        => '8280',
-      secure_api_token_revoke_endpoint_port => '8243',
-      username                              => 'admin',
-      password                              => 'admin'
+    $environments           = {
+        apim_gateway  => {
+          host                                  => 'am.dev.wso2.org',
+          port                                  => '9443',
+          api_endpoint_host                     => 'am.dev.wso2.org',
+          api_endpoint_port                     => '8280',
+          secure_api_endpoint_port              => '8243',
+          api_token_revoke_endpoint_port        => '8280',
+          secure_api_token_revoke_endpoint_port => '8243',
+          username                              => 'admin',
+          password                              => 'admin'
+        }
     }
 
     $apim_keymanager          ={
