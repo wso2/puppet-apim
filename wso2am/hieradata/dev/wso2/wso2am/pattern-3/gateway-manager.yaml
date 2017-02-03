@@ -87,7 +87,15 @@ wso2::file_list:
 
 wso2::remove_file_list:
    -  "repository/deployment/server/jaggeryapps"
-   -  "repository/deployment/server/webapps"
+   -  "repository/deployment/server/webapps/am#sample#calculator#v1.war"
+   -  "repository/deployment/server/webapps/api#am#admin#v0.11.war"
+   -  "repository/deployment/server/webapps/api#am#publisher#v0.11.war"
+   -  "repository/deployment/server/webapps/api#am#store#v0.11.war"
+   -  "repository/deployment/server/webapps/authenticationendpoint.war"
+   -  "repository/deployment/server/webapps/client-registration#v0.11.war"
+   -  "repository/deployment/server/webapps/oauth2.war"
+   -  "repository/deployment/server/webapps/shindig.war"
+   -  "repository/deployment/server/webapps/throttle#data#v1.war"
 
 wso2::enable_advance_throttling: true
 wso2::enable_data_publisher: true
