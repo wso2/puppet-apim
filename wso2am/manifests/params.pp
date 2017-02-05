@@ -40,9 +40,6 @@ class wso2am::params {
     $enable_block_condition    = hiera('wso2::enable_block_condition')
     $enable_jms_connection_details = hiera('wso2::enable_jms_connection_details')
     $disable_jms_event_parameters = hiera('wso2::disable_jms_event_parameters')
-    $enable_traffic_manager_specific_axis2_configurations = hiera('wso2::enable_traffic_manager_specific_axis2_configurations')
-    $enable_traffic_manager_specific_registry_configurations = hiera('wso2::enable_traffic_manager_specific_registry_configurations')
-    $apply_key_manager_specific_configurations = hiera('wso2::apply_key_manager_specific_configurations')
     $apply_publisher_specific_configurations = hiera('wso2::apply_publisher_specific_configurations')
     $apply_store_specific_configurations = hiera('wso2::apply_store_specific_configurations')
     $apply_gateway_specific_configurations = hiera('wso2::apply_gateway_specific_configurations')
@@ -179,9 +176,6 @@ class wso2am::params {
     $enable_block_condition    = true
     $enable_jms_connection_details = false
     $disable_jms_event_parameters = false
-    $enable_traffic_manager_specific_axis2_configurations = false
-    $enable_traffic_manager_specific_registry_configurations = false
-    $apply_key_manager_specific_configurations = false
     $apply_publisher_specific_configurations = false
     $apply_store_specific_configurations = false
     $apply_gateway_specific_configurations = false

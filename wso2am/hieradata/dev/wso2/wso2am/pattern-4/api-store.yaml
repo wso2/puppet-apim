@@ -89,8 +89,6 @@ wso2::enable_advance_throttling: true
 wso2::enable_data_publisher: false
 wso2::enable_block_condition: false
 wso2::enable_jms_connection_details: false
-wso2::enable_traffic_manager_specific_axis2_configurations: false
-wso2::enable_traffic_manager_specific_registry_configurations: false
 wso2::apply_store_specific_configurations: true
 
 wso2::analytics:

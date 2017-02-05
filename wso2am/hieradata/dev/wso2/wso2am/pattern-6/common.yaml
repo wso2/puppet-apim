@@ -61,13 +61,10 @@ wso2::hosts_mapping:
   apim_keymanager:
     ip: 192.168.57.186
     name: km.dev.wso2.org
-  apim_store:
+  apim_publisher_plus_store:
     ip: 192.168.57.21
-    name: store.dev.wso2.org
-  apim_publisher:
-    ip: 192.168.57.219
-    name: pub.dev.wso2.org
-  apim_gateway_manager:
+    name: am.dev.wso2.org
+  apim_gateway:
     ip: 192.168.57.216
     name: mgt-gw.dev.wso2.org
   apim_gateway_worker:
@@ -82,12 +79,6 @@ wso2::hosts_mapping:
   apim_analytics_server:
     ip: 192.168.57.29
     name: analytics.dev.wso2.org
-  apim_gateway_manager_dmz:
-    ip: 192.168.57.5
-    name: dmz-mgt-gw.dev.wso2.org
-  apim_gateway_worker_dmz:
-    ip: 192.168.57.218
-    name: dmz-gw.dev.wso2.org
 
 wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db
@@ -201,12 +192,10 @@ wso2::trust_store: client-truststore.jks
 wso2::apply_publisher_specific_configurations: false
 wso2::apply_store_specific_configurations: false
 wso2::apply_gateway_specific_configurations: false
-wso2::enable_log_analyzer: true
+wso2::enable_log_analyzer: false
 
 wso2::environments:
   apim_gateway_lan:
-    name: Production and Sandbox environment for LAN
-    description: This is a hybrid gateway that handles both production and sandbox token traffic, and this resides in the LAN
     host: mgt-gw.dev.wso2.org
     port: 9443
     api_endpoint_host: gw.dev.wso2.org
@@ -233,11 +222,11 @@ wso2::apim_keymanager:
   password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_store:
-  host: store.dev.wso2.org
+  host: am.dev.wso2.org
   port: 9443
 
 wso2::apim_publisher:
-  host: pub.dev.wso2.org
+  host: am.dev.wso2.org
   port: 9443
 
 # Secure vault configuration

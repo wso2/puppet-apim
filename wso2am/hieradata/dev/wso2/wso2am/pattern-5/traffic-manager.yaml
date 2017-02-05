@@ -20,9 +20,6 @@ wso2::product_profile: traffic-manager
 wso2::template_list:
   - repository/conf/broker.xml
 
-wso2::enable_traffic_manager_specific_axis2_configurations: true
-wso2::enable_traffic_manager_specific_registry_configurations: true
-
 wso2::remove_file_list:
   - "repository/deployment/server/jaggeryapps"
   - "repository/deployment/server/webapps"
