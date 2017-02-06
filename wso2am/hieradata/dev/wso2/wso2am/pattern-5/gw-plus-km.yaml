@@ -101,3 +101,6 @@ wso2::enable_log_analyzer: true
 #  proxyPort:
 #    http: 80
 #    https: 443
+
+wso2::analytics:
+  enabled : true

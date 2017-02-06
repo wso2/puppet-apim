@@ -52,6 +52,7 @@ wso2::analytics:
   enabled : false
   server_host : analytics.dev.wso2.org
   server_port : 7612
+  server_https_port : 9444
   server_username : admin
   server_password : admin
   skip_event_receiver_connection : false
@@ -68,7 +69,7 @@ wso2::hosts_mapping:
     ip: 192.168.57.216
     name: mgt-gw.dev.wso2.org
   apim_gw_plus_km:
-    ip: 192.168.57.248
+    ip: 192.168.57.247
     name: am.dev.wso2.org
   apim_traffic_manager:
     ip: 192.168.57.35

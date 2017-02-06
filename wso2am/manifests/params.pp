@@ -343,7 +343,9 @@ class wso2am::params {
     }
     $analytics                  =    {
         enabled             => false,
-        server_url          => '{tcp://localhost:7612}',
+        server_host         => 'localhost',
+        server_port         => '7612',
+        server_https_port   => '9444',
         server_username     => '${admin.username}',
         server_password     => '${admin.password}',
         skip_event_receiver_connection => false

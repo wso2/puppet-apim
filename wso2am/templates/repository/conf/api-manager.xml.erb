@@ -244,10 +244,21 @@
         <StatsProviderImpl>org.wso2.carbon.apimgt.usage.client.impl.APIUsageStatisticsRdbmsClientImpl</StatsProviderImpl>
 
         <!-- DAS REST API configuration -->
+        <%- if @analytics and @analytics['enabled'] and @analytics['server_host'] and @analytics['server_port'] -%>
+        <DASRestApiURL>https://<%= @analytics['server_host'] %>:<%= @analytics['server_https_port'] %></DASRestApiURL>
+        <%- else -%>
         <DASRestApiURL>https://localhost:9444</DASRestApiURL>
+        <%- end -%>
+        <%- if @analytics and @analytics['enabled'] and @analytics['server_username'] -%>
+        <DASRestApiUsername><%= @analytics['server_username'] %></DASRestApiUsername>
+        <%- else -%>
         <DASRestApiUsername>${admin.username}</DASRestApiUsername>
+        <%- end -%>
+        <%- if @analytics and @analytics['enabled'] and @analytics['server_password'] -%>
+        <DASRestApiPassword><%= @analytics['server_password'] %></DASRestApiPassword>
+        <%- else -%>
         <DASRestApiPassword>${admin.password}</DASRestApiPassword>
-
+        <%- end -%>
         <!-- Below property is used to skip trying to connect to event receiver nodes when publishing events even if
             the stats enabled flag is set to true. -->
         <%- if @analytics and @analytics['skip_event_receiver_connection'] -%>

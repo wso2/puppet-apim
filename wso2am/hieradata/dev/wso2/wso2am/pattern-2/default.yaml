@@ -246,6 +246,7 @@ wso2::analytics:
   enabled : true
   server_host : analytics.dev.wso2.org
   server_port : 7612
+  server_https_port : 9444
   server_username : admin
   server_password : admin
   skip_event_receiver_connection : false
