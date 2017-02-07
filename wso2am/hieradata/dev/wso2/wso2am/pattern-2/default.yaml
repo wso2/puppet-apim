@@ -255,7 +255,9 @@ wso2::hosts_mapping:
   apim_analytics_server:
     ip: 192.168.57.29
     name: analytics.dev.wso2.org
-
+  api_manager:
+    ip: 127.0.0.1
+    name: am.dev.wso2.org
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:

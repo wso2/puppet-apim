@@ -75,6 +75,11 @@ wso2::apim_publisher:
   host: am.dev.wso2.org
   port: 9443
 
+wso2::hosts_mapping:
+  api_manager:
+    ip: 127.0.0.1
+    name: am.dev.wso2.org
+
 # Use H2 based wso2_am_db in a stand-alone setup. In a clustered setup this should point to a MySQL data source
 wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db
