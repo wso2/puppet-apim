@@ -149,15 +149,18 @@ In the production environments, it is recommended to replace these with your own
 
 Following steps can be followed to create new keystore and clint-truststore with self signed certificates.
 
-1. Generate a Java keystore and key pair with self-signed certificate:
+1 . Generate a Java keystore and key pair with self-signed certificate:
 ```
 	keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore wso2carbon.jks -dname "CN=*.dev.wso2.org,OU=Home,O=Home,L=SL,S=WS,C=LK" -storepass wso2carbon -keypass wso2carbon -validity 2000
 ```
-2. Export a certificate from a keystore:
+2 . Export a certificate from a keystore:
 ```
 	keytool -export -keystore wso2carbon.jks -alias wso2carbon -file wso2carbon.cer
 ```
-3. Import a certificate into a trust store:
+3 . Import a certificate into a trust store:
 ```
 	keytool -import -alias wso2carbon -file wso2carbon.cer -keystore client-truststore.jks -storepass wso2carbon
 ```
+
+## Running WSO2 API Manager on Kubernetes
+WSO2 APIM Puppet module ships Hiera data required to deploy WSO2 API Manager on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
