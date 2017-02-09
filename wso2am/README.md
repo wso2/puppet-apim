@@ -1,0 +1,198 @@
+# WSO2 API Manager 2.1.0 Puppet Module
+
+This is the Puppet Module for installing and configuring WSO2 API Manager in the 6 basic deployment
+patterns. (plus single node deployment with embedded H2 databases : pattern-0). Configuration data is managed using
+[Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from
+Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
+
+This guide includes the the basic and common information related to each deployment pattern. For specific information
+ on each pattern, refer the relevant README file in each pattern related hieradata directory. (i.e.
+ puppet-apim/wso2am/hieradata/dev/wso2/wso2am/pattern-x/README.md). Follow the steps stated in this guide before
+ running puppet agents.
+
+Please note that the load balancer configurations are not done by puppet. All the pattern images consist of load
+balancers so that it will be convenient to understand the connections when configured load balancing, which is
+usually done in a production environment.
+
+## Setup Puppet Environment
+
+Use wso2/puppet-common repository to setup the puppet environment with the puppet modules wso2am, wso2am_analytics and wso2base.
+
+## Supported Operating Systems
+
+- Debian 6 or higher
+- Ubuntu 12.04 or higher
+
+## Supported Puppet Versions
+
+- Puppet 2.7, 3.X
+
+## Configuring WSO2 APIM Analytics
+
+Patterns 2-6 are configured with WSO2 APIM Analytics Server. So before setting up those patterns, setup WSO2
+APIM Analytics Server using the pattern-1 in puppet module 'wso2am_analytics'.
+
+## Packs to be Copied
+
+Copy the following files to their corresponding locations, in the Puppet Master.
+
+1. WSO2 API Manager 2.1.0 distribution (wso2am-2.1.0.zip)to `<PUPPET_HOME>/modules/wso2am/files`
+2. JDK jdk-8u112-linux-x64.tar.gz distribution to `<PUPPET_HOME>/modules/wso2base/files`
+3. (if using MySQL databases)MySQL JDBC driver JAR (mysql-connector-java-x.x.xx-bin.jar) into the <PUPPET_HOME>/modules/wso2am/files/configs/repository/components/lib
+4. (if using svn based deployment synchronization)
+    a. svnkit-all-1.8.7.wso2v1.jar into <PUPPET_HOME>/modules/wso2am/files/configs/repository/components/dropins
+    b. trilead-ssh2-1.0.0-build215.jar into <PUPPET_HOME>/modules/wso2am/files/configs/repository/components/lib
+
+## Running WSO2 API Manager with clustering in specific profiles
+
+Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-store`, `api-publisher`, `api-key-manager`, `gateway-manager`, `geteway-worker`, `traffic-manager`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment in your preferred deployment pattern, before running the puppet Agent. For more details refer the [WSO2 API Manager 2.0.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+2.0.0) and [Clustering the Gateway(https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway) clustering guides.
+
+Do the changes in hieradata .yaml files in the related pattern.
+
+1. Add/update the host name mapping list
+
+Puppet will add the required host entries explicitly in /etc/hosts file in the Agent. For that you have to update the hosts mappings appropriately in default.yaml file (for patterns 0 to 2) or common.yaml (for patterns 3 to 6).
+
+Ex:
+   ```yaml
+   wso2::hosts_mapping:
+     apim_keymanager:
+       ip: 192.168.57.186
+       name: km.dev.wso2.org
+     apim_store:
+       ip: 192.168.57.21
+       name: store.dev.wso2.org
+     apim_publisher:
+       ip: 192.168.57.219
+       name: pub.dev.wso2.org
+     apim_gateway:
+       ip: 192.168.57.216
+       name: mgt-gw.dev.wso2.org
+     apim_gateway_worker:
+       ip: 192.168.57.247
+       name: gw.dev.wso2.org
+     apim_traffic_manager:
+       ip: 192.168.57.35
+       name: tm.dev.wso2.org
+     apim_analytics_server:
+       ip: 192.168.57.29
+       name: analytics.dev.wso2.org
+   ```
+
+2. Add the Well Known Address list for Gateway clusters and Publisher-Store cluster.
+
+Pattern 3-6 consists of Gateway Cluster(s) and Publisher-Store clusters. If you are using those patterns, update
+members list appropriately in relevant hiera files. Refer each pattern's README for more info.
+
+3. Uncomment and modify the MySQL based data sources to point to the external MySQL servers in all the hiera data files. (You have just to replace the IP address, with the IP address of database server you are using). If you want
+to use any other database except MySQL, update the data sources appropriately.
+
+   Ex:
+    ```yaml
+    wso2am_db:
+      name: WSO2AM_DB
+      description: The datasource used for API Manager database
+      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+      url: jdbc:mysql://192.168.100.1:3306/APIM_DB?autoReconnect=true
+      username: "%{hiera('wso2::datasources::mysql::username')}"
+      password: "%{hiera('wso2::datasources::mysql::password')}"
+      jndi_config: jdbc/WSO2AM_DB
+      max_active: "%{hiera('wso2::datasources::common::max_active')}"
+      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+    ```
+    If MySQL databases are used, uncomment the file_list entry for JDBC connector jar in relevant hiera data files.
+    (In patterns 1,2 : default.yaml , in patterns 3-6 : common.yaml)
+    ```yaml
+    wso2::file_list:
+      - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+    ```
+4. Uncomment (and optionally configure) deployment synchronization in each Gateway related nodes. (Patterns 3-6 are
+configured for svn based deployment synchronization, but they are commented out by default.)
+
+    Ex:
+    ```yaml
+    wso2::dep_sync:
+        enabled: true
+        auto_checkout: true
+        auto_commit: true
+        repository_type: svn
+        svn:
+           url: http://svnrepo.example.com/repos/
+           user: username
+           password: password
+           append_tenant_id: true
+    ```
+Copy the required jars for svn, into respective locations as described under the topic **Packs to be Copied**.
+And uncomment the file_list entries for those two jar files in those hiera data files related to gateway nodes.
+    ```yaml
+    wso2::file_list:
+       -  "repository/components/dropins/svnkit-all-1.8.7.wso2v1.jar"
+       -  "repository/components/lib/trilead-ssh2-1.0.0-build215.jar"
+    ```
+
+## Running WSO2 API Manager with Secure Vault
+
+WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
+
+Uncomment and modify the below changes in Hiera file to apply Secure Vault.
+
+1. Enable Secure Vault
+
+    ```yaml
+    wso2::enable_secure_vault: true
+    ```
+
+2. Add Secure Vault configurations as below
+
+    ```yaml
+    wso2::secure_vault_configs:
+      <secure_vault_config_name>:
+        secret_alias: <secret_alias>
+        secret_alias_value: <secret_alias_value>
+        password: <password>
+    ```
+
+    Ex:
+    ```yaml
+    wso2::secure_vault_configs:
+      key_store_password:
+        secret_alias: Carbon.Security.KeyStore.Password
+        secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
+        password: wso2carbon
+    ```
+    
+3. Add Cipher Tool configuration file templates to `template_list`
+
+    ```yaml
+    wso2::template_list:
+      - repository/conf/security/cipher-text.properties
+      - repository/conf/security/cipher-tool.properties
+      - bin/ciphertool.sh
+    ```
+Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
+
+## Kestore and client-truststore related configs
+
+This repository includes custom keystore and clint-truststore in puppet-apim/wso2am/files/configs/repository/resources/security for the initial setup (testing) purpose. (same files are copied into the wso2am_analytics module too) This wso2carbon.jks keystore is created for CN=*.dev.wso2.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
+
+In the production environments, it is recommended to replace these with your own keystores and trust stores with CA signed certificates. Also if also you change the host names given by-default in these patterns, you have create your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
+
+Following steps can be followed to create new keystore and clint-truststore with self signed certificates.
+
+1 . Generate a Java keystore and key pair with self-signed certificate:
+```
+	keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore wso2carbon.jks -dname "CN=*.dev.wso2.org,OU=Home,O=Home,L=SL,S=WS,C=LK" -storepass wso2carbon -keypass wso2carbon -validity 2000
+```
+2 . Export a certificate from a keystore:
+```
+	keytool -export -keystore wso2carbon.jks -alias wso2carbon -file wso2carbon.cer
+```
+3 . Import a certificate into a trust store:
+```
+	keytool -import -alias wso2carbon -file wso2carbon.cer -keystore client-truststore.jks -storepass wso2carbon
+```
