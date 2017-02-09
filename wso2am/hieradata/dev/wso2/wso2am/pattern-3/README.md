@@ -1,10 +1,12 @@
 # WSO2 API Manager Pattern-3
 
+
 ![alt tag](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/patterns/design/am-2.1.0-pattern-3.png)
 
 This pattern consist of a fully distributed APIM setup (including a Gateway cluster of one manager and one worker), with
  a single wso2am-analytics server instance. The databases used in this pattern are external mysql databases.
 The six hiera data .yaml files (in spite of common.yaml) are for the six APIM nodes.
+
 
 ## Deployment.conf file
 
@@ -31,21 +33,23 @@ e.g. To setup Key Manager node:
  platform=default
  use_hieradata=true
  pattern=pattern-3
+```
 
 ## Node Details
 
 Following table contains the APIM node instances and their respective hiera data .yaml file names and the host names used in each instance.
 
-  | APIM Node        | Hieradata file        | Hostname             |
-  | -------------    |-----------------------| ------------------   |
-  | Publisher        | api-publisher.yaml    | pub.dev.wso2.org     |
-  | Store            | api-publisher.yaml    | store.dev.wso2.org   |
-  | Gateway Manager  | gateway-manager.yaml  | mgt-gw.dev.wso2.org  |
-  | Gateway Worker   | gateway-worker.yaml   | gw.dev.wso2.org      |
-  | Key Manager      | api-key-manager.yaml  | km.dev.wso2.org      |
-  | Traffic Manager  | traffic-manager.yaml  | tm.dev.wso2.org      |
+   APIM Node        | Hieradata file        | Hostname
+  ------------------|---------------------- |----------------------
+   Publisher        | api-publisher.yaml    | pub.dev.wso2.org
+   Store            | api-publisher.yaml    | store.dev.wso2.org
+   Gateway Manager  | gateway-manager.yaml  | mgt-gw.dev.wso2.org
+   Gateway Worker   | gateway-worker.yaml   | gw.dev.wso2.org
+   Key Manager      | api-key-manager.yaml  | km.dev.wso2.org
+   Traffic Manager  | traffic-manager.yaml  | tm.dev.wso2.org
 
 Hostname used for the Analytics Server : **analytics.dev.wso2.org**
+
 
 ## Update wka list for clusters in the deployment
 

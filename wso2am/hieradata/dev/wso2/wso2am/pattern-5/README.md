@@ -7,6 +7,7 @@ Gateway worker is merged with the Key Manager.  This also consists of a single w
 The 5 hiera data .yaml files (in spite of common.yaml) here are for these 5 APIM nodes.
  The databases used in this pattern are external mysql databases.
 
+
 ## Deployment.conf file
 
 Content of /opt/deployment.conf file should be similar to below format to run the agent and setup the respective APIM
@@ -32,21 +33,23 @@ e.g. To setup Gateway Manager node:
  platform=default
  use_hieradata=true
  pattern=pattern-5
+```
 
 ## Node Details
 
 Following table contains the APIM node instances with their respective hiera data .yaml file names and the host names
 used in each instance.
 
-  | APIM Node                   | Hieradata file            | Hostname                 |
-  | -------------               |-----------------------    | ------------------       |
-  | Publisher                   | api-publisher.yaml        | pub.dev.wso2.org         |
-  | Store                       | api-publisher.yaml        | store.dev.wso2.org       |
-  | Gateway Manager             | gateway-manager.yaml      | mgt-gw.dev.wso2.org      |
-  | Gateway Worker + Key Manager| gw-plus-km.yaml           | am.dev.wso2.org          |
-  | Traffic Manager             | traffic-manager.yaml      | tm.dev.wso2.org          |
+   APIM Node                   | Hieradata file            | Hostname
+   -------------               |-----------------------    | ------------------
+   Publisher                   | api-publisher.yaml        | pub.dev.wso2.org
+   Store                       | api-publisher.yaml        | store.dev.wso2.org
+   Gateway Manager             | gateway-manager.yaml      | mgt-gw.dev.wso2.org
+   Gateway Worker + Key Manager| gw-plus-km.yaml           | am.dev.wso2.org
+   Traffic Manager             | traffic-manager.yaml      | tm.dev.wso2.org
 
 Hostname used for the Analytics Server : **analytics.dev.wso2.org**
+
 
 ## Update wka list for clusters in the deployment
 
