@@ -105,6 +105,12 @@ to use any other database except MySQL, update the data sources appropriately.
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
+    If MySQL databases are used, uncomment the file_list entry for JDBC connector jar in relevant hiera data files.
+    (In patterns 1,2 : default.yaml , in patterns 3-6 : common.yaml)
+    ```yaml
+    wso2::file_list:
+      - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+    ```
 4. Uncomment (and optionally configure) deployment synchronization in each Gateway related nodes. (Patterns 3-6 are
 configured for svn based deployment synchronization, but they are commented out by default.)
 
@@ -120,6 +126,13 @@ configured for svn based deployment synchronization, but they are commented out 
            user: username
            password: password
            append_tenant_id: true
+    ```
+Copy the required jars for svn, into respective locations as described under the topic **Packs to be Copied**.
+And uncomment the file_list entries for those two jar files in those hiera data files related to gateway nodes.
+    ```yaml
+    wso2::file_list:
+       -  "repository/components/dropins/svnkit-all-1.8.7.wso2v1.jar"
+       -  "repository/components/lib/trilead-ssh2-1.0.0-build215.jar"
     ```
 
 ## Running WSO2 API Manager with Secure Vault
