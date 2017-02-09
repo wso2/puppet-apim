@@ -1,8 +1,18 @@
-# WSO2 API Manager Puppet Module
+# WSO2 API Manager 2.1.0 Puppet Module
 
-This repository contains the Puppet Module for installing and configuring WSO2 API Manager in the 6 basic deployment patterns. (plus single node deployment with embedded H2 databases). Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
+This is the Puppet Module for installing and configuring WSO2 API Manager in the 6 basic deployment
+patterns. (plus single node deployment with embedded H2 databases : pattern-0). Configuration data is managed using
+[Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from
+Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
 
-This guide includes the the basic and common information related to each deployment pattern. For detailed description on each pattern, refer the relavent README file in each pattern related hieradata directory. (i.e. puppet-apim/wso2am/hieradata/dev/wso2/wso2am/pattern-x/README.md) 
+This guide includes the the basic and common information related to each deployment pattern. For specific information
+ on each pattern, refer the relevant README file in each pattern related hieradata directory. (i.e.
+ puppet-apim/wso2am/hieradata/dev/wso2/wso2am/pattern-x/README.md). Follow the steps stated in this guide before
+ running puppet agents.
+
+Please note that the load balancer configurations are not done by puppet. All the pattern images consist of load
+balancers so that it will be convenient to understand the connections when configured load balancing, which is
+usually done in a production environment.
 
 ## Setup Puppet Environment
 
@@ -17,12 +27,21 @@ Use wso2/puppet-common repository to setup the puppet environment with the puppe
 
 - Puppet 2.7, 3.X
 
+## Configuring WSO2 APIM Analytics
+
+Patterns 2-6 are configured with WSO2 APIM Analytics Server. So before setting up those patterns, setup WSO2
+APIM Analytics Server using the pattern-1 in puppet module 'wso2am_analytics'.
+
 ## Packs to be Copied
 
-Copy the following files to their corresponding locations, in the Puppet Master node.
+Copy the following files to their corresponding locations, in the Puppet Master.
 
 1. WSO2 API Manager 2.1.0 distribution (wso2am-2.1.0.zip)to `<PUPPET_HOME>/modules/wso2am/files`
 2. JDK jdk-8u112-linux-x64.tar.gz distribution to `<PUPPET_HOME>/modules/wso2base/files`
+3. (if using MySQL databases)MySQL JDBC driver JAR (mysql-connector-java-x.x.xx-bin.jar) into the <PUPPET_HOME>/modules/wso2am/files/configs/repository/components/lib
+4. (if using svn based deployment synchronization)
+    a. svnkit-all-1.8.7.wso2v1.jar into <PUPPET_HOME>/modules/wso2am/files/configs/repository/components/dropins
+    b. trilead-ssh2-1.0.0-build215.jar into <PUPPET_HOME>/modules/wso2am/files/configs/repository/components/lib
 
 ## Running WSO2 API Manager with clustering in specific profiles
 
@@ -32,7 +51,7 @@ Do the changes in hieradata .yaml files in the related pattern.
 
 1. Add/update the host name mapping list
 
-Puppet will add the required host entries explicitely in /etc/hosts file in the Agent. For that you have to update the hosts mappings appropriately in default.yaml file (for patterns 0 to 2) or common.yaml (for patterns 3 to 6).
+Puppet will add the required host entries explicitly in /etc/hosts file in the Agent. For that you have to update the hosts mappings appropriately in default.yaml file (for patterns 0 to 2) or common.yaml (for patterns 3 to 6).
 
 Ex:
    ```yaml
@@ -60,11 +79,13 @@ Ex:
        name: analytics.dev.wso2.org
    ```
 
-2. Add the Well Known Address list for Gateway and Publisher/Store clusters.
+2. Add the Well Known Address list for Gateway clusters and Publisher-Store cluster.
 
-Pattern 3-6 consists of a Gateway Clusters adn Publisher/Store clusters. If you are using those patterns, update members list appropriately in relavant hiera files. Refer each pattern's README for more info.
+Pattern 3-6 consists of Gateway Cluster(s) and Publisher-Store clusters. If you are using those patterns, update
+members list appropriately in relevant hiera files. Refer each pattern's README for more info.
 
-3. Uncomment and modify the MySQL based data sources to point to the external MySQL servers in all the hiera data files. (You have just to replace the ip)
+3. Uncomment and modify the MySQL based data sources to point to the external MySQL servers in all the hiera data files. (You have just to replace the IP address, with the IP address of database server you are using). If you want
+to use any other database except MySQL, update the data sources appropriately.
 
    Ex:
     ```yaml
@@ -84,7 +105,8 @@ Pattern 3-6 consists of a Gateway Clusters adn Publisher/Store clusters. If you 
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
-4. Uncomment (and optionally configure) deployment synchronization in each Gateway related nodes. (Patterns 3-6 are configured for svn based deployment synchronization, but they are commented out.) 
+4. Uncomment (and optionally configure) deployment synchronization in each Gateway related nodes. (Patterns 3-6 are
+configured for svn based deployment synchronization, but they are commented out by default.)
 
     Ex:
     ```yaml
@@ -143,9 +165,9 @@ Please add the `password-tmp` template also to `template_list` if the `vm_type` 
 
 ## Kestore and client-truststore related configs
 
-This repository inludes custom keystore and clint-truststore in puppet-apim/wso2am/files/configs/repository/resources/security for the initial setup (testing) purpose. (same files are copied into the wso2am_analytics module too) This wso2carbon.jks keystore is created for CN=*.dev.wso2.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files. 
+This repository includes custom keystore and clint-truststore in puppet-apim/wso2am/files/configs/repository/resources/security for the initial setup (testing) purpose. (same files are copied into the wso2am_analytics module too) This wso2carbon.jks keystore is created for CN=*.dev.wso2.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
 
-In the production environments, it is recommended to replace these with your own keystores and trust stores with CA signed certificates. Also if also you change the hostnames given by-default in these patterns, you have create your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
+In the production environments, it is recommended to replace these with your own keystores and trust stores with CA signed certificates. Also if also you change the host names given by-default in these patterns, you have create your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
 
 Following steps can be followed to create new keystore and clint-truststore with self signed certificates.
 
@@ -161,6 +183,3 @@ Following steps can be followed to create new keystore and clint-truststore with
 ```
 	keytool -import -alias wso2carbon -file wso2carbon.cer -keystore client-truststore.jks -storepass wso2carbon
 ```
-
-## Running WSO2 API Manager on Kubernetes
-WSO2 APIM Puppet module ships Hiera data required to deploy WSO2 API Manager on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).

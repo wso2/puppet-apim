@@ -20,33 +20,6 @@ wso2::product_profile: default
 wso2::template_list:
   - repository/conf/jndi.properties
 
-wso2::clustering:
-  enabled: true
-  domain: pub.store.am.wso2.domain
-  sub_domain: worker
-  local_member_host: "%{::ipaddress}"
-  local_member_port: 4000
-# WKA membership scheme
-  membership_scheme: wka
-  wka:
-    members:
-      -
-        hostname: 192.168.57.219
-        port: 4000
-      -
-        hostname: 192.168.57.21
-        port: 4000
-# AWS membership scheme
-#   membership_scheme: aws
-#   aws:
-#     access_key: access-key
-#     secret_key: secret-key
-#     security_group: security-group
-#     host_header: host-header
-#     region: region
-#     tag_key: tag-key
-#     tag_value: tag-value
-
 wso2::registry_mounts:
  wso2_config_db:
    path: /_system/config
