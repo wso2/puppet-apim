@@ -38,6 +38,7 @@ wso2::template_list:
 wso2::service_name: wso2am
 wso2::hostname: am.dev.wso2.org
 wso2::mgt_hostname: am.dev.wso2.org
+wso2::product_profile: default
 
 wso2::apim_traffic_manager:
   host: am.dev.wso2.org

@@ -31,7 +31,6 @@ wso2::clustering:
   local_member_port: 4000
 # WKA membership scheme
   membership_scheme: wka
-  membership_scheme: wka
   wka:
     members:
       -

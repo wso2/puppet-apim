@@ -93,15 +93,3 @@ wso2::apply_store_specific_configurations: true
 
 wso2::analytics:
   enabled : true
-
-wso2::environments:
-  apim_gateway_dmz:
-    host: dmz-mgt-gw.dev.wso2.org
-    port: 9443
-    api_endpoint_host: dmz-gw.dev.wso2.org
-    api_endpoint_port: 8280
-    secure_api_endpoint_port: 8243
-    api_token_revoke_endpoint_port: 8280
-    secure_api_token_revoke_endpoint_port: 8243
-    username: "%{hiera('wso2::super_admin::username')}"
-    password: "%{hiera('wso2::super_admin::password')}"

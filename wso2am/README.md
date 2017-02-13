@@ -5,10 +5,20 @@ patterns. (plus single node deployment with embedded H2 databases : pattern-0). 
 [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from
 Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
 
-This guide includes the the basic and common information related to each deployment pattern. For specific information
- on each pattern, refer the relevant README file in each pattern related hieradata directory. (i.e.
- puppet-apim/wso2am/hieradata/dev/wso2/wso2am/pattern-x/README.md). Follow the steps stated in this guide before
- running puppet agents.
+This guide includes the the basic and common information related to each deployment pattern. Follow the instructions
+here, to setup any deployment pattern. For specific information  on each pattern, refer the relevant README file in
+each pattern related hieradata directory (i.e. for pattern 3 :
+puppet-apim/wso2am/hieradata/dev/wso2/wso2am/pattern-3/README.md)
+
+1. [Pattern 0 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-0/README.md)
+2. [Pattern 1 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-1/README.md)
+3. [Pattern 2 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-2/README.md)
+4. [Pattern 3 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-3/README.md)
+5. [Pattern 4 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-4/README.md)
+6. [Pattern 5 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-5/README.md)
+7. [Pattern 6 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-6/README.md)
+
+Follow the instructions stated in these relevant README files too, before running the agents.
 
 Please note that the load balancer configurations are not done by puppet. All the pattern images consist of load
 balancers so that it will be convenient to understand the connections when configured load balancing, which is
@@ -84,7 +94,8 @@ Ex:
 Pattern 3-6 consists of Gateway Cluster(s) and Publisher-Store clusters. If you are using those patterns, update
 members list appropriately in relevant hiera files. Refer each pattern's README for more info.
 
-3. Uncomment and modify the MySQL based data sources to point to the external MySQL servers in all the hiera data files. (You have just to replace the IP address, with the IP address of database server you are using). If you want
+3. Modify the MySQL based data sources to point to the external MySQL servers in all the hiera data files. (You have
+just to replace the IP address, with the IP address of database server you are using). If you want
 to use any other database except MySQL, update the data sources appropriately.
 
    Ex:

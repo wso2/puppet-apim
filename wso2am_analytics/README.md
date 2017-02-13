@@ -3,3 +3,95 @@
 This puppet module contains the WSO2 API Manager Analytics Server, v2.1.0 Puppet Module. This module is used to
 configure analytics for WSO2 APIM 2.1.0 , hence will be used in combination with the puppet module 'wso2am' in this
 repository.
+
+This contains a single pattern, which is a single node deployment. Setup the WSO2 APIM Analytics Server, before setting
+ up the WSO2 APIM patterns, which consist of Analytics Server.
+
+## Setup Puppet Environment
+
+Use wso2/puppet-common repository to setup the puppet environment with the puppet modules wso2am, wso2am_analytics and wso2base.
+
+## Supported Operating Systems
+
+- Debian 6 or higher
+- Ubuntu 12.04 or higher
+
+## Supported Puppet Versions
+
+- Puppet 2.7, 3.X
+
+## Packs to be Copied
+
+Copy the following files to their corresponding locations, in the Puppet Master.
+
+1. WSO2 API Manager Analytics Server 2.1.0 distribution (wso2am-analytics-2.1.0.zip)to
+`<PUPPET_HOME>/modules/wso2am_analytics/files`
+2. JDK jdk-8u112-linux-x64.tar.gz distribution to `<PUPPET_HOME>/modules/wso2base/files`
+3. (if using MySQL databases)MySQL JDBC driver JAR (mysql-connector-java-x.x.xx-bin.jar) into the
+<PUPPET_HOME>/modules/wso2am_analytics/files/configs/repository/components/lib
+
+## Configure Datasources
+
+Modify the MySQL based data sources to point to the external MySQL servers in the hiera data file. (You
+ have just to replace the IP address, with the IP address of database server you are using). If you want
+to use any other database except MySQL, update the data sources appropriately.
+
+   Ex:
+    ```yaml
+    wso2::analytics_datasources:
+      wso2_analytics_event_store_db:
+        name: WSO2_ANALYTICS_EVENT_STORE_DB
+        description: The datasource used for analytics record store
+        driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+        url: jdbc:mysql://192.168.57.210:3306/analyticseventstoredb?autoReconnect=true
+        username: "%{hiera('wso2::datasources::mysql::username')}"
+        password: "%{hiera('wso2::datasources::mysql::password')}"
+        max_active: "%{hiera('wso2::datasources::common::max_active')}"
+        max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+        test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+        default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+        validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+        validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+    ```
+    If MySQL databases are used, uncomment the file_list entry for JDBC connector jar
+    ```yaml
+    wso2::file_list:
+      - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+    ```
+
+## Kestore and client-truststore related configs
+
+This repository includes custom keystore and clint-truststore in puppet-apim/wso2am_analytics/files/configs/repository/resources/security for the initial setup (testing) purpose. (same files are copied into the wso2am module too) This wso2carbon.jks keystore is created for CN=*.dev.wso2.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
+
+In the production environments, it is recommended to replace these with your own keystores and trust stores with CA signed certificates. Also if also you change the host names given by-default in these patterns, you have create your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
+
+Following steps can be followed to create new keystore and clint-truststore with self signed certificates.
+
+1 . Generate a Java keystore and key pair with self-signed certificate:
+```
+	keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore wso2carbon.jks -dname "CN=*.dev.wso2.org,OU=Home,O=Home,L=SL,S=WS,C=LK" -storepass wso2carbon -keypass wso2carbon -validity 2000
+```
+2 . Export a certificate from a keystore:
+```
+	keytool -export -keystore wso2carbon.jks -alias wso2carbon -file wso2carbon.cer
+```
+3 . Import a certificate into a trust store:
+```
+	keytool -import -alias wso2carbon -file wso2carbon.cer -keystore client-truststore.jks -storepass wso2carbon
+```
+
+
+## Running Agent
+
+Content of /opt/deployment.conf file should be similar to below to run the agent and setup WSO2 APIM Analytics Server
+ in Puppet Agent.
+
+product_name=wso2am_analytics
+product_version=2.1.0
+product_profile=default
+environment=dev
+platform=default
+use_hieradata=true
+pattern=pattern-1
+

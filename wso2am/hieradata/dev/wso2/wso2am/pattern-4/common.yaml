@@ -202,7 +202,7 @@ wso2::trust_store: client-truststore.jks
 wso2::apply_publisher_specific_configurations: false
 wso2::apply_store_specific_configurations: false
 wso2::apply_gateway_specific_configurations: false
-wso2::enable_log_analyzer: true
+wso2::enable_log_analyzer: false
 
 wso2::environments:
   apim_gateway_lan:
