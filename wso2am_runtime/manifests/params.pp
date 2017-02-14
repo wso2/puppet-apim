@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-class wso2am::params {
+class wso2am_runtime::params {
 
   # Set facter variables
   $vm_type                    = $::vm_type
@@ -248,20 +248,20 @@ class wso2am::params {
       }
     }
 
-    $carbon_home_symlink      = "/mnt/${product_name}-${product_version}"
+    $carbon_home_symlink      = "/mnt/wso2am-${product_version}"
     $wso2_user                = 'wso2user'
     $wso2_group               = 'wso2'
     $maintenance_mode         = 'refresh'
     $install_mode             = 'file_bucket'
     $install_dir              = "/mnt/${ipaddress}"
     $pack_dir                 = '/mnt/packs'
-    $pack_filename            = "${product_name}-${product_version}.zip"
-    $pack_extracted_dir       = "${product_name}-${product_version}"
+    $pack_filename            = "wso2am-${product_version}.zip"
+    $pack_extracted_dir       = "wso2am-${product_version}"
     $hostname                 = 'localhost'
     $mgt_hostname             = 'localhost'
     $worker_node              = false
     $patches_dir              = 'repository/components/patches'
-    $service_name             = $product_name
+    $service_name             = wso2am
     $service_template         = 'wso2base/wso2service.erb'
     $usermgt_datasource       = 'wso2_carbon_db'
     $local_reg_datasource     = 'wso2_carbon_db'

@@ -14,7 +14,7 @@
 
 ---
 classes:
-  - wso2am
+  - wso2am_runtime
 
 wso2::template_list:
   - repository/conf/datasources/am-datasources.xml
@@ -47,6 +47,7 @@ wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 wso2::service_name: wso2am
 wso2::hostname: am.dev.wso2.org
 wso2::mgt_hostname: am.dev.wso2.org
+wso2::pack_filename: wso2am-2.1.0.zip
 
 wso2::analytics:
   enabled : false
@@ -59,18 +60,21 @@ wso2::analytics:
 
 
 wso2::hosts_mapping:
+  apim_keymanager:
+    ip: 192.168.57.186
+    name: km.dev.wso2.org
   apim_store:
     ip: 192.168.57.21
     name: store.dev.wso2.org
   apim_publisher:
     ip: 192.168.57.219
     name: pub.dev.wso2.org
-  apim_gateway_manager:
+  apim_gateway:
     ip: 192.168.57.216
     name: mgt-gw.dev.wso2.org
-  apim_gw_plus_km:
+  apim_gateway_worker:
     ip: 192.168.57.247
-    name: am.dev.wso2.org
+    name: gw.dev.wso2.org
   apim_traffic_manager:
     ip: 192.168.57.35
     name: tm.dev.wso2.org
@@ -84,7 +88,6 @@ wso2::hosts_mapping:
 wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db
 wso2::usermgt_datasource: wso2_user_db
-wso2::mb_store_datasource: wso2_mb_store_db
 
 #datasource configurations
 wso2::am_datasources:
@@ -179,6 +182,7 @@ wso2::master_datasources:
       validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
+wso2::mb_store_datasource: wso2_mb_store_db
 
 wso2::enable_advance_throttling: true
 wso2::enable_thrift_server: true
@@ -199,7 +203,7 @@ wso2::environments:
   apim_gateway_lan:
     host: mgt-gw.dev.wso2.org
     port: 9443
-    api_endpoint_host: am.dev.wso2.org
+    api_endpoint_host: gw.dev.wso2.org
     api_endpoint_port: 8280
     secure_api_endpoint_port: 8243
     api_token_revoke_endpoint_port: 8280
@@ -217,7 +221,7 @@ wso2::apim_traffic_manager:
   password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_keymanager:
-  host: am.dev.wso2.org
+  host: km.dev.wso2.org
   port: 9443
   username: "%{hiera('wso2::super_admin::username')}"
   password: "%{hiera('wso2::super_admin::password')}"

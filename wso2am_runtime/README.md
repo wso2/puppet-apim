@@ -26,7 +26,7 @@ usually done in a production environment.
 
 ## Setup Puppet Environment
 
-Use wso2/puppet-common repository to setup the puppet environment with the puppet modules wso2am, wso2am_analytics and wso2base.
+Setup the puppet environment with the puppet modules wso2am, wso2am_analytics and wso2base.
 
 ## Supported Operating Systems
 
