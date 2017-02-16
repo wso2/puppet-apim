@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright (c) 2017 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2016 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-class wso2am_analytics::params {
+class wso2am_runtime::params {
 
   # Set facter variables
   $vm_type                    = $::vm_type
@@ -24,15 +24,28 @@ class wso2am_analytics::params {
   # use_hieradata facter flags whether parameter lookup should be done via Hiera
   if $::use_hieradata == 'true' {
 
-    $analytics_datasources    = hiera('wso2::analytics_datasources')
-    $stats_datasources        = hiera('wso2::stats_datasources')
-    #$metrics_datasources      = hiera('wso2::metrics_datasources')
-    $spark                    = hiera('wso2::spark')
-    $is_datasource            = hiera('wso2::is_datasource', undef)
-    $single_node_deployment   = hiera('wso2::single_node_deployment')
-    #$ha_deployment            = hiera('wso2::ha_deployment')
-    $portal                   = hiera('wso2::portal')
-    $type_mapping_string_type_mysql = hiera('wso2::type_mapping_string_type_mysql')
+    $is_datasource            = hiera('wso2::is_datasource')
+    $am_datasource            = hiera('wso2::am_datasource')
+    $am_datasources           = hiera_hash('wso2::am_datasources')
+    $apim_traffic_manager     = hiera_hash('wso2::apim_traffic_manager')
+    $environments             = hiera_hash('wso2::environments')
+    $apim_keymanager          = hiera_hash('wso2::apim_keymanager')
+    $apim_store               = hiera_hash('wso2::apim_store')
+    $apim_publisher           = hiera_hash('wso2::apim_publisher')
+    $enable_advance_throttling = hiera('wso2::enable_advance_throttling')
+    $enable_thrift_server      = hiera('wso2::enable_thrift_server')
+    $thrift_server_host        = hiera('wso2::thrift_server_host')
+    $key_validator_client_type = hiera('wso2::key_validator_client_type')
+    $enable_data_publisher     = hiera('wso2::enable_data_publisher')
+    $enable_block_condition    = hiera('wso2::enable_block_condition')
+    $enable_jms_connection_details = hiera('wso2::enable_jms_connection_details')
+    $disable_jms_event_parameters = hiera('wso2::disable_jms_event_parameters')
+    $apply_publisher_specific_configurations = hiera('wso2::apply_publisher_specific_configurations')
+    $apply_store_specific_configurations = hiera('wso2::apply_store_specific_configurations')
+    $apply_gateway_specific_configurations = hiera('wso2::apply_gateway_specific_configurations')
+    $analytics                 = hiera_hash('wso2::analytics')
+    $enable_log_analyzer       = hiera('wso2::enable_log_analyzer')
+    $product_profile           = hiera('wso2::product_profile')
 
     $java_prefs_system_root   = hiera('java_prefs_system_root')
     $java_prefs_user_root     = hiera('java_prefs_user_root')
@@ -42,11 +55,14 @@ class wso2am_analytics::params {
     $packages                 = hiera_array('packages')
     $template_list            = hiera_array('wso2::template_list')
     $file_list                = hiera_array('wso2::file_list', undef)
+    $remove_file_list         = hiera_array('wso2::remove_file_list', undef)
     $patch_list               = hiera('wso2::patch_list', undef)
     $system_file_list         = hiera_hash('wso2::system_file_list', undef)
     $directory_list           = hiera_array('wso2::directory_list', undef)
-    $cert_list                = hiera_hash('wso2::cert_list', undef)
+    $cert_list                = hiera_array('wso2::cert_list', undef)
     $hosts_mapping            = hiera_hash('wso2::hosts_mapping')
+    $key_store                = hiera('wso2::key_store')
+    $trust_store              = hiera('wso2::trust_store')
 
     $master_datasources       = hiera_hash('wso2::master_datasources')
     $registry_mounts          = hiera_hash('wso2::registry_mounts', undef)
@@ -79,6 +95,7 @@ class wso2am_analytics::params {
     $sso_authentication       = hiera('wso2::sso_authentication')
     $user_management          = hiera('wso2::user_management')
     $enable_secure_vault      = hiera('wso2::enable_secure_vault')
+    $mb_store_datasource      = hiera('wso2::mb_store_datasource')
 
     if $enable_secure_vault {
       $secure_vault_configs   = hiera('wso2::secure_vault_configs')
@@ -88,158 +105,93 @@ class wso2am_analytics::params {
 
   } else {
 
+    $is_datasource            = 'wso2_am_db'
+    $am_datasource            = 'wso2_am_db'
 
-    $analytics_datasources     = {
-      wso2_analytics_fs_db      => {
-        name                => 'WSO2_ANALYTICS_FS_DB',
-        description         => 'The datasource used for analytics file system',
-        driver_class_name   => 'org.h2.Driver',
-        url                 => 'jdbc:h2:repository/database/ANALYTICS_FS_DB;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000',
-        username            => 'wso2carbon',
-        password            => 'wso2carbon',
-        max_active          => '50',
-        max_wait            => '60000',
-        test_on_borrow      => true,
-        default_auto_commit => false,
-        validation_query    => 'SELECT 1',
-        validation_interval => '30000',
-        initial_size        => 0,
-        test_while_idle     => true,
-        min_evictable_idle_time_millis  => 4000
-      },
-      wso2_analytics_event_store_db     => {
-        name                => 'WSO2_ANALYTICS_EVENT_STORE_DB',
-        description         => 'The datasource used for analytics record store',
-        driver_class_name   => 'org.h2.Driver',
-        url                 => 'jdbc:h2:repository/database/ANALYTICS_EVENT_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000',
-        username            => 'wso2carbon',
-        password            => 'wso2carbon',
-        max_active          => '50',
-        max_wait            => '60000',
-        test_on_borrow      => true,
-        default_auto_commit => false,
-        validation_query    => 'SELECT 1',
-        validation_interval => '30000',
-        initial_size        => 0,
-        test_while_idle     => true,
-        min_evictable_idle_time_millis  => 4000
-      },
-      wso2_analytics_processed_data_store_db => {
-        name                => 'WSO2_ANALYTICS_PROCESSED_DATA_STORE_DB',
-        description         => 'The datasource used for analytics record store',
-        driver_class_name   => 'org.h2.Driver',
-        url                 => 'jdbc:h2:repository/database/ANALYTICS_PROCESSED_DATA_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000',
-        username            => 'wso2carbon',
-        password            => 'wso2carbon',
-        max_active          => '50',
-        max_wait            => '60000',
-        test_on_borrow      => true,
-        default_auto_commit => false,
-        validation_query    => 'SELECT 1',
-        validation_interval => '30000',
-        initial_size        => 0,
-        test_while_idle     => true,
-        min_evictable_idle_time_millis  => 4000
+    $am_datasources           = {
+      wso2_am_db => {
+        name                 => 'WSO2_AM_DB',
+        description          => 'The datasource used for API Manager database',
+        driver_class_name    => "org.h2.Driver",
+        url                  => 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE',
+        username             => 'wso2carbon',
+        password             => 'wso2carbon',
+        jndi_config          => 'jdbc/WSO2AM_DB',
+        max_active           => '50',
+        max_wait             => '60000',
+        test_on_borrow       => true,
+        default_auto_commit  => false,
+        validation_query     => 'SELECT 1',
+        validation_interval  => '30000'
       }
     }
 
-    $metrics_datasources       = {
-      wso2_metrics_db   => {
-        name                => 'WSO2_METRICS_DB',
-        description         => 'The default datasource used for WSO2 Carbon Metrics',
-        driver_class_name   => 'org.h2.Driver',
-        url                 => 'jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE',
-        username            => 'wso2carbon',
-        password            => 'wso2carbon',
-        jndi_config         => 'jdbc/WSO2MetricsDB',
-        datasource          => 'WSO2MetricsDB',
-        max_active          => '50',
-        max_wait            => '60000',
-        test_on_borrow      => true,
-        default_auto_commit => false,
-        validation_query    => 'SELECT 1',
-        validation_interval => '30000'
-      }
+    $apim_traffic_manager     ={
+      host                 => 'am.dev.wso2.org',
+      port                 => '9443',
+      receiver_url_port    => '9611',
+      auth_url_port        => '9711',
+      jms_url_port         => '5672',
+      username             => 'admin',
+      password             => 'admin'
+
     }
 
-    $stats_datasources       = {
-      wso2_am_stats_db   => {
-        name                => 'WSO2AM_STATS_DB',
-        description         => 'The datasource used for setting statistics to API Manager',
-        driver_class_name   => 'org.h2.Driver',
-        url                 => 'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE',
-        username            => 'wso2carbon',
-        password            => 'wso2carbon',
-        jndi_config         => 'jdbc/WSO2AM_STATS_DB',
-        max_active          => '50',
-        max_wait            => '60000',
-        test_on_borrow      => true,
-        default_auto_commit => false,
-        validation_query    => 'SELECT 1',
-        validation_interval => '30000'
-       }
+    $environments           = {
+        apim_gateway  => {
+          host                                  => 'am.dev.wso2.org',
+          port                                  => '9443',
+          api_endpoint_host                     => 'am.dev.wso2.org',
+          api_endpoint_port                     => '8280',
+          secure_api_endpoint_port              => '8243',
+          api_token_revoke_endpoint_port        => '8280',
+          secure_api_token_revoke_endpoint_port => '8243',
+          username                              => 'admin',
+          password                              => 'admin'
+        }
     }
 
-    $spark      = {
-      master        => 'local',
-      master_count  => '1',
-      hostname      => $ipaddress
+    $apim_keymanager          ={
+      host     => 'am.dev.wso2.org',
+      port     => '9443',
+      username => 'admin',
+      password => 'admin'
     }
 
-    $is_datasource   = 'wso2_carbon_db'
-
-    $single_node_deployment = {
-      enabled  => true
+    $apim_store               ={
+      host => 'am.dev.wso2.org',
+      port => '9443'
     }
 
-    $ha_deployment   = {
-      enabled           => false,
-      presenter_enabled => false,
-      worker_enabled    => true,
-      eventSync         => {
-        hostName  => $ipaddress,
-        port      => 11224
-      },
-      management        => {
-        hostName  => $ipaddress,
-        port      => 10005
-      },
-      presentation      => {
-        hostName  => $ipaddress,
-        port      => 11000
-      }
+    $apim_publisher           ={
+      host => 'am.dev.wso2.org',
+      port => '9443'
     }
 
-    $file_list          = [
-      'dbscripts/identity/h2.sql',
-      'dbscripts/identity/mysql.sql'
-    ]
-
-    $portal   = {
-      hostname   => 'das.dev.wso2.org'
-    }
-
-    $directory_list             = [
-      'dbscripts/identity'
-    ]
+    $enable_advance_throttling = false
+    $enable_thrift_server      = true
+    $thrift_server_host        = 'localhost'
+    $key_validator_client_type = 'ThriftClient'
+    $enable_data_publisher     = false
+    $enable_block_condition    = true
+    $enable_jms_connection_details = false
+    $disable_jms_event_parameters = false
+    $apply_publisher_specific_configurations = false
+    $apply_store_specific_configurations = false
+    $apply_gateway_specific_configurations = false
+    $enable_log_analyzer      = false
 
     $java_prefs_system_root   = '/home/wso2user/.java'
     $java_prefs_user_root     = '/home/wso2user/.java/.systemPrefs'
     $java_home                = '/opt/java'
 
     # system configuration data
-    $packages             = [
+    $packages                 = [
       'zip',
       'unzip'
     ]
 
     $template_list        = [
-      'repository/conf/identity/identity.xml',
-      'repository/conf/datasources/analytics-datasources.xml',
-      'repository/conf/datasources/metrics-datasources.xml',
-      'repository/deployment/server/jaggeryapps/portal/configs/designer.json',
-      'repository/conf/analytics/spark/spark-defaults.conf',
-      'repository/conf/event-processor.xml',
       'repository/conf/carbon.xml',
       'repository/conf/user-mgt.xml',
       'repository/conf/registry.xml',
@@ -247,7 +199,13 @@ class wso2am_analytics::params {
       'repository/conf/tomcat/catalina-server.xml',
       'repository/conf/axis2/axis2.xml',
       'repository/conf/security/authenticators.xml',
-      'bin/wso2server.sh'
+      'bin/wso2server.sh',
+      'repository/conf/datasources/am-datasources.xml',
+      'repository/conf/api-manager.xml',
+      'repository/conf/identity/identity.xml',
+      'repository/conf/identity/application-authentication.xml',
+      'repository/conf/identity/EndpointConfig.properties',
+      'repository/conf/broker.xml'
     ]
 
     $hosts_mapping            = {
@@ -258,7 +216,7 @@ class wso2am_analytics::params {
     }
 
     $master_datasources       = {
-      wso2_carbon_db => {
+      wso2_carbon_db   => {
         name                => 'WSO2_CARBON_DB',
         description         => 'The datasource used for registry and user manager',
         driver_class_name   => 'org.h2.Driver',
@@ -272,26 +230,42 @@ class wso2am_analytics::params {
         default_auto_commit => false,
         validation_query    => 'SELECT 1',
         validation_interval => '30000'
+      },
+      wso2_mb_store_db => {
+        name                => 'WSO2_MB_STORE_DB',
+        description         => 'The datasource used for message broker database',
+        driver_class_name   => 'org.h2.Driver',
+        url                 => 'jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000',
+        username            => 'wso2carbon',
+        password            => 'wso2carbon',
+        jndi_config         => 'WSO2MBStoreDB',
+        max_active          => '50',
+        max_wait            => '60000',
+        test_on_borrow      => true,
+        default_auto_commit => false,
+        validation_query    => 'SELECT 1',
+        validation_interval => '30000',
       }
     }
 
-    $carbon_home_symlink      = "/mnt/${product_name}-${product_version}"
+    $carbon_home_symlink      = "/mnt/wso2am-${product_version}"
     $wso2_user                = 'wso2user'
     $wso2_group               = 'wso2'
     $maintenance_mode         = 'refresh'
     $install_mode             = 'file_bucket'
     $install_dir              = "/mnt/${ipaddress}"
     $pack_dir                 = '/mnt/packs'
-    $pack_filename            = "${product_name}-${product_version}.zip"
-    $pack_extracted_dir       = "${product_name}-${product_version}"
+    $pack_filename            = "wso2am-${product_version}.zip"
+    $pack_extracted_dir       = "wso2am-${product_version}"
     $hostname                 = 'localhost'
     $mgt_hostname             = 'localhost'
     $worker_node              = false
     $patches_dir              = 'repository/components/patches'
-    $service_name             = $product_name
+    $service_name             = wso2am
     $service_template         = 'wso2base/wso2service.erb'
     $usermgt_datasource       = 'wso2_carbon_db'
     $local_reg_datasource     = 'wso2_carbon_db'
+    $mb_store_datasource      = 'wso2_mb_store_db'
 
     $clustering               = {
       enabled           => false,
@@ -367,11 +341,18 @@ class wso2am_analytics::params {
         key_password => 'wso2carbon'
       }
     }
-    $type_mapping_string_type_mysql = 'VARCHAR(254)'
-
+    $analytics                  =    {
+        enabled             => false,
+        server_host         => 'localhost',
+        server_port         => '7612',
+        server_https_port   => '9444',
+        server_username     => '${admin.username}',
+        server_password     => '${admin.password}',
+        skip_event_receiver_connection => false
+    }
   }
 
-  $product_name               = 'wso2am-analytics'
+  $product_name               = 'wso2am'
   $product_version            = '2.1.0'
   $platform_version           = '4.4.0'
   $carbon_home                = "${install_dir}/${product_name}-${product_version}"
