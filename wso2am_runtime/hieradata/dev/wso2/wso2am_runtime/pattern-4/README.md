@@ -14,10 +14,11 @@ Content of /opt/deployment.conf file should be similar to below format to run th
  **product_profile** parameter.
 
 ```yaml
- product_name=wso2am
+ product_name=wso2am_runtime
  product_version=2.1.0
  product_profile=<hiera_file_name_without_extension>
  vm_type=openstack
+ environment=dev
  platform=default
  use_hieradata=true
  pattern=pattern-4
@@ -25,10 +26,11 @@ Content of /opt/deployment.conf file should be similar to below format to run th
 e.g.:- To setup Gateway Manager node in the DMZ:
 
 ```yaml
- product_name=wso2am
+ product_name=wso2am_runtime
  product_version=2.1.0
  product_profile=gateway-manager-dmz
  vm_type=openstack
+ environment=dev
  platform=default
  use_hieradata=true
  pattern=pattern-4

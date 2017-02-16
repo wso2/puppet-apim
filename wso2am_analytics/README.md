@@ -1,15 +1,19 @@
 # WSO2 API Manager Analytics Server, v2.1.0 Puppet Module
 
 This puppet module contains the WSO2 API Manager Analytics Server, v2.1.0 Puppet Module. This module is used to
-configure analytics for WSO2 APIM 2.1.0 , hence will be used in combination with the puppet module 'wso2am' in this
-repository.
+configure analytics for WSO2 APIM 2.1.0 , hence will be used in combination with the puppet module 'wso2am_runtime' in
+this repository.
 
 This contains a single pattern, which is a single node deployment. Setup the WSO2 APIM Analytics Server, before setting
  up the WSO2 APIM patterns, which consist of Analytics Server.
 
 ## Setup Puppet Environment
 
-Use wso2/puppet-common repository to setup the puppet environment with the puppet modules wso2am, wso2am_analytics and wso2base.
+* Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics and wso2base.
+* Both WSO2 APIM 2.1.0 and WSO2 APIM Analytics Server 2.1.0 puppet modules are compatible and tested with
+[puppet-base](https://github.com/wso2/puppet-base/) version 1.0.0 and [puppet-common](https://github.com/wso2/puppet-common) version 1.0.0
+* So if using puppet-common's setup.sh to setup the PUPPET_HOME, use this version (1.0.0) of puppet-common.
+* After setting up PUPPET_HOME using puppet-common's setup.sh, checkout the above mentioned compatible version of puppet-base.
 
 ## Supported Operating Systems
 
@@ -18,7 +22,7 @@ Use wso2/puppet-common repository to setup the puppet environment with the puppe
 
 ## Supported Puppet Versions
 
-- Puppet 2.7, 3.X
+- Puppet 2.7, 3.x
 
 ## Packs to be Copied
 
@@ -36,8 +40,8 @@ Modify the MySQL based data sources to point to the external MySQL servers in th
  have just to replace the IP address, with the IP address of database server you are using). If you want
 to use any other database except MySQL, update the data sources appropriately.
 
-   Ex:
-    ```yaml
+Ex:
+   ```yaml
     wso2::analytics_datasources:
       wso2_analytics_event_store_db:
         name: WSO2_ANALYTICS_EVENT_STORE_DB
@@ -52,17 +56,20 @@ to use any other database except MySQL, update the data sources appropriately.
         default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
         validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
         validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-    ```
+   ```
     If MySQL databases are used, uncomment the file_list entry for JDBC connector jar
-    ```yaml
+
+   ```yaml
     wso2::file_list:
       - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
-    ```
+   ```
 
 ## Kestore and client-truststore related configs
 
-This repository includes custom keystore and clint-truststore in puppet-apim/wso2am_analytics/files/configs/repository/resources/security for the initial setup (testing) purpose. (same files are copied into the wso2am module too) This wso2carbon.jks keystore is created for CN=*.dev.wso2.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
+This repository includes custom keystore and clint-truststore in
+puppet-apim/wso2am_analytics/files/configs/repository/resources/security for the initial setup (testing) purpose.
+(same files are copied into the wso2am_runtime module too) This wso2carbon.jks keystore is created for CN=*.dev.wso2
+.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
 
 In the production environments, it is recommended to replace these with your own keystores and trust stores with CA signed certificates. Also if also you change the host names given by-default in these patterns, you have create your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
 
@@ -86,12 +93,13 @@ Following steps can be followed to create new keystore and clint-truststore with
 
 Content of /opt/deployment.conf file should be similar to below to run the agent and setup WSO2 APIM Analytics Server
  in Puppet Agent.
-
+```yaml
 product_name=wso2am_analytics
 product_version=2.1.0
 product_profile=default
+vm_type=openstack
 environment=dev
 platform=default
 use_hieradata=true
 pattern=pattern-1
-
+```

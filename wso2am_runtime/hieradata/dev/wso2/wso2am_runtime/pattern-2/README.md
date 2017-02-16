@@ -9,10 +9,11 @@ Content of /opt/deployment.conf file should be similar to below to run the agent
  in Puppet Agent.
 
 ```yaml
- product_name=wso2am
+ product_name=wso2am_runtime
  product_version=2.1.0
  product_profile=default
  vm_type=openstack
+ environment=dev
  platform=default
  use_hieradata=true
  pattern=pattern-1

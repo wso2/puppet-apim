@@ -77,7 +77,6 @@ class wso2am_analytics::params {
     $ports                    = hiera('wso2::ports')
     $jvm                      = hiera('wso2::jvm')
     $sso_authentication       = hiera('wso2::sso_authentication')
-    #$oauth_authentication     = hiera('wso2::oauth_authentication')
     $user_management          = hiera('wso2::user_management')
     $enable_secure_vault      = hiera('wso2::enable_secure_vault')
 
@@ -328,10 +327,6 @@ class wso2am_analytics::params {
     $sso_authentication       = {
       enabled => false
     }
-
-   # $oauth_authentication     = {
-   #   token_validation_endpoint => 'https://localhost:9443/services/OAuth2TokenValidationService'
-   # }
 
     $user_management          = {
       admin_role      => 'admin',

@@ -10,13 +10,13 @@ here, to setup any deployment pattern. For specific information  on each pattern
 each pattern related hieradata directory (i.e. for pattern 3 :
 puppet-apim/wso2am/hieradata/dev/wso2/wso2am/pattern-3/README.md)
 
-1. [Pattern 0 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-0/README.md)
-2. [Pattern 1 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-1/README.md)
-3. [Pattern 2 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-2/README.md)
-4. [Pattern 3 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-3/README.md)
-5. [Pattern 4 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-4/README.md)
-6. [Pattern 5 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-5/README.md)
-7. [Pattern 6 - README](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/hieradata/dev/wso2/wso2am/pattern-6/README.md)
+1. [Pattern 0 - README](https://github.com/wso2/puppet-apim/blob/v2.1.0/wso2am_runtime/hieradata/dev/wso2/wso2am_runtime/pattern-0/README.md)
+2. [Pattern 1 - README](https://github.com/wso2/puppet-apim/blob/v2.1.0/wso2am_runtime/hieradata/dev/wso2/wso2am_runtime/pattern-1/README.md)
+3. [Pattern 2 - README](https://github.com/wso2/puppet-apim/blob/v2.1.0/wso2am_runtime/hieradata/dev/wso2/wso2am_runtime/pattern-2/README.md)
+4. [Pattern 3 - README](https://github.com/wso2/puppet-apim/blob/v2.1.0/wso2am_runtime/hieradata/dev/wso2/wso2am_runtime/pattern-3/README.md)
+5. [Pattern 4 - README](https://github.com/wso2/puppet-apim/blob/v2.1.0/wso2am_runtime/hieradata/dev/wso2/wso2am_runtime/pattern-4/README.md)
+6. [Pattern 5 - README](https://github.com/wso2/puppet-apim/blob/v2.1.0/wso2am_runtime/hieradata/dev/wso2/wso2am_runtime/pattern-5/README.md)
+7. [Pattern 6 - README](https://github.com/wso2/puppet-apim/blob/v2.1.0/wso2am_runtime/hieradata/dev/wso2/wso2am_runtime/pattern-6/README.md)
 
 Follow the instructions stated in these relevant README files too, before running the agents.
 
@@ -26,7 +26,11 @@ usually done in a production environment.
 
 ## Setup Puppet Environment
 
-Setup the puppet environment with the puppet modules wso2am, wso2am_analytics and wso2base.
+* Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics and wso2base.
+* Both WSO2 APIM 2.1.0 and WSO2 APIM Analytics Server 2.1.0 puppet modules are compatible and tested with [puppet-base]
+(https://github.com/wso2/puppet-base/) version 1.0.0 and [puppet-common](https://github.com/wso2/puppet-common) version 1.0.0
+* So if use puppet-common's setup.sh to setup the PUPPET_HOME, use this version (1.0.0) of puppet-common.
+* After setting up PUPPET_HOME using puppet-common's setup.sh, checkout the above mentioned compatible version of puppet-base.
 
 ## Supported Operating Systems
 
@@ -35,7 +39,7 @@ Setup the puppet environment with the puppet modules wso2am, wso2am_analytics an
 
 ## Supported Puppet Versions
 
-- Puppet 2.7, 3.X
+- Puppet 2.7, 3.x
 
 ## Configuring WSO2 APIM Analytics
 
@@ -55,7 +59,11 @@ Copy the following files to their corresponding locations, in the Puppet Master.
 
 ## Running WSO2 API Manager with clustering in specific profiles
 
-Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-store`, `api-publisher`, `api-key-manager`, `gateway-manager`, `geteway-worker`, `traffic-manager`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment in your preferred deployment pattern, before running the puppet Agent. For more details refer the [WSO2 API Manager 2.0.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+2.0.0) and [Clustering the Gateway(https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway) clustering guides.
+Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-store`, `api-publisher`,
+`api-key-manager`, `gateway-manager`, `geteway-worker`, `traffic-manager`) are shipped with clustering related
+configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment in your
+preferred deployment pattern, before running the puppet Agent. For more details refer the [Clustering the API
+Manager](https://docs.wso2.com/display/AM210/Clustering+the+API+Manager) and [Clustering the Gateway(https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway) docs.
 
 Do the changes in hieradata .yaml files in the related pattern.
 
