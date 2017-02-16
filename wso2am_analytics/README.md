@@ -57,7 +57,7 @@ Ex:
         validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
         validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
    ```
-    If MySQL databases are used, uncomment the file_list entry for JDBC connector jar
+   If MySQL databases are used, uncomment the file_list entry for JDBC connector jar
 
    ```yaml
     wso2::file_list:
