@@ -1,12 +1,13 @@
 # WSO2 API Manager Pattern-5
 
-![alt tag](https://github.com/rmsamitha/puppet-apim/blob/v2.1.0/wso2am/patterns/design/am-2.1.0-pattern-5.png)
+![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-5.png)
 
 This pattern consist of a distributed APIM setup including a Gateway cluster of one manager and one worker and the
 Gateway worker is merged with the Key Manager.  This also consists of a single wso2am-analytics server instance too.
 The 5 hiera data .yaml files (in spite of common.yaml) here are for these 5 APIM nodes.
  The databases used in this pattern are external mysql databases.
 
+Please follow the basic instructions in this [README](../../../../../README.md) before following this guide.
 
 ## Deployment.conf file
 
