@@ -72,7 +72,8 @@ Do the changes in hieradata .yaml files in the related pattern.
 
 1. Add/update the host name mapping list
 
-Puppet will add the required host entries explicitly in /etc/hosts file in the Agent. For that you have to update the hosts mappings appropriately in default.yaml file (for patterns 0 to 2) or common.yaml (for patterns 3 to 6).
+Puppet will add the required host entries explicitly in /etc/hosts file in the Agent. For that you have to update the
+ hosts mappings appropriately in default.yaml file (for patterns 0,1,2,7) or common.yaml (for patterns 3 to 6).
 
 Ex:
    ```yaml
@@ -98,6 +99,9 @@ Ex:
      apim_analytics_server:
        ip: 192.168.57.29
        name: analytics.dev.wso2.org
+     identity_server:
+       ip: 192.168.57.135
+       name: is.dev.wso2.org
    ```
 
 2. Add the Well Known Address list for Gateway clusters and Publisher-Store cluster.
