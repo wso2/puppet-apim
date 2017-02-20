@@ -24,6 +24,10 @@ This contains a single pattern, which is a single node deployment. Setup the WSO
 
 - Puppet 2.7, 3.x
 
+## How to Contribute
+
+Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wiki) to setup a development environment and update/create new puppet modules.
+
 ## Packs to be Copied
 
 Copy the following files to their corresponding locations, in the Puppet Master.

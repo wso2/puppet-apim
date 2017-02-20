@@ -41,6 +41,9 @@ usually done in a production environment.
 
 - Puppet 2.7, 3.x
 
+## How to Contribute
+Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wiki) to setup a development environment and update/create new puppet modules.
+
 ## Configuring WSO2 APIM Analytics
 
 Patterns 2-6 are configured with WSO2 APIM Analytics Server. So before setting up those patterns, setup WSO2
