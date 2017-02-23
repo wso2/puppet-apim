@@ -72,10 +72,12 @@ Ex:
 
 This repository includes custom keystore and clint-truststore in
 puppet-apim/wso2am_analytics/files/configs/repository/resources/security for the initial setup (testing) purpose.
-(same files are copied into the wso2am_runtime module too) This wso2carbon.jks keystore is created for CN=*.dev.wso2
-.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
+(same files are copied into the wso2am_runtime module and wso2is_prepacked module too). This wso2carbon.jks keystore is
+created for CN=*.dev.wso2.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
 
-In the production environments, it is recommended to replace these with your own keystores and trust stores with CA signed certificates. Also if also you change the host names given by-default in these patterns, you have create your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
+In the production environments, it is recommended to replace these with your own keystores and trust stores with CA
+signed certificates. Also if also you change the host names given by-default in these patterns, you have to create
+your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
 
 Following steps can be followed to create new keystore and clint-truststore with self signed certificates.
 

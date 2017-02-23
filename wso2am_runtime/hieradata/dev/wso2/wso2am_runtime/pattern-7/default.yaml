@@ -23,7 +23,6 @@ wso2::template_list:
   - repository/conf/identity/application-authentication.xml
   - repository/conf/identity/EndpointConfig.properties
   - repository/conf/broker.xml
-  - repository/conf/log4j.properties
   - repository/deployment/server/synapse-configs/default/api/_AuthorizeAPI_.xml
   - repository/deployment/server/synapse-configs/default/api/_RevokeAPI_.xml
   - repository/deployment/server/synapse-configs/default/api/_TokenAPI_.xml
@@ -218,10 +217,10 @@ wso2::enable_data_publisher: true
 wso2::enable_block_condition: true
 wso2::enable_jms_connection_details: true
 wso2::disable_jms_event_parameters: false
-wso2::apply_publisher_specific_configurations: false
-wso2::apply_store_specific_configurations: false
-wso2::apply_gateway_specific_configurations: false
-wso2::enable_log_analyzer: true
+wso2::apply_publisher_specific_configurations: true
+wso2::apply_store_specific_configurations: true
+wso2::apply_gateway_specific_configurations: true
+wso2::enable_log_analyzer: false
 
 wso2::registry_mounts:
  wso2_config_db:
@@ -248,19 +247,9 @@ wso2::file_list:
 
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 
-wso2::analytics:
-  enabled : true
-  server_host : analytics.dev.wso2.org
-  server_port : 7612
-  server_https_port : 9444
-  server_username : admin
-  server_password : admin
-  skip_event_receiver_connection : false
+wso2::analytics: {}
 
 wso2::hosts_mapping:
-  apim_analytics_server:
-    ip: 192.168.57.29
-    name: analytics.dev.wso2.org
   api_manager:
     ip: 127.0.0.1
     name: am.dev.wso2.org

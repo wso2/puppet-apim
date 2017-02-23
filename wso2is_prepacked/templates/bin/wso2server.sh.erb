@@ -316,6 +316,9 @@ do
     -Dcom.ibm.cacheLocalHost=true \
     -DworkerNode=false \
     -Dorg.wso2.ignoreHostnameVerification=true \
+    -Dsetup \
+    -Djava.util.prefs.systemRoot=<%= @java_prefs_system_root %> \
+    -Djava.util.prefs.userRoot=<%= @java_prefs_user_root %> \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done

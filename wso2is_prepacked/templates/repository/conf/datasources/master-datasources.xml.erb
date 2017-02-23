@@ -17,13 +17,14 @@
   -->
 
 <datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+  
     <providers>
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
     </providers>
-
     <datasources>
-            <%- @am_datasources.each do |datasource_name, datasource| -%>
-            <datasource>
+
+        <%- @master_datasources.each do |datasource_name, datasource| -%>
+        <datasource>
             <name><%= datasource['name'] %></name>
             <description><%= datasource['description'] %></description>
             <jndiConfig>
@@ -35,7 +36,7 @@
                     <username><%= datasource['username'] %></username>
                     <password><%= datasource['password'] %></password>
                     <driverClassName><%= datasource['driver_class_name'] %></driverClassName>
-                    <defaultAutoCommit><%= datasource['defaultAutoCommit'] %></defaultAutoCommit>
+                    <defaultAutoCommit><%= datasource['default_auto_commit'] %></defaultAutoCommit>
                     <maxActive><%= datasource['max_active'] %></maxActive>
                     <maxWait><%= datasource['max_wait'] %></maxWait>
                     <testOnBorrow><%= datasource['test_on_borrow'] %></testOnBorrow>
@@ -45,5 +46,6 @@
             </definition>
         </datasource>
         <%- end -%>
+
     </datasources>
 </datasources-configuration>

@@ -13,22 +13,22 @@
 # limitations under the License.
 ---
 classes:
-  - wso2is
+  - wso2is_prepacked
 
 wso2::service_name: wso2is
 wso2::hostname: is.dev.wso2.org
 wso2::mgt_hostname: is.dev.wso2.org
-
+wso2::pack_filename: wso2is-5.3.0.zip
 wso2::enable_thrift_service: false
 
 wso2::template_list:
-  - repository/conf/datasources/bps-datasources.xml
-  - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/identity/identity.xml
   - repository/conf/identity/sso-idp-config.xml
   - repository/conf/identity/application-authentication.xml
   - repository/conf/identity/EndpointConfig.properties
   - repository/conf/datasources/am-datasources.xml
+#  - repository/conf/datasources/bps-datasources.xml
+#  - repository/conf/datasources/metrics-datasources.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -49,7 +49,9 @@ wso2::template_list:
 #     https: 443
 
 wso2::file_list:
-  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+  - "repository/resources/security/%{hiera('wso2::trust_store')}"
+  - "repository/resources/security/%{hiera('wso2::key_store')}"
 
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
 
@@ -82,7 +84,7 @@ wso2::clustering:
 wso2::registry_mounts:
   wso2_config_db:
     path: /_system/config
-    target_path: /_system/config/is
+    target_path: /_system/config
     read_only: false
     registry_root: /
     enable_cache: true
@@ -95,7 +97,7 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2_user_db
-wso2::is_datasource: wso2_carbon_db
+wso2::is_datasource: wso2_am_db
 
 # SSO Configuration
 wso2::sso_authentication:
@@ -110,7 +112,7 @@ wso2::master_datasources:
    name: WSO2_CONFIG_DB
    description: The datasource used for config registry
    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-   url: jdbc:mysql://192.168.100.1:3306/configdb?autoReconnect=true
+   url: jdbc:mysql://192.168.57.210:3306/configdb?autoReconnect=true
    username: "%{hiera('wso2::datasources::mysql::username')}"
    password: "%{hiera('wso2::datasources::mysql::password')}"
    jndi_config: jdbc/WSO2_CONFIG_DB
@@ -125,7 +127,7 @@ wso2::master_datasources:
    name: WSO2_GOV_DB
    description: The datasource used for gov registry
    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-   url: jdbc:mysql://192.168.100.1:3306/govregdb?autoReconnect=true
+   url: jdbc:mysql://192.168.57.210:3306/govregdb?autoReconnect=true
    username: "%{hiera('wso2::datasources::mysql::username')}"
    password: "%{hiera('wso2::datasources::mysql::password')}"
    jndi_config: jdbc/WSO2_GOV_DB
@@ -140,7 +142,7 @@ wso2::master_datasources:
    name: WSO2_USER_DB
    description: The datasource is used for user management and userstore
    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-   url: jdbc:mysql://192.168.100.1:3306/userdb?autoReconnect=true
+   url: jdbc:mysql://192.168.57.210:3306/userdb?autoReconnect=true
    username: "%{hiera('wso2::datasources::mysql::username')}"
    password: "%{hiera('wso2::datasources::mysql::password')}"
    jndi_config: jdbc/WSO2USER_DB
@@ -187,11 +189,11 @@ wso2::master_datasources:
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::am_datasources:
-  wso2_am_db:
-    name: WSO2AM_DB
+ wso2_am_db:
+    name: WSO2_AM_DB
     description: The datasource used for API Manager database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://192.168.100.1:3306/apimgtdb?autoReconnect=true
+    url: jdbc:mysql://192.168.57.210:3306/apimgtdb?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2AM_DB
@@ -201,6 +203,11 @@ wso2::am_datasources:
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+wso2::hosts_mapping:
+  identity_server:
+    ip: 127.0.0.1
+    name: is.dev.wso2.org
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true

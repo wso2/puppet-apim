@@ -1,6 +1,11 @@
 # Pre-packaged WSO2 Identity Server (as Key Manager) Puppet Module
 
-This repository contains the Puppet Module for installing and configuring Pre-packaged WSO2 Identity Server (as Key Manager) on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
+This repository contains the Puppet Module for installing and configuring Pre-packaged WSO2 Identity Server 5.3.0 (as
+Key Manager) on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs
+.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in
+ a separate set of YAML files in a hierarchical manner.
+This module will be used with pattern-7 in wso2am_runtime puppet module in this repository to configure IS as Key
+Manager for WSO2 APIM. Supported with WSO2 APIM 2.1.0.
 
 ## Supported Operating Systems
 
@@ -49,8 +54,9 @@ clustering guides.
                port: 4000
     ```
 
-2. Add external databases to master datasources
-
+2. Modify the MySQL based data sources to point to the external MySQL servers in hiera data files. (You have
+just to replace the IP address, with the IP address of database server you are using). If you want
+to use any other database except MySQL, update the data sources appropriately.
    Ex:
     ```yaml
     wso2::master_datasources:
@@ -70,7 +76,11 @@ clustering guides.
         validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
-
+ If MySQL databases are used, uncomment the file_list entry for JDBC connector jar in the hiera data file.
+    ```yaml
+    wso2::file_list:
+      - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+    ```
 3. Configure registry mounting
 
    Ex:
@@ -90,7 +100,7 @@ clustering guides.
       enable_cache: true
     ```
 
-4. Configure deployment synchronization
+4. Configure deployment synchronization if required.
 
     Ex:
     ```yaml
@@ -146,3 +156,29 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     ```
 
     Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
+
+## Keystore and client-truststore related configs
+
+This repository includes custom keystore and clint-truststore in
+puppet-apim/wso2am/files/configs/repository/resources/security for the initial setup (testing) purpose. (same files
+are copied into the wso2am_runtime module and wso2am_analytics module too). This wso2carbon.jks keystore is created for
+CN=*.dev.wso2.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet
+agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
+
+In the production environments, it is recommended to replace these with your own keystores and trust stores with CA
+signed certificates. Also if also you change the host names given by-default in these patterns, you have to create
+your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
+
+Following steps can be followed to create new keystore and clint-truststore with self signed certificates.
+
+1 . Generate a Java keystore and key pair with self-signed certificate:
+```
+	keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore wso2carbon.jks -dname "CN=*.dev.wso2.org,OU=Home,O=Home,L=SL,S=WS,C=LK" -storepass wso2carbon -keypass wso2carbon -validity 2000
+```
+2 . Export a certificate from a keystore:
+```
+	keytool -export -keystore wso2carbon.jks -alias wso2carbon -file wso2carbon.cer
+```
+3 . Import a certificate into a trust store:
+```
+	keytool -import -alias wso2carbon -file wso2carbon.cer -keystore client-truststore.jks -storepass wso2carbon

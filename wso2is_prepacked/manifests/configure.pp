@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-class wso2is::configure {
+class wso2is_prepacked::configure {
 
   $carbon_home              = $wso2is::carbon_home
   $wso2_user                = $wso2is::wso2_user

@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-class wso2is::params {
+class wso2is_prepacked::params {
 
   # Set facter variables
   $vm_type                    = $::vm_type
@@ -25,8 +25,8 @@ class wso2is::params {
   if $::use_hieradata == 'true' {
 
     $am_datasources           = hiera('wso2::am_datasources')
-    $bps_datasources          = hiera('wso2::bps_datasources')
-    $metrics_datasources      = hiera('wso2::metrics_datasources')
+    #$bps_datasources          = hiera('wso2::bps_datasources')
+    #$metrics_datasources      = hiera('wso2::metrics_datasources')
     $is_datasource            = hiera('wso2::is_datasource')
     $sso_service_providers    = hiera('wso2::sso_service_providers', undef)
     $enable_thrift_service    = hiera('wso2::enable_thrift_service')
@@ -39,6 +39,7 @@ class wso2is::params {
     $packages                 = hiera_array('packages', undef)
     $template_list            = hiera_array('wso2::template_list')
     $file_list                = hiera_array('wso2::file_list', undef)
+    $remove_file_list         = hiera_array('wso2::remove_file_list', undef)
     $patch_list               = hiera('wso2::patch_list', undef)
     $system_file_list         = hiera_hash('wso2::system_file_list', undef)
     $directory_list           = hiera_array('wso2::directory_list', undef)

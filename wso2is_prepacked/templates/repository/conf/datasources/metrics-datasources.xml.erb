@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~  Copyright (c) 2016, WSO2 Inc. (http://wso2.com) All Rights Reserved.
   ~
@@ -15,15 +16,14 @@
   ~  specific language governing permissions and limitations
   ~  under the License.
   -->
-
 <datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
-  
+
     <providers>
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
     </providers>
-    <datasources>
 
-        <%- @master_datasources.each do |datasource_name, datasource| -%>
+    <datasources>
+        <%- @metrics_datasources.each do |datasource_name, datasource| -%>
         <datasource>
             <name><%= datasource['name'] %></name>
             <description><%= datasource['description'] %></description>
@@ -36,6 +36,7 @@
                     <username><%= datasource['username'] %></username>
                     <password><%= datasource['password'] %></password>
                     <driverClassName><%= datasource['driver_class_name'] %></driverClassName>
+                    <defaultAutoCommit><%= datasource['default_auto_commit'] %></defaultAutoCommit>
                     <maxActive><%= datasource['max_active'] %></maxActive>
                     <maxWait><%= datasource['max_wait'] %></maxWait>
                     <testOnBorrow><%= datasource['test_on_borrow'] %></testOnBorrow>
@@ -45,6 +46,6 @@
             </definition>
         </datasource>
         <%- end -%>
-
     </datasources>
+
 </datasources-configuration>

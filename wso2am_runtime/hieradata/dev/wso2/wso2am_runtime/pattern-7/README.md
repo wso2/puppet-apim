@@ -2,9 +2,12 @@
 
 ![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-2.png)
 
-This pattern consist of a stand-alone APIM setup with a single node deployment, with a single wso2am-analytics server
-instance. The databases used in this pattern are external mysql databases. The only difference of this pattern from
-pattern-2 is that this uses WSO2 Identity Sever as Key Manager.
+This pattern consist of a stand-alone APIM setup with a single node deployment. The databases used in this pattern are external mysql databases. The only difference of this pattern from
+pattern-2 is that this uses WSO2 Identity Sever as Key Manager. Use this pattern to configure APIM and use
+**wso2is_prepacked** puppet module in this repository to configure IS.
+
+Use the pattern-1 in **wso2is_prepacked** puppet module in this repository to configure a pre-packaged Identity Server 5
+.3.0 instance which would act as Key Manager.
 
 Please follow the basic instructions in this [README](../../../../../README.md) before following this guide.
 
