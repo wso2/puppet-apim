@@ -18,5 +18,5 @@ Content of /opt/deployment.conf file should be similar to below to run the agent
  environment=dev
  platform=default
  use_hieradata=true
- pattern=pattern-1
+ pattern=pattern-2
 ```

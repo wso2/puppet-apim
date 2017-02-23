@@ -9,8 +9,9 @@ This contains a single pattern, which is a single node deployment. Setup the WSO
 
 ## Setup Puppet Environment
 
-* Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics and wso2base.
-* Both WSO2 APIM 2.1.0 and WSO2 APIM Analytics Server 2.1.0 puppet modules are compatible and tested with
+* Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics, wso2is_prepacked and wso2base.
+* WSO2 APIM 2.1.0 , WSO2 APIM Analytics Server 2.1.0 and prepackaged-WSO2 Identity Server 5.3.0 puppet modules are
+compatible and tested with
 [puppet-base](https://github.com/wso2/puppet-base/) version 1.0.0 and [puppet-common](https://github.com/wso2/puppet-common) version 1.0.0
 * So if using puppet-common's setup.sh to setup the PUPPET_HOME, use this version (1.0.0) of puppet-common.
 * After setting up PUPPET_HOME using puppet-common's setup.sh, checkout the above mentioned compatible version of puppet-base.
@@ -23,6 +24,10 @@ This contains a single pattern, which is a single node deployment. Setup the WSO
 ## Supported Puppet Versions
 
 - Puppet 2.7, 3.x
+
+## How to Contribute
+
+Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wiki) to setup a development environment and update/create new puppet modules.
 
 ## Packs to be Copied
 
@@ -68,10 +73,12 @@ Ex:
 
 This repository includes custom keystore and clint-truststore in
 puppet-apim/wso2am_analytics/files/configs/repository/resources/security for the initial setup (testing) purpose.
-(same files are copied into the wso2am_runtime module too) This wso2carbon.jks keystore is created for CN=*.dev.wso2
-.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
+(same files are copied into the wso2am_runtime module and wso2is_prepacked module too). This wso2carbon.jks keystore is
+created for CN=*.dev.wso2.org, and its self signed certificate is imported into the client-truststore.jks. When running puppet agent, these two files replace the existing default wso2carbon.jks and client-truststore.jks files.
 
-In the production environments, it is recommended to replace these with your own keystores and trust stores with CA signed certificates. Also if also you change the host names given by-default in these patterns, you have create your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
+In the production environments, it is recommended to replace these with your own keystores and trust stores with CA
+signed certificates. Also if also you change the host names given by-default in these patterns, you have to create
+your own ones. For more info read [WSO2 Docs on Creating Keystores] (https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores).
 
 Following steps can be followed to create new keystore and clint-truststore with self signed certificates.
 
@@ -87,7 +94,6 @@ Following steps can be followed to create new keystore and clint-truststore with
 ```
 	keytool -import -alias wso2carbon -file wso2carbon.cer -keystore client-truststore.jks -storepass wso2carbon
 ```
-
 
 ## Running Agent
 
