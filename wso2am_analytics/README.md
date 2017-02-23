@@ -9,8 +9,9 @@ This contains a single pattern, which is a single node deployment. Setup the WSO
 
 ## Setup Puppet Environment
 
-* Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics and wso2base.
-* Both WSO2 APIM 2.1.0 and WSO2 APIM Analytics Server 2.1.0 puppet modules are compatible and tested with
+* Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics, wso2is_prepacked and wso2base.
+* WSO2 APIM 2.1.0 , WSO2 APIM Analytics Server 2.1.0 and prepackaged-WSO2 Identity Server 5.3.0 puppet modules are
+compatible and tested with
 [puppet-base](https://github.com/wso2/puppet-base/) version 1.0.0 and [puppet-common](https://github.com/wso2/puppet-common) version 1.0.0
 * So if using puppet-common's setup.sh to setup the PUPPET_HOME, use this version (1.0.0) of puppet-common.
 * After setting up PUPPET_HOME using puppet-common's setup.sh, checkout the above mentioned compatible version of puppet-base.
