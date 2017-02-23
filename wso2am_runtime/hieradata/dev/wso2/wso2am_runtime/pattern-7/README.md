@@ -1,6 +1,6 @@
 #WSO2 API Manager Pattern-2
 
-![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-2.png)
+![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-7.png)
 
 This pattern consist of a stand-alone APIM setup with a single node deployment. The databases used in this pattern are external mysql databases. The only difference of this pattern from
 pattern-2 is that this uses WSO2 Identity Sever as Key Manager. Use this pattern to configure APIM and use

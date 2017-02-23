@@ -1,11 +1,14 @@
 # Pre-packaged WSO2 Identity Server (as Key Manager) Puppet Module
 
-This repository contains the Puppet Module for installing and configuring Pre-packaged WSO2 Identity Server 5.3.0 (as
-Key Manager) on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs
-.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in
- a separate set of YAML files in a hierarchical manner.
-This module will be used with pattern-7 in wso2am_runtime puppet module in this repository to configure IS as Key
-Manager for WSO2 APIM. Supported with WSO2 APIM 2.1.0.
+This puppet module contains the Pre-packaged WSO2 Identity Server 5.3.0 Puppet Module. This module is used to
+configure IS as Key manager for WSO2 APIM 2.1.0 , hence will be used in combination with the puppet module
+'wso2am_runtime' in this repository.
+
+Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for
+separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
+
+This contains a single pattern, which is a single node deployment. This module will be used with pattern-7 in
+wso2am_runtime puppet module in this repository to configure IS as Key Manager for WSO2 APIM. Supported with WSO2 APIM 2.1.0.
 
 ## Supported Operating Systems
 
@@ -182,3 +185,19 @@ Following steps can be followed to create new keystore and clint-truststore with
 3 . Import a certificate into a trust store:
 ```
 	keytool -import -alias wso2carbon -file wso2carbon.cer -keystore client-truststore.jks -storepass wso2carbon
+```
+
+## Running Agent
+
+Content of /opt/deployment.conf file should be similar to below to run the agent and setup WSO2 APIM Analytics Server
+ in Puppet Agent.
+```yaml
+product_name=wso2is_prepacked
+product_version=5.3.0
+product_profile=default
+environment=dev
+vm_type=openstack
+platform=default
+use_hieradata=true
+pattern=pattern-1
+```

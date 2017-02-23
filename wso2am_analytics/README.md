@@ -94,7 +94,6 @@ Following steps can be followed to create new keystore and clint-truststore with
 	keytool -import -alias wso2carbon -file wso2carbon.cer -keystore client-truststore.jks -storepass wso2carbon
 ```
 
-
 ## Running Agent
 
 Content of /opt/deployment.conf file should be similar to below to run the agent and setup WSO2 APIM Analytics Server
