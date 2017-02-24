@@ -36,8 +36,7 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wik
 
 Copy the following files to their corresponding locations.
 
-1. [Pre-packaged WSO2 Identity Server 5.3.0 Key Manager pack](http://product-dist.wso2.com/downloads/api-manager/2.1
-.0/identity-server/wso2is-5.3.0.zip) to `<PUPPET_HOME>/modules/wso2is/files`
+1. [Pre-packaged WSO2 Identity Server 5.3.0 pack](http://product-dist.wso2.com/downloads/api-manager/2.1.0/identity-server/wso2is-5.3.0.zip) to `<PUPPET_HOME>/modules/wso2is/files`
 2. JDK jdk-8u112-linux-x64.tar.gz distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running WSO2 Identity Server with clustering in specific profiles

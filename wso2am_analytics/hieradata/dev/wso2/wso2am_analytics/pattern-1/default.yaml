@@ -102,7 +102,22 @@ wso2::stats_datasources:
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-
+#wso2::clustering:
+#  enabled: false
+#  domain: das.wso2.domain
+#  local_member_host: "%{::ipaddress}"
+#  local_member_port: 4000
+#  sub_domain: mgt
+## WKA membership scheme
+#  membership_scheme: wka
+#  wka:
+#    members:
+#      -
+#        hostname: 192.168.100.61
+#        port: 4000
+#      -
+#        hostname: 192.168.100.62
+#        port: 4000
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true
