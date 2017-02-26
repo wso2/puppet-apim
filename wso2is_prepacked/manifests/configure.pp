@@ -16,10 +16,10 @@
 
 class wso2is_prepacked::configure {
 
-  $carbon_home              = $wso2is::carbon_home
-  $wso2_user                = $wso2is::wso2_user
-  $wso2_group               = $wso2is::wso2_group
-  $sso_service_providers    = $wso2is::sso_service_providers
+  $carbon_home              = $wso2is_prepacked::carbon_home
+  $wso2_user                = $wso2is_prepacked::wso2_user
+  $wso2_group               = $wso2is_prepacked::wso2_group
+  $sso_service_providers    = $wso2is_prepacked::sso_service_providers
 
   contain wso2base::configure
 
