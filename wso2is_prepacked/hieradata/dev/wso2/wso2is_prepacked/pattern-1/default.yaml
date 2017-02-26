@@ -47,9 +47,11 @@ wso2::template_list:
 #   proxyPort:
 #     http: 80
 #     https: 443
+wso2::key_store: wso2carbon.jks
+wso2::trust_store: client-truststore.jks
 
 wso2::file_list:
-#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
   - "repository/resources/security/%{hiera('wso2::key_store')}"
 

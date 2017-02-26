@@ -140,7 +140,7 @@ class wso2is_prepacked::params {
         validation_interval => '30000'
       }
     }
-    $is_datasource            = 'wso2_carbon_db'
+    $is_datasource            = 'wso2_am_db'
     $enable_thrift_service    = false
 
     $java_prefs_system_root   = '/home/wso2user/.java'
@@ -203,8 +203,8 @@ class wso2is_prepacked::params {
     $install_mode             = 'file_bucket'
     $install_dir              = "/mnt/${ipaddress}"
     $pack_dir                 = '/mnt/packs'
-    $pack_filename            = "${product_name}-${product_version}.zip"
-    $pack_extracted_dir       = "${product_name}-${product_version}"
+    $pack_filename            = "wso2is-${product_version}.zip"
+    $pack_extracted_dir       = "wso2is-${product_version}"
     $hostname                 = 'localhost'
     $mgt_hostname             = 'localhost'
     $worker_node              = false
