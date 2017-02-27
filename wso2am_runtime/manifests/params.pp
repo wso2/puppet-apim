@@ -253,7 +253,7 @@ class wso2am_runtime::params {
     $wso2_group               = 'wso2'
     $maintenance_mode         = 'refresh'
     $install_mode             = 'file_bucket'
-    $install_dir              = "/mnt/${ipaddress}"
+    $install_dir              = "/mnt"
     $pack_dir                 = '/mnt/packs'
     $pack_filename            = "wso2am-${product_version}.zip"
     $pack_extracted_dir       = "wso2am-${product_version}"

@@ -1,9 +1,9 @@
-#WSO2 API Manager Pattern-2
+#WSO2 API Manager Pattern-7
 
-![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-7.png)
+![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-7.jpg)
 
 This pattern consist of a stand-alone APIM setup with a single node deployment. The databases used in this pattern are external mysql databases. The only difference of this pattern from
-pattern-2 is that this uses WSO2 Identity Sever as Key Manager. Use this pattern to configure APIM and use
+pattern-1 is that this uses WSO2 Identity Sever as Key Manager. Use this pattern to configure APIM and use
 **wso2is_prepacked** puppet module in this repository to configure IS.
 
 Use the pattern-1 in **wso2is_prepacked** puppet module in this repository to configure a pre-packaged Identity Server 5

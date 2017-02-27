@@ -1,6 +1,6 @@
 #WSO2 API Manager Pattern-2
 
-![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-2.png)
+![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-2.jpg)
 
 This pattern consist of a stand-alone APIM setup with a single node deployment, with a single wso2am-analytics server
 instance. The databases used in this pattern are external mysql databases.

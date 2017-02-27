@@ -1,7 +1,7 @@
 # WSO2 API Manager Pattern-3
 
 
-![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-3.png)
+![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-3.jpg)
 
 This pattern consist of a fully distributed APIM setup (including a Gateway cluster of one manager and one worker), with
  a single wso2am-analytics server instance. The databases used in this pattern are external mysql databases.

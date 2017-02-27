@@ -1,6 +1,6 @@
 # WSO2 API Manager Pattern-6
 
-![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-6.png)
+![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-6.jpg)
 
 This pattern consist of a distributed APIM setup (including a Gateway cluster of one manager and one worker) of which the
 Publisher is merged with the Store.  This also consists of a single wso2am-analytics server instance too.

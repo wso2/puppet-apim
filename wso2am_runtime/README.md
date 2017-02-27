@@ -27,6 +27,9 @@ Please note that the load balancer configurations are not done by puppet. All th
 balancers so that it will be convenient to understand the connections when configured load balancing, which is
 usually done in a production environment.
 
+## How to Contribute
+Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wiki) to setup a development environment and update/create new puppet modules.
+
 ## Setup Puppet Environment
 
 * Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics, wso2is_prepacked and wso2base.
@@ -44,9 +47,6 @@ compatible and tested with
 ## Supported Puppet Versions
 
 - Puppet 2.7, 3.x
-
-## How to Contribute
-Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wiki) to setup a development environment and update/create new puppet modules.
 
 ## Configuring WSO2 APIM Analytics
 

@@ -1,6 +1,6 @@
 #WSO2 API Manager Pattern-0
 
-![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-0.png)
+![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-0.jpg)
 
 This pattern consist of a stand-alone APIM setup with a single node deployment. The databases used in this pattern are
 the embedded H2 databases. The only difference between this pattern-0 and pattern-1 is that, pattern-0 uses embedded

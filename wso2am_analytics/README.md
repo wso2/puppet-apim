@@ -7,6 +7,10 @@ this repository.
 This contains a single pattern, which is a single node deployment. Setup the WSO2 APIM Analytics Server, before setting
  up the WSO2 APIM patterns, which consist of Analytics Server.
 
+## How to Contribute
+
+Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wiki) to setup a development environment and update/create new puppet modules.
+
 ## Setup Puppet Environment
 
 * Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics, wso2is_prepacked and wso2base.
@@ -24,10 +28,6 @@ compatible and tested with
 ## Supported Puppet Versions
 
 - Puppet 2.7, 3.x
-
-## How to Contribute
-
-Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wiki) to setup a development environment and update/create new puppet modules.
 
 ## Packs to be Copied
 
