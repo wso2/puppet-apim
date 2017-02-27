@@ -1,6 +1,6 @@
 # WSO2 API Manager Pattern-4
 
-![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-4.png)
+![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-4.jpg)
 
 This pattern consist of a fully distributed APIM setup (including a Gateway cluster of one manager and one worker)
 with an additional Gateway Cluster (one manager and one worker) in a DMZ, with a single
