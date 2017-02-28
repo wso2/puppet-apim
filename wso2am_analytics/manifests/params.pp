@@ -210,11 +210,6 @@ class wso2am_analytics::params {
       }
     }
 
-  #  $file_list          = [
-  #    'dbscripts/identity/h2.sql',
-  #    'dbscripts/identity/mysql.sql'
-  #  ]
-
     $portal   = {
       hostname   => 'das.dev.wso2.org'
     }
@@ -236,10 +231,6 @@ class wso2am_analytics::params {
     $template_list        = [
       'repository/conf/identity/identity.xml',
       'repository/conf/datasources/analytics-datasources.xml',
-     # 'repository/conf/datasources/metrics-datasources.xml',
-     # 'repository/deployment/server/jaggeryapps/portal/configs/designer.json',
-      #'repository/conf/analytics/spark/spark-defaults.conf',
-      #'repository/conf/event-processor.xml',
       'repository/conf/carbon.xml',
       'repository/conf/user-mgt.xml',
       'repository/conf/registry.xml',

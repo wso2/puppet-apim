@@ -141,6 +141,11 @@ to use any other database except MySQL, update the data sources appropriately.
     wso2::file_list:
       - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
     ```
+    And update the jar file name appropriately if your file name is not mysql-connector-java-5.1.39-bin.jar (which is
+     set as default) in default.yaml file (for patterns 0,1,2,7) or common.yaml (for patterns 3 to 6).
+     ```yaml
+     wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
+     ```
 4. Uncomment (and optionally configure) deployment synchronization in each Gateway related nodes. (Patterns 3-6 are
 configured for svn based deployment synchronization, but they are commented out by default.)
 

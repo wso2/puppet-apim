@@ -68,7 +68,11 @@ Ex:
     wso2::file_list:
       - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
    ```
-
+    And update the jar file name appropriately if your file name is not mysql-connector-java-5.1.39-bin.jar (which is
+     set as default) in default.yaml file.
+    ```yaml
+    wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
+    ```
 ## Running WSO2 API Manager Analytics Server with Secure Vault
 
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault]
