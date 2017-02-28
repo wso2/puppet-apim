@@ -56,7 +56,7 @@ Hostname used for the Analytics Server : **analytics.dev.wso2.org**
 
 There is a one cluster in this deployment pattern. Required configurations are already added, but WKA IP addresses should be updated in the respective hiera data files
 
-1. Gateway Cluster
+* Gateway Cluster
 
 This is a cluster of Gateway Manager node and Gateway Worker node.
 Update the wka list in both gateway-manager.yaml and gateway-worker.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node.

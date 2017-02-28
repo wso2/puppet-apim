@@ -68,6 +68,52 @@ Ex:
     wso2::file_list:
       - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
    ```
+    And update the jar file name appropriately if your file name is not mysql-connector-java-5.1.39-bin.jar (which is
+     set as default) in default.yaml file.
+    ```yaml
+    wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
+    ```
+## Running WSO2 API Manager Analytics Server with Secure Vault
+
+WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault]
+(https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
+
+Uncomment and modify the below changes in Hiera file to apply Secure Vault.
+
+1. Enable Secure Vault
+
+    ```yaml
+    wso2::enable_secure_vault: true
+    ```
+
+2. Add Secure Vault configurations as below
+
+    ```yaml
+    wso2::secure_vault_configs:
+      <secure_vault_config_name>:
+        secret_alias: <secret_alias>
+        secret_alias_value: <secret_alias_value>
+        password: <password>
+    ```
+
+    Ex:
+    ```yaml
+    wso2::secure_vault_configs:
+      key_store_password:
+        secret_alias: Carbon.Security.KeyStore.Password
+        secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
+        password: wso2carbon
+    ```
+
+3. Add Cipher Tool configuration file templates to `template_list`
+
+    ```yaml
+    wso2::template_list:
+      - repository/conf/security/cipher-text.properties
+      - repository/conf/security/cipher-tool.properties
+      - bin/ciphertool.sh
+    ```
+Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
 ## Kestore and client-truststore related configs
 

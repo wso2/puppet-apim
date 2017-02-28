@@ -39,6 +39,7 @@ Copy the following files to their corresponding locations.
 
 1. [Pre-packaged WSO2 Identity Server 5.3.0 pack](http://product-dist.wso2.com/downloads/api-manager/2.1.0/identity-server/wso2is-5.3.0.zip) to `<PUPPET_HOME>/modules/wso2is/files`
 2. JDK jdk-8u112-linux-x64.tar.gz distribution to `<PUPPET_HOME>/modules/wso2base/files`
+3. (if using MySQL databases)MySQL JDBC driver JAR (mysql-connector-java-x.x.xx-bin.jar) into the <PUPPET_HOME>/modules/wso2am/files/configs/repository/components/lib
 
 ## Running WSO2 Identity Server with clustering in specific profiles
 No changes to Hiera data are required to run the distributed deployment of WSO2 Identity Server, other than pointing
@@ -92,6 +93,11 @@ to use any other database except MySQL, update the data sources appropriately.
     ```yaml
     wso2::file_list:
       - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+    ```
+    And update the jar file name appropriately if your file name is not mysql-connector-java-5.1.39-bin.jar (which is
+     set as default) in default.yaml file.
+    ```yaml
+    wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
     ```
 3. Configure registry mounting
 
