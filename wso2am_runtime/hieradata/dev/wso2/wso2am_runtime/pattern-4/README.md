@@ -62,7 +62,7 @@ Hostname used for the Analytics Server : **analytics.dev.wso2.org**
 There are 2 clusters in this deployment pattern. Required configurations are already added, but WKA IP addresses
 should be updated in the respective hiera data files
 
-1. Publisher-Store Cluster
+1.Publisher-Store Cluster
 
 This is a cluster of Publisher node and Store node.
 Update the wka list in both api-publisher.yaml and store.yaml files with the IP addresses of Publisher and Store nodes.
@@ -76,7 +76,7 @@ Update the wka list in both api-publisher.yaml and store.yaml files with the IP 
         hostname: 192.168.57.21
         port: 4000
 ```
-2. Gateway Clusters
+2.Gateway Clusters
 
 There are 2 Gateway clusters in this pattern. One is in the LAN and the other one is in the DMZ. Each of those clusters consist of a Gateway Manager node and a Gateway Worker node.
 Required configurations are already added, but WKA IP addresses should be updated in the respective hiera data files

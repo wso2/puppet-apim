@@ -43,6 +43,10 @@ wso2::template_list:
   - repository/conf/datasources/analytics-datasources.xml
   - repository/conf/analytics/spark/spark-jdbc-config.xml
   - repository/conf/datasources/stats-datasources.xml
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/cipher-tool.properties
+#  - bin/ciphertool.sh
+#  - password-tmp
 
 wso2::directory_list:
   - dbscripts/identity
