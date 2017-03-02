@@ -148,13 +148,12 @@ class wso2am_analytics (
 
   contain wso2base
   contain wso2base::system
-  contain wso2base::java
   contain wso2base::clean
   contain wso2base::install
   contain wso2base::configure
   contain wso2base::service
 
-  Class['::wso2base'] -> Class['::wso2base::system'] -> Class['::wso2base::java']
+  Class['::wso2base'] -> Class['::wso2base::system']
   -> Class['::wso2base::clean'] -> Class['::wso2base::install']
   -> Class['::wso2base::configure'] ~> Class['::wso2base::service']
 }
