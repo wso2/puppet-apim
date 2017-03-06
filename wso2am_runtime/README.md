@@ -1,6 +1,6 @@
 # WSO2 API Manager 2.1.0 Puppet Module
 
-This is the Puppet Module for installing and configuring WSO2 API Manager in the 6 basic deployment
+This is the Puppet Module for installing and configuring WSO2 API Manager in the 7 basic deployment
 patterns. (plus single node deployment with embedded H2 databases : pattern-0). Configuration data is managed using
 [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from
 Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
@@ -17,6 +17,7 @@ puppet-apim/wso2am_runtime/hieradata/dev/wso2/wso2am_runtime/pattern-3/README.md
 5. [Pattern 4 - README](hieradata/dev/wso2/wso2am_runtime/pattern-4/README.md)
 6. [Pattern 5 - README](hieradata/dev/wso2/wso2am_runtime/pattern-5/README.md)
 7. [Pattern 6 - README](hieradata/dev/wso2/wso2am_runtime/pattern-6/README.md)
+7. [Pattern 7 - README](hieradata/dev/wso2/wso2am_runtime/pattern-7/README.md)
 
 Follow the instructions stated in these relevant README files too, before running the agents.
 
@@ -146,8 +147,12 @@ to use any other database except MySQL, update the data sources appropriately.
      ```yaml
      wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
      ```
-4. Uncomment (and optionally configure) deployment synchronization in each Gateway related nodes. (Patterns 3-6 are
-configured for svn based deployment synchronization, but they are commented out by default.)
+4. Configure deployment synchronization in each Gateway related nodes. This can be done via multiple approaches.
+
+* SVN Based
+
+Patterns 3-6 are configured for svn based deployment synchronization, but they are commented out by default. Do
+uncomment them.
 
     Ex:
     ```yaml
@@ -169,6 +174,10 @@ And uncomment the file_list entries for those two jar files in those hiera data 
        -  "repository/components/dropins/svnkit-all-1.8.7.wso2v1.jar"
        -  "repository/components/lib/trilead-ssh2-1.0.0-build215.jar"
     ```
+* Rsync
+
+Note that WSO2 now recommends rsync instead of svn, for deployment synchronization. So if you prefer to use rsync
+follow the [WSO2 Docs on Configuring rsync for Deployment Synchronization](https://docs.wso2.com/display/CLUSTER44x/Configuring+rsync+for+Deployment+Synchronization)
 
 ## Running WSO2 API Manager with Secure Vault
 

@@ -1,4 +1,4 @@
-# Pre-packaged WSO2 Identity Server (as Key Manager) Puppet Module
+# Pre-packaged WSO2 Identity Server 5.3.0 (as Key Manager) Puppet Module
 
 This puppet module contains the Pre-packaged WSO2 Identity Server 5.3.0 Puppet Module. This module is used to
 configure IS as Key manager for WSO2 APIM 2.1.0 , hence will be used in combination with the puppet module
