@@ -20,10 +20,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.puppet</groupId>
-    <artifactId>wso2is-as-km-puppet-module</artifactId>
+    <artifactId>wso2is-prepacked-puppet-module</artifactId>
     <packaging>pom</packaging>
-    <version>5.3.0-SNAPSHOT</version>
-    <name>WSO2 Identity Server as Key Manager Puppet Module</name>
+    <version>5.3.0</version>
+    <name>Pre-Packaged WSO2 Identity Server Puppet Module</name>
 
     <licenses>
         <license>
