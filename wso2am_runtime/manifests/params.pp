@@ -127,7 +127,7 @@ class wso2am_runtime::params {
     }
 
     $apim_traffic_manager     ={
-      host                 => 'am.dev.wso2.org',
+      host                 => 'localhost',
       port                 => '9443',
       receiver_url_port    => '9611',
       auth_url_port        => '9711',
@@ -139,9 +139,9 @@ class wso2am_runtime::params {
 
     $environments           = {
         apim_gateway  => {
-          host                                  => 'am.dev.wso2.org',
+          host                                  => 'localhost',
           port                                  => '9443',
-          api_endpoint_host                     => 'am.dev.wso2.org',
+          api_endpoint_host                     => 'localhost',
           api_endpoint_port                     => '8280',
           secure_api_endpoint_port              => '8243',
           api_token_revoke_endpoint_port        => '8280',
@@ -152,19 +152,19 @@ class wso2am_runtime::params {
     }
 
     $apim_keymanager          ={
-      host     => 'am.dev.wso2.org',
+      host     => 'localhost',
       port     => '9443',
       username => 'admin',
       password => 'admin'
     }
 
     $apim_store               ={
-      host => 'am.dev.wso2.org',
+      host => 'localhost',
       port => '9443'
     }
 
     $apim_publisher           ={
-      host => 'am.dev.wso2.org',
+      host => 'localhost',
       port => '9443'
     }
 
