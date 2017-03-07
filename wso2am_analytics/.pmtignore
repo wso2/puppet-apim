@@ -1,0 +1,31 @@
+# Puppet module related files
+package.xml
+pom.xml
+hieradata/
+
+# Eclipse Project Files
+.project
+.classpath
+.settings/
+.metadata
+
+# IntelliJ IDEA Project Files
+.idea/
+*.iml
+*.ipr
+*.iws
+*.swp
+
+#Backup files
+*~
+
+# puppet-modules
+*.zip
+*.gz
+*.tar
+*.jar
+
+target/
+
+# puppet packages
+pkg/

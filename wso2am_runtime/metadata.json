@@ -1,0 +1,19 @@
+{
+  "name": "wso2-wso2am_runtime",
+  "version": "2.1.0",
+  "author": "wso2",
+  "license": "Apache-2.0",
+  "summary": "puppet module",
+  "source": "https://github.com/wso2/puppet-apim.git",
+  "project_page": "http://wso2.com/api-management/",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [ "12.04", "14.04" ]
+    }
+  ],
+  "tags" : ["am", "2.1.0"],
+  "dependencies": [
+    { "name": "wso2/wso2base", "version_requirement": "1.0.0" }
+  ]
+}
