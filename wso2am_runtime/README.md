@@ -47,7 +47,7 @@ compatible and tested with
 
 ## Supported Puppet Versions
 
-- Puppet 2.7, 3.x
+- Puppet 3.x
 
 ## Configuring WSO2 APIM Analytics
 
