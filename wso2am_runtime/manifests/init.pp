@@ -78,6 +78,7 @@ class wso2am_runtime (
   $patches_dir            = $wso2am_runtime::params::patches_dir,
   $service_name           = $wso2am_runtime::params::service_name,
   $service_template       = $wso2am_runtime::params::service_template,
+  $autostart_service      = $wso2am_runtime::params::autostart_service,
   $ipaddress              = $wso2am_runtime::params::ipaddress,
   $enable_secure_vault    = $wso2am_runtime::params::enable_secure_vault,
   $secure_vault_configs   = $wso2am_runtime::params::secure_vault_configs,
