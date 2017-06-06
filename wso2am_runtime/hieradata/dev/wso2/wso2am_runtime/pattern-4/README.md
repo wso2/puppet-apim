@@ -46,7 +46,7 @@ used in each instance.
    APIM Node           | Hieradata file            | Hostname
    -------------       |-----------------------    | ------------------
    Publisher           | api-publisher.yaml        | pub.dev.wso2.org
-   Store               | api-publisher.yaml        | store.dev.wso2.org
+   Store               | api-store.yaml            | store.dev.wso2.org
    Gateway Manager-LAN | gateway-manager-lan.yaml  | mgt-gw.dev.wso2.org
    Gateway Worker-LAN  | gateway-worker-lan.yaml   | gw.dev.wso2.org
    Gateway Manager-DMZ | gateway-manager-dmz.yaml  | dmz-mgt-gw.dev.wso2.org
@@ -59,7 +59,7 @@ Hostname used for the Analytics Server : **analytics.dev.wso2.org**
 
 ## Update wka list for clusters in the deployment
 
-There are 2 clusters in this deployment pattern. Required configurations are already added, but WKA IP addresses
+There are 3 clusters in this deployment pattern. Required configurations are already added, but WKA IP addresses
 should be updated in the respective hiera data files
 
 1.Publisher-Store Cluster
