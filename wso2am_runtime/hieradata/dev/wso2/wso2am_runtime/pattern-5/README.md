@@ -46,7 +46,7 @@ used in each instance.
    APIM Node                   | Hieradata file            | Hostname
    -------------               |-----------------------    | ------------------
    Publisher                   | api-publisher.yaml        | pub.dev.wso2.org
-   Store                       | api-publisher.yaml        | store.dev.wso2.org
+   Store                       | api-store.yaml            | store.dev.wso2.org
    Gateway Manager             | gateway-manager.yaml      | mgt-gw.dev.wso2.org
    Gateway Worker + Key Manager| gw-plus-km.yaml           | am.dev.wso2.org
    Traffic Manager             | traffic-manager.yaml      | tm.dev.wso2.org

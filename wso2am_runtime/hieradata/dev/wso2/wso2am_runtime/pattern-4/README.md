@@ -2,10 +2,12 @@
 
 ![pattern-design](../../../../../patterns/design/am-2.1.0-pattern-4.jpg)
 
-This pattern consist of a fully distributed APIM setup (including a Gateway cluster of one manager and one worker)
-with an additional Gateway Cluster (one manager and one worker) in a DMZ, with a single
+This pattern consist of a fully distributed APIM setup including two Gateway clusters each with one manager and one worker, with a single
 wso2am-analytics server instance. The eight hiera data .yaml files (in spite of  common.yaml) here are for the 8 APIM nodes.
- The databases used in this pattern are external mysql databases.
+ The databases used in this pattern are external mysql databases. And please note that the hiera data files of gateway nodes are named with 
+ the suffixes 'lan' or 'dmz' which refers to the environment they could be existing in. But please consider that the two gateway clusters in 
+ this pattern are there, just to convey that they are in two (gateway)environments and there is no any particularity to a LAN or DMZ. LAN & DMZ 
+ are mentioned as examples for environments.
 
 Please follow the basic instructions in this [README](../../../../../README.md) before following this guide.
 
