@@ -13,8 +13,8 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: dmz-mgt-gw.dev.wso2.org
-wso2::hostname: dmz-gw.dev.wso2.org
+wso2::mgt_hostname: env2-mgt-gw.dev.wso2.org
+wso2::hostname: env2-gw.dev.wso2.org
 wso2::product_profile: gateway-worker
 
 wso2::template_list:

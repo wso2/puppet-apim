@@ -13,8 +13,8 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: dmz-mgt-gw.dev.wso2.org
-wso2::hostname: dmz-mgt-gw.dev.wso2.org
+wso2::mgt_hostname: env2-mgt-gw.dev.wso2.org
+wso2::hostname: env2-mgt-gw.dev.wso2.org
 wso2::product_profile: gateway-manager
 
 wso2::template_list:
@@ -73,7 +73,7 @@ wso2::sso_authentication:
   login_page: /carbon/admin/login.jsp
   service_provider_id: wso2am-gw
   sso_service_url: https://is.dev.wso2.org:9443/samlsso
-  consumer_service_url: https://dmz-gw.dev.wso2.org:9443/acs
+  consumer_service_url: https://env2-gw.dev.wso2.org:9443/acs
 
 #wso2::file_list:
 #   -  "repository/components/dropins/svnkit-all-1.8.7.wso2v1.jar"

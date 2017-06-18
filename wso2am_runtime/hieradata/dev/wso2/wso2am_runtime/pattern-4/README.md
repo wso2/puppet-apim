@@ -5,10 +5,9 @@
 This pattern consist of a fully distributed APIM setup including two Gateway clusters each with one manager and one worker, with a single
 wso2am-analytics server instance. The eight hiera data .yaml files (in spite of  common.yaml) here are for the 8 APIM nodes.
  The databases used in this pattern are external mysql databases. And please note that the hiera data files of gateway nodes are named with 
- the suffixes 'lan' or 'dmz' which refers to the environment they could be existing in. But please consider that the two gateway clusters in 
- this pattern are there, just to convey that they are in two (gateway)environments and there is no any particularity to a LAN or DMZ. LAN & DMZ 
- are mentioned as examples for environments.
-
+ the suffixes 'env1' or 'env2' which refers to the environment they could be existing in. But please consider that the two gateway clusters in 
+ this pattern are there, just to convey that they are in two (gateway)environments. You can have them in any preferred environment. (for example LAN and DMZ)
+ 
 Please follow the basic instructions in this [README](../../../../../README.md) before following this guide.
 
 ## Deployment.conf file
@@ -27,7 +26,7 @@ Content of /opt/deployment.conf file should be similar to below format to run th
  use_hieradata=true
  pattern=pattern-4
 ```
-e.g.:- To setup Gateway Manager node in the DMZ:
+e.g.:- To setup Gateway Manager node in the Gateway Environment-2:
 
 ```yaml
  product_name=wso2am_runtime
@@ -51,8 +50,8 @@ used in each instance.
    Store                | api-store.yaml            | store.dev.wso2.org
    Gateway Manager-ENV1 | gateway-manager-env1.yaml | mgt-gw.dev.wso2.org
    Gateway Worker-ENV1  | gateway-worker-env1.yaml  | gw.dev.wso2.org
-   Gateway Manager-ENV2 | gateway-manager-env2.yaml | dmz-mgt-gw.dev.wso2.org
-   Gateway Worker-ENV2  | gateway-worker-env2.yaml  | dmz-gw.dev.wso2.org
+   Gateway Manager-ENV2 | gateway-manager-env2.yaml | env2-mgt-gw.dev.wso2.org
+   Gateway Worker-ENV2  | gateway-worker-env2.yaml  | env2-gw.dev.wso2.org
    Key Manager          | api-key-manager.yaml      | km.dev.wso2.org
    Traffic Manager      | traffic-manager.yaml      | tm.dev.wso2.org
 
@@ -80,11 +79,12 @@ Update the wka list in both api-publisher.yaml and store.yaml files with the IP 
 ```
 2.Gateway Clusters
 
-There are 2 Gateway clusters in this pattern. One is in the LAN and the other one is in the DMZ. Each of those clusters consist of a Gateway Manager node and a Gateway Worker node.
+There are 2 Gateway clusters in this pattern. These are there to represent that they are in 2 environments. (for example, DMZ and LAN). We will refer them as 'Gateway Environment-1' and 'Gateway Environment-2'. 
+Each of these 2 clusters consist of a Gateway Manager node and a Gateway Worker node.
 Required configurations are already added, but WKA IP addresses should be updated in the respective hiera data files
 
-  * For the Gateway cluster in the LAN:
-    -Update the wka list in both gateway-manager-env1.yaml and gateway-worker-env1.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node in the gateway environment-1.
+  * For the Gateway cluster in the Gateway Environment-1:
+    -Update the wka list in both gateway-manager-env1.yaml and gateway-worker-env1.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node in the Gateway Environment-1.
 
 ```yaml
   wka:
@@ -97,8 +97,8 @@ Required configurations are already added, but WKA IP addresses should be update
         port: 4000
 ```
 
-  * For the Gateway cluster in the DMZ:
-    -Update the wka list in both gateway-manager-env2.yaml and gateway-worker-env2.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node in the gateway environment-2 .
+  * For the Gateway cluster in the Gateway Environment-2:
+    -Update the wka list in both gateway-manager-env2.yaml and gateway-worker-env2.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node in the Gateway Environment-2 .
 
 ```yaml
   wka:
