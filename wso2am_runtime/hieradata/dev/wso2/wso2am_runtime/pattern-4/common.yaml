@@ -206,7 +206,7 @@ wso2::apply_gateway_specific_configurations: false
 wso2::enable_log_analyzer: false
 
 wso2::environments:
-  apim_gateway_lan:
+  apim_gateway_env1:
     name: Production and Sandbox environment for Gateway Environment-1
     description: This is a hybrid gateway that handles both production and sandbox token traffic, and this resides in the Gateway Environment-1
     host: mgt-gw.dev.wso2.org
