@@ -32,7 +32,7 @@ e.g.:- To setup Gateway Manager node in the DMZ:
 ```yaml
  product_name=wso2am_runtime
  product_version=2.1.0
- product_profile=gateway-manager-dmz
+ product_profile=gateway-manager-env2
  vm_type=openstack
  environment=dev
  platform=default
@@ -45,16 +45,16 @@ e.g.:- To setup Gateway Manager node in the DMZ:
 Following table contains the APIM node instances with their respective hiera data .yaml file names and the host names
 used in each instance.
 
-   APIM Node           | Hieradata file            | Hostname
-   -------------       |-----------------------    | ------------------
-   Publisher           | api-publisher.yaml        | pub.dev.wso2.org
-   Store               | api-store.yaml            | store.dev.wso2.org
-   Gateway Manager-LAN | gateway-manager-lan.yaml  | mgt-gw.dev.wso2.org
-   Gateway Worker-LAN  | gateway-worker-lan.yaml   | gw.dev.wso2.org
-   Gateway Manager-DMZ | gateway-manager-dmz.yaml  | dmz-mgt-gw.dev.wso2.org
-   Gateway Worker-DMZ  | gateway-worker-dmz.yaml   | dmz-gw.dev.wso2.org
-   Key Manager         | api-key-manager.yaml      | km.dev.wso2.org
-   Traffic Manager     | traffic-manager.yaml      | tm.dev.wso2.org
+   APIM Node            | Hieradata file            | Hostname
+   -------------        |-----------------------    | ------------------
+   Publisher            | api-publisher.yaml        | pub.dev.wso2.org
+   Store                | api-store.yaml            | store.dev.wso2.org
+   Gateway Manager-ENV1 | gateway-manager-env1.yaml | mgt-gw.dev.wso2.org
+   Gateway Worker-ENV1  | gateway-worker-env1.yaml  | gw.dev.wso2.org
+   Gateway Manager-ENV2 | gateway-manager-env2.yaml | dmz-mgt-gw.dev.wso2.org
+   Gateway Worker-ENV2  | gateway-worker-env2.yaml  | dmz-gw.dev.wso2.org
+   Key Manager          | api-key-manager.yaml      | km.dev.wso2.org
+   Traffic Manager      | traffic-manager.yaml      | tm.dev.wso2.org
 
 Hostname used for the Analytics Server : **analytics.dev.wso2.org**
 
@@ -84,7 +84,7 @@ There are 2 Gateway clusters in this pattern. One is in the LAN and the other on
 Required configurations are already added, but WKA IP addresses should be updated in the respective hiera data files
 
   * For the Gateway cluster in the LAN:
-    -Update the wka list in both gateway-manager-lan.yaml and gateway-worker-lan.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node in the LAN.
+    -Update the wka list in both gateway-manager-env1.yaml and gateway-worker-env1.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node in the gateway environment-1.
 
 ```yaml
   wka:
@@ -98,7 +98,7 @@ Required configurations are already added, but WKA IP addresses should be update
 ```
 
   * For the Gateway cluster in the DMZ:
-    -Update the wka list in both gateway-manager-dmz.yaml and gateway-worker-dmz.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node in the DMZ.
+    -Update the wka list in both gateway-manager-env2.yaml and gateway-worker-env2.yaml files with the IP addresses of Gateway Manager node and Gateway Worker node in the gateway environment-2 .
 
 ```yaml
   wka:
