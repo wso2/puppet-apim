@@ -68,7 +68,7 @@ Copy the following files to their corresponding locations, in the Puppet Master.
 ## Running WSO2 API Manager with clustering in specific profiles
 
 Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-store`, `api-publisher`,
-`api-key-manager`, `gateway-manager`, `geteway-worker`, `traffic-manager`) are shipped with clustering related
+`api-key-manager`, `gateway-manager`, `gateway-worker`, `traffic-manager`) are shipped with clustering related
 configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment in your
 preferred deployment pattern, before running the puppet Agent. For more details refer the [Clustering the API
 Manager](https://docs.wso2.com/display/AM210/Clustering+the+API+Manager) and [Clustering the Gateway(https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway) docs.
