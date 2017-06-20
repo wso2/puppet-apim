@@ -43,11 +43,11 @@ compatible and tested with
 ## Supported Operating Systems
 
 - Debian 6 or higher
-- Ubuntu 12.04 or higher
+- Ubuntu 14.04
 
 ## Supported Puppet Versions
 
-- Puppet 2.7, 3.x
+- Puppet 3.x
 
 ## Configuring WSO2 APIM Analytics
 

@@ -13,8 +13,8 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: dmz-mgt-gw.dev.wso2.org
-wso2::hostname: dmz-gw.dev.wso2.org
+wso2::mgt_hostname: env2-mgt-gw.dev.wso2.org
+wso2::hostname: env2-gw.dev.wso2.org
 wso2::product_profile: gateway-worker
 
 wso2::template_list:
@@ -46,7 +46,7 @@ wso2::clustering:
 #  auto_commit: false
 #  repository_type: svn
 #  svn:
-#    url: https://svn.wso2.com/wso2/svn/people/samitha/depsyncrepo-dmz
+#    url: https://svn.wso2.com/wso2/svn/people/samitha/depsyncrepo-env2
 #    user: samitha@wso2.com
 #    password: password
 #    append_tenant_id: true

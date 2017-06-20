@@ -9,7 +9,7 @@
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "12.04", "14.04" ]
+      "operatingsystemrelease": [ "14.04" ]
     }
   ],
   "tags" : ["wso2is", "5.3.0", "pre-packaged", "is-as-km"],

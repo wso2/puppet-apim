@@ -99,12 +99,12 @@ wso2::analytics:
   skip_event_receiver_connection : true
 
 wso2::environments:
-  apim_gateway_dmz:
-    name: Production and Sandbox environment for DMZ
-    description: This is a hybrid gateway that handles both production and sandbox token traffic, and this resides in the DMZ
-    host: dmz-mgt-gw.dev.wso2.org
+  apim_gateway_env2:
+    name: Production and Sandbox environment for Gateway Environment-2
+    description: This is a hybrid gateway that handles both production and sandbox token traffic, and this resides in the Gateway Environment-2
+    host: env2-mgt-gw.dev.wso2.org
     port: 9443
-    api_endpoint_host: dmz-gw.dev.wso2.org
+    api_endpoint_host: env2-gw.dev.wso2.org
     api_endpoint_port: 8280
     secure_api_endpoint_port: 8243
     api_token_revoke_endpoint_port: 8280

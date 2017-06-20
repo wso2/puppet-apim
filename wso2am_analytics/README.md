@@ -23,7 +23,7 @@ compatible and tested with
 ## Supported Operating Systems
 
 - Debian 6 or higher
-- Ubuntu 12.04 or higher
+- Ubuntu 14.04
 
 ## Supported Puppet Versions
 

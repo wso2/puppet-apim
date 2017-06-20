@@ -45,7 +45,7 @@ used in each instance.
    -------------               |-----------------------    | ------------------
    Publisher + Store           | publisher-plus-store.yaml | am.dev.wso2.org
    Gateway Manager             | gateway-manager.yaml      | mgt-gw.dev.wso2.org
-   Gateway Worker              | gateway-worker-lan.yaml   | am.dev.wso2.org
+   Gateway Worker              | gateway-worker.yaml   | am.dev.wso2.org
    Key Manager                 | api-key-manager.yaml      | km.dev.wso2.org
    Traffic Manager             | traffic-manager.yaml      | tm.dev.wso2.org
 
