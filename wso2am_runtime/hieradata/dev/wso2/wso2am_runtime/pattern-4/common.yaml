@@ -84,12 +84,12 @@ wso2::hosts_mapping:
   apim_analytics_server:
     ip: 192.168.57.29
     name: analytics.dev.wso2.org
-  apim_gateway_manager_dmz:
+  apim_gateway_manager_env2:
     ip: 192.168.57.5
-    name: dmz-mgt-gw.dev.wso2.org
-  apim_gateway_worker_dmz:
+    name: env2-mgt-gw.dev.wso2.org
+  apim_gateway_worker_env2:
     ip: 192.168.57.218
-    name: dmz-gw.dev.wso2.org
+    name: env2-gw.dev.wso2.org
 
 wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db
@@ -206,9 +206,9 @@ wso2::apply_gateway_specific_configurations: false
 wso2::enable_log_analyzer: false
 
 wso2::environments:
-  apim_gateway_lan:
-    name: Production and Sandbox environment for LAN
-    description: This is a hybrid gateway that handles both production and sandbox token traffic, and this resides in the LAN
+  apim_gateway_env1:
+    name: Production and Sandbox environment for Gateway Environment-1
+    description: This is a hybrid gateway that handles both production and sandbox token traffic, and this resides in the Gateway Environment-1
     host: mgt-gw.dev.wso2.org
     port: 9443
     api_endpoint_host: gw.dev.wso2.org
