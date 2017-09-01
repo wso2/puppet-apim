@@ -97,10 +97,6 @@ class wso2am_runtime::params {
     $enable_secure_vault      = hiera('wso2::enable_secure_vault')
     $mb_store_datasource      = hiera('wso2::mb_store_datasource')
 
-    if $enable_secure_vault {
-      $secure_vault_configs   = hiera('wso2::secure_vault_configs')
-    }
-
     $key_stores               = hiera('wso2::key_stores')
 
   } else {
