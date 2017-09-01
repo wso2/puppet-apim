@@ -54,7 +54,6 @@ class wso2is_prepacked (
   $service_template       = $wso2is_prepacked::params::service_template,
   $ipaddress              = $wso2is_prepacked::params::ipaddress,
   $enable_secure_vault    = $wso2is_prepacked::params::enable_secure_vault,
-  $secure_vault_configs   = $wso2is_prepacked::params::secure_vault_configs,
   $key_stores             = $wso2is_prepacked::params::key_stores,
   $carbon_home            = $wso2is_prepacked::params::carbon_home,
   $pack_file_abs_path     = $wso2is_prepacked::params::pack_file_abs_path,
@@ -135,7 +134,6 @@ class wso2is_prepacked (
     service_template       => $service_template,
     ipaddress              => $ipaddress,
     enable_secure_vault    => $enable_secure_vault,
-    secure_vault_configs   => $secure_vault_configs,
     key_stores             => $key_stores,
     carbon_home            => $carbon_home,
     pack_file_abs_path     => $pack_file_abs_path

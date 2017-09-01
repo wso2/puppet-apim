@@ -73,7 +73,6 @@ class wso2am_runtime (
   $service_template       = $wso2am_runtime::params::service_template,
   $ipaddress              = $wso2am_runtime::params::ipaddress,
   $enable_secure_vault    = $wso2am_runtime::params::enable_secure_vault,
-  $secure_vault_configs   = $wso2am_runtime::params::secure_vault_configs,
   $key_stores             = $wso2am_runtime::params::key_stores,
   $carbon_home            = $wso2am_runtime::params::carbon_home,
   $pack_file_abs_path     = $wso2am_runtime::params::pack_file_abs_path,
@@ -158,7 +157,6 @@ class wso2am_runtime (
     service_template       => $service_template,
     ipaddress              => $ipaddress,
     enable_secure_vault    => $enable_secure_vault,
-    secure_vault_configs   => $secure_vault_configs,
     key_stores             => $key_stores,
     carbon_home            => $carbon_home,
     pack_file_abs_path     => $pack_file_abs_path
