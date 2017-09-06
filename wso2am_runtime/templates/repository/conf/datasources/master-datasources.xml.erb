@@ -16,7 +16,11 @@
   ~  under the License.
   -->
 
+<% if @enable_secure_vault %>
 <datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+<%- else -%>
+<datasources-configuration>
+<% end %>
     <providers>
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
     </providers>
@@ -33,7 +37,12 @@
                 <configuration>
                     <url><%= datasource['url'] %></url>
                     <username><%= datasource['username'] %></username>
+                    <!-- By default secure vault is applied to the WSO2_CABON_DB only -->
+                    <% if @enable_secure_vault && datasource['name'] == "WSO2_CARBON_DB" %>
+                    <password svns:secretAlias="Datasources.<%= datasource['name'] %>.Configuration.Password">password</password>
+                    <%- else -%>
                     <password><%= datasource['password'] %></password>
+                    <% end %>
                     <driverClassName><%= datasource['driver_class_name'] %></driverClassName>
                     <defaultAutoCommit><%= datasource['default_auto_commit'] %></defaultAutoCommit>
                     <maxActive><%= datasource['max_active'] %></maxActive>
