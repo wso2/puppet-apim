@@ -38,7 +38,7 @@
                     <url><%= datasource['url'] %></url>
                     <username><%= datasource['username'] %></username>
                     <!-- By default secure vault is applied to the WSO2_CABON_DB only -->
-                    <% if @enable_secure_vault && datasource['name'] == "WSO2_CARBON_DB" %>
+                    <% if @enable_secure_vault %>
                     <password svns:secretAlias="Datasources.<%= datasource['name'] %>.Configuration.Password">password</password>
                     <%- else -%>
                     <password><%= datasource['password'] %></password>
