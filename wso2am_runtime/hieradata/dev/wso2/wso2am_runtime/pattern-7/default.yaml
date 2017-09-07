@@ -264,34 +264,3 @@ wso2::hosts_mapping:
     name: is.dev.wso2.org
 # Secure vault configuration
 #wso2::enable_secure_vault: true
-
-##Use below advanced secure vault configurations if they are used in corresponding files
-#  wso2am_stats_db_password:
-#    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: "%{hiera('wso2::datasources::common::password')}"
-#
-#  user_store_manager_connection_password:
-#    secret_alias: UserStoreManager.Property.ConnectionPassword
-#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='ConnectionPassword'],flase
-#    password: admin
-#
-#  user_store_manager_password:
-#    secret_alias: UserStoreManager.Property.password
-#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='password'],true
-#    password: admin
-#
-#  user_trusted_RPStore_password:
-#    secret_alias: Security.UserTrustedRPStore.Password
-#    secret_alias_value: repository/conf/identity/identity.xml//Server/Security/UserTrustedRPStore/Password,false
-#    password: "%{hiera('wso2::key_stores::user_trusted_rp_store::password')}"
-#
-#  user_trusted_RPStore_key_password:
-#    secret_alias: Security.UserTrustedRPStore.KeyPassword
-#    secret_alias_value: repository/conf/identity/identity.xml//Server/Security/UserTrustedRPStore/KeyPassword,false
-#    password: "%{hiera('wso2::key_stores::user_trusted_rp_store::key_password')}"
-#
-#  identity_system_store_pass:
-#    secret_alias: Identity.System.StorePass
-#    secret_alias_value: repository/conf/identity/identity.xml//Server/Identity/System/StorePass,false
-#    password: wso2carbon
