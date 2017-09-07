@@ -137,43 +137,12 @@ to use any other database except MySQL, update the data sources appropriately.
 ## Running WSO2 Identity Server with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
-Uncomment and modify the below changes in Hiera file to apply Secure Vault.
+Refer [Using WSO2 Carbon Secure Vault With WSO2 Puppet Modules](https://github.com/wso2/puppet-base/wiki/Using-WSO2-Carbon-Secure-Vault-With-WSO2-Puppet-Modules) for enabling secure vault.
 
-1. Enable Secure Vault
-
-    ```yaml
-    wso2::enable_secure_vault: true
-    ```
-
-2. Add Secure Vault configurations as below
-
-    ```yaml
-    wso2::secure_vault_configs:
-      <secure_vault_config_name>:
-        secret_alias: <secret_alias>
-        secret_alias_value: <secret_alias_value>
-        password: <password>
-    ```
-
-    Ex:
-    ```yaml
-    wso2::secure_vault_configs:
-      key_store_password:
-        secret_alias: Carbon.Security.KeyStore.Password
-        secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
-        password: wso2carbon
-    ```
-
-3. Add Cipher Tool configuration file templates to `template_list`
-
-    ```yaml
-    wso2::template_list:
-      - repository/conf/security/cipher-text.properties
-      - repository/conf/security/cipher-tool.properties
-      - bin/ciphertool.sh
-    ```
-
-    Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
+---
+**Note:**
+Please note that the configuration [templates](./templates/repository/conf/) are written to match the default application of secure vault. If it is required to customize (encrypt additional passwords or remove encryption of passwords), please do the relevant changes to `ciper-tool.properties`, `cipher-text.properties` and the relevant [templates](./templates/repository/conf/).
+---
 
 ## Keystore and client-truststore related configs
 

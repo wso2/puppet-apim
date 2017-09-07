@@ -17,7 +17,11 @@
   ~  under the License.
   -->
 
+<% if @enable_secure_vault %>
+<Server xmlns:svns="http://org.wso2.securevault/configuration" port="8005" shutdown="SHUTDOWN">
+<%- else -%>
 <Server port="8005" shutdown="SHUTDOWN">
+<% end %>
 
     <Service className="org.wso2.carbon.tomcat.ext.service.ExtendedStandardService" name="Catalina">
 
@@ -54,11 +58,43 @@
         proxyPort="443"
         Added sslEnabledProtocols="TLSv1,TLSv1.1,TLSv1.2" for poodle vulnerability fix
         -->
+        <% if @enable_secure_vault %>
         <Connector protocol="org.apache.coyote.http11.Http11NioProtocol"
                    port="9443"
-<%- if @ports['proxyPort'] and @ports['proxyPort']['https'] -%>
+                   <%- if @ports['proxyPort'] and @ports['proxyPort']['https'] -%>
                    proxyPort="<%= @ports['proxyPort']['https'] %>"
-<%- end -%>
+                   <%- end -%>
+                   bindOnInit="false"
+                   sslProtocol="TLS"
+                   sslEnabledProtocols="TLSv1,TLSv1.1,TLSv1.2"
+                   maxHttpHeaderSize="8192"
+                   acceptorThreadCount="2"
+                   maxThreads="250"
+                   minSpareThreads="50"
+                   disableUploadTimeout="false"
+                   enableLookups="false"
+                   connectionUploadTimeout="120000"
+                   maxKeepAliveRequests="200"
+                   acceptCount="200"
+                   server="WSO2 Carbon Server"
+                   clientAuth="false"
+                   compression="on"
+                   scheme="https"
+                   secure="true"
+                   SSLEnabled="true"
+                   compressionMinSize="2048"
+                   noCompressionUserAgents="gozilla, traviata"
+                   compressableMimeType="text/html,text/javascript,application/x-javascript,application/javascript,application/xml,text/css,application/xslt+xml,text/xsl,image/gif,image/jpg,image/jpeg"
+    				       keystoreFile="${carbon.home}/<%= @key_stores['connector_key_store']['location'] %>"
+				           keystorePass="password"
+                   URIEncoding="UTF-8"
+                   svns:secretAlias="Server.Service.Connector.keystorePass"/>
+        <%- else -%>
+        <Connector protocol="org.apache.coyote.http11.Http11NioProtocol"
+                   port="9443"
+                   <%- if @ports['proxyPort'] and @ports['proxyPort']['https'] -%>
+                   proxyPort="<%= @ports['proxyPort']['https'] %>"
+                   <%- end -%>
                    bindOnInit="false"
                    sslProtocol="TLS"
                    sslEnabledProtocols="TLSv1,TLSv1.1,TLSv1.2"
@@ -83,6 +119,7 @@
 				           keystoreFile="${carbon.home}/<%= @key_stores['connector_key_store']['location'] %>"
 				           keystorePass="<%= @key_stores['connector_key_store']['password'] %>"
                    URIEncoding="UTF-8"/>
+        <% end %>
 
 
         <Engine name="Catalina" defaultHost="localhost">

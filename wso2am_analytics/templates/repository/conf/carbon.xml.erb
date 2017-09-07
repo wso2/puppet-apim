@@ -21,7 +21,11 @@
     ${carbon.home} represents the carbon.home system property.
     Other system properties can be specified in a similar manner.
 -->
+<% if @enable_secure_vault %>
+<Server xmlns="http://wso2.org/projects/carbon/carbon.xml" xmlns:svns="http://org.wso2.securevault/configuration">
+<%- else -%>
 <Server xmlns="http://wso2.org/projects/carbon/carbon.xml">
+<% end %>
 
     <!--
        Product Name
@@ -378,11 +382,19 @@
             <!-- Keystore type (JKS/PKCS12 etc.)-->
             <Type><%= @key_stores['key_store']['type'] %></Type>
             <!-- Keystore password-->
+            <% if @enable_secure_vault %>
+            <Password svns:secretAlias="Carbon.Security.KeyStore.Password">password</Password>
+            <%- else -%>
             <Password><%= @key_stores['key_store']['password'] %></Password>
+            <% end %>
             <!-- Private Key alias-->
             <KeyAlias><%= @key_stores['key_store']['key_alias'] %></KeyAlias>
             <!-- Private Key password-->
+            <% if @enable_secure_vault %>
+            <KeyPassword svns:secretAlias="Carbon.Security.KeyStore.KeyPassword">password</KeyPassword>
+            <%- else -%>
             <KeyPassword><%= @key_stores['key_store']['key_password'] %></KeyPassword>
+            <% end %>
         </KeyStore>
 
         <!--
@@ -395,7 +407,11 @@
             <!-- trust-store type (JKS/PKCS12 etc.) -->
             <Type><%= @key_stores['trust_store']['type'] %></Type>
             <!-- trust-store password -->
+            <% if @enable_secure_vault %>
+            <Password svns:secretAlias="Carbon.Security.TrustStore.Password">password</Password>
+            <%- else -%>
             <Password><%= @key_stores['trust_store']['password'] %></Password>
+            <% end %>
         </TrustStore>
 
         <!--

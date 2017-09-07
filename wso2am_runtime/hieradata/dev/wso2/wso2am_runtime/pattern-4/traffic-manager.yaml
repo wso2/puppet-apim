@@ -39,3 +39,15 @@ wso2::master_datasources:
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+# File list to be copied to the product folder, if there are changes found in the files, the system
+# service will be restarted
+#wso2::file_list:
+#  - repository/conf/security/cipher-tool.properties
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/secret-conf.properties
+
+
+# Files to be copied to the product folder when restarting the system service
+#wso2::service_refresh_file_list:
+#  - password-tmp
