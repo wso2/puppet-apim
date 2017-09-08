@@ -14,14 +14,22 @@
   ~ limitations under the License.
   -->
 
+<% if @enable_secure_vault %>
+<UserManager xmlns:svns="http://org.wso2.securevault/configuration">
+<%- else -%>
 <UserManager>
+<% end %>
     <Realm>
         <Configuration>
 		<AddAdmin>true</AddAdmin>
             <AdminRole><%= @user_management['admin_role'] %></AdminRole>
             <AdminUser>
                 <UserName><%= @user_management['admin_username'] %></UserName>
+                <% if @enable_secure_vault %>
+                <Password svns:secretAlias="UserManager.AdminUser.Password">password</Password>
+                <%- else -%>
                 <Password><%= @user_management['admin_password'] %></Password>
+                <% end %>
             </AdminUser>
             <EveryOneRoleName>everyone</EveryOneRoleName> <!-- By default users in this role sees the registry root -->
             <Property name="isCascadeDeleteEnabled">true</Property>

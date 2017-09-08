@@ -111,3 +111,15 @@ wso2::environments:
     secure_api_token_revoke_endpoint_port: 8243
     username: "%{hiera('wso2::super_admin::username')}"
     password: "%{hiera('wso2::super_admin::password')}"
+
+# File list to be copied to the product folder, if there are changes found in the files, the system
+# service will be restarted
+#wso2::file_list:
+#  - repository/conf/security/cipher-tool.properties
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/secret-conf.properties
+
+
+# Files to be copied to the product folder when restarting the system service
+#wso2::service_refresh_file_list:
+#  - password-tmp
