@@ -20,6 +20,24 @@ wso2::product_profile: traffic-manager
 wso2::template_list:
   - repository/conf/broker.xml
 
+wso2::clustering:
+  enabled: false
+  domain: tm.am.wso2.domain
+  sub_domain: mgt
+  local_member_host: "%{::ipaddress}"
+  local_member_port: 4000
+# WKA membership scheme
+  membership_scheme: wka
+  wka:
+    members:
+      -
+        hostname: 192.168.48.35
+        port: 4000
+      -
+        hostname: 192.168.48.37
+        port: 4000
+
+
 wso2::remove_file_list:
   - "repository/deployment/server/jaggeryapps"
   - "repository/deployment/server/webapps"
