@@ -45,7 +45,7 @@ Following table contains the APIM node instances and their respective hiera data
    APIM Node        | Hieradata file        | Hostname
   ------------------|---------------------- |----------------------
    Publisher        | api-publisher.yaml    | pub.dev.wso2.org
-   Store            | api-store.yaml        | store.dev.wso2.org
+   Store            | api-publisher.yaml    | store.dev.wso2.org
    Gateway Manager  | gateway-manager.yaml  | mgt-gw.dev.wso2.org
    Gateway Worker   | gateway-worker.yaml   | gw.dev.wso2.org
    Key Manager      | api-key-manager.yaml  | km.dev.wso2.org
