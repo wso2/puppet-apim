@@ -52,8 +52,8 @@ wso2::pack_filename: wso2am-2.1.0.zip
 wso2::analytics:
   enabled : false
   server_host : analytics.dev.wso2.org
-  server_port : 7612
-  server_https_port : 9444
+  server_port : 7611
+  server_https_port : 9443
   server_username : admin
   server_password : admin
   skip_event_receiver_connection : false
@@ -61,13 +61,13 @@ wso2::analytics:
 
 wso2::hosts_mapping:
   apim_keymanager:
-    ip: 192.168.48.73
+    ip: 192.168.48.27
     name: km.dev.wso2.org
   apim_store:
-    ip: 192.168.48.73
+    ip: 192.168.48.253
     name: store.dev.wso2.org
   apim_publisher:
-    ip: 192.168.48.73
+    ip: 192.168.48.251
     name: pub.dev.wso2.org
   apim_gateway:
     ip: 192.168.48.254

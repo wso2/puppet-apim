@@ -57,7 +57,7 @@ wso2::spark:
   hostname: "%{::ipaddress}"
 
 wso2::single_node_deployment:
-  enabled: false
+  enabled: true
 
 wso2::is_datasource: wso2_carbon_db
 
@@ -107,7 +107,7 @@ wso2::stats_datasources:
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::clustering:
-  enabled: true
+  enabled: false
   domain: das.wso2.domain
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
