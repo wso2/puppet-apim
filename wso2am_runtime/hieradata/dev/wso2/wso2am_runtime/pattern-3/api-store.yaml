@@ -92,4 +92,4 @@ wso2::enable_jms_connection_details: false
 wso2::apply_store_specific_configurations: true
 
 wso2::analytics:
-  enabled : false
+  enabled : true
