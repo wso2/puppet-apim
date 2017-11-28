@@ -61,13 +61,13 @@ wso2::analytics:
 
 wso2::hosts_mapping:
   apim_keymanager:
-    ip: 192.168.48.27
+    ip: 192.168.48.73
     name: km.dev.wso2.org
   apim_store:
-    ip: 192.168.48.253
+    ip: 192.168.48.73
     name: store.dev.wso2.org
   apim_publisher:
-    ip: 192.168.48.251
+    ip: 192.168.48.73
     name: pub.dev.wso2.org
   apim_gateway:
     ip: 192.168.48.254
@@ -202,7 +202,7 @@ wso2::enable_log_analyzer: false
 wso2::environments:
   apim_gateway_lan:
     host: mgt-gw.dev.wso2.org
-    port: 9443
+    port: 443
     api_endpoint_host: gw.dev.wso2.org
     api_endpoint_port: 8280
     secure_api_endpoint_port: 8243
@@ -222,17 +222,17 @@ wso2::apim_traffic_manager:
 
 wso2::apim_keymanager:
   host: km.dev.wso2.org
-  port: 9443
+  port: 443
   username: "%{hiera('wso2::super_admin::username')}"
   password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_store:
   host: store.dev.wso2.org
-  port: 9443
+  port: 443
 
 wso2::apim_publisher:
   host: pub.dev.wso2.org
-  port: 9443
+  port: 443
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true
