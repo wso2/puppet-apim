@@ -67,8 +67,8 @@ wso2::sso_authentication:
   enabled: false
   login_page: /carbon/admin/login.jsp
   service_provider_id: wso2am-pub
-  sso_service_url: https://km.dev.wso2.org:9443/samlsso
-  consumer_service_url: https://pub.dev.wso2.org:9443/acs
+  sso_service_url: https://km.dev.wso2.org:443/samlsso
+  consumer_service_url: https://pub.dev.wso2.org:443/acs
 
 #datasource configurations
 wso2::master_datasources:

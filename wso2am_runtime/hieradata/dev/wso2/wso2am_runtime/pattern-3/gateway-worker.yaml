@@ -39,6 +39,9 @@ wso2::clustering:
       -
         hostname: 192.168.48.26
         port: 4000
+      -
+        hostname: 192.168.48.63
+        port: 4000
 
 #wso2::dep_sync:
 #  enabled: true
@@ -87,7 +90,7 @@ wso2::thrift_server_host: localhost
 wso2::key_validator_client_type: WSClient
 wso2::disable_jms_event_parameters: true
 wso2::apply_gateway_specific_configurations: true
-wso2::enable_log_analyzer: true
+wso2::enable_log_analyzer: false
 
 #wso2::ports:
 #  proxyPort:

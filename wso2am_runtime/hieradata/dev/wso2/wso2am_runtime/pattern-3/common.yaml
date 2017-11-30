@@ -34,7 +34,7 @@ wso2::template_list:
 #    https: 443
 
 wso2::file_list:
-#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
   - "repository/resources/security/%{hiera('wso2::key_store')}"
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
 wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.39-bin.jar
