@@ -31,6 +31,10 @@ compatible and tested with
 
 ## Packs to be Copied
 
+* Download wso2-wso2am_analytics-2.1.0.tar.gz file from [https://github.com/wso2/puppet-apim/releases/download/v2.1.0.1/wso2-wso2am_analytics-2.1.0.tar.gz](https://github.com/wso2/puppet-apim/releases/download/v2.1.0.1/wso2-wso2am_analytics-2.1.0.tar.gz)
+* Extract the root folder and rename it as wso2am_analytics
+* Copy the renamed folder into <PUPPET_HOME>/modules
+
 Copy the following files to their corresponding locations, in the Puppet Master.
 
 1. WSO2 API Manager Analytics Server 2.1.0 distribution (wso2am-analytics-2.1.0.zip)to
