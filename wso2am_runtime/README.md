@@ -33,7 +33,7 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-base/wik
 
 ## Setup Puppet Environment
 
-* Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics, wso2is_prepacked and wso2base.
+* Setup the puppet environment with the puppet modules wso2am_runtime, wso2am_analytics, wso2is_prepacked and wso2base. Refer https://github.com/wso2/puppet-base/wiki/Use-WSO2-Puppet-Modules-in-puppet-master-agent-Environment---v1.0.0 for more information on setting up the puppet environment.
 * WSO2 APIM 2.1.0 , WSO2 APIM Analytics Server 2.1.0 and prepackaged-WSO2 Identity Server 5.3.0 puppet modules are
 compatible and tested with
 [puppet-base](https://github.com/wso2/puppet-base/) version 1.0.0 and [puppet-common](https://github.com/wso2/puppet-common) version 1.0.0
