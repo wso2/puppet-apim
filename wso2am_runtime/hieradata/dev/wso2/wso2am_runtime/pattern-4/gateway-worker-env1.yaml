@@ -82,22 +82,6 @@ wso2::remove_file_list:
    -  "repository/deployment/server/webapps/shindig.war"
    -  "repository/deployment/server/webapps/throttle#data#v1.war"
 
-wso2::master_datasources:
-    wso2_am_stats_db:
-      name: WSO2AM_STATS_DB
-      jndi_config: jdbc/WSO2AM_STATS_DB
-      description: The datasource used for setting statistics to API Manager
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://192.168.57.210:3306/statdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
-      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
 wso2::enable_thrift_server: false
 wso2::thrift_server_host: localhost
 wso2::key_validator_client_type: WSClient
