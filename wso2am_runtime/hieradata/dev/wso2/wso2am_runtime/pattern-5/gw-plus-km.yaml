@@ -90,7 +90,6 @@ wso2::remove_file_list:
    -  "repository/deployment/server/webapps/api#am#publisher#v0.11.war"
    -  "repository/deployment/server/webapps/api#am#store#v0.11.war"
 
-
 wso2::enable_advance_throttling: true
 wso2::enable_data_publisher: true
 wso2::enable_jms_connection_details: true
