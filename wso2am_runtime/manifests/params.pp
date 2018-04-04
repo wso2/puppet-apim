@@ -47,9 +47,14 @@ class wso2am_runtime::params {
     $enable_log_analyzer       = hiera('wso2::enable_log_analyzer')
     $product_profile           = hiera('wso2::product_profile')
 
-    $java_prefs_system_root   = hiera('java_prefs_system_root')
-    $java_prefs_user_root     = hiera('java_prefs_user_root')
-    $java_home                = hiera('java_home')
+    $install_java             = hiera('wso2base::java::install_java')
+    $java_install_dir         = hiera('wso2base::java::java_install_dir')
+    $java_source_file         = hiera('wso2base::java::java_source_file')
+    $java_user                = hiera('wso2base::java::wso2_user')
+    $java_group               = hiera('wso2base::java::wso2_group')
+    $java_prefs_system_root   = hiera('wso2base::java::prefs_system_root')
+    $java_prefs_user_root     = hiera('wso2base::java::prefs_user_root')
+    $java_home                = hiera('wso2base::java::java_home')
 
     # system configuration data
     $packages                 = hiera_array('packages')
@@ -86,6 +91,7 @@ class wso2am_runtime::params {
     $patches_dir              = hiera('wso2::patches_dir')
     $service_name             = hiera('wso2::service_name')
     $service_template         = hiera('wso2::service_template')
+    $autostart_service        = hiera('wso2::autostart_service')
     $usermgt_datasource       = hiera('wso2::usermgt_datasource')
     $local_reg_datasource     = hiera('wso2::local_reg_datasource')
     $clustering               = hiera('wso2::clustering')
@@ -177,6 +183,12 @@ class wso2am_runtime::params {
     $apply_gateway_specific_configurations = false
     $enable_log_analyzer      = false
 
+    $install_java             = 'true'
+    $java_install_dir         = '/mnt/jdk-8u131'
+    $java_source_file         = 'jdk-8u131-linux-x64.tar.gz'
+    $java_user                = 'wso2user'
+    $java_group               = 'wso2'
+
     $java_prefs_system_root   = '/home/wso2user/.java'
     $java_prefs_user_root     = '/home/wso2user/.java/.systemPrefs'
     $java_home                = '/opt/java'
@@ -259,6 +271,7 @@ class wso2am_runtime::params {
     $patches_dir              = 'repository/components/patches'
     $service_name             = wso2am
     $service_template         = 'wso2base/wso2service.erb'
+    $autostart_service        = 'true'
     $usermgt_datasource       = 'wso2_carbon_db'
     $local_reg_datasource     = 'wso2_carbon_db'
     $mb_store_datasource      = 'wso2_mb_store_db'
