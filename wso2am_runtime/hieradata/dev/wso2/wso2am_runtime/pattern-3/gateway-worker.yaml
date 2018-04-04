@@ -34,10 +34,13 @@ wso2::clustering:
   wka:
     members:
       -
-        hostname: 192.168.57.216
+        hostname: 192.168.48.254
         port: 4000
       -
-        hostname: 192.168.57.247
+        hostname: 192.168.48.26
+        port: 4000
+      -
+        hostname: 192.168.48.63
         port: 4000
 
 #wso2::dep_sync:
@@ -66,19 +69,9 @@ wso2::registry_mounts:
    registry_root: /
    enable_cache: true
 
-# File list to be copied to the product folder, if there are changes found in the files, the system
-# service will be restarted
 #wso2::file_list:
 #   -  "repository/components/dropins/svnkit-all-1.8.7.wso2v1.jar"
 #   -  "repository/components/lib/trilead-ssh2-1.0.0-build215.jar"
-#  - repository/conf/security/cipher-tool.properties
-#  - repository/conf/security/cipher-text.properties
-#  - repository/conf/security/secret-conf.properties
-
-
-# Files to be copied to the product folder when restarting the system service
-#wso2::service_refresh_file_list:
-#  - password-tmp
 
 wso2::remove_file_list:
    -  "repository/deployment/server/jaggeryapps"
@@ -98,7 +91,7 @@ wso2::thrift_server_host: localhost
 wso2::key_validator_client_type: WSClient
 wso2::disable_jms_event_parameters: true
 wso2::apply_gateway_specific_configurations: true
-wso2::enable_log_analyzer: true
+wso2::enable_log_analyzer: false
 
 #wso2::ports:
 #  proxyPort:

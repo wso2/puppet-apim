@@ -20,6 +20,24 @@ wso2::product_profile: traffic-manager
 wso2::template_list:
   - repository/conf/broker.xml
 
+wso2::clustering:
+  enabled: true
+  domain: tm.wso2.domain
+  sub_domain: worker
+  local_member_host: "%{::ipaddress}"
+  local_member_port: 4000
+# WKA membership scheme
+  membership_scheme: wka
+  wka:
+    members:
+      -
+        hostname: 192.168.48.35
+        port: 4000
+      -
+        hostname: 192.168.48.37
+        port: 4000
+
+
 wso2::remove_file_list:
   - "repository/deployment/server/jaggeryapps"
   - "repository/deployment/server/webapps"
@@ -29,7 +47,7 @@ wso2::master_datasources:
     name: WSO2_MB_STORE_DB
     description: The datasource used for message broker database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://192.168.57.210:3306/mbstoredb?autoReconnect=true
+    url: jdbc:mysql://192.168.48.73:3306/CE_MB_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: WSO2MBStoreDB
@@ -39,15 +57,3 @@ wso2::master_datasources:
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-# File list to be copied to the product folder, if there are changes found in the files, the system
-# service will be restarted
-#wso2::file_list:
-#  - repository/conf/security/cipher-tool.properties
-#  - repository/conf/security/cipher-text.properties
-#  - repository/conf/security/secret-conf.properties
-
-
-# Files to be copied to the product folder when restarting the system service
-#wso2::service_refresh_file_list:
-#  - password-tmp

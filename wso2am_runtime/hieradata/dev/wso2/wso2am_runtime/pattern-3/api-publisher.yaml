@@ -31,10 +31,10 @@ wso2::clustering:
   wka:
     members:
       -
-        hostname: 192.168.57.219
+        hostname: 192.168.48.251
         port: 4000
       -
-        hostname: 192.168.57.21
+        hostname: 192.168.48.253
         port: 4000
 # AWS membership scheme
 #   membership_scheme: aws
@@ -67,8 +67,8 @@ wso2::sso_authentication:
   enabled: false
   login_page: /carbon/admin/login.jsp
   service_provider_id: wso2am-pub
-  sso_service_url: https://is.dev.wso2.org:9443/samlsso
-  consumer_service_url: https://pub.dev.wso2.org:9443/acs
+  sso_service_url: https://km.dev.wso2.org:443/samlsso
+  consumer_service_url: https://pub.dev.wso2.org:443/acs
 
 #datasource configurations
 wso2::master_datasources:
@@ -76,7 +76,7 @@ wso2::master_datasources:
       name: WSO2AM_STATS_DB
       description: The datasource is used for stats
       driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://192.168.57.210:3306/statdb?autoReconnect=true
+      url: jdbc:mysql://192.168.48.73:3306/CE_STAT_DB?autoReconnect=true
       username: "%{hiera('wso2::datasources::mysql::username')}"
       password: "%{hiera('wso2::datasources::mysql::password')}"
       jndi_config: jdbc/WSO2AM_STATS_DB
@@ -97,15 +97,3 @@ wso2::apply_publisher_specific_configurations: true
 wso2::analytics:
   enabled : true
   skip_event_receiver_connection : true
-
-# File list to be copied to the product folder, if there are changes found in the files, the system
-# service will be restarted
-#wso2::file_list:
-#  - repository/conf/security/cipher-tool.properties
-#  - repository/conf/security/cipher-text.properties
-#  - repository/conf/security/secret-conf.properties
-
-
-# Files to be copied to the product folder when restarting the system service
-#wso2::service_refresh_file_list:
-#  - password-tmp
