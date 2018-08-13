@@ -22,8 +22,11 @@ stage { 'final': }
 Stage['main'] -> Stage['custom'] -> Stage['final']
 
 node default {
-  class { "::wso2apim": }	
+  class { "::wso2apim": }
+  class { "::wso2apim::custom":
+    stage => 'custom'
+  }
   class { "::wso2apim::startserver":
     stage => 'final'
-  }  
+  }
 }

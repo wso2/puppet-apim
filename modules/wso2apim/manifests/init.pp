@@ -1,9 +1,12 @@
 class wso2apim (
   $wso2_user    = 'ubuntu',
   $wso2_group   = 'ubuntu',
-  $service_name = 'wso2apim',
-  $install_path = $wso2apim::params::install_path
-) {
+  $service_name = $wso2apim::params::service_name,
+  $install_path = $wso2apim::params::install_path,
+)
+
+inherits wso2apim::params {
+
   if $::osfamily == 'redhat' {
     $wso2apim_package = 'wso2am-linux-installer-x64-2.5.0.rpm'
     $installer_provider = 'rpm'
@@ -34,12 +37,21 @@ class wso2apim (
     ensure   => installed,
     source   => '/opt/$service_name/$wso2apim_package'
   }
-  
+
   # Template list
   $templates = [
-    'bin/wso2server.sh'
+    'bin/wso2server.sh',
+    'repository/conf/api-manager.xml',
+    'repository/conf/carbon.xml',
+    'repository/conf/registry.xml',
+    'repository/conf/user-mgt.xml',
+    'repository/conf/axis2/axis2.xml',
+    'repository/conf/datasources/master-datasources.xml',
+    'repository/conf/identity/identity.xml',
+    'repository/conf/security/authenticators.xml',
+    'repository/conf/tomcat/catalina-server.xml',
   ]
-  
+
   $templates.each | String $template | {
     file { "${install_path}/${template}":
       ensure => file,
@@ -50,5 +62,22 @@ class wso2apim (
     }
   }
 
-}
+  # Copy service file to init.d
+  file { "/etc/init.d/${service_name}":
+    ensure => present,
+    owner => root,
+    group => root,
+    mode => '0755',
+    content => template("wso2apim/${service_name}.erb"),
+  }
 
+  # Copy the unit file required to deploy the server as a service
+  file { "/etc/systemd/system/${service_name}.service":
+    ensure => present,
+    owner => root,
+    group => root,
+    mode => '0755',
+    content => template("wso2apim/${service_name}.service.erb"),
+  }
+
+}
