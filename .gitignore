@@ -22,6 +22,10 @@
 *.deb
 *.rpm
 
+# File directories
+modules/apim/files/*
+!modules/apim/files/.gitkeep
+
 target/
 
 # puppet packages
