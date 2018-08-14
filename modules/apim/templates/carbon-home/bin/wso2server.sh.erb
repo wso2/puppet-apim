@@ -1,6 +1,6 @@
 #!/bin/sh
-#----------------------------------------------------------------------------
-#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+# ----------------------------------------------------------------------------
+#  Copyright 2005-2012 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,7 +13,8 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-#----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
 # Main Script for the WSO2 Carbon Server
 #
 # Environment Variable Prequisites
@@ -156,6 +157,17 @@ do
           CMD="restart"
     elif [ "$c" = "--test" ] || [ "$c" = "-test" ] || [ "$c" = "test" ]; then
           CMD="test"
+    elif [ "$c" = "--optimize" ] || [ "$c" = "-optimize" ] || [ "$c" = "optimize" ]; then
+          for profile in $*
+          do
+            case "$profile" in
+              *Dprofile=*)
+                cd $(dirname "$0")
+                sh profileSetup.sh $profile
+                echo "Starting the server..."
+                ;;
+            esac
+          done
     else
         args="$args $c"
     fi
@@ -261,7 +273,7 @@ cd "$CARBON_HOME"
 
 TMP_DIR="$CARBON_HOME"/tmp
 if [ -d "$TMP_DIR" ]; then
-rm -rf "$TMP_DIR"/*
+rm -rf "$TMP_DIR"
 fi
 
 START_EXIT_STATUS=121
@@ -312,9 +324,9 @@ do
     -Dfile.encoding=UTF8 \
     -Djava.net.preferIPv4Stack=true \
     -Dcom.ibm.cacheLocalHost=true \
+    -Dorg.opensaml.httpclient.https.disableHostnameVerification=true \
+    -Dhttpclient.hostnameVerifier=AllowAll \
     -DworkerNode=false \
-    -Dhttpclient.hostnameVerifier="DefaultAndLocalhost" \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done
-

@@ -14,10 +14,10 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <driverClassName>org.h2.Driver</driverClassName>
+                    <url><%= @wso2_carbon_db['url'] %></url>
+                    <username><%= @wso2_carbon_db['username'] %></username>
+                    <password><%= @wso2_carbon_db['password'] %></password>
+                    <driverClassName><%= @wso2_carbon_db['driver_class_name'] %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
@@ -35,11 +35,11 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
+                    <url><%= @wso2am_db['url'] %></url>
+                    <username><%= @wso2am_db['username'] %></username>
+                    <password><%= @wso2am_db['password'] %></password>
                     <defaultAutoCommit>false</defaultAutoCommit>
-                    <driverClassName>org.h2.Driver</driverClassName>
+                    <driverClassName><%= @wso2am_db['driver_class_name'] %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
@@ -57,11 +57,11 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
+                    <url><%= @wso2am_stat_db['url'] %></url>
+                    <username><%= @wso2am_stat_db['username'] %></username>
+                    <password><%= @wso2am_stat_db['password'] %></password>
                     <defaultAutoCommit>false</defaultAutoCommit>
-                    <driverClassName>org.h2.Driver</driverClassName>
+                    <driverClassName><%= @wso2am_stat_db['driver_class_name'] %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
@@ -79,10 +79,10 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <driverClassName>org.h2.Driver</driverClassName>
+                    <url><%= @wso2_mb_store_db['url'] %></url>
+                    <username><%= @wso2_mb_store_db['username'] %></username>
+                    <password><%= @wso2_mb_store_db['password'] %></password>
+                    <driverClassName><%= @wso2_mb_store_db['driver_class_name'] %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
