@@ -2,6 +2,10 @@
 
 This repository contains puppet modules for each profile relates to API Manager
 
+<<<<<<< HEAD
 ## Default profile
+=======
+## All-in-one profile
+>>>>>>> Modify templates with embedded ruby code
 - export FACTER_profile=apim
 - puppet agent -vt
