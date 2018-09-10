@@ -1,0 +1,3 @@
+class apim::custom {
+  # resources
+}

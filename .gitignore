@@ -19,6 +19,12 @@
 *.gz
 *.tar
 *.jar
+*.deb
+*.rpm
+
+# File directories
+modules/apim/files/*
+!modules/apim/files/.gitkeep
 
 target/
 
