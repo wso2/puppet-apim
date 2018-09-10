@@ -1,5 +1,6 @@
 class apim (
   $user                 = $apim::params::user,
+  $user_id              = $apim::params::user_id,
   $user_group           = $apim::params::user_group,
   $user_group_id        = $apim::params::user_group_id,
   $service_name         = $apim::params::service_name,
@@ -37,7 +38,7 @@ class apim (
   # Create wso2 user
   user { $user:
     ensure => present,
-    uid    => $apim::params::user_id,
+    uid    => $user_id,
     gid    => $user_group_id,
     home   => "/home/${user}",
     system => true,
