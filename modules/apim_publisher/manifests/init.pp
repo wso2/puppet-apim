@@ -1,21 +1,21 @@
-class apim_store (
-  $user                 = $apim_store::params::user,
-  $user_id              = $apim_store::params::user_id,
-  $user_group           = $apim_store::params::user_group,
-  $user_group_id        = $apim_store::params::user_group_id,
-  $service_name         = $apim_store::params::service_name,
-  $start_script_template = $apim_store::params::start_script_template,
-  $template_list        = $apim_store::params::template_list,
-  $jre_version          = $apim_store::params::jre_version,
+class apim_publisher (
+  $user                 = $apim_publisher::params::user,
+  $user_id              = $apim_publisher::params::user_id,
+  $user_group           = $apim_publisher::params::user_group,
+  $user_group_id        = $apim_publisher::params::user_group_id,
+  $service_name         = $apim_publisher::params::service_name,
+  $start_script_template = $apim_publisher::params::start_script_template,
+  $template_list        = $apim_publisher::params::template_list,
+  $jre_version          = $apim_publisher::params::jre_version,
 
   # Master-datasource configs
-  $wso2_carbon_db       = $apim_store::params::wso2_carbon_db,
-  $wso2am_db            = $apim_store::params::wso2am_db,
-  $wso2am_stat_db       = $apim_store::params::wso2am_stat_db,
-  $wso2_mb_store_db     = $apim_store::params::wso2_mb_store_db,
+  $wso2_carbon_db       = $apim_publisher::params::wso2_carbon_db,
+  $wso2am_db            = $apim_publisher::params::wso2am_db,
+  $wso2am_stat_db       = $apim_publisher::params::wso2am_stat_db,
+  $wso2_mb_store_db     = $apim_publisher::params::wso2_mb_store_db,
 )
 
-  inherits apim_store::params {
+  inherits apim_publisher::params {
 
   if $::osfamily == 'redhat' {
     $apim_package = 'wso2am-linux-installer-x64-2.5.0.rpm'
