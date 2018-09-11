@@ -7,8 +7,8 @@ ExecStart=<%=@install_path%>/bin/wso2server.sh --optimize -Dprofile=api-publishe
 ExecStop=<%=@install_path%>/bin/wso2server.sh stop
 ExecRestart=<%=@install_path%>/bin/wso2server.sh restart
 PIDFile=<%=@install_path%>/wso2carbon.pid
-User=root
-Group=root
+User=<%=@user%>
+Group=<%=@user_group%>
 Type=forking
 Restart=on-failure
 RestartSec=5
