@@ -1,18 +1,47 @@
-class apim_store (
-  $user                 = $apim_store::params::user,
-  $user_id              = $apim_store::params::user_id,
-  $user_group           = $apim_store::params::user_group,
-  $user_group_id        = $apim_store::params::user_group_id,
-  $service_name         = $apim_store::params::service_name,
+# ----------------------------------------------------------------------------
+#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+# ----------------------------------------------------------------------------
+
+# Class: apim
+# Init class of API Manager - API Store profile
+class apim (
+  $user                  = $apim_store::params::user,
+  $user_id               = $apim_store::params::user_id,
+  $user_group            = $apim_store::params::user_group,
+  $user_group_id         = $apim_store::params::user_group_id,
+  $service_name          = $apim_store::params::service_name,
+  $template_list         = $apim_store::params::template_list,
+  $jre_version           = $apim_store::params::jre_version,
   $start_script_template = $apim_store::params::start_script_template,
-  $template_list        = $apim_store::params::template_list,
-  $jre_version          = $apim_store::params::jre_version,
+
+  # api-manager.xml configs
+  $auth_manager   = $apim_store::params::auth_manager,
+  $api_gateway    = $apim_store::params::api_gateway,
+  $analytics      = $apim_store::params::analytics,
+  $api_store      = $apim_store::params::api_store,
+  $api_publisher  = $apim_store::params::api_publisher,
 
   # Master-datasource configs
-  $wso2_carbon_db       = $apim_store::params::wso2_carbon_db,
-  $wso2am_db            = $apim_store::params::wso2am_db,
-  $wso2am_stat_db       = $apim_store::params::wso2am_stat_db,
-  $wso2_mb_store_db     = $apim_store::params::wso2_mb_store_db,
+  $wso2_carbon_db   = $apim_store::params::wso2_carbon_db,
+  $wso2am_db        = $apim_store::params::wso2am_db,
+  $wso2am_stat_db   = $apim_store::params::wso2am_stat_db,
+  $wso2_mb_store_db = $apim_store::params::wso2_mb_store_db,
+
+  # carbon.xml configs
+  $ports     = $apim_store::params::ports,
+  $key_store = $apim_store::params::key_store,
 )
 
   inherits apim_store::params {
@@ -60,8 +89,8 @@ class apim_store (
 
   # Install WSO2 API Manager
   package { $service_name:
-    provider => $installer_provider,
     ensure   => installed,
+    provider => $installer_provider,
     source   => "/opt/${service_name}/${apim_package}"
   }
 
