@@ -14,9 +14,9 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim
+# Class: apim_gateway
 # Init class of API Manager gateway profile
-class apim (
+class apim_gateway (
   $user                  = $apim_gateway::params::user,
   $user_id               = $apim_gateway::params::user_id,
   $user_group            = $apim_gateway::params::user_group,
@@ -27,21 +27,21 @@ class apim (
   $start_script_template = $apim_gateway::params::start_script_template,
 
   # api-manager.xml configs
-  $auth_manager   = $apim_gateway::params::auth_manager,
-  $api_gateway    = $apim_gateway::params::api_gateway,
-  $analytics      = $apim_gateway::params::analytics,
-  $api_store      = $apim_gateway::params::api_store,
-  $api_publisher  = $apim_gateway::params::api_publisher,
+  $auth_manager          = $apim_gateway::params::auth_manager,
+  $api_gateway           = $apim_gateway::params::api_gateway,
+  $analytics             = $apim_gateway::params::analytics,
+  $api_store             = $apim_gateway::params::api_store,
+  $api_publisher         = $apim_gateway::params::api_publisher,
 
   # Master-datasource configs
-  $wso2_carbon_db   = $apim_gateway::params::wso2_carbon_db,
-  $wso2am_db        = $apim_gateway::params::wso2am_db,
-  $wso2am_stat_db   = $apim_gateway::params::wso2am_stat_db,
-  $wso2_mb_store_db = $apim_gateway::params::wso2_mb_store_db,
+  $wso2_carbon_db        = $apim_gateway::params::wso2_carbon_db,
+  $wso2am_db             = $apim_gateway::params::wso2am_db,
+  $wso2am_stat_db        = $apim_gateway::params::wso2am_stat_db,
+  $wso2_mb_store_db      = $apim_gateway::params::wso2_mb_store_db,
 
   # carbon.xml configs
-  $ports     = $apim_gateway::params::ports,
-  $key_store = $apim_gateway::params::key_store,
+  $ports                 = $apim_gateway::params::ports,
+  $key_store             = $apim_gateway::params::key_store,
 )
 
   inherits apim_gateway::params {

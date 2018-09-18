@@ -44,35 +44,35 @@ class apim_store::params {
 
   # ----- api-manager.xml config params -----
   $auth_manager = {
-    server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-    username => '${admin.username}',
-    password => '${admin.password}',
+    server_url                => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
+    username                  => '${admin.username}',
+    password                  => '${admin.password}',
     check_permission_remotely => 'false'
   }
 
   $api_gateway = {
-    server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-    username => '${admin.username}',
-    password => '${admin.password}',
-    gateway_endpoint => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
+    server_url          => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
+    username            => '${admin.username}',
+    password            => '${admin.password}',
+    gateway_endpoint    => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
     gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099'
   }
 
   $analytics = {
-    enable => 'false',
-    das_server_url => '{tcp://localhost:7612}',
-    das_username => '${admin.username}',
-    das_password => '${admin.password}',
-    das_restapi_url => 'https://localhost:9444',
+    enable               => 'false',
+    das_server_url       => '{tcp://localhost:7612}',
+    das_username         => '${admin.username}',
+    das_password         => '${admin.password}',
+    das_restapi_url      => 'https://localhost:9444',
     das_restapi_username => '${admin.username}',
     das_restapi_password => '${admin.password}'
   }
 
   $api_store = {
-    url => 'https://localhost:${mgt.transport.https.port}/store',
+    url        => 'https://localhost:${mgt.transport.https.port}/store',
     server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-    username => '${admin.username}',
-    password => '${admin.password}'
+    username   => '${admin.username}',
+    password   => '${admin.password}'
   }
 
   $api_publisher = {
@@ -88,7 +88,7 @@ class apim_store::params {
   }
 
   $wso2am_db = {
-    url               => 'jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE',
+    url               => 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE',
     username          => 'wso2carbon',
     password          => 'wso2carbon',
     driver_class_name => 'org.h2.Driver',
@@ -115,16 +115,16 @@ class apim_store::params {
   }
 
   $key_store = {
-    location => '${carbon.home}/repository/resources/security/wso2carbon.jks',
-    type => 'JKS',
-    password => 'wso2carbon',
-    key_alias => 'wso2carbon',
+    location     => '${carbon.home}/repository/resources/security/wso2carbon.jks',
+    type         => 'JKS',
+    password     => 'wso2carbon',
+    key_alias    => 'wso2carbon',
     key_password => 'wso2carbon',
   }
 
   $trust_store = {
     location => '${carbon.home}/repository/resources/security/client-truststore.jks',
-    type => 'JKS',
+    type     => 'JKS',
     password => 'wso2carbon'
   }
 }
