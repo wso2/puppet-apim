@@ -16,7 +16,7 @@
 
 # Class: apim
 # Init class of API Manager - Key Manager profile
-class apim (
+class apim_km (
   $user                  = $apim_km::params::user,
   $user_id               = $apim_km::params::user_id,
   $user_group            = $apim_km::params::user_group,
@@ -27,21 +27,21 @@ class apim (
   $start_script_template = $apim_km::params::start_script_template,
 
   # api-manager.xml configs
-  $auth_manager   = $apim_km::params::auth_manager,
-  $api_gateway    = $apim_km::params::api_gateway,
-  $analytics      = $apim_km::params::analytics,
-  $api_store      = $apim_km::params::api_store,
-  $api_publisher  = $apim_km::params::api_publisher,
+  $auth_manager          = $apim_km::params::auth_manager,
+  $api_gateway           = $apim_km::params::api_gateway,
+  $analytics             = $apim_km::params::analytics,
+  $api_store             = $apim_km::params::api_store,
+  $api_publisher         = $apim_km::params::api_publisher,
 
   # Master-datasource configs
-  $wso2_carbon_db   = $apim_km::params::wso2_carbon_db,
-  $wso2am_db        = $apim_km::params::wso2am_db,
-  $wso2am_stat_db   = $apim_km::params::wso2am_stat_db,
-  $wso2_mb_store_db = $apim_km::params::wso2_mb_store_db,
+  $wso2_carbon_db        = $apim_km::params::wso2_carbon_db,
+  $wso2am_db             = $apim_km::params::wso2am_db,
+  $wso2am_stat_db        = $apim_km::params::wso2am_stat_db,
+  $wso2_mb_store_db      = $apim_km::params::wso2_mb_store_db,
 
   # carbon.xml configs
-  $ports     = $apim_km::params::ports,
-  $key_store = $apim_km::params::key_store,
+  $ports                 = $apim_km::params::ports,
+  $key_store             = $apim_km::params::key_store,
 )
 
   inherits apim_km::params {

@@ -27,21 +27,21 @@ class apim (
   $start_script_template = $apim::params::start_script_template,
 
   # api-manager.xml configs
-  $auth_manager   = $apim::params::auth_manager,
-  $api_gateway    = $apim::params::api_gateway,
-  $analytics      = $apim::params::analytics,
-  $api_store      = $apim::params::api_store,
-  $api_publisher  = $apim::params::api_publisher,
+  $auth_manager          = $apim::params::auth_manager,
+  $api_gateway           = $apim::params::api_gateway,
+  $analytics             = $apim::params::analytics,
+  $api_store             = $apim::params::api_store,
+  $api_publisher         = $apim::params::api_publisher,
 
   # Master-datasource configs
-  $wso2_carbon_db   = $apim::params::wso2_carbon_db,
-  $wso2am_db        = $apim::params::wso2am_db,
-  $wso2am_stat_db   = $apim::params::wso2am_stat_db,
-  $wso2_mb_store_db = $apim::params::wso2_mb_store_db,
+  $wso2_carbon_db        = $apim::params::wso2_carbon_db,
+  $wso2am_db             = $apim::params::wso2am_db,
+  $wso2am_stat_db        = $apim::params::wso2am_stat_db,
+  $wso2_mb_store_db      = $apim::params::wso2_mb_store_db,
 
   # carbon.xml configs
-  $ports     = $apim::params::ports,
-  $key_store = $apim::params::key_store,
+  $ports                 = $apim::params::ports,
+  $key_store             = $apim::params::key_store,
 )
 
   inherits apim::params {

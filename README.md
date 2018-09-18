@@ -125,7 +125,7 @@ Each puppet module contains following pp files
 - init.pp <br>
 This contains the main script of the module.
 - custom.pp <br>
-This is used to add costom user code to the profile.
+This is used to add custom user code to the profile.
 - params.pp <br>
 This contains all necessary parameters for main configurations and template rendering.
 - startserver.pp <br>
