@@ -4,14 +4,14 @@ This repository contains puppet modules for each profile relates to API Manager.
 
 ## Quick Start Guide
 1. Download and copy the `wso2am-linux-installer-x64-2.5.0.deb` or/and `wso2am-linux-installer-x64-2.5.0.rpm` to the files directories in `/etc/puppet/code/environments/dev/modules/__profile__/files` in the Puppetmaster. <br>
-Profile refers to each profile in API Manager <br>
+Profile refers to each profile in API Manager. <br>
 eg: `/etc/puppet/code/environments/dev/modules/apim/files` <br>
-Dev refers to the sample environment that you can try this modules.
+Dev refers to the sample environment that you can try these modules.
 
-2. Run necessary profile on puppet agent. More details on this is available in following section.
+2. Run necessary profile on puppet agent. More details on this are available in the following section.
 
 ## Running API Manager Profiles in Puppet Agent
-This section describes how to run each profile in puppet agent. To find out more details about each profile refer [API Manager Documentation - Product Profiles](https://docs.wso2.com/display/AM250/Product+Profiles).
+This section describes how to run each profile in a puppet agent. To find out more details about each profile refer [API Manager Documentation - Product Profiles](https://docs.wso2.com/display/AM250/Product+Profiles).
 
 ### Default profile
 ```bash
@@ -52,7 +52,7 @@ puppet agent -vt
 ## Understanding the Project Structure
 In this project each profle of API Manager is mapped to a module in puppet. By having this structure each puppet module is considered as a standalone profile so each module can be configured individually without harming any other module.
 
-```tree
+```
 puppet-apim
 ├── manifests
 │   └── site.pp
@@ -66,7 +66,7 @@ puppet-apim
     │   │   ├── params.pp
     │   │   └── startserver.pp
     │   └── templates
-    │       └── ... 
+    │       └── ...
     ├── apim_gateway
     │   ├── files
     │   │   └── ...
@@ -127,6 +127,6 @@ This contains the main script of the module.
 - custom.pp <br>
 This is used to add custom user code to the profile.
 - params.pp <br>
-This contains all necessary parameters for main configurations and template rendering.
+This contains all the necessary parameters for main configurations and template rendering.
 - startserver.pp <br>
 This runs finally and starts the server as a service.

@@ -34,7 +34,6 @@ class apim_gateway (
   $api_publisher         = $apim_gateway::params::api_publisher,
 
   # Master-datasource configs
-  $wso2_carbon_db        = $apim_gateway::params::wso2_carbon_db,
   $wso2am_db             = $apim_gateway::params::wso2am_db,
   $wso2am_stat_db        = $apim_gateway::params::wso2am_stat_db,
   $wso2_mb_store_db      = $apim_gateway::params::wso2_mb_store_db,

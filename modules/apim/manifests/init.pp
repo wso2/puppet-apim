@@ -34,7 +34,6 @@ class apim (
   $api_publisher         = $apim::params::api_publisher,
 
   # Master-datasource configs
-  $wso2_carbon_db        = $apim::params::wso2_carbon_db,
   $wso2am_db             = $apim::params::wso2am_db,
   $wso2am_stat_db        = $apim::params::wso2am_stat_db,
   $wso2_mb_store_db      = $apim::params::wso2_mb_store_db,
