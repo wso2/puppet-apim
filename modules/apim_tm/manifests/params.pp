@@ -27,7 +27,7 @@ class apim_tm::params {
   $mgt_hostname = 'localhost'
   $jre_version = 'jre1.8.0_172'
 
-  # Define the template template
+  # Define the templates
   $start_script_template = 'bin/wso2server.sh'
   $template_list = [
     'repository/conf/api-manager.xml',
@@ -80,13 +80,6 @@ class apim_tm::params {
   }
 
   # ----- Master-datasources config params -----
-  $wso2_carbon_db = {
-    url               => 'jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE',
-    username          => 'wso2carbon',
-    password          => 'wso2carbon',
-    driver_class_name => 'org.h2.Driver',
-  }
-
   $wso2am_db = {
     url               => 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE',
     username          => 'wso2carbon',
