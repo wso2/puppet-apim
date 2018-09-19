@@ -1,17 +1,46 @@
+# ----------------------------------------------------------------------------
+#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+# ----------------------------------------------------------------------------
+
+# Class: apim
+# Init class of API Manager default profile
 class apim (
-  $user                 = $apim::params::user,
-  $user_group           = $apim::params::user_group,
-  $user_group_id        = $apim::params::user_group_id,
-  $service_name         = $apim::params::service_name,
+  $user                  = $apim::params::user,
+  $user_id               = $apim::params::user_id,
+  $user_group            = $apim::params::user_group,
+  $user_group_id         = $apim::params::user_group_id,
+  $service_name          = $apim::params::service_name,
+  $template_list         = $apim::params::template_list,
+  $jre_version           = $apim::params::jre_version,
   $start_script_template = $apim::params::start_script_template,
-  $template_list        = $apim::params::template_list,
-  $jre_version          = $apim::params::jre_version,
+
+  # api-manager.xml configs
+  $auth_manager          = $apim::params::auth_manager,
+  $api_gateway           = $apim::params::api_gateway,
+  $analytics             = $apim::params::analytics,
+  $api_store             = $apim::params::api_store,
+  $api_publisher         = $apim::params::api_publisher,
 
   # Master-datasource configs
-  $wso2_carbon_db       = $apim::params::wso2_carbon_db,
-  $wso2am_db            = $apim::params::wso2am_db,
-  $wso2am_stat_db       = $apim::params::wso2am_stat_db,
-  $wso2_mb_store_db     = $apim::params::wso2_mb_store_db,
+  $wso2am_db             = $apim::params::wso2am_db,
+  $wso2am_stat_db        = $apim::params::wso2am_stat_db,
+  $wso2_mb_store_db      = $apim::params::wso2_mb_store_db,
+
+  # carbon.xml configs
+  $ports                 = $apim::params::ports,
+  $key_store             = $apim::params::key_store,
 )
 
   inherits apim::params {
@@ -37,7 +66,7 @@ class apim (
   # Create wso2 user
   user { $user:
     ensure => present,
-    uid    => $apim::params::user_id,
+    uid    => $user_id,
     gid    => $user_group_id,
     home   => "/home/${user}",
     system => true,
@@ -59,8 +88,8 @@ class apim (
 
   # Install WSO2 API Manager
   package { $service_name:
-    provider => $installer_provider,
     ensure   => installed,
+    provider => $installer_provider,
     source   => "/opt/${service_name}/${apim_package}"
   }
 
