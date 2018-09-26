@@ -16,44 +16,17 @@
 
 # Class: apim
 # Init class of API Manager default profile
-class apim (
-  $user                  = $apim::params::user,
-  $user_id               = $apim::params::user_id,
-  $user_group            = $apim::params::user_group,
-  $user_group_id         = $apim::params::user_group_id,
-  $service_name          = $apim::params::service_name,
-  $template_list         = $apim::params::template_list,
-  $jre_version           = $apim::params::jre_version,
-  $start_script_template = $apim::params::start_script_template,
-
-  # api-manager.xml configs
-  $auth_manager          = $apim::params::auth_manager,
-  $api_gateway           = $apim::params::api_gateway,
-  $analytics             = $apim::params::analytics,
-  $api_store             = $apim::params::api_store,
-  $api_publisher         = $apim::params::api_publisher,
-
-  # Master-datasource configs
-  $wso2am_db             = $apim::params::wso2am_db,
-  $wso2am_stat_db        = $apim::params::wso2am_stat_db,
-  $wso2_mb_store_db      = $apim::params::wso2_mb_store_db,
-
-  # carbon.xml configs
-  $ports                 = $apim::params::ports,
-  $key_store             = $apim::params::key_store,
-)
-
-  inherits apim::params {
+class apim inherits apim::params {
 
   if $::osfamily == 'redhat' {
-    $apim_package = 'wso2am-linux-installer-x64-2.5.0.rpm'
+    $apim_package = 'wso2am-linux-installer-x64-2.6.0.rpm'
     $installer_provider = 'rpm'
-    $install_path = '/usr/lib64/wso2/wso2am/2.5.0'
+    $install_path = '/usr/lib64/wso2/wso2am/2.6.0'
   }
   elsif $::osfamily == 'debian' {
-    $apim_package = 'wso2am-linux-installer-x64-2.5.0.deb'
+    $apim_package = 'wso2am-linux-installer-x64-2.6.0.deb'
     $installer_provider = 'dpkg'
-    $install_path = '/usr/lib/wso2/wso2am/2.5.0'
+    $install_path = '/usr/lib/wso2/wso2am/2.6.0'
   }
 
   # Create wso2 group
