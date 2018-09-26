@@ -16,44 +16,17 @@
 
 # Class: apim_gateway
 # Init class of API Manager gateway profile
-class apim_gateway (
-  $user                  = $apim_gateway::params::user,
-  $user_id               = $apim_gateway::params::user_id,
-  $user_group            = $apim_gateway::params::user_group,
-  $user_group_id         = $apim_gateway::params::user_group_id,
-  $service_name          = $apim_gateway::params::service_name,
-  $template_list         = $apim_gateway::params::template_list,
-  $jre_version           = $apim_gateway::params::jre_version,
-  $start_script_template = $apim_gateway::params::start_script_template,
-
-  # api-manager.xml configs
-  $auth_manager          = $apim_gateway::params::auth_manager,
-  $api_gateway           = $apim_gateway::params::api_gateway,
-  $analytics             = $apim_gateway::params::analytics,
-  $api_store             = $apim_gateway::params::api_store,
-  $api_publisher         = $apim_gateway::params::api_publisher,
-
-  # Master-datasource configs
-  $wso2am_db             = $apim_gateway::params::wso2am_db,
-  $wso2am_stat_db        = $apim_gateway::params::wso2am_stat_db,
-  $wso2_mb_store_db      = $apim_gateway::params::wso2_mb_store_db,
-
-  # carbon.xml configs
-  $ports                 = $apim_gateway::params::ports,
-  $key_store             = $apim_gateway::params::key_store,
-)
-
-  inherits apim_gateway::params {
+class apim_gateway inherits apim_gateway::params {
 
   if $::osfamily == 'redhat' {
-    $apim_package = 'wso2am-linux-installer-x64-2.5.0.rpm'
+    $apim_package = 'wso2am-linux-installer-x64-2.6.0.rpm'
     $installer_provider = 'rpm'
-    $install_path = '/usr/lib64/wso2/wso2am/2.5.0'
+    $install_path = '/usr/lib64/wso2/wso2am/2.6.0'
   }
   elsif $::osfamily == 'debian' {
-    $apim_package = 'wso2am-linux-installer-x64-2.5.0.deb'
+    $apim_package = 'wso2am-linux-installer-x64-2.6.0.deb'
     $installer_provider = 'dpkg'
-    $install_path = '/usr/lib/wso2/wso2am/2.5.0'
+    $install_path = '/usr/lib/wso2/wso2am/2.6.0'
   }
 
   # Create wso2 group
