@@ -14,9 +14,9 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim_analytics_dashboard
-# Init class of API Manager Analytics - Dashboard profile
-class apim_analytics_dashboard inherits apim_analytics_dashboard::params {
+# Class: apim_analytics_worker
+# Init class of API Manager Analytics - Worker profile
+class apim_analytics_worker inherits apim_analytics_worker::params {
 
   if $::osfamily == 'redhat' {
     $apim_analytics_package = 'wso2am-analytics-linux-installer-x64-2.6.0.rpm'
