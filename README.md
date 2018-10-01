@@ -1,9 +1,9 @@
-# WSO2 API Manager 2.5.0 Puppet 5 Modules
+# WSO2 API Manager 2.6.0 Puppet 5 Modules
 
 This repository contains puppet modules for each profile relates to API Manager.
 
 ## Quick Start Guide
-1. Download and copy the `wso2am-linux-installer-x64-2.5.0.deb` or/and `wso2am-linux-installer-x64-2.5.0.rpm` to the files directories in `/etc/puppet/code/environments/dev/modules/__profile__/files` in the Puppetmaster. <br>
+1. Download and copy the `wso2am-linux-installer-x64-2.6.0.deb` or/and `wso2am-linux-installer-x64-2.6.0.rpm` to the files directories in `/etc/puppet/code/environments/dev/modules/__profile__/files` in the Puppetmaster. <br>
 Profile refers to each profile in API Manager. <br>
 eg: `/etc/puppet/code/environments/dev/modules/apim/files` <br>
 Dev refers to the sample environment that you can try these modules.
