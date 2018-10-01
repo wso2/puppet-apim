@@ -115,6 +115,14 @@ class apim_tm::params {
     key_password => 'wso2carbon',
   }
 
+  $internal_key_store = {
+    location     => '${carbon.home}/repository/resources/security/wso2carbon.jks',
+    type         => 'JKS',
+    password     => 'wso2carbon',
+    key_alias    => 'wso2carbon',
+    key_password => 'wso2carbon',
+  }
+
   $trust_store = {
     location => '${carbon.home}/repository/resources/security/client-truststore.jks',
     type     => 'JKS',

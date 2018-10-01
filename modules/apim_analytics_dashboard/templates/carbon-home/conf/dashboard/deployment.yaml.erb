@@ -307,10 +307,10 @@ wso2.datasources:
     definition:
       type: RDBMS
       configuration:
-        jdbcUrl: 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
-        username: wso2carbon
-        password: wso2carbon
-        driverClassName: org.h2.Driver
+        jdbcUrl: '<%= @permission_db_url %>'
+        username: <%= @permission_db_username %>
+        password: <%= @permission_db_password %>
+        driverClassName: <%= @permission_db_driver %>
         maxPoolSize: 10
         idleTimeout: 60000
         connectionTestQuery: SELECT 1
@@ -325,10 +325,10 @@ wso2.datasources:
     definition:
       type: RDBMS
       configuration:
-        jdbcUrl: 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_STATS_DB;AUTO_SERVER=TRUE'
-        username: wso2carbon
-        password: wso2carbon
-        driverClassName: org.h2.Driver
+        jdbcUrl: '<%= @apim_analytics_db_url %>'
+        username: <%= @apim_analytics_db_username %>
+        password: <%= @apim_analytics_db_password %>
+        driverClassName: <%= @apim_analytics_db_driver %>
         maxPoolSize: 50
         idleTimeout: 60000
         connectionTestQuery: SELECT 1
@@ -375,7 +375,7 @@ wso2.transport.http:
 
   listenerConfigurations:
     - id: "default-https"
-      host: "0.0.0.0"
+      host: "<%= @default_host %>"
       port: 9643
       scheme: https
       keyStoreFile: "<%= @default_listener_keystore %>"
