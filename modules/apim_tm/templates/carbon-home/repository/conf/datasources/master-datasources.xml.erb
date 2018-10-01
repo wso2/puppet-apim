@@ -23,6 +23,7 @@
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>
                     <validationInterval>30000</validationInterval>
+                    <defaultAutoCommit>true</defaultAutoCommit>
                 </configuration>
             </definition>
         </datasource>
@@ -38,7 +39,7 @@
                     <url><%= @wso2am_db['url'] %></url>
                     <username><%= @wso2am_db['username'] %></username>
                     <password><%= @wso2am_db['password'] %></password>
-                    <defaultAutoCommit>false</defaultAutoCommit>
+                    <defaultAutoCommit>true</defaultAutoCommit>
                     <driverClassName><%= @wso2am_db['driver_class_name'] %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
@@ -60,7 +61,7 @@
                     <url><%= @wso2am_stat_db['url'] %></url>
                     <username><%= @wso2am_stat_db['username'] %></username>
                     <password><%= @wso2am_stat_db['password'] %></password>
-                    <defaultAutoCommit>false</defaultAutoCommit>
+                    <defaultAutoCommit>true</defaultAutoCommit>
                     <driverClassName><%= @wso2am_stat_db['driver_class_name'] %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>

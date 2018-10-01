@@ -36,7 +36,7 @@
     <!--
        Product Version
     -->
-    <Version>2.5.0</Version>
+    <Version>2.6.0</Version>
 
     <!--
        Host name or IP address of the machine hosting this server
@@ -349,6 +349,33 @@
     </ServiceUserRoles>
 
     <!--
+       Configurations related to Carbon Crypto Service which is a crypto framework used inside Carbon products.
+    -->
+    <CryptoService>
+
+        <Enabled>true</Enabled>
+
+        <!-- The crypto provider which is used for internal data encryption and decryption -->
+        <InternalCryptoProviderClassName>org.wso2.carbon.crypto.provider.KeyStoreBasedInternalCryptoProvider</InternalCryptoProviderClassName>
+
+        <!--
+            The crypto provider which is used for the crypto needs which come when communicating with external parties.
+            e.g. Signing, Decrypting.
+        -->
+        <ExternalCryptoProviderClassName>org.wso2.carbon.core.encryption.KeyStoreBasedExternalCryptoProvider</ExternalCryptoProviderClassName>
+
+        <!--
+            The list of key resolvers which will be used based on the context when handling crypto with external parties.
+
+            e.g. Resolving the public key of an external entity.
+        -->
+        <KeyResolvers>
+            <KeyResolver className="org.wso2.carbon.crypto.defaultProvider.resolver.ContextIndependentKeyResolver" priority="-1"/>
+        </KeyResolvers>
+
+    </CryptoService>
+
+    <!--
       Enable following config to allow Emails as usernames.
     -->
     <!--EnableEmailUserName>true</EnableEmailUserName-->
@@ -373,6 +400,23 @@
             <!-- Private Key password-->
             <KeyPassword><%= @key_store['key_password'] %></KeyPassword>
         </KeyStore>
+
+        <!--
+            The KeyStore which is used for encrypting/decrypting internal data.
+            This block is read by Carbon Crypto Service.
+        -->
+        <InternalKeyStore>
+            <!-- Keystore file location-->
+            <Location><%= @internal_key_store['location'] %></Location>
+            <!-- Keystore type (JKS/PKCS12 etc.)-->
+            <Type><%= @internal_key_store['type'] %></Type>
+            <!-- Keystore password-->
+            <Password><%= @internal_key_store['password'] %></Password>
+            <!-- Private Key alias-->
+            <KeyAlias><%= @internal_key_store['key_alias'] %></KeyAlias>
+            <!-- Private Key password-->
+            <KeyPassword><%= @internal_key_store['key_password'] %></KeyPassword>
+        </InternalKeyStore>
 
         <!--
             System wide trust-store which is used to maintain the certificates of all

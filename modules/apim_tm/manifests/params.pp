@@ -25,7 +25,7 @@ class apim_tm::params {
   $service_name = 'wso2am'
   $hostname = 'localhost'
   $mgt_hostname = 'localhost'
-  $jre_version = 'jre1.8.0_172'
+  $jdk_version = 'jdk1.8.0_192'
 
   # Define the templates
   $start_script_template = 'bin/wso2server.sh'
@@ -59,13 +59,13 @@ class apim_tm::params {
   }
 
   $analytics = {
-    enable               => 'false',
-    das_server_url       => '{tcp://localhost:7612}',
-    das_username         => '${admin.username}',
-    das_password         => '${admin.password}',
-    das_restapi_url      => 'https://localhost:9444',
-    das_restapi_username => '${admin.username}',
-    das_restapi_password => '${admin.password}'
+    enable              => 'false',
+    sp_server_url       => '{tcp://localhost:7612}',
+    sp_username         => '${admin.username}',
+    sp_password         => '${admin.password}',
+    sp_restapi_url      => 'https://localhost:7444',
+    sp_restapi_username => '${admin.username}',
+    sp_restapi_password => '${admin.password}'
   }
 
   $api_store = {
@@ -108,6 +108,14 @@ class apim_tm::params {
   }
 
   $key_store = {
+    location     => '${carbon.home}/repository/resources/security/wso2carbon.jks',
+    type         => 'JKS',
+    password     => 'wso2carbon',
+    key_alias    => 'wso2carbon',
+    key_password => 'wso2carbon',
+  }
+
+  $internal_key_store = {
     location     => '${carbon.home}/repository/resources/security/wso2carbon.jks',
     type         => 'JKS',
     password     => 'wso2carbon',
