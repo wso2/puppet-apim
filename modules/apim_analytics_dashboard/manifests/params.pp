@@ -73,6 +73,16 @@ class apim_analytics_dashboard::params {
   $metrics_db_password = 'wso2carbon'
   $metrics_db_driver = 'org.h2.Driver'
 
+  $permission_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
+  $permission_db_username = 'wso2carbon'
+  $permission_db_password = 'wso2carbon'
+  $permission_db_driver = 'org.h2.Driver'
+
+  $apim_analytics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_STATS_DB;AUTO_SERVER=TRUE'
+  $apim_analytics_db_username = 'wso2carbon'
+  $apim_analytics_db_password = 'wso2carbon'
+  $apim_analytics_db_driver = 'org.h2.Driver'
+
   # wso2.business.rules.manager config
   $business_rules_manager_username = 'admin'
   $business_rules_manager_password = 'admin'
@@ -82,6 +92,7 @@ class apim_analytics_dashboard::params {
   $status_dashboard_password = 'admin'
 
   # transport.http configuration
+  $default_host = '0.0.0.0'
   $default_listener_keystore = '${carbon.home}/resources/security/wso2carbon.jks'
   $default_listener_keystore_password = 'wso2carbon'
   $default_listener_keystore_cert_pass = 'wso2carbon'

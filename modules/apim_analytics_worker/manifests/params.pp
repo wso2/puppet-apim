@@ -87,4 +87,8 @@ class apim_analytics_worker::params {
   $message_tracing_db_password = 'wso2carbon'
   $message_tracing_db_driver = 'org.h2.Driver'
 
+  $apim_analytics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_STATS_DB;AUTO_SERVER=TRUE'
+  $apim_analytics_db_username = 'wso2carbon'
+  $apim_analytics_db_password = 'wso2carbon'
+  $apim_analytics_db_driver = 'org.h2.Driver'
 }
