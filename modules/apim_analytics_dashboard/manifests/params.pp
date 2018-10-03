@@ -23,6 +23,7 @@ class apim_analytics_dashboard::params {
   $user_home = '/home/$user'
   $user_group_id = 802
   $product = 'wso2am-analytics'
+  $product_version = '2.6.0'
   $profile = 'dashboard'
   $service_name = "${product}-${profile}"
   $hostname = 'localhost'
