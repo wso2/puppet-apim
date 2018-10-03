@@ -124,7 +124,7 @@
          the define value + Offset.
          e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
          -->
-        <Offset><%= @ports['offset'] %></Offset>
+        <Offset><%= @ports_offset %></Offset>
 
         <!-- The JMX Ports -->
         <JMX>
@@ -390,15 +390,15 @@
         -->
         <KeyStore>
             <!-- Keystore file location-->
-            <Location><%= @key_store['location'] %></Location>
+            <Location><%= @key_store %></Location>
             <!-- Keystore type (JKS/PKCS12 etc.)-->
-            <Type><%= @key_store['type'] %></Type>
+            <Type><%= @key_store_type %></Type>
             <!-- Keystore password-->
-            <Password><%= @key_store['password'] %></Password>
+            <Password><%= @key_store_password %></Password>
             <!-- Private Key alias-->
-            <KeyAlias><%= @key_store['key_alias'] %></KeyAlias>
+            <KeyAlias><%= @key_store_key_alias %></KeyAlias>
             <!-- Private Key password-->
-            <KeyPassword><%= @key_store['key_password'] %></KeyPassword>
+            <KeyPassword><%= @key_store_key_password %></KeyPassword>
         </KeyStore>
 
         <!--
@@ -407,15 +407,15 @@
         -->
         <InternalKeyStore>
             <!-- Keystore file location-->
-            <Location><%= @internal_key_store['location'] %></Location>
+            <Location><%= @internal_key_store %></Location>
             <!-- Keystore type (JKS/PKCS12 etc.)-->
-            <Type><%= @internal_key_store['type'] %></Type>
+            <Type><%= @internal_key_store_type %></Type>
             <!-- Keystore password-->
-            <Password><%= @internal_key_store['password'] %></Password>
+            <Password><%= @internal_key_store_password %></Password>
             <!-- Private Key alias-->
-            <KeyAlias><%= @internal_key_store['key_alias'] %></KeyAlias>
+            <KeyAlias><%= @internal_key_store_key_alias %></KeyAlias>
             <!-- Private Key password-->
-            <KeyPassword><%= @internal_key_store['key_password'] %></KeyPassword>
+            <KeyPassword><%= @internal_key_store_key_password %></KeyPassword>
         </InternalKeyStore>
 
         <!--
@@ -424,11 +424,11 @@
         -->
         <TrustStore>
             <!-- trust-store file location -->
-            <Location><%= @trust_store['location'] %></Location>
+            <Location><%= @trust_store %></Location>
             <!-- trust-store type (JKS/PKCS12 etc.) -->
-            <Type><%= @trust_store['type'] %></Type>
+            <Type><%= @trust_store_type %></Type>
             <!-- trust-store password -->
-            <Password><%= @trust_store['password'] %></Password>
+            <Password><%= @trust_store_password %></Password>
         </TrustStore>
 
         <!--
