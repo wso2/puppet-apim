@@ -16,14 +16,14 @@
          logic relies on this. -->
     <AuthManager>
         <!-- Server URL of the Authentication service -->
-        <ServerURL><%= @auth_manager['server_url'] %></ServerURL>
+        <ServerURL><%= @auth_manager_url %></ServerURL>
         <!-- Admin username for the Authentication manager. -->
-        <Username><%= @auth_manager['username'] %></Username>
+        <Username><%= @auth_manager_username %></Username>
         <!-- Admin password for the Authentication manager. -->
-        <Password><%= @auth_manager['password'] %></Password>
+        <Password><%= @auth_manager_password %></Password>
         <!-- Indicates whether the permissions checking of the user (on the Publisher and Store) should be done
            via a remote service. The check will be done on the local server when false. -->
-        <CheckPermissionsRemotely><%= @auth_manager['check_permission_remotely'] %></CheckPermissionsRemotely>
+        <CheckPermissionsRemotely><%= @auth_manager_check_permission_remotely %></CheckPermissionsRemotely>
     </AuthManager>
 
     <JWTConfiguration>
@@ -85,15 +85,15 @@
                 <Name>Production and Sandbox</Name>
                 <Description>This is a hybrid gateway that handles both production and sandbox token traffic.</Description>
                 <!-- Server URL of the API gateway -->
-                <ServerURL><%= @api_gateway['server_url'] %></ServerURL>
+                <ServerURL><%= @api_gateway_url %></ServerURL>
 		        <!-- Admin username for the API gateway. -->
-                <Username><%= @api_gateway['username'] %></Username>
+                <Username><%= @api_gateway_username %></Username>
                 <!-- Admin password for the API gateway.-->
-                <Password><%= @api_gateway['password'] %></Password>
+                <Password><%= @api_gateway_password %></Password>
                 <!-- Endpoint URLs for the APIs hosted in this API gateway.-->
-                <GatewayEndpoint><%= @api_gateway['gateway_endpoint'] %></GatewayEndpoint>
+                <GatewayEndpoint><%= @api_gateway_endpoint %></GatewayEndpoint>
                 <!-- Endpoint of the Websocket APIs hosted in this API Gateway -->
-                <GatewayWSEndpoint><%= @api_gateway['gateway_ws_endpoint'] %></GatewayWSEndpoint>
+                <GatewayWSEndpoint><%= @api_gateway_ws_endpoint %></GatewayWSEndpoint>
             </Environment>
         </Environments>
     </APIGateway>
@@ -139,7 +139,7 @@
     -->
     <Analytics>
         <!-- Enable Analytics for API Manager -->
-        <Enabled><%= @analytics['enabled'] %></Enabled>
+        <Enabled><%= @analytics_enable %></Enabled>
 
         <!-- Server URL of the remote StreamProcessor server used to collect statistics. Must
              be specified in protocol://hostname:port/ format.
@@ -151,20 +151,20 @@
 
              Ex - Multiple Receiver Groups with two receivers each
              {tcp://localhost:7612/,tcp://localhost:7613},{tcp://localhost:7712/,tcp://localhost:7713/} -->
-        <StreamProcessorServerURL><%= @analytics['sp_server_url'] %></StreamProcessorServerURL>
+        <StreamProcessorServerURL><%= @stream_processor_url %></StreamProcessorServerURL>
         <!--StreamProcessorAuthServerURL>{ssl://localhost:7712}</StreamProcessorAuthServerURL-->
         <!-- Administrator username to login to the remote StreamProcessor server. -->
-        <StreamProcessorUsername><%= @analytics['sp_username'] %></StreamProcessorUsername>
+        <StreamProcessorUsername><%= @stream_processor_username %></StreamProcessorUsername>
         <!-- Administrator password to login to the remote StreamProcessor server. -->
-        <StreamProcessorPassword><%= @analytics['sp_password'] %></StreamProcessorPassword>
+        <StreamProcessorPassword><%= @stream_processor_password %></StreamProcessorPassword>
 
         <!-- For APIM implemented Statistic client for RDBMS -->
         <StatsProviderImpl>org.wso2.carbon.apimgt.usage.client.impl.APIUsageStatisticsRestClientImpl</StatsProviderImpl>
 
         <!-- StreamProcessor REST API configuration -->
-        <StreamProcessorRestApiURL><%= @analytics['sp_restapi_url'] %></StreamProcessorRestApiURL>
-        <StreamProcessorRestApiUsername><%= @analytics['sp_restapi_username'] %></StreamProcessorRestApiUsername>
-        <StreamProcessorRestApiPassword><%= @analytics['sp_restapi_password'] %></StreamProcessorRestApiPassword>
+        <StreamProcessorRestApiURL><%= @stream_processor_restapi_url %></StreamProcessorRestApiURL>
+        <StreamProcessorRestApiUsername><%= @stream_processor_restapi_username %></StreamProcessorRestApiUsername>
+        <StreamProcessorRestApiPassword><%= @stream_processor_restapi_password %></StreamProcessorRestApiPassword>
 
         <!-- Below property is used to skip trying to connect to event receiver nodes when publishing events even if
             the stats enabled flag is set to true. -->
@@ -301,15 +301,15 @@
         <!--This property is used to indicate how we do user name comparision for token generation https://wso2.org/jira/browse/APIMANAGER-2225-->
         <CompareCaseInsensitively>true</CompareCaseInsensitively>
         <DisplayURL>false</DisplayURL>
-        <URL><%= @api_store['url'] %></URL>
+        <URL><%= @api_store_url %></URL>
 
         <!-- Server URL of the API Store. -->
-        <ServerURL><%= @api_store['server_url'] %></ServerURL>
+        <ServerURL><%= @api_store_server_url %></ServerURL>
         <!-- Admin username for API Store. -->
-        <Username><%= @api_store['username'] %></Username>
+        <Username><%= @api_store_username %></Username>
 
         <!-- Admin password for API Store. -->
-        <Password><%= @api_store['password'] %></Password>
+        <Password><%= @api_store_password %></Password>
         <!-- This parameter specifies whether to display multiple versions of same
              API or only showing the latest version of an API. -->
         <DisplayMultipleVersions>false</DisplayMultipleVersions>
@@ -340,7 +340,7 @@
 
     <APIPublisher>
         <DisplayURL>false</DisplayURL>
-        <URL><%= @api_publisher['url'] %></URL>
+        <URL><%= @api_publisher_url %></URL>
         <!-- This parameter specifies enabling the capability of setting API documentation level granular visibility levels.
              By default any document associate with an API will have the same permissions set as the API.With enabling below
              property,it will show two additional permission levels as visible only to all registered users in a particular

@@ -22,7 +22,10 @@ class apim_tm::params {
   $user_group = 'wso2'
   $user_home = '/home/$user'
   $user_group_id = 802
+  $product = 'wso2am'
+  $product_version = '2.6.0'
   $service_name = 'wso2am'
+
   $hostname = 'localhost'
   $mgt_hostname = 'localhost'
   $jdk_version = 'jdk1.8.0_192'
@@ -41,91 +44,65 @@ class apim_tm::params {
     # 'repository/conf/tomcat/catalina-server.xml',
   ]
 
-
   # ----- api-manager.xml config params -----
-  $auth_manager = {
-    server_url                => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-    username                  => '${admin.username}',
-    password                  => '${admin.password}',
-    check_permission_remotely => 'false'
-  }
+  $auth_manager_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $auth_manager_username = '${admin.username}'
+  $auth_manager_password = '${admin.password}'
+  $auth_manager_check_permission_remotely = 'false'
 
-  $api_gateway = {
-    server_url          => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-    username            => '${admin.username}',
-    password            => '${admin.password}',
-    gateway_endpoint    => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
-    gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099'
-  }
+  $api_gateway_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $api_gateway_username = '${admin.username}'
+  $api_gateway_password = '${admin.password}'
+  $api_gateway_endpoint = 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}'
+  $api_gateway_ws_endpoint = 'ws://${carbon.local.ip}:9099'
 
-  $analytics = {
-    enable              => 'false',
-    sp_server_url       => '{tcp://localhost:7612}',
-    sp_username         => '${admin.username}',
-    sp_password         => '${admin.password}',
-    sp_restapi_url      => 'https://localhost:7444',
-    sp_restapi_username => '${admin.username}',
-    sp_restapi_password => '${admin.password}'
-  }
+  $analytics_enable = 'false'
+  $stream_processor_url = '{tcp://localhost:7612}'
+  $stream_processor_username = '${admin.username}'
+  $stream_processor_password = '${admin.password}'
+  $stream_processor_restapi_url = 'https://localhost:7444'
+  $stream_processor_restapi_username = '${admin.username}'
+  $stream_processor_restapi_password = '${admin.password}'
 
-  $api_store = {
-    url        => 'https://localhost:${mgt.transport.https.port}/store',
-    server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-    username   => '${admin.username}',
-    password   => '${admin.password}'
-  }
+  $api_store_url = 'https://localhost:${mgt.transport.https.port}/store'
+  $api_store_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $api_store_username = '${admin.username}'
+  $api_store_password = '${admin.password}'
 
-  $api_publisher = {
-    url => 'https://localhost:${mgt.transport.https.port}/publisher'
-  }
+  $api_publisher_url = 'https://localhost:${mgt.transport.https.port}/publisher'
 
   # ----- Master-datasources config params -----
-  $wso2am_db = {
-    url               => 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE',
-    username          => 'wso2carbon',
-    password          => 'wso2carbon',
-    driver_class_name => 'org.h2.Driver',
-  }
+  $wso2am_db_url = 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE'
+  $wso2am_db_username = 'wso2carbon'
+  $wso2am_db_password = 'wso2carbon'
+  $wso2am_db_driver = 'org.h2.Driver'
 
-  $wso2am_stat_db = {
-    url               =>
-    'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE',
-    username          => 'wso2carbon',
-    password          => 'wso2carbon',
-    driver_class_name => 'org.h2.Driver',
-  }
+  $stat_db_url = 'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
+  $stat_db_username = 'wso2carbon'
+  $stat_db_password = 'wso2carbon'
+  $stat_db_driver = 'org.h2.Driver'
 
-  $wso2_mb_store_db = {
-    url               => 'jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000',
-    username          => 'wso2carbon',
-    password          => 'wso2carbon',
-    driver_class_name => 'org.h2.Driver',
-  }
+  $mb_store_db_url = 'jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000'
+  $mb_store_db_username = 'wso2carbon'
+  $mb_store_db_password = 'wso2carbon'
+  $mb_store_driver = 'org.h2.Driver'
 
   # ----- Carbon.xml config params -----
-  $ports = {
-    offset => 0
-  }
+  $ports_offset = 0
 
-  $key_store = {
-    location     => '${carbon.home}/repository/resources/security/wso2carbon.jks',
-    type         => 'JKS',
-    password     => 'wso2carbon',
-    key_alias    => 'wso2carbon',
-    key_password => 'wso2carbon',
-  }
+  $key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
+  $key_store_type = 'JKS'
+  $key_store_password = 'wso2carbon'
+  $key_store_key_alias = 'wso2carbon'
+  $key_store_key_password = 'wso2carbon'
 
-  $internal_key_store = {
-    location     => '${carbon.home}/repository/resources/security/wso2carbon.jks',
-    type         => 'JKS',
-    password     => 'wso2carbon',
-    key_alias    => 'wso2carbon',
-    key_password => 'wso2carbon',
-  }
+  $internal_key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
+  $internal_key_store_type = 'JKS'
+  $internal_key_store_password = 'wso2carbon'
+  $internal_key_store_key_alias = 'wso2carbon'
+  $internal_key_store_key_password = 'wso2carbon'
 
-  $trust_store = {
-    location => '${carbon.home}/repository/resources/security/client-truststore.jks',
-    type     => 'JKS',
-    password => 'wso2carbon'
-  }
+  $trust_store = '${carbon.home}/repository/resources/security/client-truststore.jks'
+  $trust_store_type = 'JKS'
+  $trust_store_password = 'wso2carbon'
 }
