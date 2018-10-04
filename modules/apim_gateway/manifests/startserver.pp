@@ -16,10 +16,7 @@
 
 # Class apim::startserver
 # Starts the server as a service in the final stage.
-class apim_gateway::startserver (
-  $service_name = $apim_gateway::params::service_name
-)
-  inherits apim_gateway::params {
+class apim_gateway::startserver inherits apim_gateway::params {
 
   service { $service_name:
     ensure => running,

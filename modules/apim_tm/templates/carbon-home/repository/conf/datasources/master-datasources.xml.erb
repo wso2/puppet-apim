@@ -36,11 +36,11 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url><%= @wso2am_db['url'] %></url>
-                    <username><%= @wso2am_db['username'] %></username>
-                    <password><%= @wso2am_db['password'] %></password>
+                    <url><%= @wso2am_db_url %></url>
+                    <username><%= @wso2am_db_username %></username>
+                    <password><%= @wso2am_db_password %></password>
                     <defaultAutoCommit>true</defaultAutoCommit>
-                    <driverClassName><%= @wso2am_db['driver_class_name'] %></driverClassName>
+                    <driverClassName><%= @wso2am_db_driver %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
@@ -58,11 +58,11 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url><%= @wso2am_stat_db['url'] %></url>
-                    <username><%= @wso2am_stat_db['username'] %></username>
-                    <password><%= @wso2am_stat_db['password'] %></password>
+                    <url><%= @stat_db_url %></url>
+                    <username><%= @stat_db_username %></username>
+                    <password><%= @stat_db_password %></password>
                     <defaultAutoCommit>true</defaultAutoCommit>
-                    <driverClassName><%= @wso2am_stat_db['driver_class_name'] %></driverClassName>
+                    <driverClassName><%= @stat_db_driver %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
@@ -80,10 +80,10 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url><%= @wso2_mb_store_db['url'] %></url>
-                    <username><%= @wso2_mb_store_db['username'] %></username>
-                    <password><%= @wso2_mb_store_db['password'] %></password>
-                    <driverClassName><%= @wso2_mb_store_db['driver_class_name'] %></driverClassName>
+                    <url><%= @mb_store_db_url %></url>
+                    <username><%= @mb_store_db_username %></username>
+                    <password><%= @mb_store_db_password %></password>
+                    <driverClassName><%= @mb_store_driver %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>

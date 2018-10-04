@@ -19,14 +19,16 @@
 class apim_analytics_worker inherits apim_analytics_worker::params {
 
   if $::osfamily == 'redhat' {
-    $apim_analytics_package = 'wso2am-analytics-linux-installer-x64-2.6.0.rpm'
-    $installer_provider = 'rpm'
-    $install_path = '/usr/lib64/wso2/wso2am-analytics/2.6.0'
+    $product_package = "${product}-linux-installer-x64-${product_version}.rpm"
+    $installer_provider = 'yum'
+    $install_path = "/usr/lib64/wso2/${product}/${product_version}"
+    $package_name = "${product}-${product_version}"
   }
   elsif $::osfamily == 'debian' {
-    $apim_analytics_package = 'wso2am-analytics-linux-installer-x64-2.6.0.deb'
-    $installer_provider = 'dpkg'
-    $install_path = '/usr/lib/wso2/wso2am-analytics/2.6.0'
+    $product_package = "${product}-linux-installer-x64-${product_version}.deb"
+    $installer_provider = 'apt'
+    $install_path = "/usr/lib/wso2/${product}/${product_version}"
+    $package_name = "/opt/${product}/${product_package}"
   }
 
   # Create wso2 group
@@ -59,11 +61,11 @@ class apim_analytics_worker inherits apim_analytics_worker::params {
     source => "puppet:///modules/${module_name}/${apim_analytics_package}",
   }
 
-  # Install WSO2 API Manager
-  package { $product:
+  # Install WSO2 API Manager Analytics
+  package { $package_name:
     ensure   => installed,
     provider => $installer_provider,
-    source   => "/opt/${product}/${apim_analytics_package}"
+    source  => "/opt/${product}/${product_package}"
   }
 
   # Change the ownership of the installation directory to wso2 user & group

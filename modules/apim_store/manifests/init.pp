@@ -19,14 +19,16 @@
 class apim_store inherits apim_store::params {
 
   if $::osfamily == 'redhat' {
-    $apim_package = 'wso2am-linux-installer-x64-2.6.0.rpm'
-    $installer_provider = 'rpm'
-    $install_path = '/usr/lib64/wso2/wso2am/2.6.0'
+    $product_package = "${product}-linux-installer-x64-${product_version}.rpm"
+    $installer_provider = 'yum'
+    $install_path = "/usr/lib64/wso2/${product}/${product_version}"
+    $package_name = "${product}-${product_version}"
   }
   elsif $::osfamily == 'debian' {
-    $apim_package = 'wso2am-linux-installer-x64-2.6.0.deb'
-    $installer_provider = 'dpkg'
-    $install_path = '/usr/lib/wso2/wso2am/2.6.0'
+    $product_package = "${product}-linux-installer-x64-${product_version}.deb"
+    $installer_provider = 'apt'
+    $install_path = "/usr/lib/wso2/${product}/${product_version}"
+    $package_name = "/opt/${product}/${product_package}"
   }
 
   # Create wso2 group
@@ -45,25 +47,25 @@ class apim_store inherits apim_store::params {
     system => true,
   }
   # Ensure the installation directory is available
-  file { "/opt/${service_name}":
+  file { "/opt/${product}":
     ensure => 'directory',
     owner  => $user,
     group  => $user_group,
   }
 
   # Copy the installer to the directory
-  file { "/opt/${service_name}/${apim_package}":
+  file { "/opt/${product}/${product_package}":
     owner  => $user,
     group  => $user_group,
     mode   => '0644',
-    source => "puppet:///modules/${module_name}/${apim_package}",
+    source => "puppet:///modules/${module_name}/${product_package}",
   }
 
   # Install WSO2 API Manager
-  package { $service_name:
+  package { $package_name:
     ensure   => installed,
     provider => $installer_provider,
-    source   => "/opt/${service_name}/${apim_package}"
+    source  => "/opt/${product}/${product_package}"
   }
 
   # Change the ownership of the installation directory to wso2 user & group
