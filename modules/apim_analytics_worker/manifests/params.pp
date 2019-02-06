@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Claas apim_analytics_worker::params
+# Class apim_analytics_worker::params
 # This class includes all the necessary parameters.
 class apim_analytics_worker::params {
   $user = 'wso2carbon'
