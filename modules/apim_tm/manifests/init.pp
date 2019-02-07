@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim
+# Class: apim_tm
 # Init class of API Manager - Traffic Manager profile
 class apim_tm  inherits apim_tm::params {
 

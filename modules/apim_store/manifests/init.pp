@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim
+# Class: apim_store
 # Init class of API Manager - API Store profile
 class apim_store inherits apim_store::params {
 
