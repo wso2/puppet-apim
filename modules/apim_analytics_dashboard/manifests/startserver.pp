@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_analytics_dashboard::startserver
+# Class: apim_analytics_dashboard::startserver
 # Starts the server as a service in the final stage.
 class apim_analytics_dashboard::startserver inherits apim_analytics_dashboard::params {
 

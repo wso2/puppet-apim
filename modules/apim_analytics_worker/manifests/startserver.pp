@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_analytics_worker::startserver
+# Class: apim_analytics_worker::startserver
 # Starts the server as a service in the final stage.
 class apim_analytics_worker::startserver inherits apim_analytics_worker::params {
 

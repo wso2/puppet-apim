@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_analytics_dashboard::params
+# Class: apim_analytics_dashboard::params
 # This class includes all the necessary parameters.
 class apim_analytics_dashboard::params {
   $user = 'wso2carbon'

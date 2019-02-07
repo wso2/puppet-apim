@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim::startserver
+# Class: apim_publisher::startserver
 # Starts the server as a service in the final stage.
 class apim_publisher::startserver (
   $service_name = $apim_publisher::params::service_name
