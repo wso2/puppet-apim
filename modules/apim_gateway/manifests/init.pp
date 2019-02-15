@@ -65,7 +65,7 @@ class apim_gateway inherits apim_gateway::params {
   package { $package_name:
     ensure   => installed,
     provider => $installer_provider,
-    source  => "/opt/${product}/${product_package}"
+    source   => "/opt/${product}/${product_package}"
   }
 
   # Change the ownership of the installation directory to wso2 user & group
