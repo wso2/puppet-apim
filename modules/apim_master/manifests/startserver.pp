@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2019 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -16,19 +16,10 @@
 
 # Class apim::startserver
 # Starts the server as a service in the final stage.
-class apim::startserver (
-  $service_name = $apim::params::service_name
+class apim_master::startserver (
+  $service_name = $apim_master::params::service_name
 )
-  inherits apim::params {
+  inherits apim_master::params {
 
-  exec { 'daemon-reload':
-    command => "systemctl daemon-reload",
-    path    => "/bin/",
-  }
-
-  service { $service_name:
-    enable => true,
-    ensure => running,
-    subscribe => File["binary"],
-  }
+  # This class should be used to control Identity Server if required.
 }

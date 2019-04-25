@@ -18,19 +18,6 @@
 # Init class of API Manager default profile
 class apim inherits apim::params {
 
-  if $::osfamily == 'redhat' {
-    $product_package = "${product}-linux-installer-x64-${product_version}.rpm"
-    $installer_provider = 'yum'
-    $install_path = "/usr/lib64/wso2/${product}/${product_version}"
-    $package_name = "${product}-${product_version}"
-  }
-  elsif $::osfamily == 'debian' {
-    $product_package = "${product}-linux-installer-x64-${product_version}.deb"
-    $installer_provider = 'apt'
-    $install_path = "/usr/lib/wso2/${product}/${product_version}"
-    $package_name = "/opt/${product}/${product_package}"
-  }
-
   # Create wso2 group
   group { $user_group:
     ensure => present,
@@ -46,30 +33,42 @@ class apim inherits apim::params {
     home   => "/home/${user}",
     system => true,
   }
-  # Ensure the installation directory is available
-  file { "/opt/${product}":
+
+  /*
+  * Java Distribution
+  */
+
+  # Copy JDK distrubution path
+  file { "${$lib_dir}":
+    ensure => directory
+  }
+
+  # Copy JDK to Java distribution path
+  file { "jdk-distribution":
+    path  =>  "${java_home}.tar.gz",
+    source => "puppet:///modules/${module_name}/${jdk_name}.tar.gz",
+  }
+
+  # Unzip distribution
+  exec { "unpack-jdk":
+    command     => "tar -zxvf ${java_home}.tar.gz",
+    path        => "/bin/",
+    cwd         => "${lib_dir}",
+    onlyif      => "/usr/bin/test ! -d ${java_home}",
+  }
+
+  /*
+  * WSO2 Distribution
+  */
+
+  # Create distribution path
+  file { [  "${products_dir}",
+    "${products_dir}/${product}" ]:
     ensure => 'directory',
-    owner  => $user,
-    group  => $user_group,
   }
 
-  # Copy the installer to the directory
-  file { "/opt/${product}/${product_package}":
-    owner  => $user,
-    group  => $user_group,
-    mode   => '0644',
-    source => "puppet:///modules/${module_name}/${product_package}",
-  }
-
-  # Install WSO2 API Manager
-  package { $package_name:
-    ensure   => installed,
-    provider => $installer_provider,
-    source  => "/opt/${product}/${product_package}"
-  }
-
-  # Change the ownership of the installation directory to wso2 user & group
-  file { $install_path:
+  # Change the ownership of the installation directory to specified user & group
+  file { $distribution_path:
     ensure  => directory,
     owner   => $user,
     group   => $user_group,
@@ -77,27 +76,69 @@ class apim inherits apim::params {
     recurse => true
   }
 
-  # Copy configuration changes to the installed directory
-  $template_list.each | String $template | {
-    file { "${install_path}/${template}":
-      ensure  => file,
-      owner   => $user,
-      group   => $user_group,
-      mode    => '0644',
-      content => template("${module_name}/carbon-home/${template}.erb")
-    }
+  # Copy binary to distribution path
+  file { "binary":
+    path   => "$distribution_path/${product_binary}",
+    owner  => $user,
+    group  => $user_group,
+    mode   => '0644',
+    source => "puppet:///modules/${module_name}/${product_binary}",
+  }
+
+  # Stop the existing setup
+  exec { "stop-server":
+    command     => "kill -term $(cat ${install_path}/wso2carbon.pid)",
+    path        => "/bin/",
+    onlyif      => "/usr/bin/test -f ${install_path}/wso2carbon.pid",
+    subscribe   => File["binary"],
+    refreshonly => true,
+  }
+
+  # Wait for the server to stop
+  exec { "wait":
+    command     => "sleep 10",
+    path        => "/bin/",
+    onlyif      => "/usr/bin/test -d ${install_path}",
+    subscribe   => File["binary"],
+    refreshonly => true,
+  }
+
+  # Delete existing setup
+  exec { "detele-pack":
+    command     =>  "rm -rf ${install_path}",
+    path        =>  "/bin/",
+    onlyif      => "/usr/bin/test -d ${install_path}",
+    subscribe   => File["binary"],
+    refreshonly => true,
+  }
+
+  # Install the "unzip" package
+  package { 'unzip':
+    ensure => installed,
+  }
+
+  # Unzip the binary and create setup
+  exec { "unzip-update":
+    command     => "unzip -qo ${product_binary}",
+    path        => "/usr/bin/",
+    user        => $user,
+    cwd         => "${distribution_path}",
+    onlyif      => "/usr/bin/test ! -d ${install_path}",
+    subscribe   => File["binary"],
+    refreshonly => true,
+    require     => Package['unzip'],
   }
 
   # Copy wso2server.sh to installed directory
   file { "${install_path}/${start_script_template}":
     ensure  => file,
-    owner   => $user,
-    group   => $user_group,
+    owner  => $user,
+    group  => $user_group,
     mode    => '0754',
     content => template("${module_name}/carbon-home/${start_script_template}.erb")
   }
 
-  # Copy the unit file required to deploy the server as a service
+  # Copy the Unit file required to deploy the server as a service
   file { "/etc/systemd/system/${service_name}.service":
     ensure  => present,
     owner   => root,
