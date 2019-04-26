@@ -16,16 +16,7 @@
 
 # Class apim::startserver
 # Starts the server as a service in the final stage.
-class apim_gateway::startserver inherits apim_gateway::params {
+class apim_gateway_master::startserver inherits apim_gateway_master::params {
 
-  exec { 'daemon-reload':
-    command => "systemctl daemon-reload",
-    path    => "/bin/",
-  }
-
-  service { $service_name:
-    enable => true,
-    ensure => running,
-    subscribe => File["binary"],
-  }
+  # This class should be used to control Identity Server if required.
 }

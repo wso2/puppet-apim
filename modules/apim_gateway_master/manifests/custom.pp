@@ -14,18 +14,8 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim::startserver
-# Starts the server as a service in the final stage.
-class apim_gateway::startserver inherits apim_gateway::params {
-
-  exec { 'daemon-reload':
-    command => "systemctl daemon-reload",
-    path    => "/bin/",
-  }
-
-  service { $service_name:
-    enable => true,
-    ensure => running,
-    subscribe => File["binary"],
-  }
+# Class: apim::custom
+# This class is reserved to run custom user code before starting the server.
+class apim_gateway_master::custom {
+  # resources
 }
