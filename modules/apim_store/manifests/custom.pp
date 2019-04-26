@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim::custom
+# Class: apim_store::custom
 # This class is reserved to run custom user code before starting the server.
 class apim_store::custom {
   # resources
