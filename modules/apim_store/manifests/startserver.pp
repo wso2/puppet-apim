@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim::startserver
+# Class apim_store::startserver
 # Starts the server as a service in the final stage.
 class apim_store::startserver (
   $service_name = $apim_store::params::service_name
@@ -27,8 +27,8 @@ class apim_store::startserver (
   }
 
   service { $service_name:
-    enable => true,
-    ensure => running,
+    enable    => true,
+    ensure    => running,
     subscribe => File["binary"],
   }
 }

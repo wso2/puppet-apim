@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim::startserver
+# Class apim_km::startserver
 # Starts the server as a service in the final stage.
 class apim_km::startserver inherits apim_km::params {
 
@@ -24,8 +24,8 @@ class apim_km::startserver inherits apim_km::params {
   }
 
   service { $service_name:
-    enable => true,
-    ensure => running,
+    enable    => true,
+    ensure    => running,
     subscribe => File["binary"],
   }
 }

@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2019 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim::params
+# Class apim_km_master::params
 # This class includes all the necessary parameters.
 class apim_km_master::params {
   $user = 'wso2carbon'

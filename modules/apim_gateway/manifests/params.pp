@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim::params
+# Class apim_gateway::params
 # This class includes all the necessary parameters.
 class apim_gateway::params {
   $user = 'wso2carbon'

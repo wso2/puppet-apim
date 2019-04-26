@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim
+# Class: apim_km
 # Init class of API Manager - Key Manager profile
 class apim_km inherits apim_km::params {
 
