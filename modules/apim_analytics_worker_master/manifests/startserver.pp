@@ -14,9 +14,9 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_analytics_dashboard::startserver
+# Class apim_analytics_worker_master::startserver
 # Starts the server as a service in the final stage.
 class apim_analytics_worker_master::startserver inherits apim_analytics_worker_master::params {
 
-  # This class should be used to control Identity Server if required.
+  # This class should be used to control API Manger if required.
 }
