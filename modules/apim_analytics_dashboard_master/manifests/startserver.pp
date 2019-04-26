@@ -18,5 +18,5 @@
 # Starts the server as a service in the final stage.
 class apim_analytics_dashboard_master::startserver inherits apim_analytics_dashboard_master::params {
 
-  # This class should be used to control Identity Server if required.
+  # This class should be used to control API Manger if required.
 }

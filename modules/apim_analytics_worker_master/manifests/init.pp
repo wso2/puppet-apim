@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim_analytics_dashboard
+# Class: apim_analytics_worker_master
 # Init class of API Manager Analytics - Dashboard profile
 class apim_analytics_worker_master inherits apim_analytics_worker_master::params {
 
@@ -66,7 +66,7 @@ class apim_analytics_worker_master inherits apim_analytics_worker_master::params
   /*
     Following script can be used to copy file to a given location.
     This will copy some_file to install_path -> repository.
-    Note: Ensure that file is available in modules -> apim_analytics_dashboard_master -> files
+    Note: Ensure that file is available in modules -> apim_analytics_worker_master -> files
   */
   # file { "${install_path}/repository/some_file":
   #   owner  => $user,
