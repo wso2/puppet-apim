@@ -27,7 +27,7 @@ class apim_gateway inherits apim_gateway::params {
 
   # Create wso2 user
   user { $user:
-    ensure => present,d
+    ensure => present,
     uid    => $user_id,
     gid    => $user_group_id,
     home   => "/home/${user}",
@@ -150,7 +150,7 @@ class apim_gateway inherits apim_gateway::params {
   /*
     Following script can be used to copy file to a given location.
     This will copy some_file to install_path -> repository.
-    Note: Ensure that file is available in modules -> apim_km_master -> files
+    Note: Ensure that file is available in modules -> apim_gateway -> files
   */
   # file { "${install_path}/repository/some_file":
   #   owner  => $user,
