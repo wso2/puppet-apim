@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim_analytics_dashboard::custom
+# Class: apim_analytics_worker_master::custom
 # This class is reserved to run custom user code before starting the server.
 class apim_analytics_worker_master::custom {
   # resources
