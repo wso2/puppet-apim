@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2019 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim::startserver
+# Class apim_km_master::startserver
 # Starts the server as a service in the final stage.
 class apim_km_master::startserver inherits apim_km_master::params {
 
-  # This class should be used to control Identity Server if required.
+  # This class should be used to control API Manager if required.
 }

@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Claas apim::params
+# Claas apim_store::params
 # This class includes all the necessary parameters.
 class apim_store::params {
   $user = 'wso2carbon'

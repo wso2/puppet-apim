@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim
+# Class: apim_publisher
 # Init class of API Manager - API Publisher profile
 class apim_publisher inherits apim_publisher::params {
 
