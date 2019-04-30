@@ -46,7 +46,7 @@ class apim_tm  inherits apim_tm::params {
   # Copy JDK to Java distribution path
   file { "jdk-distribution":
     path   => "${java_home}.tar.gz",
-    source => "puppet:///modules/${module_name}/${jdk_name}.tar.gz",
+    source => "puppet:///modules/distributions/${jdk_name}.tar.gz",
   }
 
   # Unzip distribution

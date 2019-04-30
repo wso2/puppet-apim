@@ -29,7 +29,7 @@ class apim_publisher_master inherits apim_publisher_master::params {
   file { "binary":
     path   => "${distribution_path}/${product_binary}",
     mode   => '0644',
-    source => "puppet:///modules/${module_name}/${product_binary}",
+    source => "puppet:///modules/distributions/${product_binary}",
   }
 
   # Install the "unzip" package
