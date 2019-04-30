@@ -21,5 +21,5 @@ class apim_master::startserver (
 )
   inherits apim_master::params {
 
-  # This class should be used to control Identity Server if required.
+  # This class should be used to control API Manager if required.
 }
