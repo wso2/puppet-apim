@@ -63,7 +63,8 @@ class apim_publisher inherits apim_publisher::params {
 
   # Create distribution path
   file { [  "${products_dir}",
-    "${products_dir}/${product}" ]:
+    "${products_dir}/${product}",
+    "${products_dir}/${product}/${profile}" ]:
     ensure => 'directory',
   }
 

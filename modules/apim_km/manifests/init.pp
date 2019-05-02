@@ -63,7 +63,8 @@ class apim_km inherits apim_km::params {
 
   # Create distribution path
   file { [  "${products_dir}",
-    "${products_dir}/${product}" ]:
+    "${products_dir}/${product}",
+    "${products_dir}/${product}/${profile}" ]:
     ensure => 'directory',
   }
 
