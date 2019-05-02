@@ -63,7 +63,8 @@ class apim_store inherits apim_store::params {
 
   # Create distribution path
   file { [  "${products_dir}",
-    "${products_dir}/${product}" ]:
+    "${products_dir}/${product}",
+    "${products_dir}/${product}/${profile}" ]:
     ensure => 'directory',
   }
 

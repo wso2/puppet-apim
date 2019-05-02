@@ -23,7 +23,8 @@
 : ${product:="wso2am"}
 : ${product_version:="2.6.0"}
 : ${products_dir:="/usr/local/wso2"}
-: ${distribution_path:=${products_dir}"/"${product}"/"${product_version}}
+: ${profile:="store"}
+: ${distribution_path:=${products_dir}"/"${product}"/"${profile}"/"${product_version}}
 : ${install_path:=${distribution_path}"/"${product}"-"${product_version}}
 : ${product_binary:=${product}"-"${product_version}".zip"}
 : ${puppet_env:="/etc/puppet/code/environments/production"}
