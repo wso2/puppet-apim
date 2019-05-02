@@ -22,6 +22,7 @@ class apim_publisher_master::params {
   $product = 'wso2am'
   $product_version = '2.6.0'
   $service_name = 'wso2am'
+  $profile = 'publisher'
 
   # Define the templates
   $start_script_template = 'bin/wso2server.sh'
@@ -99,6 +100,6 @@ class apim_publisher_master::params {
 
   # Product and installation paths
   $product_binary = "${product}-${product_version}.zip"
-  $distribution_path = "${products_dir}/${product}/${product_version}"
+  $distribution_path = "${products_dir}/${product}/${profile}/${product_version}"
   $install_path = "${distribution_path}/${product}-${product_version}"
 }

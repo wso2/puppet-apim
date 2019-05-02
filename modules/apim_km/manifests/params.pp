@@ -22,6 +22,7 @@ class apim_km::params {
   $product = 'wso2am'
   $product_version = '2.6.0'
   $service_name = 'wso2am'
+  $profile = 'keymanager'
 
   # JDK Distributions
   if $::osfamily == 'redhat' {
@@ -40,6 +41,6 @@ class apim_km::params {
 
   # Product and installation information
   $product_binary = "${product}-${product_version}.zip"
-  $distribution_path = "${products_dir}/${product}/${product_version}"
+  $distribution_path = "${products_dir}/${product}/${profile}/${product_version}"
   $install_path = "${distribution_path}/${product}-${product_version}"
 }

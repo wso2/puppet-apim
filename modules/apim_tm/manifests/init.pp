@@ -63,7 +63,8 @@ class apim_tm  inherits apim_tm::params {
 
   # Create distribution path
   file { [  "${products_dir}",
-    "${products_dir}/${product}" ]:
+    "${products_dir}/${product}",
+    "${products_dir}/${product}/${profile}" ]:
     ensure => 'directory',
   }
 

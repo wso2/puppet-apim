@@ -21,6 +21,7 @@ class apim_gateway_master inherits apim_gateway_master::params {
   # Create distribution path
   file { [  "${products_dir}",
     "${products_dir}/${product}",
+    "${products_dir}/${product}/${profile}",
     "${distribution_path}"]:
     ensure => 'directory',
   }
