@@ -16,7 +16,7 @@
 
 # Class apim_publisher_master::params
 # This class includes all the necessary parameters.
-class apim_publisher_master::params {
+class apim_publisher_master::params inherits common::params {
   $user = 'wso2carbon'
   $user_group = 'wso2'
   $product = 'wso2am'
@@ -30,6 +30,7 @@ class apim_publisher_master::params {
     'repository/conf/api-manager.xml',
     'repository/conf/datasources/master-datasources.xml',
     'repository/conf/carbon.xml',
+    'repository/conf/user-mgt.xml',
   ]
 
   # ----- api-manager.xml config params -----
@@ -58,22 +59,6 @@ class apim_publisher_master::params {
   $api_store_password = '${admin.password}'
 
   $api_publisher_url = 'https://localhost:${mgt.transport.https.port}/publisher'
-
-  # ----- Master-datasources config params -----
-  $wso2am_db_url = 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE'
-  $wso2am_db_username = 'wso2carbon'
-  $wso2am_db_password = 'wso2carbon'
-  $wso2am_db_driver = 'org.h2.Driver'
-
-  $stat_db_url = 'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
-  $stat_db_username = 'wso2carbon'
-  $stat_db_password = 'wso2carbon'
-  $stat_db_driver = 'org.h2.Driver'
-
-  $mb_store_db_url = 'jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000'
-  $mb_store_db_username = 'wso2carbon'
-  $mb_store_db_password = 'wso2carbon'
-  $mb_store_driver = 'org.h2.Driver'
 
   # ----- Carbon.xml config params -----
   $ports_offset = 0
