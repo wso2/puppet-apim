@@ -47,43 +47,11 @@ class apim_analytics_worker_master::params {
   $siddhi_msf4j_listener_keystore_password = 'wso2carbon'
   $siddhi_msf4j_listener_keystore_cert_pass = 'wso2carbon'
 
-  # Configuration used for the databridge communication
-  $databridge_keystore = '${sys:carbon.home}/resources/security/wso2carbon.jks'
-  $databridge_keystore_password = 'wso2carbon'
-  $binary_data_receiver_hostname = '0.0.0.0'
-
-  # Configuration of the Data Agents - to publish events through
-  $thrift_agent_trust_store = '${sys:carbon.home}/resources/security/client-truststore.jks'
-  $thrift_agent_trust_store_password = 'wso2carbon'
-  $binary_agent_trust_store = '${sys:carbon.home}/resources/security/client-truststore.jks'
-  $binary_agent_trust_store_password = 'wso2carbon'
-
-  # Secure Vault Configuration
-  $securevault_key_store = '${sys:carbon.home}/resources/security/securevault.jks'
-  $securevault_private_key_alias = 'wso2carbon'
-  $securevault_secret_properties_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/secrets.properties'
-  $securevault_master_key_reader_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/master-keys.yaml'
-
   # Data Sources Configuration
-  $metrics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/metrics;AUTO_SERVER=TRUE'
-  $metrics_db_username = 'wso2carbon'
-  $metrics_db_password = 'wso2carbon'
-  $metrics_db_driver = 'org.h2.Driver'
-
-  $permission_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
-  $permission_db_username = 'wso2carbon'
-  $permission_db_password = 'wso2carbon'
-  $permission_db_driver = 'org.h2.Driver'
-
   $message_tracing_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/MESSAGE_TRACING_DB;AUTO_SERVER=TRUE'
   $message_tracing_db_username = 'wso2carbon'
   $message_tracing_db_password = 'wso2carbon'
   $message_tracing_db_driver = 'org.h2.Driver'
-
-  $apim_analytics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_STATS_DB;AUTO_SERVER=TRUE'
-  $apim_analytics_db_username = 'wso2carbon'
-  $apim_analytics_db_password = 'wso2carbon'
-  $apim_analytics_db_driver = 'org.h2.Driver'
 
   # Directories
   $products_dir = "/usr/local/wso2"
