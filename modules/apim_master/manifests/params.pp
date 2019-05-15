@@ -30,6 +30,7 @@ class apim_master::params inherits common::params {
     'repository/conf/datasources/master-datasources.xml',
     'repository/conf/carbon.xml',
     'repository/conf/user-mgt.xml',
+    'repository/conf/axis2/axis2.xml',
   ]
 
   # ----- api-manager.xml config params -----
@@ -77,6 +78,10 @@ class apim_master::params inherits common::params {
   $trust_store = '${carbon.home}/repository/resources/security/client-truststore.jks'
   $trust_store_type = 'JKS'
   $trust_store_password = 'wso2carbon'
+
+  # ----- axis2.xml config params -----
+  $clustering_enabled = 'false'
+  $clustering_membership_scheme = 'multicast'
 
   # Directories
   $products_dir = "/usr/local/wso2"

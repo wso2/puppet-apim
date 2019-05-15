@@ -148,6 +148,13 @@ class apim_km inherits apim_km::params {
     content => template("${module_name}/${service_name}.service.erb"),
   }
 
+  # Add agent specific file configurations
+  # $config_file_list.each |$config_file| {
+  #   exec { "sed -i -e 's/${config_file['key']}/${config_file['value']}/g' ${config_file['file']}":
+  #     path => "/bin/",
+  #   }
+  # }
+
   /*
     Following script can be used to copy file to a given location.
     This will copy some_file to install_path -> repository.
