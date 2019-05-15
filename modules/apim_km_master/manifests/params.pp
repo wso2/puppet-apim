@@ -63,6 +63,14 @@ class apim_km_master::params inherits common::params {
 
   # ----- Carbon.xml config params -----
   $ports_offset = 0
+  /*
+     Host name or IP address of the machine hosting this server
+     e.g. www.wso2.org, 192.168.1.10
+     This is will become part of the End Point Reference of the
+     services deployed on this server instance.
+  */
+  $hostname = 'localhost'
+  $mgt_hostname = 'localhost'
 
   $key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
   $key_store_type = 'JKS'
