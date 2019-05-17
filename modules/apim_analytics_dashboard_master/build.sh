@@ -30,8 +30,7 @@
 : ${puppet_env:="/etc/puppet/code/environments/production"}
 
 # Apply configurations
-export FACTER_profile=apim_analytics_dashboard_master
-puppet agent -vt
+puppet apply -e "include apim_analytics_dashboard_master" --modulepath=${puppet_env}/modules
 
 # exit immediately if a command exits with a non-zero status
 set -e
