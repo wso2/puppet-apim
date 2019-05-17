@@ -1,132 +1,73 @@
-# WSO2 API Manager 2.6.0 Puppet 5 Modules
+# Puppet Modules for WSO2 API Manager
 
-This repository contains puppet modules for each profile relates to API Manager.
+This repository contains the Puppet modules for WSO2 API Manager and the profiles related to API Manager Analytics.
 
 ## Quick Start Guide
-1. Download and copy the `wso2am-linux-installer-x64-2.6.0.deb` or/and `wso2am-linux-installer-x64-2.6.0.rpm` to the files directories in `/etc/puppet/code/environments/dev/modules/__profile__/files` in the Puppetmaster. <br>
-Profile refers to each profile in API Manager. <br>
-eg: `/etc/puppet/code/environments/dev/modules/apim/files` <br>
-Dev refers to the sample environment that you can try these modules.
+1. Download wso2am-2.6.0.zip or wso2am-analytics-2.6.0.zip to the `<puppet_environment>/modules/common/files` directory in the **Puppetmaster**.
 
-2. Run necessary profile on puppet agent. More details on this are available in the following section.
+2. Set up the JDK distribution as follows:
 
-## Running API Manager Profiles in Puppet Agent
-This section describes how to run each profile in a puppet agent. To find out more details about each profile refer [API Manager Documentation - Product Profiles](https://docs.wso2.com/display/AM250/Product+Profiles).
+   The Puppet modules for WSO2 products use Amazon Coretto as the JDK distribution. However, you can use any [supported JDK distribution](https://docs.wso2.com/display/compatibility/Tested+Operating+Systems+and+JDKs).
+   1. Download Amazon Coretto for Linux x64 from [here](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html) and copy .tar into the `<puppet_environment>/modules/common/files` directory.
+   2. Reassign the *$jdk_name* variable in `<puppet_environment>/modules/<agent_module>/manifests/params.pp` to the name of the downloaded JDK distribution.
+3. Identify the absolute path of the Puppet environment in the build script by renaming the *puppet_env* variable in `<puppet_environment>/modules/<master_module>/build.sh`.
+4. Execute the build script.
 
-### Default profile
-```bash
-export FACTER_profile=apim
-puppet agent -vt
-```
+    ```bash
+    ./build.sh
+    ```
+5. Run the relevant profile on the **Puppet agent**.
+    1. Default profile:
+        ```bash
+        export FACTER_profile=apim
+        puppet agent -vt
+        ```
+    2. Gateway profile:
+       ```bash
+       export FACTER_profile=apim_gateway
+       puppet agent -vt
+       ```
+    3. Key Manager profile:
+       ```bash
+       export FACTER_profile=apim_km
+       puppet agent -vt
+       ```
+    4. Publisher profile:
+       ```bash
+       export FACTER_profile=apim_publisher
+       puppet agent -vt
+       ```
+    5. Store profile:
+       ```bash
+       export FACTER_profile=apim_store
+       puppet agent -vt
+       ```
+    6. Traffic Manager profile:
+       ```bash
+       export FACTER_profile=apim_tm
+       puppet agent -vt
+       ```
+    7. Analytics profile:
+        1. Dashboard:
+            ```bash
+            export FACTER_profile=apim_analytics_dashboard
+            puppet agent -vt
+            ```
+        2. Worker:
+            ```bash
+            export FACTER_profile=apim_analytics_worker
+            puppet agent -vt
+            ```
 
-### Gateway worker profile
-```bash
-export FACTER_profile=apim_gateway
-puppet agent -vt
-```
+## Manifests in a module
+The run stages for Puppet are described in `<puppet_environment>/manifests/site.pp`, and they are of the order Main -> Custom -> Final.
 
-### Key manager profile
-```bash
-export FACTER_profile=apim_km
-puppet agent -vt
-```
-
-### Traffice manager profile
-```bash
-export FACTER_profile=apim_tm
-puppet agent -vt
-```
-
-### API publisher profile
-```bash
-export FACTER_profile=apim_publisher
-puppet agent -vt
-```
-
-### API store profile
-```bash
-export FACTER_profile=apim_store
-puppet agent -vt
-```
-
-## Understanding the Project Structure
-In this project each profle of API Manager is mapped to a module in puppet. By having this structure each puppet module is considered as a standalone profile so each module can be configured individually without harming any other module.
-
-```
-puppet-apim
-├── manifests
-│   └── site.pp
-└── modules
-    ├── apim
-    │   ├── files
-    │   │   └── ...
-    │   ├── manifests
-    │   │   ├── init.pp
-    │   │   ├── custom.pp
-    │   │   ├── params.pp
-    │   │   └── startserver.pp
-    │   └── templates
-    │       └── ...
-    ├── apim_gateway
-    │   ├── files
-    │   │   └── ...
-    │   ├── manifests
-    │   │   ├── init.pp
-    │   │   ├── custom.pp
-    │   │   ├── params.pp
-    │   │   └── startserver.pp
-    │   └── templates
-    │       └── ...
-    ├── apim_km
-    │   ├── files
-    │   │   └── ...
-    │   ├── manifests
-    │   │   ├── init.pp
-    │   │   ├── custom.pp
-    │   │   ├── params.pp
-    │   │   └── startserver.pp
-    │   └── templates
-    │       └── ...
-    ├── apim_publisher
-    │   ├── files
-    │   │   └── ...
-    │   ├── manifests
-    │   │   ├── init.pp
-    │   │   ├── custom.pp
-    │   │   ├── params.pp
-    │   │   └── startserver.pp
-    │   └── templates
-    │       └── ...
-    ├── apim_store
-    │   ├── files
-    │   │   └── ...
-    │   ├── manifests
-    │   │   ├── init.pp
-    │   │   ├── custom.pp
-    │   │   ├── params.pp
-    │   │   └── startserver.pp
-    │   └── templates
-    │       └── ...
-    └── apim_tm
-        ├── files
-        │   └── ...
-        ├── manifests
-        │   ├── init.pp
-        │   ├── custom.pp
-        │   ├── params.pp
-        │   └── startserver.pp
-        └── templates
-            └── ...
-
-```
-
-### Manifests in a module
-Each puppet module contains following pp files
-- init.pp <br>
-This contains the main script of the module.
-- custom.pp <br>
-This is used to add custom user code to the profile.
-- params.pp <br>
-This contains all the necessary parameters for main configurations and template rendering.
-- startserver.pp <br>
-This runs finally and starts the server as a service.
+Each Puppet module contains the following .pp files.
+* Main
+    * params.pp: Contains all the parameters necessary for the main configuration and template
+    * init.pp: Contains the main script of the module.
+* Custom
+    * custom.pp: Used to add custom configurations to the Puppet module.
+* Final
+    * startserver.pp: Runs at the end and starts the server as a linux service.
+    
