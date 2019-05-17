@@ -1,9 +1,9 @@
 # Puppet Modules for WSO2 API Manager
 
-This repository contains the Puppet modules for WSO2 API Manager and the profiles related to API Manager Analytics.
+This repository contains the Puppet modules for profiles related to WSO2 API Manager and API Manager Analytics.
 
 ## Quick Start Guide
-1. Download wso2am-2.6.0.zip or wso2am-analytics-2.6.0.zip to the `<puppet_environment>/modules/common/files` directory in the **Puppetmaster**.
+1. Download an updated wso2am-2.6.0.zip or wso2am-analytics-2.6.0.zip to your preferred deployment pattern and copy it to the `<puppet_environment>/modules/common/files` directory in the **Puppetmaster**.
 
 2. Set up the JDK distribution as follows:
 
