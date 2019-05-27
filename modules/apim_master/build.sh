@@ -110,6 +110,14 @@ else
   exit 1
 fi
 
+# Handle the In-place tool being updated
+if [[ ${update_status} -eq 2 ]]
+then
+    echo "In-place tool has been updated. Running update again."
+    ./update_linux --verbose 2>&1 | tee ${install_path}/bin/output.txt
+    update_status=${PIPESTATUS[0]}
+fi
+
 # Update status
 echo ${update_status} > ${distribution_path}/updates/status
 if [[ ${update_status} -eq 0 ]]
