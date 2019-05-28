@@ -15,13 +15,17 @@
 #----------------------------------------------------------------------------
 
 # Run stages
+stage { 'begin' }
 stage { 'custom': }
 stage { 'final': }
 
 # Order stages
-Stage['main'] -> Stage['custom'] -> Stage['final']
+Stage['begin'] -> Stage['main'] -> Stage['custom'] -> Stage['final']
 
 node default {
+  class { "::${::profile}::stopserver":
+    stage => 'begin'
+  }
   class { "::${::profile}": }
   class { "::${::profile}::custom":
     stage => 'custom'

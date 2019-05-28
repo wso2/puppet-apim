@@ -28,5 +28,6 @@ class apim_analytics_worker::startserver inherits apim_analytics_worker::params 
     enable => true,
     ensure => running,
     subscribe => File["binary"],
+    require   => Exec['daemon-reload'],
   }
 }

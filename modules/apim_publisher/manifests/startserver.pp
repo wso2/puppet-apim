@@ -30,5 +30,6 @@ class apim_publisher::startserver (
     enable    => true,
     ensure    => running,
     subscribe => File["binary"],
+    require   => Exec['daemon-reload'],
   }
 }

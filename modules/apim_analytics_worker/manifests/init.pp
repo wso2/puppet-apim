@@ -86,23 +86,6 @@ class apim_analytics_worker inherits apim_analytics_worker::params {
     source => "puppet:///modules/${module_name}/${product_binary}",
   }
 
-  # Stop the existing setup
-  exec { "stop-server":
-    command     => "kill -term $(cat ${install_path}/wso2/${profile}/runtime.pid)",
-    path        => "/bin/",
-    onlyif      => "/usr/bin/test -f ${install_path}/wso2/${profile}/runtime.pid",
-    subscribe   => File["binary"],
-    refreshonly => true,
-  }
-
-  # Wait for the server to stop
-  exec { "wait":
-    command     => "sleep 15",
-    path        => "/bin/",
-    onlyif      => "/usr/bin/test -d ${install_path}",
-    subscribe   => File["binary"],
-    refreshonly => true,
-  }
 
   # Delete existing setup
   exec { "detele-pack":
