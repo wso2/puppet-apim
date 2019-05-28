@@ -27,5 +27,6 @@ class apim_km::startserver inherits apim_km::params {
     enable    => true,
     ensure    => running,
     subscribe => File["binary"],
+    require   => Exec['daemon-reload'],
   }
 }

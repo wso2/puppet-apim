@@ -37,6 +37,10 @@ class apim_analytics_worker::params {
   # Define the template
   $start_script_template = "bin/${profile}.sh"
 
+  # service stop retry and sleep times in seconds
+  $max_tries = 5
+  $sleep_between_try = 5
+
   # Directories
   $products_dir = "/usr/local/wso2"
 

@@ -86,24 +86,6 @@ class apim_tm  inherits apim_tm::params {
     source => "puppet:///modules/${module_name}/${product_binary}",
   }
 
-  # Stop the existing setup
-  exec { "stop-server":
-    command     => "kill -term $(cat ${install_path}/wso2carbon.pid)",
-    path        => "/bin/",
-    onlyif      => "/usr/bin/test -f ${install_path}/wso2carbon.pid",
-    subscribe   => File["binary"],
-    refreshonly => true,
-  }
-
-  # Wait for the server to stop
-  exec { "wait":
-    command     => "sleep 10",
-    path        => "/bin/",
-    onlyif      => "/usr/bin/test -d ${install_path}",
-    subscribe   => File["binary"],
-    refreshonly => true,
-  }
-
   # Delete existing setup
   exec { "detele-pack":
     command     => "rm -rf ${install_path}",

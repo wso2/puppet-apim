@@ -27,5 +27,6 @@ class apim_gateway::startserver inherits apim_gateway::params {
     enable    => true,
     ensure    => running,
     subscribe => File["binary"],
+    require   => Exec['daemon-reload'],
   }
 }

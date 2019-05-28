@@ -14,20 +14,16 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_analytics_dashboard::startserver
+# Class apim_km::stopserver
 # Starts the server as a service in the final stage.
-class apim_analytics_dashboard::startserver inherits apim_analytics_dashboard::params {
+class apim_km::stopserver (
+  $service_name = $apim_km::params::service_name
+)
+  inherits apim_km::params {
 
-  exec { 'daemon-reload':
-    command => "systemctl daemon-reload",
-    path    => "/bin/",
-  }
-
-  # Start the service
-  service { $service_name:
-    enable => true,
-    ensure => running,
-    subscribe => File["binary"],
-    require   => Exec['daemon-reload'],
+  exec { "systemctl stop ${service_name} ":
+    tries     => $max_try,
+    try_sleep => $sleep_between_try,
+    path      => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
   }
 }
