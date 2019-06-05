@@ -136,6 +136,15 @@ class apim_store inherits apim_store::params {
     require     => Package['unzip'],
   }
 
+  # Copy configuration changes to the installed directory
+  $template_list.each |String $template| {
+    file { "${install_path}/${template}":
+      ensure  => file,
+      mode    => '0644',
+      content => template("${module_name}/carbon-home/${template}.erb")
+    }
+  }
+
   # Copy wso2server.sh to installed directory
   file { "${install_path}/${start_script_template}":
     ensure  => file,
@@ -153,13 +162,6 @@ class apim_store inherits apim_store::params {
     mode    => '0754',
     content => template("${module_name}/${service_name}.service.erb"),
   }
-
-  # Add agent specific file configurations
-  # $config_file_list.each |$config_file| {
-  #   exec { "sed -i -e 's/${config_file['key']}/${config_file['value']}/g' ${config_file['file']}":
-  #     path => "/bin/",
-  #   }
-  # }
 
   /*
     Following script can be used to copy file to a given location.

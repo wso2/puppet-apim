@@ -23,36 +23,6 @@ class apim_analytics_worker_master::params {
   $product_version = '2.6.0'
   $profile = 'worker'
 
-  # Define the template
-  $template_list = [
-    'conf/dashboard/deployment.yaml'
-  ]
-
-  # -------------- Deployment.yaml Config -------------- #
-
-  # Carbon Configuration Parameters
-  $ports_offset = 1
-
-  # transport.http config
-  $default_listener_host = '0.0.0.0'
-  $msf4j_host = '0.0.0.0'
-  $msf4j_listener_keystore = '${carbon.home}/resources/security/wso2carbon.jks'
-  $msf4j_listener_keystore_password = 'wso2carbon'
-  $msf4j_listener_keystore_cert_pass = 'wso2carbon'
-
-  # siddhi.stores.query.api config
-  $siddhi_default_listener_host = '0.0.0.0'
-  $siddhi_msf4j_host = '0.0.0.0'
-  $siddhi_msf4j_listener_keystore = '${carbon.home}/resources/security/wso2carbon.jks'
-  $siddhi_msf4j_listener_keystore_password = 'wso2carbon'
-  $siddhi_msf4j_listener_keystore_cert_pass = 'wso2carbon'
-
-  # Data Sources Configuration
-  $message_tracing_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/MESSAGE_TRACING_DB;AUTO_SERVER=TRUE'
-  $message_tracing_db_username = 'wso2carbon'
-  $message_tracing_db_password = 'wso2carbon'
-  $message_tracing_db_driver = 'org.h2.Driver'
-
   # Directories
   $products_dir = "/usr/local/wso2"
 
