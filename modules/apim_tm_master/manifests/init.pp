@@ -49,15 +49,6 @@ class apim_tm_master inherits apim_tm_master::params {
     require     => Package['unzip'],
   }
 
-  # Copy configuration changes to the installed directory
-  $template_list.each |String $template| {
-    file { "${install_path}/${template}":
-      ensure  => file,
-      mode    => '0644',
-      content => template("${module_name}/carbon-home/${template}.erb")
-    }
-  }
-
   # Install the "zip" package
   package { 'zip':
     ensure => installed,
