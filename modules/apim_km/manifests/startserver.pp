@@ -23,9 +23,9 @@ class apim_km::startserver inherits apim_km::params {
     path    => "/bin/",
   }
 
-  service { $service_name:
+  service { $profile:
     enable    => true,
     ensure    => running,
-    subscribe => File["binary"],
+    subscribe => File["wso2-binary"],
   }
 }

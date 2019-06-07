@@ -26,9 +26,9 @@ class apim_store::startserver (
     path    => "/bin/",
   }
 
-  service { $service_name:
+  service { $profile:
     enable    => true,
     ensure    => running,
-    subscribe => File["binary"],
+    subscribe => File["wso2-binary"],
   }
 }
