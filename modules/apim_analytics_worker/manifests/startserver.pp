@@ -24,9 +24,9 @@ class apim_analytics_worker::startserver inherits apim_analytics_worker::params 
   }
 
   # Start the service
-  service { $service_name:
+  service { $profile:
     enable => true,
     ensure => running,
-    subscribe => File["binary"],
+    subscribe => File["wso2-binary"],
   }
 }

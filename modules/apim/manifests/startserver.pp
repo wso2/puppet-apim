@@ -16,19 +16,16 @@
 
 # Class apim::startserver
 # Starts the server as a service in the final stage.
-class apim::startserver (
-  $service_name = $apim::params::service_name
-)
-  inherits apim::params {
+class apim::startserver inherits apim::params {
 
   exec { 'daemon-reload':
     command => "systemctl daemon-reload",
     path    => "/bin/",
   }
 
-  service { $service_name:
+  service { $profile:
     enable => true,
     ensure => running,
-    subscribe => File["binary"],
+    subscribe => File["wso2-binary"],
   }
 }
