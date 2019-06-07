@@ -16,26 +16,12 @@
 
 # Claas apim_tm::params
 # This class includes all the necessary parameters.
-class apim_tm::params {
-  $user = 'wso2carbon'
-  $user_group = 'wso2'
-  $product = 'wso2am'
-  $product_version = '2.6.0'
-  $service_name = 'wso2am'
-  $profile = 'trafficmanager'
-  # $local_ip = $::ipaddress
-
-  # JDK Distributions
-  if $::osfamily == 'redhat' {
-    $lib_dir = "/usr/lib64/wso2"
-  }
-  elsif $::osfamily == 'debian' {
-    $lib_dir = "/usr/lib/wso2"
-  }
-  $jdk_name = 'amazon-corretto-8.202.08.2-linux-x64'
-  $java_home = "${lib_dir}/${jdk_name}"
+class apim_tm::params inherits apim_common::params {
 
   $start_script_template = 'bin/wso2server.sh'
+  $jvmxms = '256m'
+  $jvmxmx = '1024m'
+
   $template_list = [
     'repository/conf/api-manager.xml',
     'repository/conf/datasources/master-datasources.xml',
@@ -44,35 +30,13 @@ class apim_tm::params {
     'repository/conf/axis2/axis2.xml',
   ]
 
-  # ----- api-manager.xml config params -----
-  $auth_manager_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $auth_manager_username = '${admin.username}'
-  $auth_manager_password = '${admin.password}'
-  $auth_manager_check_permission_remotely = 'false'
+  # Define file list
+  $file_list = []
 
-  $api_gateway_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $api_gateway_username = '${admin.username}'
-  $api_gateway_password = '${admin.password}'
-  $api_gateway_endpoint = 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}'
-  $api_gateway_ws_endpoint = 'ws://${carbon.local.ip}:9099'
-
-  $analytics_enable = 'false'
-  $stream_processor_url = '{tcp://localhost:7612}'
-  $stream_processor_username = '${admin.username}'
-  $stream_processor_password = '${admin.password}'
-  $stream_processor_restapi_url = 'https://localhost:7444'
-  $stream_processor_restapi_username = '${admin.username}'
-  $stream_processor_restapi_password = '${admin.password}'
-
-  $api_store_url = 'https://localhost:${mgt.transport.https.port}/store'
-  $api_store_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $api_store_username = '${admin.username}'
-  $api_store_password = '${admin.password}'
-
-  $api_publisher_url = 'https://localhost:${mgt.transport.https.port}/publisher'
+  # Define remove file list
+  $file_removelist = []
 
   # ----- Carbon.xml config params -----
-  $ports_offset = 0
   /*
      Host name or IP address of the machine hosting this server
      e.g. www.wso2.org, 192.168.1.10
@@ -101,12 +65,4 @@ class apim_tm::params {
   # ----- axis2.xml config params -----
   $clustering_enabled = 'false'
   $clustering_membership_scheme = 'multicast'
-
-  # Directories
-  $products_dir = "/usr/local/wso2"
-
-  # Product and installation information
-  $product_binary = "${product}-${product_version}.zip"
-  $distribution_path = "${products_dir}/${product}/${profile}/${product_version}"
-  $install_path = "${distribution_path}/${product}-${product_version}"
 }

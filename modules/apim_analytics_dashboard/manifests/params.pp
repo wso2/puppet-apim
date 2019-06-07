@@ -16,31 +16,21 @@
 
 # Class apim_analytics_dashboard::params
 # This class includes all the necessary parameters.
-class apim_analytics_dashboard::params {
-  $user = 'wso2carbon'
-  $user_group = 'wso2'
-  $product = 'wso2am-analytics'
-  $product_version = '2.6.0'
-  $profile = 'dashboard'
-  $service_name = "${product}-${profile}"
-
-  # JDK Distributions
-  if $::osfamily == 'redhat' {
-    $lib_dir = "/usr/lib64/wso2"
-  }
-  elsif $::osfamily == 'debian' {
-    $lib_dir = "/usr/lib/wso2"
-  }
-  $jdk_name = 'amazon-corretto-8.202.08.2-linux-x64'
-  $java_home = "${lib_dir}/${jdk_name}"
+class apim_analytics_dashboard::params inherits apim_common::params {
 
   # Define the template
-  $start_script_template = "bin/${profile}.sh"
+  $start_script_template = "bin/dashboard.sh"
 
   # Define the template
   $template_list = [
     'conf/dashboard/deployment.yaml'
   ]
+
+  # Define file list
+  $file_list = []
+
+  # Define remove file list
+  $file_removelist = []
 
   # -------------- Deployment.yaml Config -------------- #
 
@@ -71,12 +61,4 @@ class apim_analytics_dashboard::params {
   $default_listener_keystore = '${carbon.home}/resources/security/wso2carbon.jks'
   $default_listener_keystore_password = 'wso2carbon'
   $default_listener_keystore_cert_pass = 'wso2carbon'
-
-  # Directories
-  $products_dir = "/usr/local/wso2"
-
-  # Product and installation information
-  $product_binary = "${product}-${product_version}.zip"
-  $distribution_path = "${products_dir}/${product}/${profile}/${product_version}"
-  $install_path = "${distribution_path}/${product}-${product_version}"
 }
