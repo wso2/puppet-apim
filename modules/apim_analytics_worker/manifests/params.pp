@@ -16,31 +16,21 @@
 
 # Claas apim_analytics_worker::params
 # This class includes all the necessary parameters.
-class apim_analytics_worker::params {
-  $user = 'wso2carbon'
-  $user_group = 'wso2'
-  $product = 'wso2am-analytics'
-  $product_version = '2.6.0'
-  $profile = 'worker'
-  $service_name = "${product}-${profile}"
-
-  # JDK Distributions
-  if $::osfamily == 'redhat' {
-    $lib_dir = "/usr/lib64/wso2"
-  }
-  elsif $::osfamily == 'debian' {
-    $lib_dir = "/usr/lib/wso2"
-  }
-  $jdk_name = 'amazon-corretto-8.202.08.2-linux-x64'
-  $java_home = "${lib_dir}/${jdk_name}"
+class apim_analytics_worker::params inherits apim_common::params {
 
   # Define the template
-  $start_script_template = "bin/${profile}.sh"
+  $start_script_template = "bin/worker.sh"
 
   # Define the template
   $template_list = [
     'conf/dashboard/deployment.yaml'
   ]
+
+  # Define file list
+  $file_list = []
+
+  # Define remove file list
+  $file_removelist = []
 
   # -------------- Deployment.yaml Config -------------- #
 
@@ -66,12 +56,4 @@ class apim_analytics_worker::params {
   $message_tracing_db_username = 'wso2carbon'
   $message_tracing_db_password = 'wso2carbon'
   $message_tracing_db_driver = 'org.h2.Driver'
-
-  # Directories
-  $products_dir = "/usr/local/wso2"
-
-  # Product and installation information
-  $product_binary = "${product}-${product_version}.zip"
-  $distribution_path = "${products_dir}/${product}/${profile}/${product_version}"
-  $install_path = "${distribution_path}/${product}-${product_version}"
 }

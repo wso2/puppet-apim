@@ -14,14 +14,139 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-class common::params {
+class apim_common::params {
+
+  $packages = ["unzip"]
+  $version = "2.6.0"
+
+  $user = 'wso2carbon'
+  $user_group = 'wso2'
+  $user_id = 802
+  $user_group_id = 802
+  $local_ip = $::ipaddress
+
+  # JDK Distributions
+  $java_dir = "/opt"
+  $java_symlink = "${java_dir}/java"
+  $jdk_name = 'amazon-corretto-8.202.08.2-linux-x64'
+  $java_home = "${java_dir}/${jdk_name}"
+
+  $profile = $profile
+  $target = "/mnt"
+  $product_dir = "${target}/${profile}"
+  $pack_dir = "${target}/${profile}/packs"
+
+  # ----- Profile configs -----
+  case $profile {
+    'apim_analytics_dashboard': {
+      $pack = "wso2am-analytics-${version}"
+      $server_script_path = "${product_dir}/${pack}/bin/dashboard.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2/dashboard/runtime.pid"
+    }
+    'apim_analytics_worker': {
+      $pack = "wso2am-analytics-${version}"
+      $server_script_path = "${product_dir}/${pack}/bin/worker.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2/worker/runtime.pid"
+    }
+    'apim_gateway': {
+      $pack = "wso2am-${version}"
+      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+      $optimize_params = "--optimize -Dprofile=gateway-worker -DworkerNode=true"
+    }
+    'apim_km': {
+      $pack = "wso2am-${version}"
+      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+      $optimize_params = "--optimize -Dprofile=api-key-manager"
+    }
+    'apim_publisher': {
+      $pack = "wso2am-${version}"
+      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+      $optimize_params = "--optimize -Dprofile=api-publisher"
+    }
+    'apim_store': {
+      $pack = "wso2am-${version}"
+      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+      $optimize_params = "--optimize -Dprofile=api-store"
+    }
+    'apim_tm': {
+      $pack = "wso2am-${version}"
+      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+      $optimize_params = "--optimize -Dprofile=traffic-manager"
+    }
+    default: {
+      $pack = "wso2am-${version}"
+      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+      $optimize_params = ""
+    }
+  }
+
+  # Pack Directories
+  $carbon_home = "${product_dir}/${pack}"
+  $product_binary = "${pack}.zip"
+
+  # Server stop retry configs
+  $try_count = 5
+  $try_sleep = 5
+
+  # ----- api-manager.xml config params -----
+  $auth_manager_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $auth_manager_username = '${admin.username}'
+  $auth_manager_password = '${admin.password}'
+  $auth_manager_check_permission_remotely = 'false'
+
+  $api_gateway_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $api_gateway_username = '${admin.username}'
+  $api_gateway_password = '${admin.password}'
+  $api_gateway_endpoint = 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}'
+  $api_gateway_ws_endpoint = 'ws://${carbon.local.ip}:9099'
+
+  $analytics_enable = 'false'
+  $stream_processor_url = '{tcp://localhost:7612}'
+  $stream_processor_username = '${admin.username}'
+  $stream_processor_password = '${admin.password}'
+  $stream_processor_restapi_url = 'https://localhost:7444'
+  $stream_processor_restapi_username = '${admin.username}'
+  $stream_processor_restapi_password = '${admin.password}'
+
+  $api_store_url = 'https://localhost:${mgt.transport.https.port}/store'
+  $api_store_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $api_store_username = '${admin.username}'
+  $api_store_password = '${admin.password}'
+
+  $api_publisher_url = 'https://localhost:${mgt.transport.https.port}/publisher'
 
   # ----- Master-datasources config params -----
+
+  $wso2carbon_db_url = 'jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE'
+  $wso2carbon_db_username = 'wso2carbon'
+  $wso2carbon_db_password = 'wso2carbon'
+  $wso2carbon_db_driver = 'org.h2.Driver'
 
   $wso2am_db_url = 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE'
   $wso2am_db_username = 'wso2carbon'
   $wso2am_db_password = 'wso2carbon'
   $wso2am_db_driver = 'org.h2.Driver'
+
+  # $wso2config_db_url = ''
+  # $wso2config_db_username = ''
+  # $wso2config_db_password = ''
+  # $wso2config_db_driver = 'org.h2.Driver'
+  #
+  # $wso2user_db_url = ''
+  # $wso2user_db_username = ''
+  # $wso2user_db_password = ''
+  # $wso2user_db_driver = 'org.h2.Driver'
+  #
+  # $wso2gov_db_url = ''
+  # $wso2gov_db_username = ''
+  # $wso2gov_db_password = ''
+  # $wso2gov_db_driver = 'org.h2.Driver'
 
   $stat_db_url = 'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
   $stat_db_username = 'wso2carbon'
@@ -33,7 +158,26 @@ class common::params {
   $mb_store_db_password = 'wso2carbon'
   $mb_store_driver = 'org.h2.Driver'
 
-  # user-mgt.xml
+  # ----- Carbon.xml config params -----
+  $ports_offset = 0
+
+  $key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
+  $key_store_type = 'JKS'
+  $key_store_password = 'wso2carbon'
+  $key_store_key_alias = 'wso2carbon'
+  $key_store_key_password = 'wso2carbon'
+
+  $internal_key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
+  $internal_key_store_type = 'JKS'
+  $internal_key_store_password = 'wso2carbon'
+  $internal_key_store_key_alias = 'wso2carbon'
+  $internal_key_store_key_password = 'wso2carbon'
+
+  $trust_store = '${carbon.home}/repository/resources/security/client-truststore.jks'
+  $trust_store_type = 'JKS'
+  $trust_store_password = 'wso2carbon'
+
+  # ----- user-mgt.xml config params -----
   $admin_username = 'admin'
   $admin_password = 'admin'
 
