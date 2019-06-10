@@ -133,21 +133,6 @@ class apim_common::params {
   $wso2am_db_password = 'wso2carbon'
   $wso2am_db_driver = 'org.h2.Driver'
 
-  # $wso2config_db_url = ''
-  # $wso2config_db_username = ''
-  # $wso2config_db_password = ''
-  # $wso2config_db_driver = 'org.h2.Driver'
-  #
-  # $wso2user_db_url = ''
-  # $wso2user_db_username = ''
-  # $wso2user_db_password = ''
-  # $wso2user_db_driver = 'org.h2.Driver'
-  #
-  # $wso2gov_db_url = ''
-  # $wso2gov_db_username = ''
-  # $wso2gov_db_password = ''
-  # $wso2gov_db_driver = 'org.h2.Driver'
-
   $stat_db_url = 'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
   $stat_db_username = 'wso2carbon'
   $stat_db_password = 'wso2carbon'
