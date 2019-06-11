@@ -16,17 +16,13 @@
 
 # Run stages
 stage { 'custom': }
-stage { 'final': }
 
 # Order stages
-Stage['main'] -> Stage['custom'] -> Stage['final']
+Stage['main'] -> Stage['custom']
 
 node default {
   class { "::${::profile}": }
   class { "::${::profile}::custom":
     stage => 'custom'
-  }
-  class { "::${::profile}::startserver":
-    stage => 'final'
   }
 }

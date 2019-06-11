@@ -1,4 +1,4 @@
-# ----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
 #  Copyright (c) 2019 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,10 +12,12 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-# ----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
 
-# Class: apim::custom
-# This class is reserved to run custom user code before starting the server.
-class apim_master::custom {
-  # resources
+class apim_common::service inherits apim_common::params {
+
+  service { "${wso2_service_name}":
+    enable => true,
+    ensure => running,
+  }
 }

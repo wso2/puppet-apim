@@ -26,7 +26,7 @@ class apim_gateway inherits apim_gateway::params {
       ensure  => file,
       mode    => '0644',
       content => template("${module_name}/carbon-home/${template}.erb"),
-      notify  => Service["${profile}"],
+      notify  => Service["${wso2_service_name}"],
       require => Class["apim_common"]
     }
   }
@@ -40,7 +40,7 @@ class apim_gateway inherits apim_gateway::params {
       group => $user_group,
       mode => '0755',
       source => "puppet:///modules/${module_name}/${file}",
-      notify  => Service["${profile}"],
+      notify  => Service["${wso2_service_name}"],
       require => Class["apim_common"]
     }
   }
@@ -51,7 +51,7 @@ class apim_gateway inherits apim_gateway::params {
       ensure => absent,
       owner => $user,
       group => $user_group,
-      notify  => Service["${profile}"],
+      notify  => Service["${wso2_service_name}"],
       require => Class["apim_common"]
     }
   }
@@ -63,7 +63,7 @@ class apim_gateway inherits apim_gateway::params {
     group   => $user_group,
     mode    => '0754',
     content => template("${module_name}/carbon-home/${start_script_template}.erb"),
-    notify  => Service["${profile}"],
+    notify  => Service["${wso2_service_name}"],
     require => Class["apim_common"]
   }
 
