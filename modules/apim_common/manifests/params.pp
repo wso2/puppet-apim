@@ -35,6 +35,7 @@ class apim_common::params {
   $target = "/mnt"
   $product_dir = "${target}/${profile}"
   $pack_dir = "${target}/${profile}/packs"
+  $wso2_service_name = "wso2${profile}"
 
   # ----- Profile configs -----
   case $profile {
