@@ -43,7 +43,6 @@ update_pack() {
         exit 1
     fi
     rm ${cwd}/${1}.zip
-    delete_pack ${1}
     cd ${cwd}
     echo "Repackaging ${1}..."
     zip -qr ${1}.zip ${1}
