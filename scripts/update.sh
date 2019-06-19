@@ -23,27 +23,27 @@ set -e
 
 # Build artifacts and versions
 : ${version:="2.6.0"}
-: ${cwd:=$(pwd)}
+: ${packs_dir:=$(pwd)/../modules/apim_common/files/packs/}
 
 usage() { echo "Usage: $0 -p <profile_name>" 1>&2; exit 1; }
 
 unzip_pack() {
-    if [[ -d ${cwd}/${1} ]]
+    if [[ -d ${packs_dir}/${1} ]]
     then
         echo "The current directory contains a directory ${1}. Please move the directory to another location."
     fi
     echo "Unzipping ${1}.zip..."
-    unzip -q ${cwd}/${1}.zip
+    unzip -q ${packs_dir}/${1}.zip
 }
 
 update_pack() {
     if ! [ -x "$(command -v zip)" ]; then
         echo 'Error: zip is not installed.' >&2
-        rm -rf ${cwd}/${1}
+        rm -rf ${packs_dir}/${1}
         exit 1
     fi
-    rm ${cwd}/${1}.zip
-    cd ${cwd}
+    rm ${packs_dir}/${1}.zip
+    cd ${packs_dir}
     echo "Repackaging ${1}..."
     zip -qr ${1}.zip ${1}
     rm -rf ${1}
@@ -69,27 +69,35 @@ fi
 case "${profile}" in
     apim_analytics_dashboard)
         pack="wso2am-analytics-"${version}
+        updated_modules=("apim_analytics_dashboard" "apim_analytics_worker")
         ;;
     apim_analytics_worker)
         pack="wso2am-analytics-"${version}
+        updated_modules=("apim_analytics_dashboard" "apim_analytics_worker")
         ;;
     apim)
         pack="wso2am-"${version}
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
         ;;
     apim_gateway)
         pack="wso2am-"${version}
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
         ;;
     apim_km)
         pack="wso2am-"${version}
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
         ;;
     apim_publisher)
         pack="wso2am-"${version}
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
         ;;
     apim_store)
         pack="wso2am-"${version}
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
         ;;
     apim_tm)
         pack="wso2am-"${version}
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
         ;;
     *)
         echo "Invalid profile. Please provide one of the following profiles:
@@ -105,10 +113,10 @@ case "${profile}" in
         ;;
 esac
 
-carbon_home=${cwd}/${pack}
+carbon_home=${packs_dir}/${pack}
 
 # Create updates directory if it doesn't exist
-updates_dir=${cwd}/updates/${pack}
+updates_dir=${packs_dir}/updates/${pack}
 if [[ ! -d ${updates_dir} ]]
 then
   mkdir -p ${updates_dir}
@@ -125,6 +133,7 @@ then
   status=$(cat ${updates_dir}/status)
 fi
 
+cd ${packs_dir}
 # Check if user has a WSO2 subscription
 while :
 do
@@ -142,7 +151,7 @@ do
     then
       echo "Update executable not found. Please download package for subscription users from website."
       echo "Don't have a subscription yet? Sign up for a free-trial subscription at https://wso2.com/subscription/free-trial"
-      rm -rf ${cwd}/${pack}
+      rm -rf ${packs_dir}/${pack}
       exit 1
     else
       break
@@ -174,12 +183,12 @@ then
   if [[ ${update_status} -eq 1 ]]
   then
     echo "Error occurred while attempting to resolve conflicts."
-    rm -rf ${cwd}/${pack}
+    rm -rf ${packs_dir}/${pack}
     exit 1
   fi
 else
   echo "status file is invalid. Please delete or clear file content."
-  rm -rf ${cwd}/${pack}
+  rm -rf ${packs_dir}/${pack}
   exit 1
 fi
 
@@ -200,10 +209,10 @@ then
   update_pack ${pack}
 elif [[ ${update_status} -eq 3 ]]
 then
-  echo "Conflicts encountered. Please resolve conflicts in ${cwd}/${pack} and run the update script again."
+  echo "Conflicts encountered. Please resolve conflicts in ${packs_dir}/${pack} and run the update script again."
 else
   echo "Update error occurred. Stopped with exit code ${update_status}"
-  rm -rf ${cwd}/${pack}
+  rm -rf ${packs_dir}/${pack}
   exit ${update_status}
 fi
 
@@ -223,11 +232,15 @@ then
 
   while read -r line; do
     filepath=${line##*${pack}/}
-    template_file=${cwd}/../../../${profile}/templates/carbon-home/${filepath}.erb
-    if [[ -f ${template_file} ]]
-    then
-      updated_templates+=("modules/"${template_file##*${cwd}/../../../})
-    fi
+
+    for module in "${updated_modules[@]}"
+    do
+        template_file=${packs_dir}/../../../${module}/templates/carbon-home/${filepath}.erb
+        if [[ -f ${template_file} ]]
+        then
+            updated_templates+=("modules/"${template_file##*${packs_dir}/../../../})
+        fi
+    done
   done < ${updates_dir}/merged_files.txt
 
   # Display template files to be changed
