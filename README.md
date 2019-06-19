@@ -42,11 +42,6 @@ This repository contains the Puppet modules for profiles related to WSO2 API Man
        puppet agent -vt
        ```
     7. Analytics profile:
-        1. Dashboard:
-            ```bash
-            export FACTER_profile=apim_analytics_dashboard
-            puppet agent -vt
-            ```
         2. Worker:
             ```bash
             export FACTER_profile=apim_analytics_worker
