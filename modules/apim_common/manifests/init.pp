@@ -90,11 +90,11 @@ class apim_common inherits apim_common::params {
 
   # Stop the existing setup
   exec { "stop-server":
-    command     => "systemctl stop ${profile}",
+    command     => "systemctl stop ${wso2_service_name}",
     path        => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ],
     tries       => $try_count,
     try_sleep   => $try_sleep,
-    onlyif      => "/usr/bin/test -f /etc/systemd/system/${profile}.service",
+    onlyif      => "/usr/bin/test -f /etc/systemd/system/${wso2_service_name}.service",
     subscribe   => File["wso2-binary"],
     refreshonly => true,
   }
