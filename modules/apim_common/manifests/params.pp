@@ -19,9 +19,10 @@ class apim_common::params {
   $packages = ["unzip"]
   $version = "2.6.0"
 
+  # Set the location the product packages should reside in (eg: "local" in the /files directory, "remote" in a remote location)
   $pack_location = "local"
   # $pack_location = "remote"
-  # $remote_jdk = "http://10.100.5.174:8000/jdk/amazon-corretto-8.202.08.2-linux-x64.tar.gz"
+  # $remote_jdk = "<URL_TO_JDK_FILE>"
 
   $user = 'wso2carbon'
   $user_group = 'wso2'
@@ -43,56 +44,50 @@ class apim_common::params {
 
   # ----- Profile configs -----
   case $profile {
-    'apim_analytics_dashboard': {
-      $pack = "wso2am-analytics-${version}"
-      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-analytics-2.6.0.zip"
-      $server_script_path = "${product_dir}/${pack}/bin/dashboard.sh"
-      $pid_file_path = "${product_dir}/${pack}/wso2/dashboard/runtime.pid"
-    }
     'apim_analytics_worker': {
       $pack = "wso2am-analytics-${version}"
-      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
+      # $remote_pack = "<URL_TO_APIM_ANALYTICS_WORKER_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/worker.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2/worker/runtime.pid"
     }
     'apim_gateway': {
       $pack = "wso2am-${version}"
-      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
+      # $remote_pack = "<URL_TO_APIM_GATEWAY_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=gateway-worker -DworkerNode=true"
     }
     'apim_km': {
       $pack = "wso2am-${version}"
-      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
+      # $remote_pack = "<URL_TO_APIM_KEYMANAGER_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=api-key-manager"
     }
     'apim_publisher': {
       $pack = "wso2am-${version}"
-      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
+      # $remote_pack = "<URL_TO_APIM_PUBLISHER_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=api-publisher"
     }
     'apim_store': {
       $pack = "wso2am-${version}"
-      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
+      # $remote_pack = "<URL_TO_APIM_STORE_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=api-store"
     }
     'apim_tm': {
       $pack = "wso2am-${version}"
-      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
+      # $remote_pack = "<URL_TO_APIM_TRAFFICMANAGER_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=traffic-manager"
     }
     default: {
       $pack = "wso2am-${version}"
-      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
+      # $remote_pack = "<URL_TO_APIM_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = ""
@@ -208,7 +203,8 @@ class apim_common::params {
   $metrics_db_password = 'wso2carbon'
   $metrics_db_driver = 'org.h2.Driver'
 
-  $permission_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
+  $permission_db_url =
+    'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
   $permission_db_username = 'wso2carbon'
   $permission_db_password = 'wso2carbon'
   $permission_db_driver = 'org.h2.Driver'

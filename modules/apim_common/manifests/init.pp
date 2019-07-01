@@ -49,24 +49,24 @@ class apim_common inherits apim_common::params {
     file { "jdk-distribution":
       path   => "${java_home}.tar.gz",
       source => "puppet:///modules/${module_name}/jdk/${jdk_name}.tar.gz",
-      notify  => Exec["unpack-jdk"],
+      notify => Exec["unpack-jdk"],
     }
   }
   elsif $pack_location == "remote" {
     exec { "retrieve-jdk":
-      command     => "wget -q ${remote_jdk} -O ${java_home}.tar.gz",
-      path        => "/usr/bin/",
-      onlyif      => "/usr/bin/test ! -f ${java_home}.tar.gz",
+      command => "wget -q ${remote_jdk} -O ${java_home}.tar.gz",
+      path    => "/usr/bin/",
+      onlyif  => "/usr/bin/test ! -f ${java_home}.tar.gz",
       notify  => Exec["unpack-jdk"],
     }
   }
 
   # Unzip distribution
   exec { "unpack-jdk":
-    command     => "tar -zxvf ${java_home}.tar.gz",
-    path        => "/bin/",
-    cwd         => "${java_dir}",
-    onlyif      => "/usr/bin/test ! -d ${java_home}",
+    command => "tar -zxvf ${java_home}.tar.gz",
+    path    => "/bin/",
+    cwd     => "${java_dir}",
+    onlyif  => "/usr/bin/test ! -d ${java_home}",
   }
 
   # Create symlink to Java binary
@@ -106,8 +106,8 @@ class apim_common inherits apim_common::params {
       require => File["${product_dir}", "${pack_dir}"],
     }
     exec { "retrieve-pack":
-      command     => "wget -q ${remote_pack} -O ${pack_dir}/${product_binary}",
-      path        => "/usr/bin/",
+      command => "wget -q ${remote_pack} -O ${pack_dir}/${product_binary}",
+      path    => "/usr/bin/",
       require => File["delete-existing-pack"],
       notify  => [Exec["stop-server"], Exec["detele-pack"], Exec["unzip-update"]],
     }
@@ -115,11 +115,11 @@ class apim_common inherits apim_common::params {
 
   # Stop the existing setup
   exec { "stop-server":
-    command     => "systemctl stop ${wso2_service_name}",
-    path        => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ],
-    tries       => $try_count,
-    try_sleep   => $try_sleep,
-    onlyif      => "/usr/bin/test -f /etc/systemd/system/${wso2_service_name}.service",
+    command   => "systemctl stop ${wso2_service_name}",
+    path      => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ],
+    tries     => $try_count,
+    try_sleep => $try_sleep,
+    onlyif    => "/usr/bin/test -f /etc/systemd/system/${wso2_service_name}.service",
   }
 
   # Delete existing setup
@@ -133,11 +133,11 @@ class apim_common inherits apim_common::params {
 
   # Unzip the binary and create setup
   exec { "unzip-update":
-    command     => "unzip -o ${product_binary} -d ${product_dir}",
-    path        => "/usr/bin/",
-    user        => $user,
-    group       => $user_group,
-    cwd         => "${pack_dir}",
+    command => "unzip -o ${product_binary} -d ${product_dir}",
+    path    => "/usr/bin/",
+    user    => $user,
+    group   => $user_group,
+    cwd     => "${pack_dir}",
   }
 
   # Copy the unit file required to deploy the server as a service
@@ -150,8 +150,8 @@ class apim_common inherits apim_common::params {
   }
 
   exec { 'systemctl daemon-reload':
-    path    =>  '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
-    subscribe => File["/etc/systemd/system/${wso2_service_name}.service"],
+    path        => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
+    subscribe   => File["/etc/systemd/system/${wso2_service_name}.service"],
     refreshonly => true,
   }
 }
