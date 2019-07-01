@@ -19,6 +19,10 @@ class apim_common::params {
   $packages = ["unzip"]
   $version = "2.6.0"
 
+  $pack_location = "local"
+  # $pack_location = "remote"
+  # $remote_jdk = "http://10.100.5.174:8000/jdk/amazon-corretto-8.202.08.2-linux-x64.tar.gz"
+
   $user = 'wso2carbon'
   $user_group = 'wso2'
   $user_id = 802
@@ -41,46 +45,54 @@ class apim_common::params {
   case $profile {
     'apim_analytics_dashboard': {
       $pack = "wso2am-analytics-${version}"
+      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-analytics-2.6.0.zip"
       $server_script_path = "${product_dir}/${pack}/bin/dashboard.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2/dashboard/runtime.pid"
     }
     'apim_analytics_worker': {
       $pack = "wso2am-analytics-${version}"
+      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
       $server_script_path = "${product_dir}/${pack}/bin/worker.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2/worker/runtime.pid"
     }
     'apim_gateway': {
       $pack = "wso2am-${version}"
+      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=gateway-worker -DworkerNode=true"
     }
     'apim_km': {
       $pack = "wso2am-${version}"
+      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=api-key-manager"
     }
     'apim_publisher': {
       $pack = "wso2am-${version}"
+      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=api-publisher"
     }
     'apim_store': {
       $pack = "wso2am-${version}"
+      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=api-store"
     }
     'apim_tm': {
       $pack = "wso2am-${version}"
+      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=traffic-manager"
     }
     default: {
       $pack = "wso2am-${version}"
+      # $remote_pack = "http://10.100.5.174:8000/packs/wso2am-2.6.0.zip"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = ""
