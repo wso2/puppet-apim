@@ -30,6 +30,13 @@ class apim_common::params {
   $user_group_id = 802
   $local_ip = $::ipaddress
 
+  # Performance tuning configurations
+  $enable_performance_tuning = false
+  $performance_tuning_flie_list = [
+    'etc/sysctl.conf',
+    'etc/security/limits.conf',
+  ]
+
   # JDK Distributions
   $java_dir = "/opt"
   $java_symlink = "${java_dir}/java"
