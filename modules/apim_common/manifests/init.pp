@@ -41,6 +41,22 @@ class apim_common inherits apim_common::params {
   }
 
   /*
+  * System Performance Tuning
+  */
+  if $enable_performance_tuning {
+    $performance_tuning_flie_list.each | String $file | {
+      file { "/${file}":
+        path    => "/${file}",
+        ensure  => present,
+        recurse => remote,
+        source  => "puppet:///modules/${module_name}/system/${file}",
+        owner   => root,
+        group   => root
+      }
+    }
+  }
+
+  /*
   * Java Distribution
   */
 
