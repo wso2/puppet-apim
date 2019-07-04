@@ -54,10 +54,10 @@ This repository contains the Puppet modules for profiles related to WSO2 API Man
             puppet agent -vt
             ```
 
-## Tuning Performance
+## Performance Tuning
 System configurations can be changed through Puppet to optimize OS level performance. Performance tuning can be enabled by changing `$enable_performance_tuning` in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `true`.
 
-System files that will be updated when performance tuning is enabled is available in `<puppet_environment>/modules/apim_common/files/system`. Update the configuration values according to the requirements of your deployment.
+System files that will be updated when performance tuning is enabled are available in `<puppet_environment>/modules/apim_common/files/system`. Update the configuration values according to the requirements of your deployment.
 
 ## Manifests in a module
 The run stages for Puppet are described in `<puppet_environment>/manifests/site.pp`, and they are of the order Main -> Custom.
