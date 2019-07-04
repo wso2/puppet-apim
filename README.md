@@ -60,6 +60,9 @@ System configurations can be changed through Puppet to optimize OS level perform
 System files that will be updated when performance tuning is enabled are available in `<puppet_environment>/modules/apim_common/files/system`. Update the configuration values according to the requirements of your deployment.
 
 ## Manifests in a module
+
+![Module architecture](docs/images/module_architecture.png "Module architecture")
+
 The run stages for Puppet are described in `<puppet_environment>/manifests/site.pp`, and they are of the order Main -> Custom.
 
 Each Puppet module contains the following .pp files.
