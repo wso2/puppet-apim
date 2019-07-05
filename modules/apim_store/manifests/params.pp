@@ -49,4 +49,18 @@ class apim_store::params inherits apim_common::params {
   # ----- axis2.xml config params -----
   $clustering_enabled = 'false'
   $clustering_membership_scheme = 'multicast'
+
+  # ----- api-manager.xml config params -----
+  $key_validator_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $key_validator_username = '${admin.username}'
+  $key_validator_password = '${admin.password}'
+  $key_validator_thrift_server_enable = 'false'
+  $key_validator_thrift_server_host = 'localhost'
+
+  $oauth_configs_revoke_api_url = 'https://localhost:${https.nio.port}/revoke'
+
+  $throttle_config_data_pub_enable = 'false'
+  $throttle_config_policy_deployer_enable = 'false'
+  $throttle_config_block_condition_enable = 'false'
+  $throttle_config_jms_conn_enable = 'false'
 }
