@@ -50,4 +50,15 @@ class apim_publisher::params inherits apim_common::params {
   # ----- axis2.xml config params -----
   $clustering_enabled = 'false'
   $clustering_membership_scheme = 'multicast'
+
+  # ----- api-manager.xml config params -----
+  $key_validator_thrift_server_enable = 'false'
+
+  $throttle_config_tm_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
+  $throttle_config_tm_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
+  $throttle_config_data_pub_enable = 'false'
+  $throttle_config_policy_deployer_enable = 'true'
+  $throttle_config_policy_deployer_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $throttle_config_block_condition_enable = 'false'
+  $throttle_config_jms_conn_enable = 'false'
 }
