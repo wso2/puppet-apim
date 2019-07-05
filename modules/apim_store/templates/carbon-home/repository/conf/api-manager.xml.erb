@@ -212,12 +212,12 @@
     -->
     <APIKeyValidator>
         <!-- Server URL of the API key manager -->
-        <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
+        <ServerURL><%= @key_validator_server_url %></ServerURL>
 
         <!-- Admin username for API key manager. -->
-        <Username>${admin.username}</Username>
+        <Username><%= @key_validator_username %></Username>
         <!-- Admin password for API key manager. -->
-        <Password>${admin.password}</Password>
+        <Password><%= @key_validator_password %></Password>
 
         <!-- Configurations related to enable thrift support for key-management related communication.
              If you want to switch back to Web Service Client, change the value of "KeyValidatorClientType" to "WSClient".
@@ -230,8 +230,8 @@
         <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
         <!--ThriftClientPort>10397</ThriftClientPort-->
 
-        <EnableThriftServer>true</EnableThriftServer>
-        <ThriftServerHost>localhost</ThriftServerHost>
+        <EnableThriftServer><%= @key_validator_thrift_server_enable %></EnableThriftServer>
+        <ThriftServerHost><%= @key_validator_thrift_server_host %></ThriftServerHost>
         <!--ThriftServerPort>10397</ThriftServerPort-->
 
         <!--ConnectionPool>
@@ -276,7 +276,7 @@
              In distributed deployment we should configure this property in key manager node by pointing
              gateway https( /http, we recommend users to use 'https' endpoints for security purpose) url.
              Also please note that we should point gateway revoke service to key manager -->
-        <RevokeAPIURL>https://localhost:${https.nio.port}/revoke</RevokeAPIURL>
+        <RevokeAPIURL><%= @oauth_configs_revole_api_url %></RevokeAPIURL>
         <!-- Whether to encrypt tokens when storing in the Database
         Note: If changing this value to true, change the value of <TokenPersistenceProcessor> to
         org.wso2.carbon.identity.oauth.tokenprocessor.EncryptionDecryptionPersistenceProcessor in the identity.xml -->
@@ -564,7 +564,7 @@
             <Password>${admin.password}</Password>
         </TrafficManager>
         <DataPublisher>
-            <Enabled>true</Enabled>
+            <Enabled><%= @throttle_config_data_pub_enable %></Enabled>
             <DataPublisherPool>
                 <MaxIdle>1000</MaxIdle>
                 <InitIdleCapacity>200</InitIdleCapacity>
@@ -576,18 +576,18 @@
             </DataPublisherThreadPool>
         </DataPublisher>
         <PolicyDeployer>
-            <Enabled>true</Enabled>
+            <Enabled><%= @throttle_config_policy_deployer_enable %></Enabled>
             <ServiceURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServiceURL>
             <Username>${admin.username}</Username>
             <Password>${admin.password}</Password>
         </PolicyDeployer>
         <BlockCondition>
-            <Enabled>true</Enabled>
+            <Enabled><%= @throttle_config_block_condition_enable %></Enabled>
             <!--InitDelay>300000</InitDelay>
             <Period>3600000</Period-->
         </BlockCondition>
         <JMSConnectionDetails>
-            <Enabled>true</Enabled>
+            <Enabled><%= @throttle_config_jms_conn_enable %></Enabled>
             <Destination>throttleData</Destination>
             <!--InitDelay>300000</InitDelay-->
             <JMSConnectionParameters>

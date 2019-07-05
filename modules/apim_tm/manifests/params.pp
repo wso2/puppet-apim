@@ -65,4 +65,9 @@ class apim_tm::params inherits apim_common::params {
   # ----- axis2.xml config params -----
   $clustering_enabled = 'false'
   $clustering_membership_scheme = 'multicast'
+
+  # ----- api-manager.xml config params -----
+  $key_validator_thrift_server_enable = 'false'
+
+  $throttle_config_policy_deployer_enable = 'true'
 }
