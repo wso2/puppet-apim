@@ -49,4 +49,19 @@ class apim_gateway::params inherits apim_common::params {
   # ----- axis2.xml config params -----
   $clustering_enabled = 'false'
   $clustering_membership_scheme = 'multicast'
+
+  # ----- api-manager.xml config params -----
+  $key_validator_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $key_validator_username = '${admin.username}'
+  $key_validator_password = '${admin.password}'
+  $key_validator_thrift_client_port = '10397'
+  $key_validator_thrift_server_enable = 'false'
+  $key_validator_thrift_server_host = 'localhost'
+
+  $throttle_config_tm_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
+  $throttle_config_tm_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
+  $throttle_config_policy_deployer_enable = 'false'
+  $throttle_config_policy_deployer_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $throttle_config_jms_conn_enable = 'true'
+  $throttle_config_jms_conn_factory = 'amqp://${admin.username}:${admin.password}@clientid/carbon?brokerlist=\'tcp://${carbon.local.ip}:${jms.port}\''
 }

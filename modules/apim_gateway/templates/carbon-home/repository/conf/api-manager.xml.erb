@@ -212,12 +212,12 @@
     -->
     <APIKeyValidator>
         <!-- Server URL of the API key manager -->
-        <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
+        <ServerURL><%= @key_validator_server_url %></ServerURL>
 
         <!-- Admin username for API key manager. -->
-        <Username>${admin.username}</Username>
+        <Username><%= @key_validator_username %></Username>
         <!-- Admin password for API key manager. -->
-        <Password>${admin.password}</Password>
+        <Password><%= @key_validator_password %></Password>
 
         <!-- Configurations related to enable thrift support for key-management related communication.
              If you want to switch back to Web Service Client, change the value of "KeyValidatorClientType" to "WSClient".
@@ -228,10 +228,10 @@
 	         -The Gateway uses this parameter to connect to the key validation thrift service. -->
         <KeyValidatorClientType>ThriftClient</KeyValidatorClientType>
         <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
-        <!--ThriftClientPort>10397</ThriftClientPort-->
+        <ThriftClientPort><%= @key_validator_thrift_client_port %></ThriftClientPort>
 
-        <EnableThriftServer>true</EnableThriftServer>
-        <ThriftServerHost>localhost</ThriftServerHost>
+        <EnableThriftServer><%= @key_validator_thrift_server_enable %></EnableThriftServer>
+        <ThriftServerHost><%= @key_validator_thrift_server_host %></ThriftServerHost>
         <!--ThriftServerPort>10397</ThriftServerPort-->
 
         <!--ConnectionPool>
@@ -558,8 +558,8 @@
         <EnableAdvanceThrottling>true</EnableAdvanceThrottling>
         <TrafficManager>
             <Type>Binary</Type>
-            <ReceiverUrlGroup>tcp://${carbon.local.ip}:${receiver.url.port}</ReceiverUrlGroup>
-            <AuthUrlGroup>ssl://${carbon.local.ip}:${auth.url.port}</AuthUrlGroup>
+            <ReceiverUrlGroup><%= @throttle_config_tm_receiver_url %></ReceiverUrlGroup>
+            <AuthUrlGroup><%= @throttle_config_tm_auth_url %></AuthUrlGroup>
             <Username>${admin.username}</Username>
             <Password>${admin.password}</Password>
         </TrafficManager>
@@ -576,8 +576,8 @@
             </DataPublisherThreadPool>
         </DataPublisher>
         <PolicyDeployer>
-            <Enabled>true</Enabled>
-            <ServiceURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServiceURL>
+            <Enabled><%= @throttle_config_policy_deployer_enable %></Enabled>
+            <ServiceURL><%= @throttle_config_policy_deployer_url %></ServiceURL>
             <Username>${admin.username}</Username>
             <Password>${admin.password}</Password>
         </PolicyDeployer>
@@ -587,14 +587,14 @@
             <Period>3600000</Period-->
         </BlockCondition>
         <JMSConnectionDetails>
-            <Enabled>true</Enabled>
+            <Enabled><%= @throttle_config_jms_conn_enable %></Enabled>
             <Destination>throttleData</Destination>
             <!--InitDelay>300000</InitDelay-->
             <JMSConnectionParameters>
                 <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
                 <transport.jms.DestinationType>topic</transport.jms.DestinationType>
                 <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
-                <connectionfactory.TopicConnectionFactory>amqp://${admin.username}:${admin.password}@clientid/carbon?brokerlist='tcp://${carbon.local.ip}:${jms.port}'</connectionfactory.TopicConnectionFactory>
+                <connectionfactory.TopicConnectionFactory><%= @throttle_config_jms_conn_factory %></connectionfactory.TopicConnectionFactory>
             </JMSConnectionParameters>
         </JMSConnectionDetails>
 
