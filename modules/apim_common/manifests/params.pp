@@ -110,17 +110,6 @@ class apim_common::params {
   $try_sleep = 5
 
   # ----- api-manager.xml config params -----
-  $auth_manager_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $auth_manager_username = '${admin.username}'
-  $auth_manager_password = '${admin.password}'
-  $auth_manager_check_permission_remotely = 'false'
-
-  $api_gateway_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $api_gateway_username = '${admin.username}'
-  $api_gateway_password = '${admin.password}'
-  $api_gateway_endpoint = 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}'
-  $api_gateway_ws_endpoint = 'ws://${carbon.local.ip}:9099'
-
   $analytics_enable = 'false'
   $stream_processor_url = '{tcp://localhost:7612}'
   $stream_processor_username = '${admin.username}'
@@ -131,18 +120,13 @@ class apim_common::params {
 
   $api_store_url = 'https://localhost:${mgt.transport.https.port}/store'
   $api_store_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $api_store_username = '${admin.username}'
-  $api_store_password = '${admin.password}'
 
-  $api_publisher_url = 'https://localhost:${mgt.transport.https.port}/publisher'
+  $key_validator_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $key_validator_username = '${admin.username}'
+  $key_validator_password = '${admin.password}'
+  $key_validator_thrift_server_host = 'localhost'
 
   # ----- Master-datasources config params -----
-
-  $wso2carbon_db_url = 'jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE'
-  $wso2carbon_db_username = 'wso2carbon'
-  $wso2carbon_db_password = 'wso2carbon'
-  $wso2carbon_db_driver = 'org.h2.Driver'
-  $wso2carbon_db_validation_query = 'SELECT 1'
 
   $wso2am_db_url = 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE'
   $wso2am_db_username = 'wso2carbon'
@@ -162,23 +146,32 @@ class apim_common::params {
   $mb_store_driver = 'org.h2.Driver'
   $mb_store_db_validation_query = 'SELECT 1'
 
+  $wso2um_db_url = 'jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE'
+  $wso2um_db_username = 'wso2carbon'
+  $wso2um_db_password = 'wso2carbon'
+  $wso2um_db_driver = 'org.h2.Driver'
+  $wso2um_db_validation_query = 'SELECT 1'
+
+  $wso2reg_db_url = 'jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE'
+  $wso2reg_db_username = 'wso2carbon'
+  $wso2reg_db_password = 'wso2carbon'
+  $wso2reg_db_driver = 'org.h2.Driver'
+  $wso2reg_db_validation_query = 'SELECT 1'
+
   # ----- Carbon.xml config params -----
   $ports_offset = 0
 
-  $key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
-  $key_store_type = 'JKS'
+  $key_store = 'repository/resources/security/wso2carbon.jks'
   $key_store_password = 'wso2carbon'
   $key_store_key_alias = 'wso2carbon'
   $key_store_key_password = 'wso2carbon'
 
-  $internal_key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
-  $internal_key_store_type = 'JKS'
+  $internal_key_store = 'repository/resources/security/wso2carbon.jks'
   $internal_key_store_password = 'wso2carbon'
   $internal_key_store_key_alias = 'wso2carbon'
   $internal_key_store_key_password = 'wso2carbon'
 
-  $trust_store = '${carbon.home}/repository/resources/security/client-truststore.jks'
-  $trust_store_type = 'JKS'
+  $trust_store = 'repository/resources/security/client-truststore.jks'
   $trust_store_password = 'wso2carbon'
 
   # ----- user-mgt.xml config params -----
