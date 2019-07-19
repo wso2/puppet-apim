@@ -28,7 +28,6 @@ class apim_common::params {
   $user_group = 'wso2'
   $user_id = 802
   $user_group_id = 802
-  $local_ip = $::ipaddress
 
   # Performance tuning configurations
   $enable_performance_tuning = false
@@ -120,11 +119,6 @@ class apim_common::params {
 
   $api_store_url = 'https://localhost:${mgt.transport.https.port}/store'
   $api_store_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-
-  $key_validator_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $key_validator_username = '${admin.username}'
-  $key_validator_password = '${admin.password}'
-  $key_validator_thrift_server_host = 'localhost'
 
   # ----- Master-datasources config params -----
 
