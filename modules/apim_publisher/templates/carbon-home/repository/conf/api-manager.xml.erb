@@ -16,14 +16,14 @@
          logic relies on this. -->
     <AuthManager>
         <!-- Server URL of the Authentication service -->
-        <ServerURL><%= @auth_manager_url %></ServerURL>
+        <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
         <!-- Admin username for the Authentication manager. -->
-        <Username><%= @auth_manager_username %></Username>
+        <Username>${admin.username}</Username>
         <!-- Admin password for the Authentication manager. -->
-        <Password><%= @auth_manager_password %></Password>
+        <Password>${admin.password}</Password>
         <!-- Indicates whether the permissions checking of the user (on the Publisher and Store) should be done
            via a remote service. The check will be done on the local server when false. -->
-        <CheckPermissionsRemotely><%= @auth_manager_check_permission_remotely %></CheckPermissionsRemotely>
+        <CheckPermissionsRemotely>false</CheckPermissionsRemotely>
     </AuthManager>
 
     <JWTConfiguration>
@@ -81,20 +81,22 @@
                  An API deployed on a 'sandbox' type gateway will only support sandbox keys
                  An API deployed on a 'hybrid' type gateway will support both production and sandbox keys. -->
             <!-- api-console element specifies whether the environment should be listed in API Console or not -->
-            <Environment type="hybrid" api-console="true">
-                <Name>Production and Sandbox</Name>
-                <Description>This is a hybrid gateway that handles both production and sandbox token traffic.</Description>
+          <% @gateway_environments.each do |environment| %>
+            <Environment type="<%= environment['type'] %>" api-console="true">
+                <Name><%= environment['name'] %></Name>
+                <Description><%= environment['description'] %></Description>
                 <!-- Server URL of the API gateway -->
-                <ServerURL><%= @api_gateway_url %></ServerURL>
-		        <!-- Admin username for the API gateway. -->
-                <Username><%= @api_gateway_username %></Username>
+                <ServerURL><%= environment['server_url'] %></ServerURL>
+		            <!-- Admin username for the API gateway. -->
+                <Username>${admin.username}</Username>
                 <!-- Admin password for the API gateway.-->
-                <Password><%= @api_gateway_password %></Password>
+                <Password>${admin.password}</Password>
                 <!-- Endpoint URLs for the APIs hosted in this API gateway.-->
-                <GatewayEndpoint><%= @api_gateway_endpoint %></GatewayEndpoint>
+                <GatewayEndpoint><%= environment['gateway_endpoint'] %></GatewayEndpoint>
                 <!-- Endpoint of the Websocket APIs hosted in this API Gateway -->
-                <GatewayWSEndpoint><%= @api_gateway_ws_endpoint %></GatewayWSEndpoint>
+                <GatewayWSEndpoint><%= environment['gateway_ws_endpoint'] %></GatewayWSEndpoint>
             </Environment>
+          <% end %>
         </Environments>
     </APIGateway>
 
@@ -230,7 +232,7 @@
         <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
         <!--ThriftClientPort>10397</ThriftClientPort-->
 
-        <EnableThriftServer><%= @key_validator_thrift_server_enable %></EnableThriftServer>
+        <EnableThriftServer>false</EnableThriftServer>
         <ThriftServerHost>localhost</ThriftServerHost>
         <!--ThriftServerPort>10397</ThriftServerPort-->
 
@@ -306,10 +308,10 @@
         <!-- Server URL of the API Store. -->
         <ServerURL><%= @api_store_server_url %></ServerURL>
         <!-- Admin username for API Store. -->
-        <Username><%= @api_store_username %></Username>
+        <Username>${admin.username}</Username>
 
         <!-- Admin password for API Store. -->
-        <Password><%= @api_store_password %></Password>
+        <Password>${admin.password}</Password>
         <!-- This parameter specifies whether to display multiple versions of same
              API or only showing the latest version of an API. -->
         <DisplayMultipleVersions>false</DisplayMultipleVersions>
@@ -340,7 +342,7 @@
 
     <APIPublisher>
         <DisplayURL>false</DisplayURL>
-        <URL><%= @api_publisher_url %></URL>
+        <URL>https://localhost:${mgt.transport.https.port}/publisher</URL>
         <!-- This parameter specifies enabling the capability of setting API documentation level granular visibility levels.
              By default any document associate with an API will have the same permissions set as the API.With enabling below
              property,it will show two additional permission levels as visible only to all registered users in a particular
@@ -564,7 +566,7 @@
             <Password>${admin.password}</Password>
         </TrafficManager>
         <DataPublisher>
-            <Enabled><%= @throttle_config_data_pub_enable %></Enabled>
+            <Enabled>true</Enabled>
             <DataPublisherPool>
                 <MaxIdle>1000</MaxIdle>
                 <InitIdleCapacity>200</InitIdleCapacity>
@@ -576,18 +578,18 @@
             </DataPublisherThreadPool>
         </DataPublisher>
         <PolicyDeployer>
-            <Enabled><%= @throttle_config_policy_deployer_enable %></Enabled>
+            <Enabled>true</Enabled>
             <ServiceURL><%= @throttle_config_policy_deployer_url %></ServiceURL>
             <Username>${admin.username}</Username>
             <Password>${admin.password}</Password>
         </PolicyDeployer>
         <BlockCondition>
-            <Enabled><%= @throttle_config_block_condition_enable %></Enabled>
+            <Enabled>true</Enabled>
             <!--InitDelay>300000</InitDelay>
             <Period>3600000</Period-->
         </BlockCondition>
         <JMSConnectionDetails>
-            <Enabled><%= @throttle_config_jms_conn_enable %></Enabled>
+            <Enabled>true</Enabled>
             <Destination>throttleData</Destination>
             <!--InitDelay>300000</InitDelay-->
             <JMSConnectionParameters>
