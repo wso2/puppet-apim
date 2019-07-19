@@ -44,11 +44,6 @@ class apim_km::params inherits apim_common::params {
      services deployed on this server instance.
   */
   $hostname = 'localhost'
-  $mgt_hostname = 'localhost'
-
-  # ----- axis2.xml config params -----
-  $clustering_enabled = 'false'
-  $clustering_membership_scheme = 'multicast'
 
   # ----- api-manager.xml config params -----
   $key_validator_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
