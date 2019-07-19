@@ -26,6 +26,8 @@ class apim_publisher::params inherits apim_common::params {
     'repository/conf/api-manager.xml',
     'repository/conf/datasources/master-datasources.xml',
     'repository/conf/carbon.xml',
+    'repository/conf/registry.xml',
+    'repository/conf/tomcat/catalina-server.xml',
     'repository/conf/user-mgt.xml',
     'repository/conf/axis2/axis2.xml',
   ]
@@ -45,20 +47,20 @@ class apim_publisher::params inherits apim_common::params {
      services deployed on this server instance.
   */
   $hostname = 'localhost'
-  $mgt_hostname = 'localhost'
-
-  # ----- axis2.xml config params -----
-  $clustering_enabled = 'false'
-  $clustering_membership_scheme = 'multicast'
 
   # ----- api-manager.xml config params -----
-  $key_validator_thrift_server_enable = 'false'
-
   $throttle_config_tm_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
   $throttle_config_tm_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
-  $throttle_config_data_pub_enable = 'false'
-  $throttle_config_policy_deployer_enable = 'true'
   $throttle_config_policy_deployer_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $throttle_config_block_condition_enable = 'false'
-  $throttle_config_jms_conn_enable = 'false'
+
+  $gateway_environments = [
+    {
+      type => 'hybrid',
+      name => 'Production and Sandbox',
+      description => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
+      server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
+      gateway_endpoint => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
+      gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099'
+    }
+  ]
 }
