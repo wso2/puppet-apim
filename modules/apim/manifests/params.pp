@@ -28,6 +28,8 @@ class apim::params inherits apim_common::params {
     'repository/conf/carbon.xml',
     'repository/conf/user-mgt.xml',
     'repository/conf/axis2/axis2.xml',
+    'repository/conf/registry.xml',
+    'repository/conf/tomcat/catalina-server.xml',
   ]
 
   # Define file list
@@ -35,6 +37,19 @@ class apim::params inherits apim_common::params {
 
   # Define remove file list
   $file_removelist = []
+
+  # ----- Master-datasources config params -----
+  $stat_db_url = 'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
+  $stat_db_username = 'wso2carbon'
+  $stat_db_password = 'wso2carbon'
+  $stat_db_driver = 'org.h2.Driver'
+  $stat_db_validation_query = 'SELECT 1'
+
+  $mb_store_db_url = 'jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000'
+  $mb_store_db_username = 'wso2carbon'
+  $mb_store_db_password = 'wso2carbon'
+  $mb_store_driver = 'org.h2.Driver'
+  $mb_store_db_validation_query = 'SELECT 1'
 
   # ----- Carbon.xml config params -----
   /*
@@ -44,9 +59,8 @@ class apim::params inherits apim_common::params {
      services deployed on this server instance.
   */
   $hostname = 'localhost'
-  $mgt_hostname = 'localhost'
 
-  # ----- axis2.xml config params -----
-  $clustering_enabled = 'false'
-  $clustering_membership_scheme = 'multicast'
+  # ----- api-manager.xml config params -----
+  $throttle_config_tm_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
+  $throttle_config_tm_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
 }

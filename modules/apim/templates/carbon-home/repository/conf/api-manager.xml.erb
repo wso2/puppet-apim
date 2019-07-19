@@ -16,14 +16,14 @@
          logic relies on this. -->
     <AuthManager>
         <!-- Server URL of the Authentication service -->
-        <ServerURL><%= @auth_manager_url %></ServerURL>
+        <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
         <!-- Admin username for the Authentication manager. -->
-        <Username><%= @auth_manager_username %></Username>
+        <Username>${admin.username}</Username>
         <!-- Admin password for the Authentication manager. -->
-        <Password><%= @auth_manager_password %></Password>
+        <Password>${admin.password}</Password>
         <!-- Indicates whether the permissions checking of the user (on the Publisher and Store) should be done
            via a remote service. The check will be done on the local server when false. -->
-        <CheckPermissionsRemotely><%= @auth_manager_check_permission_remotely %></CheckPermissionsRemotely>
+        <CheckPermissionsRemotely>false</CheckPermissionsRemotely>
     </AuthManager>
 
     <JWTConfiguration>
@@ -85,15 +85,15 @@
                 <Name>Production and Sandbox</Name>
                 <Description>This is a hybrid gateway that handles both production and sandbox token traffic.</Description>
                 <!-- Server URL of the API gateway -->
-                <ServerURL><%= @api_gateway_url %></ServerURL>
+                <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
 		        <!-- Admin username for the API gateway. -->
-                <Username><%= @api_gateway_username %></Username>
+                <Username>${admin.username}</Username>
                 <!-- Admin password for the API gateway.-->
-                <Password><%= @api_gateway_password %></Password>
+                <Password>${admin.password}</Password>
                 <!-- Endpoint URLs for the APIs hosted in this API gateway.-->
-                <GatewayEndpoint><%= @api_gateway_endpoint %></GatewayEndpoint>
+                <GatewayEndpoint>http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}</GatewayEndpoint>
                 <!-- Endpoint of the Websocket APIs hosted in this API Gateway -->
-                <GatewayWSEndpoint><%= @api_gateway_ws_endpoint %></GatewayWSEndpoint>
+                <GatewayWSEndpoint>ws://${carbon.local.ip}:9099</GatewayWSEndpoint>
             </Environment>
         </Environments>
     </APIGateway>
@@ -301,15 +301,15 @@
         <!--This property is used to indicate how we do user name comparision for token generation https://wso2.org/jira/browse/APIMANAGER-2225-->
         <CompareCaseInsensitively>true</CompareCaseInsensitively>
         <DisplayURL>false</DisplayURL>
-        <URL><%= @api_store_url %></URL>
+        <URL>https://localhost:${mgt.transport.https.port}/store</URL>
 
         <!-- Server URL of the API Store. -->
-        <ServerURL><%= @api_store_server_url %></ServerURL>
+        <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
         <!-- Admin username for API Store. -->
-        <Username><%= @api_store_username %></Username>
+        <Username>${admin.username}</Username>
 
         <!-- Admin password for API Store. -->
-        <Password><%= @api_store_password %></Password>
+        <Password>${admin.password}</Password>
         <!-- This parameter specifies whether to display multiple versions of same
              API or only showing the latest version of an API. -->
         <DisplayMultipleVersions>false</DisplayMultipleVersions>
@@ -340,7 +340,7 @@
 
     <APIPublisher>
         <DisplayURL>false</DisplayURL>
-        <URL><%= @api_publisher_url %></URL>
+        <URL>https://localhost:${mgt.transport.https.port}/publisher</URL>
         <!-- This parameter specifies enabling the capability of setting API documentation level granular visibility levels.
              By default any document associate with an API will have the same permissions set as the API.With enabling below
              property,it will show two additional permission levels as visible only to all registered users in a particular
@@ -558,8 +558,8 @@
         <EnableAdvanceThrottling>true</EnableAdvanceThrottling>
         <TrafficManager>
             <Type>Binary</Type>
-            <ReceiverUrlGroup>tcp://${carbon.local.ip}:${receiver.url.port}</ReceiverUrlGroup>
-            <AuthUrlGroup>ssl://${carbon.local.ip}:${auth.url.port}</AuthUrlGroup>
+            <ReceiverUrlGroup><%= @throttle_config_tm_receiver_url %></ReceiverUrlGroup>
+            <AuthUrlGroup><%= @throttle_config_tm_auth_url %></AuthUrlGroup>
             <Username>${admin.username}</Username>
             <Password>${admin.password}</Password>
         </TrafficManager>
