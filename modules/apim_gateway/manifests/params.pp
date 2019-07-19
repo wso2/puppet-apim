@@ -44,10 +44,6 @@ class apim_gateway::params inherits apim_common::params {
   */
   $hostname = 'localhost'
 
-  # ----- axis2.xml config params -----
-  $clustering_enabled = 'false'
-  $clustering_membership_scheme = 'multicast'
-
   # ----- api-manager.xml config params -----
   $throttle_config_tm_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
   $throttle_config_tm_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
