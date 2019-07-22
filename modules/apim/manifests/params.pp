@@ -38,13 +38,6 @@ class apim::params inherits apim_common::params {
   # Define remove file list
   $file_removelist = []
 
-  # ----- Master-datasources config params -----
-  $stat_db_url = 'jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
-  $stat_db_username = 'wso2carbon'
-  $stat_db_password = 'wso2carbon'
-  $stat_db_driver = 'org.h2.Driver'
-  $stat_db_validation_query = 'SELECT 1'
-
   # ----- Carbon.xml config params -----
   /*
      Host name or IP address of the machine hosting this server

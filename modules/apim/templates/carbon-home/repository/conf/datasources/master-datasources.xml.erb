@@ -58,15 +58,15 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url><%= @stat_db_url %></url>
-                    <username><%= @stat_db_username %></username>
-                    <password><%= @stat_db_password %></password>
+                    <url>jdbc:h2:../tmpStatDB/WSO2AM_STATS_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
                     <defaultAutoCommit>true</defaultAutoCommit>
-                    <driverClassName><%= @stat_db_driver %></driverClassName>
+                    <driverClassName>org.h2.Driver</driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
-                    <validationQuery><%= @stat_db_validation_query %></validationQuery>
+                    <validationQuery>SELECT 1</validationQuery>
                     <validationInterval>30000</validationInterval>
                 </configuration>
             </definition>
@@ -83,7 +83,7 @@
                     <url>jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
-                    <driverClassName>org.h2.Driver'</driverClassName>
+                    <driverClassName>org.h2.Driver</driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
