@@ -45,12 +45,6 @@ class apim::params inherits apim_common::params {
   $stat_db_driver = 'org.h2.Driver'
   $stat_db_validation_query = 'SELECT 1'
 
-  $mb_store_db_url = 'jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000'
-  $mb_store_db_username = 'wso2carbon'
-  $mb_store_db_password = 'wso2carbon'
-  $mb_store_driver = 'org.h2.Driver'
-  $mb_store_db_validation_query = 'SELECT 1'
-
   # ----- Carbon.xml config params -----
   /*
      Host name or IP address of the machine hosting this server

@@ -80,14 +80,14 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url><%= @mb_store_db_url %></url>
-                    <username><%= @mb_store_db_username %></username>
-                    <password><%= @mb_store_db_password %></password>
-                    <driverClassName><%= @mb_store_driver %></driverClassName>
+                    <url>jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver'</driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
-                    <validationQuery><%= @mb_store_db_validation_query %></validationQuery>
+                    <validationQuery>SELECT 1</validationQuery>
                     <validationInterval>30000</validationInterval>
                     <defaultAutoCommit>false</defaultAutoCommit>
                 </configuration>
