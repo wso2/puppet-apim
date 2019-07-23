@@ -14,14 +14,14 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url><%= @wso2carbon_db_url %></url>
-                    <username><%= @wso2carbon_db_username %></username>
-                    <password><%= @wso2carbon_db_password %></password>
-                    <driverClassName><%= @wso2carbon_db_driver %></driverClassName>
+                    <url>jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
-                    <validationQuery><%= @wso2carbon_db_validation_query %></validationQuery>
+                    <validationQuery>SELECT 1</validationQuery>
                     <validationInterval>30000</validationInterval>
                     <defaultAutoCommit>true</defaultAutoCommit>
                 </configuration>
@@ -50,46 +50,46 @@
             </definition>
         </datasource>
 
-         <datasource>
-            <name>WSO2AM_STATS_DB</name>
-            <description>The datasource used for getting statistics to API Manager</description>
+        <datasource>
+            <name>WSO2_UM_DB</name>
+            <description>The datasource used by user manager</description>
             <jndiConfig>
-                <name>jdbc/WSO2AM_STATS_DB</name>
+                <name>jdbc/WSO2UM_DB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url><%= @stat_db_url %></url>
-                    <username><%= @stat_db_username %></username>
-                    <password><%= @stat_db_password %></password>
+                    <url><%= @wso2um_db_url %></url>
+                    <username><%= @wso2um_db_username %></username>
+                    <password><%= @wso2um_db_password %></password>
                     <defaultAutoCommit>true</defaultAutoCommit>
-                    <driverClassName><%= @stat_db_driver %></driverClassName>
+                    <driverClassName><%= @wso2um_db_driver %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
-                    <validationQuery><%= @stat_db_validation_query %></validationQuery>
+                    <validationQuery><%= @wso2um_db_validation_query %></validationQuery>
                     <validationInterval>30000</validationInterval>
                 </configuration>
             </definition>
-         </datasource>
+        </datasource>
 
         <datasource>
-            <name>WSO2_MB_STORE_DB</name>
-            <description>The datasource used for message broker database</description>
+            <name>WSO2_REG_DB</name>
+            <description>The datasource used by the registry</description>
             <jndiConfig>
-                <name>WSO2MBStoreDB</name>
+                <name>jdbc/WSO2RegistryDB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url><%= @mb_store_db_url %></url>
-                    <username><%= @mb_store_db_username %></username>
-                    <password><%= @mb_store_db_password %></password>
-                    <driverClassName><%= @mb_store_driver %></driverClassName>
+                    <url><%= @wso2reg_db_url %></url>
+                    <username><%= @wso2reg_db_username %></username>
+                    <password><%= @wso2reg_db_password %></password>
+                    <defaultAutoCommit>true</defaultAutoCommit>
+                    <driverClassName><%= @wso2reg_db_driver %></driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
-                    <validationQuery><%= @mb_store_db_validation_query %></validationQuery>
+                    <validationQuery><%= @wso2reg_db_validation_query %></validationQuery>
                     <validationInterval>30000</validationInterval>
-                    <defaultAutoCommit>false</defaultAutoCommit>
                 </configuration>
             </definition>
         </datasource>
