@@ -52,15 +52,18 @@ class apim_store::params inherits apim_common::params {
 
   # ----- api-manager.xml config params -----
   $key_validator_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $key_validator_username = '${admin.username}'
-  $key_validator_password = '${admin.password}'
-  $key_validator_thrift_server_enable = 'false'
   $key_validator_thrift_server_host = 'localhost'
 
   $oauth_configs_revoke_api_url = 'https://localhost:${https.nio.port}/revoke'
 
-  $throttle_config_data_pub_enable = 'false'
-  $throttle_config_policy_deployer_enable = 'false'
-  $throttle_config_block_condition_enable = 'false'
-  $throttle_config_jms_conn_enable = 'false'
+  $gateway_environments = [
+    {
+      type => 'hybrid',
+      name => 'Production and Sandbox',
+      description => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
+      server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
+      gateway_endpoint => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
+      gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099'
+    }
+  ]
 }
