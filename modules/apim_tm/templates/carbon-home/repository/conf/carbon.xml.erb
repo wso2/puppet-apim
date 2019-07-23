@@ -44,12 +44,12 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
-    <!--<HostName><%= @hostname %></HostName>-->
+    <HostName><%= @hostname %></HostName>
 
     <!--
     Host name to be used for the Carbon management console
     -->
-    <!--<MgtHostName><%= @mgt_hostname %></MgtHostName>-->
+    <MgtHostName><%= @hostname %></MgtHostName>
 
     <!--
         The URL of the back end server. This is where the admin services are hosted and
@@ -390,9 +390,9 @@
         -->
         <KeyStore>
             <!-- Keystore file location-->
-            <Location><%= @key_store %></Location>
+            <Location>${carbon.home}/<%= @key_store %></Location>
             <!-- Keystore type (JKS/PKCS12 etc.)-->
-            <Type><%= @key_store_type %></Type>
+            <Type>JKS</Type>
             <!-- Keystore password-->
             <Password><%= @key_store_password %></Password>
             <!-- Private Key alias-->
@@ -407,9 +407,9 @@
         -->
         <InternalKeyStore>
             <!-- Keystore file location-->
-            <Location><%= @internal_key_store %></Location>
+            <Location>${carbon.home}/<%= @internal_key_store %></Location>
             <!-- Keystore type (JKS/PKCS12 etc.)-->
-            <Type><%= @internal_key_store_type %></Type>
+            <Type>JKS</Type>
             <!-- Keystore password-->
             <Password><%= @internal_key_store_password %></Password>
             <!-- Private Key alias-->
@@ -424,9 +424,9 @@
         -->
         <TrustStore>
             <!-- trust-store file location -->
-            <Location><%= @trust_store %></Location>
+            <Location>${carbon.home}/<%= @trust_store %></Location>
             <!-- trust-store type (JKS/PKCS12 etc.) -->
-            <Type><%= @trust_store_type %></Type>
+            <Type>JKS</Type>
             <!-- trust-store password -->
             <Password><%= @trust_store_password %></Password>
         </TrustStore>

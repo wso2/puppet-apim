@@ -23,11 +23,9 @@ class apim_tm::params inherits apim_common::params {
   $jvmxmx = '1024m'
 
   $template_list = [
-    'repository/conf/api-manager.xml',
-    'repository/conf/datasources/master-datasources.xml',
     'repository/conf/carbon.xml',
-    'repository/conf/user-mgt.xml',
-    'repository/conf/axis2/axis2.xml',
+    'repository/conf/data-bridge/data-bridge-config.xml',
+    'repository/conf/tomcat/catalina-server.xml',
   ]
 
   # Define file list
@@ -44,30 +42,4 @@ class apim_tm::params inherits apim_common::params {
      services deployed on this server instance.
   */
   $hostname = 'localhost'
-  $mgt_hostname = 'localhost'
-
-  $key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
-  $key_store_type = 'JKS'
-  $key_store_password = 'wso2carbon'
-  $key_store_key_alias = 'wso2carbon'
-  $key_store_key_password = 'wso2carbon'
-
-  $internal_key_store = '${carbon.home}/repository/resources/security/wso2carbon.jks'
-  $internal_key_store_type = 'JKS'
-  $internal_key_store_password = 'wso2carbon'
-  $internal_key_store_key_alias = 'wso2carbon'
-  $internal_key_store_key_password = 'wso2carbon'
-
-  $trust_store = '${carbon.home}/repository/resources/security/client-truststore.jks'
-  $trust_store_type = 'JKS'
-  $trust_store_password = 'wso2carbon'
-
-  # ----- axis2.xml config params -----
-  $clustering_enabled = 'false'
-  $clustering_membership_scheme = 'multicast'
-
-  # ----- api-manager.xml config params -----
-  $key_validator_thrift_server_enable = 'false'
-
-  $throttle_config_policy_deployer_enable = 'true'
 }
