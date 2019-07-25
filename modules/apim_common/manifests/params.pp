@@ -63,6 +63,12 @@ class apim_common::params {
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "--optimize -Dprofile=gateway-worker -DworkerNode=true"
     }
+    'apim_is_as_km': {
+      $pack = "wso2is-km-5.7.0"
+      # $remote_pack = "<URL_TO_IS_AS_KM_PACK>"
+      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+    }
     'apim_km': {
       $pack = "wso2am-${version}"
       # $remote_pack = "<URL_TO_APIM_KEYMANAGER_PACK>"
