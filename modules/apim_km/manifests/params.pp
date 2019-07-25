@@ -37,6 +37,7 @@ class apim_km::params inherits apim_common::params {
   $file_removelist = []
 
   # ----- Carbon.xml config params -----
+  $ports_offset = 0
   /*
      Host name or IP address of the machine hosting this server
      e.g. www.wso2.org, 192.168.1.10
