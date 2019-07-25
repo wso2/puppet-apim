@@ -4,7 +4,7 @@ This repository contains the Puppet modules for profiles related to WSO2 API Man
 
 ## Quick Start Guide
 1. Download a product package. Product packages can be downloaded and copied to a local directory, or downloaded from a remote location.
-    * **Local**: Download a wso2am-2.6.0.zip or wso2am-analytics-2.6.0.zip to your preferred deployment pattern and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
+    * **Local**: Download a wso2am-2.6.0.zip, wso2am-analytics-2.6.0.zip, or wso2is-km-5.7.0.zip to your preferred deployment pattern and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
     * **Remote**: 
         1. Change the value *$pack_location* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `remote`.
         2. Change the value *$remote_pack* variable of the relevant profile in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the package should be downloaded from, and remove it as a comment.
@@ -32,22 +32,27 @@ This repository contains the Puppet modules for profiles related to WSO2 API Man
        export FACTER_profile=apim_km
        puppet agent -vt
        ```
-    4. Publisher profile:
+    4. IS as Key Manager profile:
+       ```bash
+       export FACTER_profile=apim_is_as_km
+       puppet agent -vt
+       ```
+    5. Publisher profile:
        ```bash
        export FACTER_profile=apim_publisher
        puppet agent -vt
        ```
-    5. Store profile:
+    6. Store profile:
        ```bash
        export FACTER_profile=apim_store
        puppet agent -vt
        ```
-    6. Traffic Manager profile:
+    7. Traffic Manager profile:
        ```bash
        export FACTER_profile=apim_tm
        puppet agent -vt
        ```
-    7. Analytics profile:
+    8. Analytics profile:
         2. Worker:
             ```bash
             export FACTER_profile=apim_analytics_worker
