@@ -95,6 +95,29 @@
             </definition>
         </datasource>
 
+        <datasource>
+            <name>WSO2_REG_DB</name>
+            <description>The datasource used by the registry</description>
+            <jndiConfig>
+                <name>jdbc/WSO2RegistryDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url><%= @wso2reg_db_url %></url>
+                    <username><%= @wso2reg_db_username %></username>
+                    <password><%= @wso2reg_db_password %></password>
+                    <defaultAutoCommit>true</defaultAutoCommit>
+                    <driverClassName><%= @wso2reg_db_driver %></driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery><%= @wso2reg_db_validation_query %></validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+
+
         <!-- For an explanation of the properties, see: http://people.apache.org/~fhanik/jdbc-pool/jdbc-pool.html -->
         <!--datasource>
             <name>SAMPLE_DATA_SOURCE</name>
