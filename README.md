@@ -2,7 +2,9 @@
 
 This repository contains the Puppet modules for profiles related to WSO2 API Manager and API Manager Analytics.
 
-These modules are supported for Puppet 5.4.0
+## Supported Puppet Versions
+
+- Puppet 5.4.0
 
 ## Quick Start Guide
 1. Download a product package. Product packages can be downloaded and copied to a local directory, or downloaded from a remote location.
