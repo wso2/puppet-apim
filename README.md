@@ -2,6 +2,8 @@
 
 This repository contains the Puppet modules for profiles related to WSO2 API Manager and API Manager Analytics.
 
+These modules are supported for Puppet 5.4.0
+
 ## Quick Start Guide
 1. Download a product package. Product packages can be downloaded and copied to a local directory, or downloaded from a remote location.
     * **Local**: Download a wso2am-2.6.0.zip, wso2am-analytics-2.6.0.zip, or wso2is-km-5.7.0.zip to your preferred deployment pattern and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
