@@ -44,26 +44,7 @@ class apim_store::params inherits apim_common::params {
      services deployed on this server instance.
   */
   $hostname = 'localhost'
-  $mgt_hostname = 'localhost'
 
-  # ----- axis2.xml config params -----
-  $clustering_enabled = 'false'
-  $clustering_membership_scheme = 'multicast'
-
-  # ----- api-manager.xml config params -----
-  $key_validator_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $key_validator_thrift_server_host = 'localhost'
-
+  # ----- api-manager.xml config params ----
   $oauth_configs_revoke_api_url = 'https://localhost:${https.nio.port}/revoke'
-
-  $gateway_environments = [
-    {
-      type => 'hybrid',
-      name => 'Production and Sandbox',
-      description => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
-      server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-      gateway_endpoint => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
-      gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099'
-    }
-  ]
 }

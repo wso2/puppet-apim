@@ -123,8 +123,25 @@ class apim_common::params {
   $stream_processor_restapi_username = '${admin.username}'
   $stream_processor_restapi_password = '${admin.password}'
 
+  $gateway_environments = [
+    {
+      type => 'hybrid',
+      name => 'Production and Sandbox',
+      description => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
+      server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
+      gateway_endpoint => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
+      gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099'
+    }
+  ]
+
+  $key_manager_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $key_validator_thrift_server_host = 'localhost'
+
   $api_store_url = 'https://localhost:${mgt.transport.https.port}/store'
   $api_store_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+
+  $traffic_mamanger_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
+  $traffic_mamanger_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
 
   # ----- Master-datasources config params -----
 

@@ -49,18 +49,5 @@ class apim_publisher::params inherits apim_common::params {
   $hostname = 'localhost'
 
   # ----- api-manager.xml config params -----
-  $throttle_config_tm_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
-  $throttle_config_tm_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
   $throttle_config_policy_deployer_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-
-  $gateway_environments = [
-    {
-      type => 'hybrid',
-      name => 'Production and Sandbox',
-      description => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
-      server_url => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-      gateway_endpoint => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
-      gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099'
-    }
-  ]
 }
