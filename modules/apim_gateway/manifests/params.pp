@@ -45,7 +45,5 @@ class apim_gateway::params inherits apim_common::params {
   $hostname = 'localhost'
 
   # ----- api-manager.xml config params -----
-  $throttle_config_tm_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
-  $throttle_config_tm_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
   $throttle_config_jms_conn_factory = 'amqp://${admin.username}:${admin.password}@clientid/carbon?brokerlist=\'tcp://${carbon.local.ip}:${jms.port}\''
 }

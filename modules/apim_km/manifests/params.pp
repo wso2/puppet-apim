@@ -45,16 +45,4 @@ class apim_km::params inherits apim_common::params {
      services deployed on this server instance.
   */
   $hostname = 'localhost'
-
-  # ----- api-manager.xml config params -----
-  $key_validator_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
-  $key_validator_username = '${admin.username}'
-  $key_validator_password = '${admin.password}'
-  $key_validator_client_type = 'ThriftClient'
-  $key_validator_thrift_client_port = '10397'
-  $key_validator_thrift_server_enable = 'false'
-  $key_validator_thrift_server_host = 'localhost'
-  $key_validator_thrift_server_port = '10397'
-
-  $throttle_config_policy_deployer_enable = 'false'
 }
