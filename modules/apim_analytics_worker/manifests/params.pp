@@ -23,7 +23,7 @@ class apim_analytics_worker::params inherits apim_common::params {
 
   # Define the template
   $template_list = [
-    'conf/dashboard/deployment.yaml'
+    'conf/worker/deployment.yaml'
   ]
 
   # Define file list
@@ -35,7 +35,32 @@ class apim_analytics_worker::params inherits apim_common::params {
   # -------------- Deployment.yaml Config -------------- #
 
   # Carbon Configuration Parameters
+  $carbon_id = 'wso2-am-analytics'
   $ports_offset = 1
+
+  # Configuration used for the databridge communication
+  $databridge_worker_threads = 10
+  $databridge_keystore = '${sys:carbon.home}/resources/security/wso2carbon.jks'
+  $databridge_keystore_password = 'wso2carbon'
+  $binary_data_receiver_hostname = '0.0.0.0'
+  $binary_data_receiver_tcp_pool_side = 100
+  $binary_data_receiver_ssl_pool_side = 100
+
+  $state_persistence_enabled = 'false'
+  $state_persistence_interval = 1
+  $state_persistence_revisions = 2
+
+  # Configuration of the Data Agents - to publish events through
+  $thrift_agent_trust_store = '${sys:carbon.home}/resources/security/client-truststore.jks'
+  $thrift_agent_trust_store_password = 'wso2carbon'
+  $binary_agent_trust_store = '${sys:carbon.home}/resources/security/client-truststore.jks'
+  $binary_agent_trust_store_password = 'wso2carbon'
+
+  # Secure Vault Configuration
+  $securevault_key_store = '${sys:carbon.home}/resources/security/securevault.jks'
+  $securevault_private_key_alias = 'wso2carbon'
+  $securevault_secret_properties_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/secrets.properties'
+  $securevault_master_key_reader_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/master-keys.yaml'
 
   # transport.http config
   $default_listener_host = '0.0.0.0'
@@ -51,9 +76,76 @@ class apim_analytics_worker::params inherits apim_common::params {
   $siddhi_msf4j_listener_keystore_password = 'wso2carbon'
   $siddhi_msf4j_listener_keystore_cert_pass = 'wso2carbon'
 
-  # Data Sources Configuration
+  # Data Sources Configurations
+  $metrics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/metrics;AUTO_SERVER=TRUE'
+  $metrics_db_username = 'wso2carbon'
+  $metrics_db_password = 'wso2carbon'
+  $metrics_db_driver = 'org.h2.Driver'
+  $metrics_db_test_query = 'SELECT 1'
+
+  $permission_db_url =
+    'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
+  $permission_db_username = 'wso2carbon'
+  $permission_db_password = 'wso2carbon'
+  $permission_db_driver = 'org.h2.Driver'
+  $permission_db_test_query = 'SELECT 1'
+
+  $apim_analytics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_STATS_DB;AUTO_SERVER=TRUE'
+  $apim_analytics_db_username = 'wso2carbon'
+  $apim_analytics_db_password = 'wso2carbon'
+  $apim_analytics_db_driver = 'org.h2.Driver'
+  $apim_analytics_db_test_query = 'SELECT 1'
+
   $message_tracing_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/MESSAGE_TRACING_DB;AUTO_SERVER=TRUE'
   $message_tracing_db_username = 'wso2carbon'
   $message_tracing_db_password = 'wso2carbon'
   $message_tracing_db_driver = 'org.h2.Driver'
+  $message_tracing_db_test_query = 'SELECT 1'
+
+  $persistence_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_MGW_ANALYTICS_DB;AUTO_SERVER=TRUE'
+  $persistence_db_username = 'wso2carbon'
+  $persistence_db_password = 'wso2carbon'
+  $persistence_db_driver = 'com.mysql.jdbc.Driver'
+  $persistence_db_test_query = 'SELECT 1'
+
+  $cluster_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_MGW_ANALYTICS_DB;AUTO_SERVER=TRUE'
+  $cluster_db_username = 'wso2carbon'
+  $cluster_db_password = 'wso2carbon'
+  $cluster_db_driver = 'com.mysql.jdbc.Driver'
+  $cluster_db_test_query = 'SELECT 1'
+
+  # Cluster configurations
+  $cluster_config_enabled = 'false'
+  $cluster_config_group_id = 'sp'
+  $cluster_config_heartbeat_interval = 3000
+  $cluster_config_max_retry = 3
+  $cluster_config_polling_interval = 3000
+
+  # Configurations for High Availability deployments
+  # $deployment_type = 'ha'
+  # $eventSyncServer_host = 'localhost'
+  # $eventSyncServer_port = '9893'
+  # $eventSyncServer_advertised_host = 'localhost'
+  # $eventSyncServer_advertised_port = '9893'
+
+  # Configurations for distributed deployments
+  # $deployment_type = 'distributed'
+  # $https_interface_host = '192.168.1.3'
+  # $https_interface_port = '9443'
+  # $https_interface_username = 'admin'
+  # $https_interface_password = 'admin'
+  # $resource_managers = [
+  #   {
+  #     host     => '192.168.1.3',
+  #     port     => '9443',
+  #     username => 'admin',
+  #     password => 'admin'
+  #   },
+  #   {
+  #     host     => '192.168.1.1',
+  #     port     => '9443',
+  #     username => 'admin',
+  #     password => 'admin'
+  #   }
+  # ]
 }
