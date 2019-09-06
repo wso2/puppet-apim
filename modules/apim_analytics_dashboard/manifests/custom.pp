@@ -14,19 +14,8 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_analytics_worker::startserver
-# Starts the server as a service in the final stage.
-class apim_analytics_worker::startserver inherits apim_analytics_worker::params {
-
-  exec { 'daemon-reload':
-    command => "systemctl daemon-reload",
-    path    => "/bin/",
-  }
-
-  # Start the service
-  service { $profile:
-    enable => true,
-    ensure => running,
-    subscribe => File["wso2-binary"],
-  }
+# Class: apim_analytics_dashboard::custom
+# This class is reserved to run custom user code before starting the server.
+class apim_analytics_dashboard::custom {
+  # resources
 }

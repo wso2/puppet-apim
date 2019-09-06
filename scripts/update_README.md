@@ -25,6 +25,7 @@ Any of the following profile names can be provided as arguments:
 * apim_publisher
 * apim_store
 * apim_tm
+* apim_analytics_dashboard
 * apim_analytics_worker
 
 If any file that is used as a template is updated, a warning will be displayed. Update the relevant template files accordingly before pushing updates to the nodes.
