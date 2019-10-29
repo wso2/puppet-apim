@@ -20,6 +20,11 @@ class apim_tm inherits apim_tm::params {
 
   include apim_common
 
+  # Optimize for profile
+  exec { "optimize-profile":
+    command => "/bin/sh ${carbon_home}/bin/profileSetup.sh -Dprofile=traffic-manager",
+  }
+
   # Copy configuration changes to the installed directory
   $template_list.each |String $template| {
     file { "${carbon_home}/${template}":
