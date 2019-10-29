@@ -23,13 +23,7 @@ class apim_publisher::params inherits apim_common::params {
   $jvmxmx = '1024m'
 
   $template_list = [
-    'repository/conf/api-manager.xml',
-    'repository/conf/datasources/master-datasources.xml',
-    'repository/conf/carbon.xml',
-    'repository/conf/registry.xml',
-    'repository/conf/tomcat/catalina-server.xml',
-    'repository/conf/user-mgt.xml',
-    'repository/conf/axis2/axis2.xml',
+    'repository/conf/deployment.toml',
   ]
 
   # Define file list
