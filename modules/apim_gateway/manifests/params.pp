@@ -23,10 +23,7 @@ class apim_gateway::params inherits apim_common::params {
   $jvmxmx = '1024m'
 
   $template_list = [
-    'repository/conf/api-manager.xml',
-    'repository/conf/carbon.xml',
-    'repository/conf/axis2/axis2.xml',
-    'repository/conf/tomcat/catalina-server.xml',
+    'repository/conf/deployment.toml',
   ]
 
   # Define file list
@@ -45,5 +42,5 @@ class apim_gateway::params inherits apim_common::params {
   $hostname = 'localhost'
 
   # ----- api-manager.xml config params -----
-  $throttle_config_jms_conn_factory = 'amqp://${admin.username}:${admin.password}@clientid/carbon?brokerlist=\'tcp://${carbon.local.ip}:${jms.port}\''
+  $jms_conn_factory = 'amqp://${admin.username}:${admin.password}@clientid/carbon?brokerlist=\'tcp://${carbon.local.ip}:${jms.port}\''
 }
