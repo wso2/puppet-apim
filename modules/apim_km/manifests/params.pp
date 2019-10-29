@@ -23,12 +23,13 @@ class apim_km::params inherits apim_common::params {
   $jvmxmx = '1024m'
 
   $template_list = [
-    'repository/conf/api-manager.xml',
-    'repository/conf/datasources/master-datasources.xml',
-    'repository/conf/carbon.xml',
-    'repository/conf/user-mgt.xml',
-    'repository/conf/axis2/axis2.xml',
+    'repository/conf/deployment.toml',
   ]
+
+  $jwt_enable = "true"
+  $jwt_encoding = "base64"
+  $jwt_claim_dialect = "http://wso2.org/claims"
+  $jwt_signing_algorithm = "SHA256withRSA"
 
   # Define file list
   $file_list = []
