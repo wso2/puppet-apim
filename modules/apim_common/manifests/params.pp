@@ -141,11 +141,11 @@ class apim_common::params {
   $throttling_url_group = [
     {
       traffic_manager_urls      => '"tcp://tm1.local:9611"',
-      traffic_manager_auth_urls => '"ssl://tm1.local:9671"'
+      traffic_manager_auth_urls => '"ssl://tm1.local:9771"'
     },
     {
       traffic_manager_urls      => '"tcp://tm2.local:9611"',
-      traffic_manager_auth_urls => '"ssl://tm2.local:9671"'
+      traffic_manager_auth_urls => '"ssl://tm2.local:9771"'
     }
   ]
 
@@ -171,7 +171,7 @@ class apim_common::params {
 
   # ----- Master-datasources config params -----
 
-  $wso2am_db_url = 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE'
+  $wso2am_db_url = 'jdbc:h2:./repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE'
   $wso2am_db_username = 'wso2carbon'
   $wso2am_db_password = 'wso2carbon'
   $wso2am_db_type = 'h2'
