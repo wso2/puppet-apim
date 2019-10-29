@@ -23,9 +23,7 @@ class apim_tm::params inherits apim_common::params {
   $jvmxmx = '1024m'
 
   $template_list = [
-    'repository/conf/carbon.xml',
-    'repository/conf/data-bridge/data-bridge-config.xml',
-    'repository/conf/tomcat/catalina-server.xml',
+    'repository/conf/deployment.toml',
   ]
 
   # Define file list
