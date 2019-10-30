@@ -8,7 +8,7 @@ This repository contains the Puppet modules for profiles related to WSO2 API Man
 
 ## Quick Start Guide
 1. Download a product package. Product packages can be downloaded and copied to a local directory, or downloaded from a remote location.
-    * **Local**: Download a wso2am-2.6.0.zip, wso2am-analytics-2.6.0.zip, or wso2is-km-5.7.0.zip to your preferred deployment pattern and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
+    * **Local**: Download a wso2am-3.0.0.zip, wso2am-analytics-3.0.0.zip, or wso2is-km-5.9.0.zip to your preferred deployment pattern and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
     * **Remote**: 
         1. Change the value *$pack_location* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `remote`.
         2. Change the value *$remote_pack* variable of the relevant profile in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the package should be downloaded from, and remove it as a comment.
@@ -46,9 +46,9 @@ This repository contains the Puppet modules for profiles related to WSO2 API Man
        export FACTER_profile=apim_publisher
        puppet agent -vt
        ```
-    6. Store profile:
+    6. Devportal profile:
        ```bash
-       export FACTER_profile=apim_store
+       export FACTER_profile=apim_devportal
        puppet agent -vt
        ```
     7. Traffic Manager profile:
