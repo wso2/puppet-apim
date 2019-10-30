@@ -189,6 +189,7 @@ class apim_common::params {
   $ports_offset = 0
 
   $key_store_location = 'wso2carbon.jks'
+  $analytics_key_store_location = '${sys:carbon.home}/resources/security/wso2carbon.jks'
   $key_store_password = 'wso2carbon'
   $key_store_key_alias = 'wso2carbon'
   $key_store_key_password = 'wso2carbon'
@@ -199,6 +200,7 @@ class apim_common::params {
   $internal_keystore_key_password = 'wso2carbon'
 
   $trust_store_location = 'client-truststore.jks'
+  $analytics_trust_store_location = '${sys:carbon.home}/resources/security/client-truststore.jks'
   $trust_store_password = 'wso2carbon'
 
   # ----- user-mgt.xml config params -----
@@ -208,10 +210,12 @@ class apim_common::params {
   # ----- Analytics config params -----
 
   # Configuration used for the databridge communication
-  $databridge_worker_threads = 10
-  $databridge_keystore = '${sys:carbon.home}/resources/security/wso2carbon.jks'
-  $databridge_keystore_password = 'wso2carbon'
+  $databridge_config_worker_threads = 10
+  $databridge_config_keystore_location = '${sys:carbon.home}/resources/security/wso2carbon.jks'
+  $databridge_config_keystore_password = 'wso2carbon'
   $binary_data_receiver_hostname = '0.0.0.0'
+  $tcp_receiver_thread_pool_size = 100
+  $ssl_receiver_thread_pool_size = 100
 
   # Configuration of the Data Agents - to publish events through
   $thrift_agent_trust_store = '${sys:carbon.home}/resources/security/client-truststore.jks'
@@ -220,28 +224,34 @@ class apim_common::params {
   $binary_agent_trust_store_password = 'wso2carbon'
 
   # Secure Vault Configuration
-  $securevault_key_store = '${sys:carbon.home}/resources/security/securevault.jks'
-  $securevault_private_key_alias = 'wso2carbon'
+  $securevault_keystore_location = '${sys:carbon.home}/resources/security/securevault.jks'
+  $securevault_privatekey_alias = 'wso2carbon'
   $securevault_secret_properties_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/secrets.properties'
-  $securevault_master_key_reader_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/master-keys.yaml'
+  $securevault_masterkeyreader_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/master-keys.yaml'
 
   # Data Sources Configurations
-  $metrics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/metrics;AUTO_SERVER=TRUE'
-  $metrics_db_username = 'wso2carbon'
-  $metrics_db_password = 'wso2carbon'
-  $metrics_db_driver = 'org.h2.Driver'
-  $metrics_db_test_query = 'SELECT 1'
+  $wso2_metrics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/metrics;AUTO_SERVER=TRUE'
+  $wso2_metrics_db_username = 'wso2carbon'
+  $wso2_metrics_db_password = 'wso2carbon'
+  $wso2_metrics_db_driver = 'org.h2.Driver'
+  $wso2_metrics_db_test_query = 'SELECT 1'
 
-  $permission_db_url =
+  $wso2_permissions_db_url =
     'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
-  $permission_db_username = 'wso2carbon'
-  $permission_db_password = 'wso2carbon'
-  $permission_db_driver = 'org.h2.Driver'
-  $permission_db_test_query = 'SELECT 1'
+  $wso2_permissions_db_username = 'wso2carbon'
+  $wso2_permissions_db_password = 'wso2carbon'
+  $wso2_permissions_db_driver = 'org.h2.Driver'
+  $wso2_permissions_db_test_query = 'SELECT 1'
 
   $apim_analytics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_STATS_DB;AUTO_SERVER=TRUE'
   $apim_analytics_db_username = 'wso2carbon'
   $apim_analytics_db_password = 'wso2carbon'
   $apim_analytics_db_driver = 'org.h2.Driver'
   $apim_analytics_db_test_query = 'SELECT 1'
+
+  $am_db_url = 'jdbc:h2:${sys:carbon.home}/../wso2am-3.0.0/repository/database/WSO2AM_DB;AUTO_SERVER=TRUE'
+  $am_db_username = 'wso2carbon'
+  $am_db_password = 'wso2carbon'
+  $am_db_driver = 'org.h2.Driver'
+  $am_test_query = 'SELECT 1'
 }
