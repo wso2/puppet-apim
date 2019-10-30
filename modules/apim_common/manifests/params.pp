@@ -89,12 +89,12 @@ class apim_common::params {
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "-Dprofile=api-publisher"
     }
-    'apim_store': {
+    'apim_devportal': {
       $pack = "wso2am-${version}"
-      # $remote_pack = "<URL_TO_APIM_STORE_PACK>"
+      # $remote_pack = "<URL_TO_APIM_DEVPORTAL_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=api-store"
+      $optimize_params = "-Dprofile=api-devportal"
     }
     'apim_tm': {
       $pack = "wso2am-${version}"
@@ -158,7 +158,10 @@ class apim_common::params {
       description         => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
       server_url          => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
       gateway_endpoint    => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
-      gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099'
+      gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099',
+      ws_endpoint         => 'ws://localhost:9099',
+      http_endpoint       => 'http://localhost:${http.nio.port}',
+      https_endpoint      => 'https://localhost:${https.nio.port}'
     }
   ]
 
