@@ -53,6 +53,7 @@ class apim_analytics_dashboard::params inherits apim_common::params {
   $business_rules_db_username = 'wso2carbon'
   $business_rules_db_password = 'wso2carbon'
   $business_rules_db_driver = 'org.h2.Driver'
+  $business_rules_db_test_query = 'SELECT 1'
 
   $status_dashboard_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/wso2_status_dashboard;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
   $status_dashboard_db_username = 'wso2carbon'
@@ -63,15 +64,16 @@ class apim_analytics_dashboard::params inherits apim_common::params {
   $business_rules_manager_username = 'admin'
   $business_rules_manager_password = 'admin'
 
-  # wso2.status.dashboard config
-  $status_dashboard_username = 'admin'
-  $status_dashboard_password = 'admin'
-
   # transport.http configuration
   $default_host = '0.0.0.0'
-  $default_listener_keystore = '${carbon.home}/resources/security/wso2carbon.jks'
-  $default_listener_keystore_password = 'wso2carbon'
   $default_listener_keystore_cert_pass = 'wso2carbon'
+
+  # dashboard admin service configurations
+  $admin_service_url = 'https://localhost:9443'
+  $admin_service_username = 'admin'
+  $admin_service_password = 'admin'
+  $keymanager_username = 'admin'
+  $keymanager_password = 'admin'
 
   # worker configurations
   # ip: ip of the worker node
