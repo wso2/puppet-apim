@@ -14,20 +14,16 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Claas apim_store::params
+# Claas apim_devportal::params
 # This class includes all the necessary parameters.
-class apim_store::params inherits apim_common::params {
+class apim_devportal::params inherits apim_common::params {
 
   $start_script_template = 'bin/wso2server.sh'
   $jvmxms = '256m'
   $jvmxmx = '1024m'
 
   $template_list = [
-    'repository/conf/api-manager.xml',
-    'repository/conf/datasources/master-datasources.xml',
-    'repository/conf/carbon.xml',
-    'repository/conf/user-mgt.xml',
-    'repository/conf/axis2/axis2.xml',
+    'repository/conf/deployment.toml',
   ]
 
   # Define file list

@@ -14,11 +14,16 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim_store
+# Class: apim_devportal
 # Init class of API Manager - API Store profile
-class apim_store inherits apim_store::params {
+class apim_devportal inherits apim_devportal::params {
 
   include apim_common
+
+  # Optimize for profile
+  exec { "optimize-profile":
+    command => "/bin/sh ${carbon_home}/bin/profileSetup.sh -Dprofile=api-devportal",
+  }
 
   # Copy configuration changes to the installed directory
   $template_list.each |String $template| {
@@ -70,7 +75,7 @@ class apim_store inherits apim_store::params {
   /*
     Following script can be used to copy file to a given location.
     This will copy some_file to install_path -> repository.
-    Note: Ensure that file is available in modules -> apim_store -> files
+    Note: Ensure that file is available in modules -> apim_devportal -> files
   */
   # file { "${install_path}/repository/some_file":
   #   owner  => $user,
