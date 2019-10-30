@@ -22,7 +22,7 @@
 set -e
 
 # Build artifacts and versions
-: ${version:="2.6.0"}
+: ${version:="3.0.0"}
 : ${packs_dir:=$(pwd)/../modules/apim_common/files/packs/}
 
 usage() { echo "Usage: $0 -p <profile_name>" 1>&2; exit 1; }
@@ -76,27 +76,27 @@ case "${profile}" in
         ;;
     apim)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
         ;;
     apim_gateway)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
         ;;
     apim_km)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
         ;;
     apim_publisher)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
         ;;
-    apim_store)
+    apim_devportal)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
         ;;
     apim_tm)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_store" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
         ;;
     *)
         echo "Invalid profile. Please provide one of the following profiles:
@@ -104,7 +104,7 @@ case "${profile}" in
             apim_gateway
             apim_km
             apim_publisher
-            apim_store
+            apim_devportal
             apim_tm
             apim_analytics_worker"
         exit 1
