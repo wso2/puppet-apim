@@ -122,6 +122,8 @@ class apim_common::params {
 
   # ----- api-manager.xml config params -----
   $analytics_enabled = 'false'
+  $stream_processor_username = '${admin.username}'
+  $stream_processor_password = '${admin.password}'
   $stream_processor_rest_api_url = 'https://localhost:7444'
   $stream_processor_restapi_url = 'https://localhost:7444'
   $stream_processor_rest_api_username = '${admin.username}'
@@ -191,10 +193,10 @@ class apim_common::params {
   $key_store_key_alias = 'wso2carbon'
   $key_store_key_password = 'wso2carbon'
 
-  $internal_key_store = 'wso2carbon.jks'
-  $internal_key_store_password = 'wso2carbon'
-  $internal_key_store_key_alias = 'wso2carbon'
-  $internal_key_store_key_password = 'wso2carbon'
+  $internal_keystore_location = 'wso2carbon.jks'
+  $internal_keystore_password = 'wso2carbon'
+  $internal_keystore_key_alias = 'wso2carbon'
+  $internal_keystore_key_password = 'wso2carbon'
 
   $trust_store_location = 'client-truststore.jks'
   $trust_store_password = 'wso2carbon'
