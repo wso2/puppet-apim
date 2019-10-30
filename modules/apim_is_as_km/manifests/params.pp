@@ -23,16 +23,7 @@ class apim_is_as_km::params inherits apim_common::params {
   $jvmxmx = '1024m'
 
   $template_list = [
-    'repository/conf/datasources/master-datasources.xml',
-    'repository/conf/datasources/bps-datasources.xml',
-    'repository/conf/carbon.xml',
-    'repository/conf/user-mgt.xml',
-    'repository/conf/axis2/axis2.xml',
-    'repository/conf/api-manager.xml',
-    'repository/conf/registry.xml',
-    'repository/conf/tomcat/catalina-server.xml',
-    'repository/conf/identity/embedded-ldap.xml',
-    'repository/conf/identity/identity.xml',
+    'repository/conf/deployment.toml',
   ]
 
   # Define file list
@@ -63,18 +54,39 @@ class apim_is_as_km::params inherits apim_common::params {
     }
   ]
 
+  # Traffic Manager configurations
+  $traffic_manager_url = 'tcp://localhost:9611'
+  $traffic_manager_auth_url = 'ssl://localhost:9711'
+
   # Datasource configurations
-  $wso2identity_db_url = 'jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE'
+  $wso2identity_db_id = 'WSO2IDENTITY_DB'
+  $wso2identity_db_type = 'h2'
+  $wso2identity_db_url = 'jdbc:h2:./repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE'
   $wso2identity_db_username = 'wso2carbon'
   $wso2identity_db_password = 'wso2carbon'
   $wso2identity_db_driver = 'org.h2.Driver'
   $wso2identity_db_validation_query = 'SELECT 1'
 
-  $wso2bps_db_url = 'jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE'
+  $wso2bps_db_type = 'h2'
+  $wso2bps_db_url = 'jdbc:h2:file:./repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE'
   $wso2bps_db_username = 'wso2carbon'
   $wso2bps_db_password = 'wso2carbon'
   $wso2bps_db_driver = 'org.h2.Driver'
   $wso2bps_db_validation_query = 'SELECT 1'
+
+  $wso2config_db_type = 'h2'
+  $wso2config_db_url = 'jdbc:h2:./repository/database/WSO2SHARED_DB;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE'
+  $wso2config_db_username = 'wso2carbon'
+  $wso2config_db_password = 'wso2carbon'
+  $wso2config_db_validation_query = 'SELECT 1'
+
+  $wso2consent_db_id = 'WSO2CONSENT_DB'
+  $wso2consent_db_type = 'h2'
+  $wso2consent_db_url = 'jdbc:h2:./repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE'
+  $wso2consent_db_username = 'wso2carbon'
+  $wso2consent_db_password = 'wso2carbon'
+  $wso2consent_db_driver = 'org.h2.Driver'
+  $wso2consent_db_validation_query = 'SELECT 1'
 
   # LDAP Configurations
   $embedded_ldap_enabled = 'false'
