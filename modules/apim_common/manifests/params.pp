@@ -158,11 +158,7 @@ class apim_common::params {
       description         => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
       server_url          => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
       ws_endpoint         => 'ws://localhost:9099',
-<<<<<<< HEAD
       wss_endpoint        => 'wss://localhost:8099',
-=======
-      wss_endpoint         => 'wss://localhost:8099',
->>>>>>> Add puppet changes for apim profile
       http_endpoint       => 'http://localhost:${http.nio.port}',
       https_endpoint      => 'https://localhost:${https.nio.port}'
     }
