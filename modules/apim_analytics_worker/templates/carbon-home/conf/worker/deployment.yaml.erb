@@ -14,16 +14,16 @@
 #   limitations under the License.
 ################################################################################
 
-  # Carbon Configuration Parameters
+# Carbon Configuration Parameters
 wso2.carbon:
   type: wso2-apim-analytics
-    # value to uniquely identify a server
-  id: <%= @carbon_id %>
-    # server name
+  # value to uniquely identify a server
+  id: <%= @wso2_carbon_id %>
+  # server name
   name: WSO2 API Manager Analytics Server
-    # ports used by this server
+  # ports used by this server
   ports:
-      # port offset
+    # port offset
     offset: <%= @ports_offset %>
 
 wso2.transport.http:
@@ -41,16 +41,16 @@ wso2.transport.http:
   listenerConfigurations:
     -
       id: "default"
-      host: "<%= @default_listener_host %>"
-      port: 9091
+      host: "<%= @hostname %>"
+      port: <%= @wso2_transport_default_port %>
     -
       id: "msf4j-https"
-      host: "<%= @msf4j_host %>"
-      port: 9444
+      host: "<%= @hostname %>"
+      port: <%= @wso2_transport_msf4j_https_port %>
       scheme: https
-      keyStoreFile: "<%= @msf4j_listener_keystore %>"
-      keyStorePassword: <%= @msf4j_listener_keystore_password %>
-      certPass: <%= @msf4j_listener_keystore_cert_pass %>
+      keyStoreFile: "<%= @analytics_key_store_location %>"
+      keyStorePassword: <%= @key_store_password %>
+      certPass: <%= @key_store_key_password %>
 
   senderConfigurations:
     -
@@ -71,22 +71,22 @@ siddhi.stores.query.api:
   listenerConfigurations:
     -
       id: "default"
-      host: "<%= @siddhi_default_listener_host %>"
-      port: 7071
+      host: "<%= @hostname %>"
+      port: <%= @siddhi_api_default_port %>
     -
       id: "msf4j-https"
-      host: "<%= @siddhi_msf4j_host %>"
-      port: 7444
+      host: "<%= @hostname %>"
+      port: <%= @siddhi_api_msf4j_https_port %>
       scheme: https
-      keyStoreFile: "<%= @siddhi_msf4j_listener_keystore %>"
-      keyStorePassword: <%= @siddhi_msf4j_listener_keystore_password %>
-      certPass: <%= @siddhi_msf4j_listener_keystore_cert_pass %>
+      keyStoreFile: "<%= @siddhi_api_keystore_file %>"
+      keyStorePassword: <%= @siddhi_api_keystore_password %>
+      certPass: <%= @siddhi_api_keystore_cert_password %>
 
   # Configuration used for the databridge communication
 databridge.config:
     # No of worker threads to consume events
     # THIS IS A MANDATORY FIELD
-  workerThreads: <%= @databridge_worker_threads %>
+  workerThreads: <%= @databridge_config_worker_threads %>
     # Maximum amount of messages that can be queued internally in MB
     # THIS IS A MANDATORY FIELD
   maxEventBufferCapacity: 10000000
@@ -95,10 +95,10 @@ databridge.config:
   eventBufferSize: 2000
     # Keystore file path
     # THIS IS A MANDATORY FIELD
-  keyStoreLocation : <%= @databridge_keystore %>
+  keyStoreLocation : <%= @databridge_config_keystore_location %>
     # Keystore password
     # THIS IS A MANDATORY FIELD
-  keyStorePassword : <%= @databridge_keystore_password %>
+  keyStorePassword : <%= @databridge_config_keystore_password %>
     # Session Timeout value in mins
     # THIS IS A MANDATORY FIELD
   clientTimeoutMin: 30
@@ -113,8 +113,8 @@ databridge.config:
       type: Thrift
         # Data receiver properties
       properties:
-        tcpPort: '7611'
-        sslPort: '7711'
+        tcpPort: '<%= @thrift_data_receiver_tcp_port %>'
+        sslPort: '<%= @thrift_data_receiver_ssl_port %>'
 
   -
       # Data receiver configuration
@@ -124,11 +124,11 @@ databridge.config:
       type: Binary
         # Data receiver properties
       properties:
-        tcpPort: '9611'
-        sslPort: '9711'
-        tcpReceiverThreadPoolSize: '<%= @binary_data_receiver_tcp_pool_side %>'
-        sslReceiverThreadPoolSize: '<%= @binary_data_receiver_ssl_pool_side %>'
-        hostName: <%= @binary_data_receiver_hostname %>
+        tcpPort: '<%= @binary_data_receiver_tcp_port %>'
+        sslPort: '<%= @bianry_data_receiver_ssl_port %>'
+        tcpReceiverThreadPoolSize: '<%= @tcp_receiver_thread_pool_size %>'
+        sslReceiverThreadPoolSize: '<%= @ssl_receiver_thread_pool_size %>'
+        hostName: <%= @hostname %>
 
   # Configuration of the Data Agents - to publish events through databridge
 data.agent.config:
@@ -147,9 +147,9 @@ data.agent.config:
         # Data publisher strategy
       publishingStrategy: async
         # Trust store path
-      trustStorePath: '<%= @thrift_agent_trust_store %>'
+      trustStorePath: '<%= @analytics_trust_store_location %>'
         # Trust store password
-      trustStorePassword: '<%= @thrift_agent_trust_store_password %>'
+      trustStorePassword: '<%= @trust_store_password %>'
         # Queue Size
       queueSize: 32768
         # Batch Size
@@ -196,9 +196,9 @@ data.agent.config:
         # Data publisher strategy
       publishingStrategy: async
         # Trust store path
-      trustStorePath: '<%= @binary_agent_trust_store %>'
+      trustStorePath: '<%= @analytics_trust_store_location %>'
         # Trust store password
-      trustStorePassword: '<%= @binary_agent_trust_store_password %>'
+      trustStorePassword: '<%= @trust_store_password %>'
         # Queue Size
       queueSize: 32768
         # Batch Size
@@ -302,43 +302,26 @@ state.persistence:
   enabled: <%= @state_persistence_enabled %>
   intervalInMin: <%= @state_persistence_interval %>
   revisionsToKeep: <%= @state_persistence_revisions %>
-  persistenceStore: org.wso2.carbon.stream.processor.core.persistence.FileSystemPersistenceStore
+  persistenceStore: org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore
   config:
-    datasource: PERSISTENCE_DB
-    table: PERSISTENCE_TABLE
+    location: siddhi-app-persistence
 
   # Secure Vault Configuration
 wso2.securevault:
   secretRepository:
     type: org.wso2.carbon.secvault.repository.DefaultSecretRepository
     parameters:
-      privateKeyAlias: <%= @securevault_private_key_alias %>
-      keystoreLocation: <%= @securevault_key_store %>
+      privateKeyAlias: <%= @securevault_privatekey_alias %>
+      keystoreLocation: <%= @securevault_keystore_location %>
       secretPropertiesFile: <%= @securevault_secret_properties_file %>
   masterKeyReader:
     type: org.wso2.carbon.secvault.reader.DefaultMasterKeyReader
     parameters:
-      masterKeyReaderFile: <%= @securevault_master_key_reader_file %>
+      masterKeyReaderFile: <%= @securevault_masterkeyreader_file %>
 
   # Datasource Configurations
 wso2.datasources:
   dataSources:
-    -
-      definition:
-        configuration:
-          connectionTestQuery: "SELECT 1"
-          driverClassName: org.h2.Driver
-          idleTimeout: 60000
-          isAutoCommit: false
-          jdbcUrl: "jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/WSO2_CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000"
-          maxPoolSize: 10
-          password: wso2carbon
-          username: wso2carbon
-          validationTimeout: 30000
-        type: RDBMS
-      description: "The datasource used for registry and user manager"
-      name: WSO2_CARBON_DB
-
     # carbon metrics data source
     - name: WSO2_METRICS_DB
       description: The datasource used for dashboard feature
@@ -347,13 +330,13 @@ wso2.datasources:
       definition:
         type: RDBMS
         configuration:
-          jdbcUrl: '<%= @metrics_db_url %>'
-          username: <%= @metrics_db_username %>
-          password: <%= @metrics_db_password %>
-          driverClassName: <%= @metrics_db_driver %>
+          jdbcUrl: '<%= @wso2_metrics_db_url %>'
+          username: <%= @wso2_metrics_db_username %>
+          password: <%= @wso2_metrics_db_password %>
+          driverClassName: <%= @wso2_metrics_db_driver %>
           maxPoolSize: 30
           idleTimeout: 60000
-          connectionTestQuery: <%= @metrics_db_test_query %>
+          connectionTestQuery: <%= @wso2_metrics_db_test_query %>
           validationTimeout: 30000
           isAutoCommit: false
 
@@ -365,13 +348,13 @@ wso2.datasources:
       definition:
         type: RDBMS
         configuration:
-          jdbcUrl: '<%= @permission_db_url %>'
-          username: <%= @permission_db_username %>
-          password: <%= @permission_db_password %>
-          driverClassName: <%= @permission_db_driver %>
+          jdbcUrl: '<%= @wso2_permissions_db_url %>'
+          username: <%= @wso2_permissions_db_username %>
+          password: <%= @wso2_permissions_db_password %>
+          driverClassName: <%= @wso2_permissions_db_driver %>
           maxPoolSize: 10
           idleTimeout: 60000
-          connectionTestQuery: <%= @permission_db_test_query %>
+          connectionTestQuery: <%= @wso2_permissions_db_test_query %>
           validationTimeout: 30000
           isAutoCommit: false
 
@@ -425,6 +408,24 @@ wso2.datasources:
           validationTimeout: 30000
           isAutoCommit: false
 
+    #Main datasource used in API Manager
+    - name: AM_DB
+      description: Main datasource used by API Manager
+      jndiConfig:
+        name: jdbc/AM_DB
+      definition:
+        type: RDBMS
+        configuration:
+          jdbcUrl: "<%= @am_db_url %>"
+          username: <%= @am_db_username %>
+          password: <%= @am_db_password %>
+          driverClassName: <%= @am_db_driver %>
+          maxPoolSize: 10
+          idleTimeout: 60000
+          connectionTestQuery: <%= @am_test_query %>
+          validationTimeout: 30000
+          isAutoCommit: false
+
     - name: WSO2AM_MGW_ANALYTICS_DB
       description: "The datasource used for APIM MGW analytics data."
       jndiConfig:
@@ -432,51 +433,38 @@ wso2.datasources:
       definition:
         type: RDBMS
         configuration:
-          jdbcUrl: 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_MGW_ANALYTICS_DB;AUTO_SERVER=TRUE'
-          username: wso2carbon
-          password: wso2carbon
-          driverClassName: org.h2.Driver
+          jdbcUrl: '<%= @wso2am_mgw_analytics_db_url %>'
+          username: <%= @wso2am_mgw_analytics_db_username %>
+          password: <%= @wso2am_mgw_analytics_db_password %>
+          driverClassName: <%= @wso2am_mgw_analytics_db_driver %>
           maxPoolSize: 50
           idleTimeout: 60000
-          connectionTestQuery: SELECT 1
+          connectionTestQuery: <%= @wso2am_mgw_analytics_db_test_query %>
           validationTimeout: 30000
           isAutoCommit: false
-
-    - name: PERSISTENCE_DB
-      description: The MySQL datasource used for persistence
-      jndiConfig:
-        name: jdbc/PERSISTENCE_DB
+    -
+      name: WSO2_CLUSTER_DB
+      description: "The datasource used by cluster coordinators in HA deployment"
       definition:
         type: RDBMS
         configuration:
-          jdbcUrl: '<%= @persistence_db_url %>'
-          username: <%= @persistence_db_username %>
-          password: <%= @persistence_db_password %>
-          driverClassName: <%= @persistence_db_driver %>
-          maxPoolSize: 50
-          idleTimeout: 60000
-          connectionTestQuery: <%= @persistence_db_test_query %>
-          validationTimeout: 30000
-          isAutoCommit: false
-
-    - name: WSO2_CLUSTER_DB
-      description: The MySQL datasource used for Cluster Coordination
-      jndiConfig:
-        name: jdbc/WSO2ClusterDB
-      definition:
-        type: RDBMS
-        configuration:
-          jdbcUrl: '<%= @cluster_db_url %>'
-          username: <%= @cluster_db_username %>
-          password: <%= @cluster_db_password %>
+          connectionTestQuery: "<%= @cluster_db_test_query %>"
           driverClassName: <%= @cluster_db_driver %>
-          maxPoolSize: 50
           idleTimeout: 60000
-          connectionTestQuery: <%= @cluster_db_test_query %>
-          validationTimeout: 30000
           isAutoCommit: false
+          jdbcUrl: "<%= @cluster_db_url %>"
+          maxPoolSize: 10
+          password: <%= @cluster_db_password %>
+          username: <%= @cluster_db_username %>
+          validationTimeout: 30000
 
 siddhi:
+  refs:
+    - ref:
+        name: 'grpcSource'
+        type: 'grpc'
+        properties:
+          receiver.url : grpc://localhost:9806/org.wso2.grpc.EventService/consume
   extensions:
     -
       extension:
@@ -498,6 +486,32 @@ siddhi:
           cacheSize: 10000
           isPersistInDatabase: true
           datasource: GEO_LOCATION_DATA
+    # Enable email config
+    # -
+    #   extension:
+    #     name: email
+    #     namespace: sink
+    #     properties:
+    #       username: user@domain
+    #       address: user@domain
+    #       password: sample_pass
+    #       host: The host name of the SMTP server.
+    #       port: The port that is used to create the connection.
+    #       auth: false
+    #       ssl.enable: false
+
+    #Enabling GRPC Service with an Extension
+    -
+      extension:
+        name: 'grpc'
+        namespace: 'source'
+        properties:
+          keyStoreFile : ${sys:carbon.home}/resources/security/wso2carbon.jks
+          keyStorePassword : wso2carbon
+          keyStoreAlgorithm : SunX509
+          trustStoreFile : ${sys:carbon.home}/resources/security/client-truststore.jks
+          trustStorePassword : wso2carbon
+          trustStoreAlgorithm : SunX509
 
   # Cluster Configuration
 cluster.config:
@@ -508,16 +522,41 @@ cluster.config:
     datasource: WSO2_CLUSTER_DB
     heartbeatInterval: <%= @cluster_config_heartbeat_interval %>
     heartbeatMaxRetry: <%= @cluster_config_max_retry %>
-    eventPollingInterval: <%= @cluster_config_polling_interval %>
+    eventPollingInterval: <%= @cluster_config_event_polling_interval %>
+
+# Authentication configuration
+auth.configs:
+  type: '<%= @authentication_type %>'        # Type of the IdP client used
+  userManager:
+    adminRole: <%= @authentication_admin_role %>   # Admin role which is granted all permissions
+    userStore:         # User store
+      users:
+        -<% @user_store_users.each do |user| %>
+          user:
+            username: <%= user['username'] %>
+            password: <%= user['password'] %>
+            roles: <%= user['roles'] %>
+          <% end %>
+
+      roles:
+        -<% @user_store_roles.each do |role| %>
+          role:
+            id: <%= role['id'] %>
+            displayName: <%= role['displayName'] %>
+          <% end %>
+
+    # Configuration to enable apim alerts
+#analytics.solutions:
+#  APIM-alerts.enabled: true
 
 <% if @deployment_type == 'ha' %>
 deployment.config:
   type: ha
   eventSyncServer:
-    host: localhost
-    port: 9893
-    advertisedHost: localhost
-    advertisedPort: 9893
+    host: <%= @eventSyncServer_host %>
+    port: <%= @eventSyncServer_port %>
+    advertisedHost: <%= @eventSyncServer_advertised_host %>
+    advertisedPort: <%= @eventSyncServer_advertised_port %>
     bossThreads: 10
     workerThreads: 10
   eventSyncClientPool:
@@ -532,10 +571,10 @@ deployment.config:
 deployment.config:
   type: distributed
   httpsInterface:
-    host: 192.168.1.3
-    port: 9443
-    username: admin
-    password: admin
+    host: <%= @https_interface_host %>
+    port: <%= @https_interface_port %>
+    username: <%= @https_interface_username %>
+    password: <%= @https_interface_password %>
   leaderRetryInterval: 10000
   resourceManagers:
     <% @resource_managers.each do |manager| %>
