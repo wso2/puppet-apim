@@ -35,7 +35,7 @@ class apim_analytics_worker::params inherits apim_common::params {
   # -------------- Deployment.yaml Config -------------- #
 
   # Carbon Configuration Parameters
-  $carbon_id = 'wso2-am-analytics'
+  $wso2_carbon_id = 'wso2-am-analytics'
   $ports_offset = 1
 
   # Configuration used for the databridge communication
@@ -47,18 +47,22 @@ class apim_analytics_worker::params inherits apim_common::params {
   $state_persistence_revisions = 2
 
   # transport.http config
-  $default_listener_host = '0.0.0.0'
-  $msf4j_host = '0.0.0.0'
-  $msf4j_listener_keystore = '${carbon.home}/resources/security/wso2carbon.jks'
-  $msf4j_listener_keystore_password = 'wso2carbon'
-  $msf4j_listener_keystore_cert_pass = 'wso2carbon'
+  $hostname = '0.0.0.0'
+  $wso2_transport_default_port = 9091
+  $wso2_transport_msf4j_https_port = 9444
 
   # siddhi.stores.query.api config
-  $siddhi_default_listener_host = '0.0.0.0'
-  $siddhi_msf4j_host = '0.0.0.0'
-  $siddhi_msf4j_listener_keystore = '${carbon.home}/resources/security/wso2carbon.jks'
-  $siddhi_msf4j_listener_keystore_password = 'wso2carbon'
-  $siddhi_msf4j_listener_keystore_cert_pass = 'wso2carbon'
+  $siddhi_api_default_port = 7071
+  $siddhi_api_msf4j_https_port = 7444
+  $siddhi_api_keystore_file = '${carbon.home}/resources/security/wso2carbon.jks'
+  $siddhi_api_keystore_password = 'wso2carbon'
+  $siddhi_api_keystore_cert_password = 'wso2carbon'
+
+  $thrift_data_receiver_tcp_port = 7611
+  $thrift_data_receiver_ssl_port = 7711
+
+  $binary_data_receiver_tcp_port = 9611
+  $bianry_data_receiver_ssl_port = 9711
 
   # Data Sources Configurations
   $message_tracing_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/MESSAGE_TRACING_DB;AUTO_SERVER=TRUE'
@@ -67,13 +71,13 @@ class apim_analytics_worker::params inherits apim_common::params {
   $message_tracing_db_driver = 'org.h2.Driver'
   $message_tracing_db_test_query = 'SELECT 1'
 
-  $persistence_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_MGW_ANALYTICS_DB;AUTO_SERVER=TRUE'
-  $persistence_db_username = 'wso2carbon'
-  $persistence_db_password = 'wso2carbon'
-  $persistence_db_driver = 'com.mysql.jdbc.Driver'
-  $persistence_db_test_query = 'SELECT 1'
+  $wso2am_mgw_analytics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_MGW_ANALYTICS_DB;AUTO_SERVER=TRUE'
+  $wso2am_mgw_analytics_db_username = 'wso2carbon'
+  $wso2am_mgw_analytics_db_password = 'wso2carbon'
+  $wso2am_mgw_analytics_db_driver = 'org.h2.Driver'
+  $wso2am_mgw_analytics_db_test_query = 'SELECT 1'
 
-  $cluster_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_MGW_ANALYTICS_DB;AUTO_SERVER=TRUE'
+  $cluster_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/WSO2_CLUSTER_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
   $cluster_db_username = 'wso2carbon'
   $cluster_db_password = 'wso2carbon'
   $cluster_db_driver = 'com.mysql.jdbc.Driver'
@@ -82,9 +86,25 @@ class apim_analytics_worker::params inherits apim_common::params {
   # Cluster configurations
   $cluster_config_enabled = 'false'
   $cluster_config_group_id = 'sp'
-  $cluster_config_heartbeat_interval = 3000
-  $cluster_config_max_retry = 3
-  $cluster_config_polling_interval = 3000
+  $cluster_config_heartbeat_interval = 1000
+  $cluster_config_max_retry = 2
+  $cluster_config_event_polling_interval = 1000
+
+  $authentication_type = 'local'
+  $authentication_admin_role = 'admin'
+  $user_store_users = [
+    {
+      username  =>  'admin',
+      password  =>  'YWRtaW4=',
+      roles     =>  1
+    }
+  ]
+  $user_store_roles = [
+    {
+      displayName  =>  'admin',
+      id     =>  1
+    }
+  ]
 
   # Configurations for High Availability deployments
   # $deployment_type = 'ha'
