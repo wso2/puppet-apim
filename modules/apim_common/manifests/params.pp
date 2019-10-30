@@ -157,9 +157,12 @@ class apim_common::params {
       name                => 'Production and Sandbox',
       description         => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
       server_url          => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-      gateway_endpoint    => 'http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}',
-      gateway_ws_endpoint => 'ws://${carbon.local.ip}:9099',
       ws_endpoint         => 'ws://localhost:9099',
+<<<<<<< HEAD
+      wss_endpoint        => 'wss://localhost:8099',
+=======
+      wss_endpoint         => 'wss://localhost:8099',
+>>>>>>> Add puppet changes for apim profile
       http_endpoint       => 'http://localhost:${http.nio.port}',
       https_endpoint      => 'https://localhost:${https.nio.port}'
     }
@@ -168,7 +171,7 @@ class apim_common::params {
   $key_manager_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
   $key_validator_thrift_server_host = 'localhost'
 
-  $api_store_url = 'https://localhost:${mgt.transport.https.port}/store'
+  $api_devportal_url = 'https://localhost:${mgt.transport.https.port}/devportal'
   $api_devportal_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
 
   $traffic_manager_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
@@ -216,7 +219,7 @@ class apim_common::params {
   $databridge_config_worker_threads = 10
   $databridge_config_keystore_location = '${sys:carbon.home}/resources/security/wso2carbon.jks'
   $databridge_config_keystore_password = 'wso2carbon'
-  $binary_data_receiver_hostname = '0.0.0.0'
+  $binary_data_receiver_hostname = '127.0.0.1'
   $tcp_receiver_thread_pool_size = 100
   $ssl_receiver_thread_pool_size = 100
 

@@ -1,0 +1,96 @@
+[server]
+hostname = "<%= @hostname %>"
+node_ip = "<%= @binary_data_receiver_hostname %>"
+mode = "single"
+base_path = "${carbon.protocol}://${carbon.host}:${carbon.management.port}"
+server_role = "default"
+offset = "<%= @ports_offset %>"
+
+[super_admin]
+username = "<%= @admin_username %>"
+password = "<%= @admin_password %>"
+create_admin_account = true
+
+[user_store]
+type = "database"
+
+[database.apim_db]
+type = "<%= @wso2am_db_type %>"
+url = "<%= @wso2am_db_url %>"
+username = "<%= @wso2am_db_username %>"
+password = "<%= @wso2am_db_password %>"
+[database.apim_db.pool_options]
+validationQuery = "<%= @wso2am_db_validation_query %>"
+
+[database.shared_db]
+type = "<%= @wso2shared_db_type %>"
+url = "<%= @wso2shared_db_url %>"
+username = "<%= @wso2shared_db_username %>"
+password = "<%= @wso2shared_db_password %>"
+[database.shared_db.pool_options]
+validationQuery = "<%= @wso2shared_db_validation_query %>"
+
+[keystore.tls]
+file_name =  "<%= @key_store_location %>"
+type =  "JKS"
+password =  "<%= @key_store_password %>"
+alias =  "<%= @key_store_key_alias %>"
+key_password =  "<%= @key_store_key_password %>"
+
+<% @gateway_environments.each do |environment| %>
+[[apim.gateway.environment]]
+name = "<%= environment['name'] %>"
+type = "<%= environment['type'] %>"
+display_in_api_console = true
+description = "<%= environment['description'] %>"
+show_as_token_endpoint_url = true
+service_url = "<%= environment['server_url'] %>"
+username= "${admin.username}"
+password= "${admin.password}"
+ws_endpoint = "<%= environment['ws_endpoint'] %>"
+wss_endpoint = "<%= environment['wss_endpoint'] %>"
+http_endpoint = "<%= environment['http_endpoint'] %>"
+https_endpoint = "<%= environment['https_endpoint'] %>"
+<% end %>
+
+[apim.cors]
+allow_origins = "*"
+allow_methods = ["GET","PUT","POST","DELETE","PATCH","OPTIONS"]
+allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction"]
+allow_credentials = false
+
+[[event_handler]]
+name = "userPostSelfRegistration"
+subscriptions = ["POST_ADD_USER"]
+
+[service_provider]
+sp_name_regex = "^[\\sa-zA-Z0-9._-]*$"
+
+[apim.analytics]
+enable = "<%= @analytics_enabled %>"
+receiver_username = "<%= @stream_processor_username %>"
+receiver_password = "<%= @stream_processor_password %>"
+store_api_url = "<%= @stream_processor_rest_api_url %>"
+store_api_username = "<%= @stream_processor_rest_api_username %>"
+store_api_password = "<%= @stream_processor_rest_api_password %>"
+
+<% @analytics_url_group.each do |url_group| %>
+[[apim.analytics.url_group]]
+analytics_url =[<%= url_group['analytics_urls'] %>]
+analytics_auth_url =[<%= url_group['analytics_auth_urls'] %>]
+
+<% end %>
+
+[apim.key_manager]
+service_url = "<%= @key_manager_server_url %>"
+
+[apim.oauth_config]
+revoke_endpoint = "<%= @oauth_configs_revoke_api_url %>"
+
+[apim.devportal]
+url = "<%= @api_devportal_url %>"
+
+[apim.throttling]
+receiver_url = "<%= @traffic_manager_receiver_url %>"
+receiver_auth_url = "<%= @traffic_manager_auth_url %>"
+service_url = "<%= @api_devportal_server_url %>"
