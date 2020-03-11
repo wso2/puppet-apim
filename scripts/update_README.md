@@ -1,4 +1,4 @@
-# Continuous Update Delivery for WSO2 Identity Server
+# Continuous Update Delivery for WSO2 API Manager
 
 The update script is to be used by WSO2 subscription users such that products packs can be updated. If you do not have a WSO2 subscription, you can sign up for a [free trial](https://wso2.com/subscription/free-trial).
 
