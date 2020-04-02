@@ -9,7 +9,7 @@ The update script is to be used by WSO2 subscription users such that products pa
 ---
 **NOTE**
 
-Provided WUM updated packs should contain the latest updates for wso2am-3.0.0 and wso2am-analytics-3.0.0
+Provided WUM updated packs should contain the latest updates for wso2am-3.1.0 and wso2am-analytics-3.1.0
 
 ---
 
