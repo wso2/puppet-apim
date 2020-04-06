@@ -416,14 +416,14 @@ wso2.datasources:
 #      definition:
 #        type: RDBMS
 #        configuration:
-#          connectionTestQuery: "SELECT 1"
-#          driverClassName: com.mysql.jdbc.Driver
+#          connectionTestQuery: "<%= @persistence_db_test_query %>"
+#          driverClassName: <%= @persistence_db_driver %>
 #          idleTimeout: 60000
 #          isAutoCommit: false
-#          jdbcUrl: "jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERSISTENCE_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE"
+#          jdbcUrl: "<%= @persistence_db_url %>"
 #          maxPoolSize: 10
-#          password: pass
-#          username: root
+#          password: <%= @persistence_db_password %>
+#          username: <%= @persistence_db_password %>
 #          validationTimeout: 30000
 
 siddhi:
