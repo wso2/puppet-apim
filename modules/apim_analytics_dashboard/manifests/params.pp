@@ -42,6 +42,7 @@ class apim_analytics_dashboard::params inherits apim_common::params {
   $thrift_data_receiver_tcp_port = 7611
   $thrift_data_receiver_ssl_port = 7711
 
+  $transport_listner_config_port_default = 9089
   $transport_listner_config_port = 9643
 
   # Configuration used for the databridge communication
