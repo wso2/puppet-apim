@@ -6,6 +6,7 @@ offset = "<%= @ports_offset %>"
 
 [user_store]
 type = "database"
+type = "database_unique_id"
 
 [super_admin]
 username = "<%= @admin_username %>"
@@ -74,7 +75,12 @@ signing_algorithm = "<%= @jwt_signing_algorithm %>"
 
 [apim.throttling]
 <% @throttling_url_group.each do |url_group| %>
+
 [[apim.throttling.url_group]]
 traffic_manager_urls=[<%= url_group['traffic_manager_urls'] %>]
 traffic_manager_auth_urls=[<%= url_group['traffic_manager_auth_urls'] %>]
 <% end %>
+
+[[event_handler]]
+name="userPostSelfRegistration"
+subscriptions=["POST_ADD_USER"]
