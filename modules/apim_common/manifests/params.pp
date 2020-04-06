@@ -39,7 +39,7 @@ class apim_common::params {
   # JDK Distributions
   $java_dir = "/opt"
   $java_symlink = "${java_dir}/java"
-  $jdk_name = 'amazon-corretto-8.222.10.1-linux-x64'
+  $jdk_name = 'amazon-corretto-8.242.08.1-linux-x64'
   $java_home = "${java_dir}/${jdk_name}"
 
   $profile = $profile
