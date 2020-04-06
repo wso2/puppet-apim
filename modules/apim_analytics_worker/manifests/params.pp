@@ -71,11 +71,11 @@ class apim_analytics_worker::params inherits apim_common::params {
   $message_tracing_db_driver = 'org.h2.Driver'
   $message_tracing_db_test_query = 'SELECT 1'
 
-  $wso2am_mgw_analytics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_MGW_ANALYTICS_DB;AUTO_SERVER=TRUE'
-  $wso2am_mgw_analytics_db_username = 'wso2carbon'
-  $wso2am_mgw_analytics_db_password = 'wso2carbon'
-  $wso2am_mgw_analytics_db_driver = 'org.h2.Driver'
-  $wso2am_mgw_analytics_db_test_query = 'SELECT 1'
+  $persistence_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERSISTENCE_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
+  $persistence_db_username = 'root'
+  $persistence_db_password = 'pass
+  $persistence_db_driver = 'com.mysql.jdbc.Driver'
+  $persistence_db_test_query = 'SELECT 1'
 
   $cluster_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/WSO2_CLUSTER_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE'
   $cluster_db_username = 'wso2carbon'
