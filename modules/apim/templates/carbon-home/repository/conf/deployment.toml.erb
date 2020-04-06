@@ -12,7 +12,7 @@ password = "<%= @admin_password %>"
 create_admin_account = true
 
 [user_store]
-type = "database"
+type = "database_unique_id"
 
 [database.apim_db]
 type = "<%= @wso2am_db_type %>"
@@ -29,6 +29,11 @@ username = "<%= @wso2shared_db_username %>"
 password = "<%= @wso2shared_db_password %>"
 [database.shared_db.pool_options]
 validationQuery = "<%= @wso2shared_db_validation_query %>"
+
+[truststore]
+file_name = "<%= @trust_store_location %>"
+type = "JKS"
+password = "<%= @trust_store_password %>"
 
 [keystore.tls]
 file_name =  "<%= @key_store_location %>"
@@ -52,19 +57,6 @@ wss_endpoint = "<%= environment['wss_endpoint'] %>"
 http_endpoint = "<%= environment['http_endpoint'] %>"
 https_endpoint = "<%= environment['https_endpoint'] %>"
 <% end %>
-
-[apim.cors]
-allow_origins = "*"
-allow_methods = ["GET","PUT","POST","DELETE","PATCH","OPTIONS"]
-allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction"]
-allow_credentials = false
-
-[[event_handler]]
-name = "userPostSelfRegistration"
-subscriptions = ["POST_ADD_USER"]
-
-[service_provider]
-sp_name_regex = "^[\\sa-zA-Z0-9._-]*$"
 
 [apim.analytics]
 enable = "<%= @analytics_enabled %>"
@@ -90,7 +82,23 @@ revoke_endpoint = "<%= @oauth_configs_revoke_api_url %>"
 [apim.devportal]
 url = "<%= @api_devportal_url %>"
 
-[apim.throttling]
-receiver_url = "<%= @traffic_manager_receiver_url %>"
-receiver_auth_url = "<%= @traffic_manager_auth_url %>"
-service_url = "<%= @api_devportal_server_url %>"
+[apim.cors]
+allow_origins = "*"
+allow_methods = ["GET","PUT","POST","DELETE","PATCH","OPTIONS"]
+allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction"]
+allow_credentials = false
+
+[[apim.throttling.url_group]]
+traffic_manager_urls = "$traffic_manager_receiver_urls"
+traffic_manager_auth_urls = "$traffic_manager_auth_urls"
+type = "failover"
+
+[[event_handler]]
+name = "userPostSelfRegistration"
+subscriptions = ["POST_ADD_USER"]
+
+[service_provider]
+sp_name_regex = "^[\\sa-zA-Z0-9._-]*$"
+
+[database.local]
+url = "jdbc:h2:./repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE"
