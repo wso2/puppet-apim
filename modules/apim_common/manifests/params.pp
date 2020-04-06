@@ -170,8 +170,8 @@ class apim_common::params {
   $api_devportal_url = 'https://localhost:${mgt.transport.https.port}/devportal'
   $api_devportal_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
 
-  $traffic_manager_receiver_urls = '["tcp://localhost:9611","tcp://localhost:9611"]'
-  $traffic_manager_auth_urls = '["ssl://localhost:9711","ssl://localhost:9711"]'
+  $traffic_manager_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
+  $traffic_manager_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
 
   # ----- Master-datasources config params -----
 

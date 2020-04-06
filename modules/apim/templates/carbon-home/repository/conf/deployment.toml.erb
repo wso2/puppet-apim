@@ -30,11 +30,6 @@ password = "<%= @wso2shared_db_password %>"
 [database.shared_db.pool_options]
 validationQuery = "<%= @wso2shared_db_validation_query %>"
 
-[truststore]
-file_name = "<%= @trust_store_location %>"
-type = "JKS"
-password = "<%= @trust_store_password %>"
-
 [keystore.tls]
 file_name =  "<%= @key_store_location %>"
 type =  "JKS"
@@ -88,10 +83,13 @@ allow_methods = ["GET","PUT","POST","DELETE","PATCH","OPTIONS"]
 allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction"]
 allow_credentials = false
 
+[apim.throttling]
+<% @throttling_url_group.each do |url_group| %>
+
 [[apim.throttling.url_group]]
-traffic_manager_urls = ["<%= @traffic_manager_urls %>"]
-traffic_manager_auth_urls = ["<%= @traffic_manager_auth_urls %>"]
-type = "failover"
+traffic_manager_urls=[<%= url_group['traffic_manager_urls'] %>]
+traffic_manager_auth_urls=[<%= url_group['traffic_manager_auth_urls'] %>]
+<% end %>
 
 [[event_handler]]
 name = "userPostSelfRegistration"
