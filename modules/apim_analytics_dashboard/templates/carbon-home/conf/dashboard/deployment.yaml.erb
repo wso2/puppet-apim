@@ -349,6 +349,10 @@ wso2.transport.http:
       value: true
 
   listenerConfigurations:
+    - id: "default"
+      host: "<%= @hostname %>"
+      port: "<%= @transport_listner_config_port_default %>"
+
     - id: "default-https"
       host: "<%= @hostname %>"
       port: "<%= @transport_listner_config_port %>"
@@ -366,6 +370,10 @@ data.provider.configs:
 ## The configured APIs will be available as https://{host}:{port}/analytics-dashboard/{API_context_path}
 additional.apis:
   /apis/analytics/v1.0/apim: org.wso2.analytics.apim.rest.api.proxy.ApimApi
+  /apis/v1.0/report: org.wso2.analytics.apim.rest.api.report.ReportApi
+
+report:
+  implClass: org.wso2.analytics.apim.rest.api.report.reportgen.DefaultReportGeneratorImpl
 
 ## Authentication configuration
 auth.configs:
@@ -377,20 +385,32 @@ auth.configs:
     adminServiceBaseUrl: <%= @admin_service_url %>
     adminUsername: <%= @admin_service_username %>
     adminPassword: <%= @admin_service_password %>
-    kmDcrUrl: <%= @admin_service_url %>/client-registration/v0.15/register
+    kmDcrUrl: <%= @admin_service_url %>/client-registration/v0.16/register
     kmTokenUrlForRedirection: <%= @admin_service_url %>:9443/oauth2
     kmTokenUrl: <%= @admin_service_url %>/oauth2
     kmUsername: <%= @keymanager_username %>
     kmPassword: <%= @keymanager_password %>
     portalAppContext: analytics-dashboard
     businessRulesAppContext : business-rules
-    cacheTimeout: 900
+    cacheTimeout: 30
     baseUrl: https://localhost:9643
     grantType: authorization_code
     publisherUrl: <%= @admin_service_url %>
+    devPortalUrl: <%= @admin_service_url %>
+    externalLogoutUrl: <%= @admin_service_url %>/oidc/logout
     #storeUrl: <%= @admin_service_url %>
 
 wso2.dashboard:
   roles:
     creators:
       - apim_analytics:admin_carbon.super
+  themeConfigProviderClass: org.wso2.carbon.dashboards.core.DefaultDashboardThemeConfigProvider
+
+## RDBMS Data Provider configuration
+wso2.rdbms.data.provider:
+  timeTypes:
+    - DATE
+    - TIME
+    - DATETIME
+    - TIMESTAMP
+    - TIMESTAMP WITHOUT TIME ZONE
