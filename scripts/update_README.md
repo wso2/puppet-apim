@@ -1,10 +1,7 @@
 # Continuous Update Delivery for WSO2 API Manager
 
-The update script is to be used by WSO2 subscription users such that products packs can be updated. If you do not have a WSO2 subscription, you can sign up for a [free trial](https://wso2.com/subscription/free-trial).
-
 ### Prequisites
-* A WSO2 Subscription
-* [WUM](https://wso2.com/updates/wum) updated packs should be provided in the `/modules/apim_common/files/packs` directory
+* Product packs should be included in the `/modules/apim_common/files/packs` directory
 
 ---
 **NOTE**
