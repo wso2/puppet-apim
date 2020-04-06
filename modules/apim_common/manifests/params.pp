@@ -17,7 +17,7 @@
 class apim_common::params {
 
   $packages = ["unzip"]
-  $version = "3.0.0"
+  $version = "3.1.0"
 
   # Set the location the product packages should reside in (eg: "local" in the /files directory, "remote" in a remote location)
   $pack_location = "local"
@@ -70,7 +70,7 @@ class apim_common::params {
       $optimize_params = "-Dprofile=gateway-worker"
     }
     'apim_is_as_km': {
-      $pack = "wso2is-km-5.9.0"
+      $pack = "wso2is-km-5.10.0"
       # $remote_pack = "<URL_TO_IS_AS_KM_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
@@ -170,8 +170,8 @@ class apim_common::params {
   $api_devportal_url = 'https://localhost:${mgt.transport.https.port}/devportal'
   $api_devportal_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
 
-  $traffic_manager_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
-  $traffic_manager_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
+  $traffic_manager_receiver_urls = '["tcp://localhost:9611","tcp://localhost:9611"]'
+  $traffic_manager_auth_urls = '["ssl://localhost:9711","ssl://localhost:9711"]'
 
   # ----- Master-datasources config params -----
 
@@ -251,7 +251,7 @@ class apim_common::params {
   $apim_analytics_db_driver = 'org.h2.Driver'
   $apim_analytics_db_test_query = 'SELECT 1'
 
-  $am_db_url = 'jdbc:h2:${sys:carbon.home}/../wso2am-3.0.0/repository/database/WSO2AM_DB;AUTO_SERVER=TRUE'
+  $am_db_url = 'jdbc:h2:${sys:carbon.home}/../wso2am-3.1.0/repository/database/WSO2AM_DB;AUTO_SERVER=TRUE'
   $am_db_username = 'wso2carbon'
   $am_db_password = 'wso2carbon'
   $am_db_driver = 'org.h2.Driver'
