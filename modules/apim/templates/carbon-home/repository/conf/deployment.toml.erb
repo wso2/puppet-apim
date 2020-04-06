@@ -89,8 +89,8 @@ allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","S
 allow_credentials = false
 
 [[apim.throttling.url_group]]
-traffic_manager_urls = "$traffic_manager_receiver_urls"
-traffic_manager_auth_urls = "$traffic_manager_auth_urls"
+traffic_manager_urls = ["<%= @traffic_manager_urls %>"]
+traffic_manager_auth_urls = ["<%= @traffic_manager_auth_urls %>"]
 type = "failover"
 
 [[event_handler]]
