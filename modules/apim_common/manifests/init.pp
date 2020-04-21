@@ -79,7 +79,7 @@ class apim_common inherits apim_common::params {
 
   # Unzip distribution
   exec { "unpack-jdk":
-    command => "tar -zxvf ${java_home}.tar.gz",
+    command => "tar -zxvf ${java_home}.tar.gz --strip-components=1",
     path    => "/bin/",
     cwd     => "${java_dir}",
     onlyif  => "/usr/bin/test ! -d ${java_home}",
