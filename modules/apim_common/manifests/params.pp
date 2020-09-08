@@ -17,7 +17,7 @@
 class apim_common::params {
 
   $packages = ["unzip"]
-  $version = "3.1.0"
+  $version = "3.2.0"
 
   # Set the location the product packages should reside in (eg: "local" in the /files directory, "remote" in a remote location)
   $pack_location = "local"
