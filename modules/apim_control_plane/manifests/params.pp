@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2021 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_publisher::params
+# Class apim_control_plane::params
 # This class includes all the necessary parameters.
-class apim_publisher::params inherits apim_common::params {
+class apim_control_plane::params inherits apim_common::params {
 
-  $start_script_template = 'bin/wso2server.sh'
+  $start_script_template = 'bin/api-manager.sh'
   $jvmxms = '256m'
   $jvmxmx = '1024m'
 

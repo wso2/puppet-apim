@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2021 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim_publisher
-# Init class of API Manager - API Publisher profile
-class apim_publisher inherits apim_publisher::params {
+# Class: apim_control_plane
+# Init class of API Manager - API Control Plane profile
+class apim_control_plane inherits apim_control_plane::params {
 
   include apim_common
 
   # Optimize for profile
   exec { "optimize-profile":
-    command => "/bin/sh ${carbon_home}/bin/profileSetup.sh -Dprofile=api-publisher",
+    command => "/bin/sh ${carbon_home}/bin/profileSetup.sh -Dprofile=control-plane",
   }
 
   # Copy configuration changes to the installed directory
@@ -61,7 +61,7 @@ class apim_publisher inherits apim_publisher::params {
     }
   }
 
-  # Copy wso2server.sh to installed directory
+  # Copy api-manager.sh to installed directory
   file { "${carbon_home}/${start_script_template}":
     ensure  => file,
     owner   => $user,
@@ -75,7 +75,7 @@ class apim_publisher inherits apim_publisher::params {
   /*
     Following script can be used to copy file to a given location.
     This will copy some_file to install_path -> repository.
-    Note: Ensure that file is available in modules -> apim_publisher -> files
+    Note: Ensure that file is available in modules -> apim_control_plane -> files
   */
   # file { "${install_path}/repository/some_file":
   #   owner  => $user,
