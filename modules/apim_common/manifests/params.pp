@@ -97,11 +97,11 @@ class apim_common::params {
   $throttling_url_group = [
     {
       traffic_manager_urls      => '"tcp://tm1.local:9611"',
-      traffic_manager_auth_urls => '"ssl://tm1.local:9771"'
+      traffic_manager_auth_urls => '"ssl://tm1.local:9711"'
     },
     {
       traffic_manager_urls      => '"tcp://tm2.local:9611"',
-      traffic_manager_auth_urls => '"ssl://tm2.local:9771"'
+      traffic_manager_auth_urls => '"ssl://tm2.local:9711"'
     }
   ]
 
@@ -113,8 +113,8 @@ class apim_common::params {
       server_url                            => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
       ws_endpoint                           => 'ws://localhost:9099',
       wss_endpoint                          => 'wss://localhost:8099',
-      http_endpoint                         => 'http://localhost:${http.nio.port}',
-      https_endpoint                        => 'https://localhost:${https.nio.port}',
+      http_endpoint                         => 'http://localhost:8280',
+      https_endpoint                        => 'https://localhost:8243',
       websub_event_receiver_http_endpoint   => 'http://localhost:9021',
       websub_event_receiver_https_endpoint  => 'https://localhost:8021'
     }
@@ -126,7 +126,7 @@ class apim_common::params {
   $key_validator_thrift_server_host = 'localhost'
 
   $api_devportal_url = 'https://localhost:${mgt.transport.https.port}/devportal'
-  $throttling_service_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $throttle_service_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
 
   $traffic_manager_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
   $traffic_manager_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
@@ -167,24 +167,5 @@ class apim_common::params {
   $admin_username = 'admin'
   $admin_password = 'admin'
 
-  # ----- Analytics config params -----
-
-  # Configuration used for the databridge communication
-  $databridge_config_worker_threads = 10
-  $databridge_config_keystore_location = '${sys:carbon.home}/resources/security/wso2carbon.jks'
-  $databridge_config_keystore_password = 'wso2carbon'
-  $tcp_receiver_thread_pool_size = 100
-  $ssl_receiver_thread_pool_size = 100
-
-  # Configuration of the Data Agents - to publish events through
-  $thrift_agent_trust_store = '${sys:carbon.home}/resources/security/client-truststore.jks'
-  $thrift_agent_trust_store_password = 'wso2carbon'
-  $binary_agent_trust_store = '${sys:carbon.home}/resources/security/client-truststore.jks'
-  $binary_agent_trust_store_password = 'wso2carbon'
-
-  $am_db_url = 'jdbc:h2:${sys:carbon.home}/../wso2am-3.1.0/repository/database/WSO2AM_DB;AUTO_SERVER=TRUE'
-  $am_db_username = 'wso2carbon'
-  $am_db_password = 'wso2carbon'
-  $am_db_driver = 'org.h2.Driver'
-  $am_test_query = 'SELECT 1'
+  $event_listener_notification_endpoint = 'https://localhost:${mgt.transport.https.port}/internal/data/v1/notify'
 }

@@ -41,7 +41,4 @@ class apim_control_plane::params inherits apim_common::params {
      services deployed on this server instance.
   */
   $hostname = 'localhost'
-
-  # ----- api-manager.xml config params -----
-  $throttle_config_policy_deployer_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
 }

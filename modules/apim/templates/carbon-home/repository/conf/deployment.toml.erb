@@ -162,7 +162,7 @@ allow_credentials = false
 #enable_policy_deploy = true
 #enable_blacklist_condition = true
 #enable_persistence = true
-#throttle_decision_endpoints = ["tcp://localhost:5672","tcp://localhost:5672"]
+#throttle_decision_endpoints = [ <%=throttle_decision_endpoints%> ]
 
 #[apim.throttling.blacklist_condition]
 #start_delay = "5m"
@@ -246,7 +246,7 @@ type = "org.wso2.carbon.identity.core.handler.AbstractIdentityHandler"
 name = "org.wso2.is.notification.ApimOauthEventInterceptor"
 order = 1
 [event_listener.properties]
-notification_endpoint = "https://localhost:${mgt.transport.https.port}/internal/data/v1/notify"
+notification_endpoint = "<%= @event_listener_notification_endpoint %>"
 username = "${admin.username}"
 password = "${admin.password}"
 'header.X-WSO2-KEY-MANAGER' = "default"
