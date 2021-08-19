@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2021 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 # This class includes all the necessary parameters.
 class apim_tm::params inherits apim_common::params {
 
-  $start_script_template = 'bin/wso2server.sh'
+  $start_script_template = 'bin/api-manager.sh'
   $jvmxms = '256m'
   $jvmxmx = '1024m'
 
@@ -33,6 +33,7 @@ class apim_tm::params inherits apim_common::params {
   $file_removelist = []
 
   # ----- Carbon.xml config params -----
+  $ports_offset = 0
   /*
      Host name or IP address of the machine hosting this server
      e.g. www.wso2.org, 192.168.1.10
