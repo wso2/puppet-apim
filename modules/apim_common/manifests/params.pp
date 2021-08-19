@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright (c) 2019 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2021 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 class apim_common::params {
 
   $packages = ["unzip"]
-  $version = "3.2.0"
+  $version = "4.0.0"
 
   # Set the location the product packages should reside in (eg: "local" in the /files directory, "remote" in a remote location)
   $pack_location = "local"
@@ -39,7 +39,7 @@ class apim_common::params {
   # JDK Distributions
   $java_dir = "/opt"
   $java_symlink = "${java_dir}/java"
-  $jdk_name = 'amazon-corretto-8.242.08.1-linux-x64'
+  $jdk_name = 'amazon-corretto-8.302.08.1-linux-x64'
   $java_home = "${java_dir}/${jdk_name}"
 
   $profile = $profile
@@ -50,63 +50,31 @@ class apim_common::params {
 
   # ----- Profile configs -----
   case $profile {
-    'apim_analytics_dashboard': {
-      $pack = "wso2am-analytics-${version}"
-      # $remote_pack = "<URL_TO_APIM_ANALYTICS_WORKER_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/dashboard.sh"
-      $pid_file_path = "${product_dir}/${pack}/wso2/dashboard/runtime.pid"
-    }
-    'apim_analytics_worker': {
-      $pack = "wso2am-analytics-${version}"
-      # $remote_pack = "<URL_TO_APIM_ANALYTICS_WORKER_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/worker.sh"
-      $pid_file_path = "${product_dir}/${pack}/wso2/worker/runtime.pid"
-    }
     'apim_gateway': {
       $pack = "wso2am-${version}"
       # $remote_pack = "<URL_TO_APIM_GATEWAY_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "-Dprofile=gateway-worker"
     }
-    'apim_is_as_km': {
-      $pack = "wso2is-km-5.10.0"
-      # $remote_pack = "<URL_TO_IS_AS_KM_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
-      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-    }
-    'apim_km': {
+    'apim_control_plane': {
       $pack = "wso2am-${version}"
-      # $remote_pack = "<URL_TO_APIM_KEYMANAGER_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK>"
+      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=api-key-manager"
-    }
-    'apim_publisher': {
-      $pack = "wso2am-${version}"
-      # $remote_pack = "<URL_TO_APIM_PUBLISHER_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
-      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=api-publisher"
-    }
-    'apim_devportal': {
-      $pack = "wso2am-${version}"
-      # $remote_pack = "<URL_TO_APIM_DEVPORTAL_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
-      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=api-devportal"
+      $optimize_params = "-Dprofile=control-plane"
     }
     'apim_tm': {
       $pack = "wso2am-${version}"
       # $remote_pack = "<URL_TO_APIM_TRAFFICMANAGER_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = "-Dprofile=traffic-manager"
     }
     default: {
       $pack = "wso2am-${version}"
       # $remote_pack = "<URL_TO_APIM_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/wso2server.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = ""
     }
@@ -122,21 +90,8 @@ class apim_common::params {
 
   # ----- api-manager.xml config params -----
   $analytics_enabled = 'false'
-  $stream_processor_username = '${admin.username}'
-  $stream_processor_password = '${admin.password}'
-  $stream_processor_rest_api_url = 'https://localhost:7444'
-  $stream_processor_rest_api_username = '${admin.username}'
-  $stream_processor_rest_api_password = '${admin.password}'
-  $analytics_url_group = [
-    {
-      analytics_urls      => '"tcp://analytics1.local:7612"',
-      analytics_auth_urls => '"ssl://analytics1.local:7712"'
-    },
-    {
-      analytics_urls      => '"tcp://analytics2.local:7612"',
-      analytics_auth_urls => '"ssl://analytics2.local:7712"'
-    }
-  ]
+  $analytics_config_endpoint = 'https://localhost:8080/auth/v1'
+  $analytics_auth_token = ''
 
   $throttle_decision_endpoints = '"tcp://tm1.local:5672","tcp://tm2.local:5672"'
   $throttling_url_group = [
@@ -152,22 +107,26 @@ class apim_common::params {
 
   $gateway_environments = [
     {
-      type                => 'hybrid',
-      name                => 'Production and Sandbox',
-      description         => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
-      server_url          => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-      ws_endpoint         => 'ws://localhost:9099',
-      wss_endpoint        => 'wss://localhost:8099',
-      http_endpoint       => 'http://localhost:${http.nio.port}',
-      https_endpoint      => 'https://localhost:${https.nio.port}'
+      type                                  => 'hybrid',
+      name                                  => 'Default',
+      description                           => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
+      server_url                            => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
+      ws_endpoint                           => 'ws://localhost:9099',
+      wss_endpoint                          => 'wss://localhost:8099',
+      http_endpoint                         => 'http://localhost:${http.nio.port}',
+      https_endpoint                        => 'https://localhost:${https.nio.port}',
+      websub_event_receiver_http_endpoint   => 'http://localhost:9021',
+      websub_event_receiver_https_endpoint  => 'https://localhost:8021'
     }
   ]
+
+  $gateway_labels = ["Default"]
 
   $key_manager_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
   $key_validator_thrift_server_host = 'localhost'
 
   $api_devportal_url = 'https://localhost:${mgt.transport.https.port}/devportal'
-  $api_devportal_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $throttling_service_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
 
   $traffic_manager_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
   $traffic_manager_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
@@ -214,7 +173,6 @@ class apim_common::params {
   $databridge_config_worker_threads = 10
   $databridge_config_keystore_location = '${sys:carbon.home}/resources/security/wso2carbon.jks'
   $databridge_config_keystore_password = 'wso2carbon'
-  $binary_data_receiver_hostname = '127.0.0.1'
   $tcp_receiver_thread_pool_size = 100
   $ssl_receiver_thread_pool_size = 100
 
@@ -223,32 +181,6 @@ class apim_common::params {
   $thrift_agent_trust_store_password = 'wso2carbon'
   $binary_agent_trust_store = '${sys:carbon.home}/resources/security/client-truststore.jks'
   $binary_agent_trust_store_password = 'wso2carbon'
-
-  # Secure Vault Configuration
-  $securevault_keystore_location = '${sys:carbon.home}/resources/security/securevault.jks'
-  $securevault_privatekey_alias = 'wso2carbon'
-  $securevault_secret_properties_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/secrets.properties'
-  $securevault_masterkeyreader_file = '${sys:carbon.home}/conf/${sys:wso2.runtime}/master-keys.yaml'
-
-  # Data Sources Configurations
-  $wso2_metrics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/metrics;AUTO_SERVER=TRUE'
-  $wso2_metrics_db_username = 'wso2carbon'
-  $wso2_metrics_db_password = 'wso2carbon'
-  $wso2_metrics_db_driver = 'org.h2.Driver'
-  $wso2_metrics_db_test_query = 'SELECT 1'
-
-  $wso2_permissions_db_url =
-    'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
-  $wso2_permissions_db_username = 'wso2carbon'
-  $wso2_permissions_db_password = 'wso2carbon'
-  $wso2_permissions_db_driver = 'org.h2.Driver'
-  $wso2_permissions_db_test_query = 'SELECT 1'
-
-  $apim_analytics_db_url = 'jdbc:h2:${sys:carbon.home}/wso2/worker/database/WSO2AM_STATS_DB;AUTO_SERVER=TRUE'
-  $apim_analytics_db_username = 'wso2carbon'
-  $apim_analytics_db_password = 'wso2carbon'
-  $apim_analytics_db_driver = 'org.h2.Driver'
-  $apim_analytics_db_test_query = 'SELECT 1'
 
   $am_db_url = 'jdbc:h2:${sys:carbon.home}/../wso2am-3.1.0/repository/database/WSO2AM_DB;AUTO_SERVER=TRUE'
   $am_db_username = 'wso2carbon'
