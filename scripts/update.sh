@@ -1,7 +1,7 @@
 #!/bin/bash
 # ----------------------------------------------------------------------------
 #
-# Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+# Copyright (c) 2021, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 #
 # WSO2 Inc. licenses this file to you under the Apache License,
 # Version 2.0 (the "License"); you may not use this file except
@@ -22,7 +22,7 @@
 set -e
 
 # Build artifacts and versions
-: ${version:="3.2.0"}
+: ${version:="4.0.0"}
 : ${packs_dir:=$(pwd)/../modules/apim_common/files/packs/}
 
 usage() { echo "Usage: $0 -p <profile_name>" 1>&2; exit 1; }
@@ -83,48 +83,28 @@ fi
 
 # Set variables relevant to each profile
 case "${profile}" in
-    apim_analytics_dashboard)
-        pack="wso2am-analytics-"${version}
-        updated_modules=("apim_analytics_dashboard" "apim_analytics_worker")
-        ;;
-    apim_analytics_worker)
-        pack="wso2am-analytics-"${version}
-        updated_modules=("apim_analytics_dashboard" "apim_analytics_worker")
-        ;;
     apim)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_control_plane" "apim_tm")
         ;;
     apim_gateway)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_control_plane" "apim_tm")
         ;;
-    apim_km)
+    apim_control_plane)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
-        ;;
-    apim_publisher)
-        pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
-        ;;
-    apim_devportal)
-        pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_control_plane" "apim_tm")
         ;;
     apim_tm)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_km" "apim_publisher" "apim_devportal" "apim_tm")
+        updated_modules=("apim" "apim_gateway" "apim_control_plane" "apim_tm")
         ;;
     *)
         echo "Invalid profile. Please provide one of the following profiles:
             apim
             apim_gateway
-            apim_km
-            apim_publisher
-            apim_devportal
+            apim_control_plane
             apim_tm
-            apim_analytics_worker
-            apim_analytics_dashboard"
         exit 1
         ;;
 esac

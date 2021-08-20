@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright (c) 2019 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2021 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ class apim_common inherits apim_common::params {
 
   # Unzip distribution
   exec { "unpack-jdk":
-    command => "tar -zxvf ${java_home}.tar.gz --strip-components=1",
+    command => "tar -zxvf ${java_home}.tar.gz",
     path    => "/bin/",
     cwd     => "${java_dir}",
     onlyif  => "/usr/bin/test ! -d ${java_home}",
