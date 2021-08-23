@@ -14,15 +14,15 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim_tm
-# Init class of API Manager - Traffic Manager profile
-class apim_tm inherits apim_tm::params {
+# Class: apim_control_plane
+# Init class of API Manager - API Control Plane profile
+class apim_control_plane inherits apim_control_plane::params {
 
   include apim_common
 
   # Optimize for profile
   exec { "optimize-profile":
-    command => "/bin/sh ${carbon_home}/bin/profileSetup.sh -Dprofile=traffic-manager",
+    command => "/bin/sh ${carbon_home}/bin/profileSetup.sh -Dprofile=control-plane",
   }
 
   # Copy configuration changes to the installed directory
@@ -75,7 +75,7 @@ class apim_tm inherits apim_tm::params {
   /*
     Following script can be used to copy file to a given location.
     This will copy some_file to install_path -> repository.
-    Note: Ensure that file is available in modules -> apim_tm -> files
+    Note: Ensure that file is available in modules -> apim_control_plane -> files
   */
   # file { "${install_path}/repository/some_file":
   #   owner  => $user,

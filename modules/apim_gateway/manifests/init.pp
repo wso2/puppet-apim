@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2021 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ class apim_gateway inherits apim_gateway::params {
     }
   }
 
-  # Copy wso2server.sh to installed directory
+  # Copy api-manager.sh to installed directory
   file { "${carbon_home}/${start_script_template}":
     ensure  => file,
     owner   => $user,

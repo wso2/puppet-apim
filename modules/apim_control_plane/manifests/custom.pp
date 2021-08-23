@@ -14,31 +14,8 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Claas apim_tm::params
-# This class includes all the necessary parameters.
-class apim_tm::params inherits apim_common::params {
-
-  $start_script_template = 'bin/api-manager.sh'
-  $jvmxms = '256m'
-  $jvmxmx = '1024m'
-
-  $template_list = [
-    'repository/conf/deployment.toml',
-  ]
-
-  # Define file list
-  $file_list = []
-
-  # Define remove file list
-  $file_removelist = []
-
-  # ----- Carbon.xml config params -----
-  $ports_offset = 0
-  /*
-     Host name or IP address of the machine hosting this server
-     e.g. www.wso2.org, 192.168.1.10
-     This is will become part of the End Point Reference of the
-     services deployed on this server instance.
-  */
-  $hostname = 'localhost'
+# Class: apim_control_plane::custom
+# This class is reserved to run custom user code before starting the server.
+class apim_control_plane::custom {
+  # resources
 }
