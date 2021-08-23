@@ -104,7 +104,7 @@ case "${profile}" in
             apim
             apim_gateway
             apim_control_plane
-            apim_tm
+            apim_tm"
         exit 1
         ;;
 esac
