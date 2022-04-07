@@ -109,6 +109,7 @@ class apim_common::params {
     {
       type                                  => 'hybrid',
       name                                  => 'Default',
+      provider                              => 'wso2',
       description                           => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
       server_url                            => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
       ws_endpoint                           => 'ws://localhost:9099',
@@ -168,4 +169,9 @@ class apim_common::params {
   $admin_password = 'admin'
 
   $event_listener_notification_endpoint = 'https://localhost:${mgt.transport.https.port}/internal/data/v1/notify'
+
+  $token_exchange_enable = true
+  $token_exchange_allow_refresh_tokens = true
+  $token_exchange_iat_validity_period = '1h'
+
 }
