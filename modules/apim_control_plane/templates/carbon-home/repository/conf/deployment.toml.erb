@@ -18,6 +18,7 @@ type = "<%= @wso2am_db_type %>"
 url = "<%= @wso2am_db_url %>"
 username = "<%= @wso2am_db_username %>"
 password = "<%= @wso2am_db_password %>"
+
 [database.apim_db.pool_options]
 validationQuery = "<%= @wso2am_db_validation_query %>"
 
@@ -26,7 +27,8 @@ type = "<%= @wso2shared_db_type %>"
 url = "<%= @wso2shared_db_url %>"
 username = "<%= @wso2shared_db_username %>"
 password = "<%= @wso2shared_db_password %>"
-[database.shared_db.pool_options]
+
+[database.shared_db.pool_options]	
 validationQuery = "<%= @wso2shared_db_validation_query %>"
 
 [keystore.tls]
@@ -54,6 +56,7 @@ key_password =  "<%= @key_store_key_password %>"
 [[apim.gateway.environment]]
 name = "<%= environment['name'] %>"
 type = "<%= environment['type'] %>"
+provider = "wso2"
 display_in_api_console = true
 description = "<%= environment['description'] %>"
 show_as_token_endpoint_url = true
@@ -67,6 +70,7 @@ https_endpoint = "<%= environment['https_endpoint'] %>"
 websub_event_receiver_http_endpoint = "<%= environment['websub_event_receiver_http_endpoint'] %>"
 websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_https_endpoint'] %>"
 <% end %>
+
 
 #[apim.cache.gateway_token]
 #enable = true
@@ -135,11 +139,11 @@ allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","S
 allow_credentials = false
 
 [apim.throttling]
+service_url = "<%= @throttle_service_url %>"
 #enable_data_publishing = true
 #enable_policy_deploy = true
 #enable_blacklist_condition = true
 #enable_persistence = true
-service_url = "<%= @throttle_service_url %>"
 throttle_decision_endpoints = [ <%= @throttle_decision_endpoints %> ]
 
 <% @throttling_url_group.each do |url_group| %>

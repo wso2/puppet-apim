@@ -18,6 +18,7 @@ type = "<%= @wso2am_db_type %>"
 url = "<%= @wso2am_db_url %>"
 username = "<%= @wso2am_db_username %>"
 password = "<%= @wso2am_db_password %>"
+
 [database.apim_db.pool_options]
 validationQuery = "<%= @wso2am_db_validation_query %>"
 
@@ -26,6 +27,7 @@ type = "<%= @wso2shared_db_type %>"
 url = "<%= @wso2shared_db_url %>"
 username = "<%= @wso2shared_db_username %>"
 password = "<%= @wso2shared_db_password %>"
+
 [database.shared_db.pool_options]
 validationQuery = "<%= @wso2shared_db_validation_query %>"
 
@@ -35,6 +37,9 @@ type =  "JKS"
 password =  "<%= @key_store_password %>"
 alias =  "<%= @key_store_key_alias %>"
 key_password =  "<%= @key_store_key_password %>"
+
+#[keystore.listener_profile]
+#bind_address = "0.0.0.0"
 
 #[keystore.primary]
 #file_name =  "wso2carbon.jks"
@@ -54,6 +59,7 @@ key_password =  "<%= @key_store_key_password %>"
 [[apim.gateway.environment]]
 name = "<%= environment['name'] %>"
 type = "<%= environment['type'] %>"
+provider = "wso2"
 display_in_api_console = true
 description = "<%= environment['description'] %>"
 show_as_token_endpoint_url = true
@@ -69,7 +75,7 @@ websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_h
 <% end %>
 
 [apim.sync_runtime_artifacts.gateway]
-gateway_labels = <%= @gateway_labels %>
+gateway_labels =<%= @gateway_labels %>
 
 #[apim.cache.gateway_token]
 #enable = true
@@ -98,7 +104,6 @@ gateway_labels = <%= @gateway_labels %>
 
 #[apim.cache.tags]
 #expiry_time = "2m"
-
 
 [apim.analytics]
 enable = <%= @analytics_enabled %>
@@ -132,9 +137,12 @@ service_url = "<%= @key_manager_server_url %>"
 #enable_user_claims = true
 #claims_extractor_impl = "org.wso2.carbon.apimgt.impl.token.ExtendedDefaultClaimsRetriever"
 
-
 [apim.oauth_config]
+#enable_outbound_auth_header = false
+#auth_header = "Authorization"
 revoke_endpoint = "<%= @oauth_configs_revoke_api_url %>"
+#enable_token_encryption = false
+#enable_token_hashing = false
 
 [apim.devportal]
 url = "<%= @api_devportal_url %>"
@@ -162,8 +170,7 @@ allow_credentials = false
 #enable_policy_deploy = true
 #enable_blacklist_condition = true
 #enable_persistence = true
-#throttle_decision_endpoints = [ <%=throttle_decision_endpoints%> ]
-
+#throttle_decision_endpoints = [ <%= @throttle_decision_endpoints%> ]
 #[apim.throttling.blacklist_condition]
 #start_delay = "5m"
 #period = "1h"
@@ -179,7 +186,8 @@ allow_credentials = false
 #hostName = "0.0.0.0"
 #port = 10005
 
-# <% @throttling_url_group.each do |url_group| %>
+		
+# <% @throttling_url_group.each do |url_group| %>	
 # [[apim.throttling.url_group]]
 # traffic_manager_urls=[<%= url_group['traffic_manager_urls'] %>]
 # traffic_manager_auth_urls=[<%= url_group['traffic_manager_auth_urls'] %>]
@@ -250,3 +258,8 @@ notification_endpoint = "<%= @event_listener_notification_endpoint %>"
 username = "${admin.username}"
 password = "${admin.password}"
 'header.X-WSO2-KEY-MANAGER' = "default"
+
+[oauth.grant_type.token_exchange]
+enable = true
+allow_refresh_tokens = true
+iat_validity_period = "1h"
