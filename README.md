@@ -16,9 +16,9 @@ This repository contains the Puppet modules for profiles related to WSO2 API Man
 2. Set up the JDK distribution as follows:
 
    The Puppet modules for WSO2 products use Amazon Corretto as the JDK distribution. However, you can use any [supported JDK distribution](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/reference/product-compatibility/#tested-jdks). The JDK Distribution can be downloaded and copied to a local directory, or downloaded from a remote location.
-   * **local**: Download Amazon Corretto for Linux x64 from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) and copy .tar into the `<puppet_environment>/modules/apim_common/files/jdk` directory.
+   * **local**: Download Amazon Corretto for Linux x64 from [here](https://corretto.aws/downloads/resources/11.0.14.9.1/amazon-corretto-11.0.14.9.1-linux-x64.tar.gz) and copy .tar into the `<puppet_environment>/modules/apim_common/files/jdk` directory.
    * **remote**: Change the value *$remote_jdk* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the JDK should be downloaded from, and remove it as a comment.
-   * Reassign the *$jdk_name* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the name of the downloaded JDK distribution.
+   * To use a different jdk distribution, reassign the *$jdk_name* and the *$java_home* variables in `<puppet_environment>/modules/apim_common/manifests/params.pp` accordingly.
 
 3. Run the relevant profile on the **Puppet agent**.
     1. Default profile:
