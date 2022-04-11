@@ -17,7 +17,7 @@
 class apim_common::params {
 
   $packages = ["unzip"]
-  $version = "4.0.0"
+  $version = "4.1.0"
 
   # Set the location the product packages should reside in (eg: "local" in the /files directory, "remote" in a remote location)
   $pack_location = "local"
@@ -39,7 +39,7 @@ class apim_common::params {
   # JDK Distributions
   $java_dir = "/opt"
   $java_symlink = "${java_dir}/java"
-  $jdk_name = 'amazon-corretto-8.302.08.1-linux-x64'
+  $jdk_name = 'amazon-corretto-11.0.14.9.1-linux-x64'
   $java_home = "${java_dir}/${jdk_name}"
 
   $profile = $profile
@@ -109,6 +109,7 @@ class apim_common::params {
     {
       type                                  => 'hybrid',
       name                                  => 'Default',
+      provider                              => 'wso2',
       description                           => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
       server_url                            => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
       ws_endpoint                           => 'ws://localhost:9099',
@@ -168,4 +169,9 @@ class apim_common::params {
   $admin_password = 'admin'
 
   $event_listener_notification_endpoint = 'https://localhost:${mgt.transport.https.port}/internal/data/v1/notify'
+
+  $token_exchange_enable = true
+  $token_exchange_allow_refresh_tokens = true
+  $token_exchange_iat_validity_period = '1h'
+
 }
