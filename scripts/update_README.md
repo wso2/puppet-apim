@@ -6,7 +6,7 @@
 ---
 **NOTE**
 
-Provided WUM updated packs should contain the latest updates for wso2am-4.0.0
+Provided U2 updated packs should contain the latest updates for wso2am-4.1.0
 
 ---
 
