@@ -49,21 +49,3 @@ service_url = "<%= @key_manager_server_url %>"
 revoke_endpoint = "<%= @oauth_configs_revoke_api_url %>"
 enable_token_encryption = false
 enable_token_hashing = false
-
-<% @gateway_environments.each do |environment| %>
-[[apim.gateway.environment]]
-name = "<%= environment['name'] %>"
-type = "<%= environment['type'] %>"
-display_in_api_console = true
-description = "<%= environment['description'] %>"
-show_as_token_endpoint_url = true
-service_url = "<%= environment['server_url'] %>"
-username= "${admin.username}"
-password= "${admin.password}"
-ws_endpoint = "<%= environment['ws_endpoint'] %>"
-wss_endpoint = "<%= environment['wss_endpoint'] %>"
-http_endpoint = "<%= environment['http_endpoint'] %>"
-https_endpoint = "<%= environment['https_endpoint'] %>"
-websub_event_receiver_http_endpoint = "<%= environment['websub_event_receiver_http_endpoint'] %>"
-websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_https_endpoint'] %>"
-<% end %>
