@@ -21,8 +21,8 @@ stage { 'custom': }
 Stage['main'] -> Stage['custom']
 
 node default {
-  class { "::${::profile}": }
-  class { "::${::profile}::custom":
+  class { "::${facts['profile']}": }
+  class { "::${facts['profile']}::custom":
     stage => 'custom'
   }
 }
