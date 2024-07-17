@@ -56,6 +56,7 @@ key_password =  "<%= @key_store_key_password %>"
 [[apim.gateway.environment]]
 name = "<%= environment['name'] %>"
 type = "<%= environment['type'] %>"
+gateway_type = "<%= environment['gateway_type'] %>"
 provider = "<%= environment['provider'] %>"
 display_in_api_console = true
 description = "<%= environment['description'] %>"
@@ -99,6 +100,11 @@ websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_h
 
 #[apim.cache.tags]
 #expiry_time = "2m"
+
+[apim.ai]
+enable = <%= @ai_enabled %>
+token = <%= @ai_token %>
+endpoint = <%= @ai_endpoint %>
 
 #[apim.key_manager]
 #service_url = "https://localhost:${mgt.transport.https.port}/services/"

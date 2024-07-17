@@ -93,6 +93,10 @@ class apim_common::params {
   $analytics_config_endpoint = 'https://localhost:8080/auth/v1'
   $analytics_auth_token = ''
 
+  $ai_enabled = 'true'
+  $ai_endpoint = ''
+  $ai_token = ''
+
   $throttle_decision_endpoints = '"tcp://tm1.local:5672","tcp://tm2.local:5672"'
   $throttling_url_group = [
     {
@@ -109,6 +113,7 @@ class apim_common::params {
     {
       type                                  => 'hybrid',
       name                                  => 'Default',
+      gateway_type                          => 'Regular',
       provider                              => 'wso2',
       description                           => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
       server_url                            => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
