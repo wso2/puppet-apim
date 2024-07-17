@@ -4,11 +4,11 @@ This repository contains the Puppet modules for profiles related to WSO2 API Man
 
 ## Supported Puppet Versions
 
-- Puppet 5.4.0
+- Puppet 7.31.0
 
 ## Quick Start Guide
 1. Download a product package. Product packages can be downloaded and copied to a local directory, or downloaded from a remote location.
-    * **Local**: Download wso2am-4.2.0.zip from [here](https://wso2.com/api-management/install/) and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
+    * **Local**: Download wso2am-4.3.0.zip from [here](https://wso2.com/api-management/install/) and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
     * **Remote**:
         1. Change the value *$pack_location* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `remote`.
         2. Change the value *$remote_pack* variable of the relevant profile in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the package should be downloaded from, and remove it as a comment.
