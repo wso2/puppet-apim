@@ -18,7 +18,7 @@
 # This class includes all the necessary parameters.
 class apim_control_plane::params inherits apim_common::params {
 
-  $start_script_template = 'bin/api-manager.sh'
+  $start_script_template = 'bin/api-cp.sh'
   $jvmxms = '256m'
   $jvmxmx = '1024m'
 

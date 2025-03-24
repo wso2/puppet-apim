@@ -20,11 +20,6 @@ class apim_gateway inherits apim_gateway::params {
 
   include apim_common
 
-  # Optimize for profile
-  exec { "optimize-profile":
-    command => "/bin/sh ${carbon_home}/bin/profileSetup.sh -Dprofile=gateway-worker",
-  }
-
   # Copy configuration changes to the installed directory
   $template_list.each |String $template| {
     file { "${carbon_home}/${template}":
@@ -61,7 +56,7 @@ class apim_gateway inherits apim_gateway::params {
     }
   }
 
-  # Copy api-manager.sh to installed directory
+  # Copy gateway.sh to installed directory
   file { "${carbon_home}/${start_script_template}":
     ensure  => file,
     owner   => $user,
