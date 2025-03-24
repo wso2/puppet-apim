@@ -61,7 +61,7 @@ class apim_tm inherits apim_tm::params {
     }
   }
 
-  # Copy api-manager.sh to installed directory
+  # Copy traffic-manager.sh to installed directory
   file { "${carbon_home}/${start_script_template}":
     ensure  => file,
     owner   => $user,
