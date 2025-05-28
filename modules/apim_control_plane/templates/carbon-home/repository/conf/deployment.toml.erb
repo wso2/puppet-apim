@@ -103,8 +103,8 @@ websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_h
 
 [apim.ai]
 enable = <%= @ai_enabled %>
-token = <%= @ai_token %>
-endpoint = <%= @ai_endpoint %>
+token = "<%= @ai_token %>"
+endpoint = "<%= @ai_endpoint %>"
 
 #[apim.key_manager]
 #service_url = "https://localhost:${mgt.transport.https.port}/services/"
