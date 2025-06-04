@@ -59,24 +59,19 @@ Before starting the configuration steps, Puppet environment should be created an
    * **Download from Remote**: Change the value *$remote_jdk* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the JDK should be downloaded from, and remove it as a comment.
    * To use a different jdk distribution, reassign the *$jdk_name* and the *$java_home* variables in `<puppet_environment>/modules/apim_common/manifests/params.pp` accordingly.
 <br>
-
 4. Depending on the Deployment Pattern going to be followed, add the necessary configurations in the modules in the **puppet server**. 
 
-    - For that, populate the `params.pp` and the `deployment.toml.erb` within each module. Follow the Official APIM Documentation to find the required configurations that should be there in the deployment.toml for each profile.
-    <span></span>
-      **[+] Refer Official Documentations Frome Here:**
+    - For that, populate the ```params.pp``` and the ```deployment.toml.erb``` within each module. Follow the Official APIM Documentation to find the required configurations that should be there in the deployment.toml for each profile.
+    
+        > [WSO2 API Manager Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/deployment-overview/)
+        >    - [All-in-One Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/all-in-one-deployment-overview/)
+        >        - [Configure Single Node Deployment](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/configuring-a-single-node/)
+        >        - [Configure Active - Active Deployment](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/configuring-an-active-active-deployment/)
+        >    - [Distributed Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/understanding-the-distributed-deployment-of-wso2-api-m/)
+        >       - [Configuring a Distributed Deployment with Gateway and Control Plane](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup/)
+        >       - [Configuring a Distributed Deployment with Traffic Manager Separated from the Control Plane](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup-with-tm-separated/)
 
-      - [WSO2 API Manager Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/deployment-overview/)
-        - [All-in-One Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/all-in-one-deployment-overview/)
-          - [Configure Single Node Deployment](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/configuring-a-single-node/)
-          - [Configure Active – Active Deployment](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/configuring-an-active-active-deployment/)
-        - [Distributed Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/understanding-the-distributed-deployment-of-wso2-api-m/)
-          - [Configuring a Distributed Deployment with Gateway and Control Plane](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup/)
-          - [Configuring a Distributed Deployment with Traffic Manager Separated from the Control Plane](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup-with-tm-separated/)
-
-
-    - Refer to the `docs/samples/distributed_tm_seperated` folder in this repo for some example `params.pp` and `deployment.toml.erb` files created for configuring a TM-separated distributed API-M deployment using an external MySQL DB.
-
+    - Refer to the ```docs/samples/distributed_tm_seperated``` folder in this repo for some example params.pp and deployment.toml.erbs created for configuring a TM separated distributed API-M deployment using an external MySQL DB.
 <br>
 
 5. In the **agents**, the profile that is desired to be configured on it should be added and this can be done in two ways. 
@@ -136,8 +131,7 @@ System files that will be updated when performance tuning is enabled are availab
 
 1. **Permissions Issues:**
 The service runs as ```User=wso2carbon``` and ```Group=wso2```. Make sure ```/mnt/apim/wso2am-4.4.0/``` and all its contents are owned by ```wso2carbon:wso2``` and are writable by that user.
-    
-    <i>**Fix:**</i>
+    Fix:
     ```bash
     sudo chown -R wso2carbon:wso2 /mnt/<PROFILE_NAME>/wso2am-4.4.0
     sudo chmod -R 755 /mnt/<PROFILE_NAME>/wso2am-4.4.0
@@ -146,8 +140,7 @@ The service runs as ```User=wso2carbon``` and ```Group=wso2```. Make sure ```/mn
 
 2. **JAVA_HOME Not Set or Java Not Installed:**
 The script expects JAVA_HOME to be set (it is set in the script, but make sure /opt/java exists and points to a valid JDK). Make sure Java is installed and accessible to the wso2carbon user.
-
-    <i>**Fix:**</i>
+    Fix:
     ```bash
     sudo -u wso2carbon /opt/java/bin/java -version
     ```
@@ -156,8 +149,7 @@ The script expects JAVA_HOME to be set (it is set in the script, but make sure /
 
 3. **Script Fails Silently:**
 The api-manager.sh script may exit early due to a missing dependency or misconfiguration, so the PID file is never created.
-
-    <i>**Fix:**</i>
+    Fix:
     - Try running the script manually as the wso2carbon user and see if it starts or prints errors:
         ```bash
         sudo -u wso2carbon /mnt/<PROFILE_NAME>/wso2am-4.4.0/bin/api-manager.sh start
@@ -167,8 +159,7 @@ The api-manager.sh script may exit early due to a missing dependency or misconfi
 
 4. **Systemd Type Mismatch:**
 The service is defined as ```Type=forking```, which expects the script to fork and leave a process running in the background, and to write a PID file. If the script does not fork or does not write the PID file, systemd will kill it.
-
-    <i>**Fix:**</i>
+    Fix:
     > Confirm that the script actually forks and writes the PID file.
 
 ---
