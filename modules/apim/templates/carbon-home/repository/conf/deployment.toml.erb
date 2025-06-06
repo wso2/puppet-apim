@@ -55,6 +55,9 @@ key_password =  "<%= @key_store_key_password %>"
 #alias =  "wso2carbon"
 #key_password =  "wso2carbon"
 
+[apim]
+gateway_type = "Regular,APK,AWS"
+
 <% @gateway_environments.each do |environment| %>
 [[apim.gateway.environment]]
 name = "<%= environment['name'] %>"
@@ -113,11 +116,11 @@ auth_token = "<%= @analytics_auth_token %>"
 
 [apim.ai]
 enable = <%= @ai_enabled %>
-token = "<%= @ai_token %>"
+key = "<%= @ai_token %>"
 endpoint = "<%= @ai_endpoint %>"
 
 [apim.key_manager]
-enable_apikey_subscription_validation = true
+enable_lightweight_apikey_generation = true
 service_url = "<%= @key_manager_server_url %>"
 #username = "$ref{super_admin.username}"
 #password = "$ref{super_admin.password}"
@@ -143,6 +146,7 @@ service_url = "<%= @key_manager_server_url %>"
 #signing_algorithm = "SHA256withRSA"
 #enable_user_claims = true
 #claims_extractor_impl = "org.wso2.carbon.apimgt.impl.token.ExtendedDefaultClaimsRetriever"
+#use_sha256_hash = false
 
 [apim.oauth_config]
 #enable_outbound_auth_header = false
@@ -165,6 +169,10 @@ url = "<%= @api_devportal_url %>"
 #enable_anonymous_mode=true
 #enable_cross_tenant_subscriptions = true
 #default_reserved_username = "apim_reserved_user"
+
+
+#[apim.publisher]
+#enable_portal_configuration_only_mode = false
 
 [apim.cors]
 allow_origins = "*"
@@ -236,7 +244,7 @@ allow_credentials = false
 #enable_authentication = true
 
 #[apim.token.revocation]
-#notifier_impl = "org.wso2.carbon.apimgt.keymgt.events.TokenRevocationNotifierImpl"
+#notifier_impl = "org.wso2.carbon.apimgt.notification.TokenRevocationNotifierImpl"
 #enable_realtime_notifier = true
 #realtime_notifier.ttl = 5000
 #enable_persistent_notifier = true
@@ -267,6 +275,22 @@ password = "${admin.password}"
 'header.X-WSO2-KEY-MANAGER' = "default"
 
 [oauth.grant_type.token_exchange]
-enable = "<%= @token_exchange_enable %>"
-allow_refresh_tokens = "<%= @token_exchange_allow_refresh_tokens %>"
+enable = <%= @token_exchange_enable %>
+allow_refresh_tokens = <%= @token_exchange_allow_refresh_tokens %>
 iat_validity_period = "<%= @token_exchange_iat_validity_period %>"
+
+#[apim.transaction_counter]
+#enable = true
+#server_id = "Gateway1"
+#producer_counting_thread_pool_size = 10
+#producer_scheduled_interval = 10
+#max_transaction_count_per_record = 20
+#min_transaction_count_per_record = 5
+#record_queue_size = 1000
+#publisher_scheduled_interval = 5
+#publisher_max_batch_size = 100
+#publisher_max_retries = 3
+#store_impl = "org.wso2.integration.transaction.counter.store.TransactionRecordStoreImpl"
+#service_url = "https://localhost:8080/transactions/records"
+#service_username = "admin"
+#service_password = "admin"
