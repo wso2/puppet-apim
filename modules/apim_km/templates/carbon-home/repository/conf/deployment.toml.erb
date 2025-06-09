@@ -17,17 +17,11 @@ url = "<%= @wso2am_db_url %>"
 username = "<%= @wso2am_db_username %>"
 password = "<%= @wso2am_db_password %>"
 
-[database.apim_db.pool_options]
-validationQuery = "<%= @wso2am_db_validation_query %>"
-
 [database.shared_db]
 type = "<%= @wso2shared_db_type %>"
 url = "<%= @wso2shared_db_url %>"
 username = "<%= @wso2shared_db_username %>"
 password = "<%= @wso2shared_db_password %>"
-
-[database.shared_db.pool_options]
-validationQuery = "<%= @wso2shared_db_validation_query %>"
 
 [keystore.tls]
 file_name =  "<%= @key_store_location %>"
@@ -41,19 +35,26 @@ file_name = "<%= @trust_store_location %>"
 type = "JKS"
 password = "<%= @trust_store_password %>"
 
-# key manager implementation
-[apim.key_manager]
-service_url = "<%= @key_manager_server_url %>"
+[[event_handler]]
+name="userPostSelfRegistration"
+subscriptions=["POST_ADD_USER"]
 
-[apim.oauth_config]
-revoke_endpoint = "<%= @oauth_configs_revoke_api_url %>"
-enable_token_encryption = false
-enable_token_hashing = false
+[[event_listener]]
+id = "token_revocation"
+type = "org.wso2.carbon.identity.core.handler.AbstractIdentityHandler"
+name = "org.wso2.is.notification.ApimOauthEventInterceptor"
+order = 1
 
-# Event Hub configurations
-#[apim.event_hub]
-#enable = true
-#username = "$ref{super_admin.username}"
-#password = "$ref{super_admin.password}"
-#service_url = "https://localhost:${mgt.transport.https.port}/services/"
-#event_listening_endpoints = ["tcp://localhost:5672"]
+[event_listener.properties]
+notification_endpoint = "https://localhost:${mgt.transport.https.port}/internal/data/v1/notify"
+username = "${admin.username}"
+password = "${admin.password}"
+'header.X-WSO2-KEY-MANAGER' = "default"
+
+# Eventhub configurations
+[apim.event_hub]
+enable = true
+username= "$ref{super_admin.username}"
+password= "$ref{super_admin.password}"
+service_url = "https://localhost:${mgt.transport.https.port}/services/"
+event_listening_endpoints = ["tcp://localhost:5672"]

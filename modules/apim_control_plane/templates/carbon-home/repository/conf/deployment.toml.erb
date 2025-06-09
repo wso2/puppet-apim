@@ -2,7 +2,7 @@
 hostname = "<%= @hostname %>"
 base_path = "${carbon.protocol}://${carbon.host}:${carbon.management.port}"
 #discard_empty_caches = false
-server_role = "control-plane"
+server_role = "default"
 offset = "<%= @ports_offset %>"
 
 [super_admin]
@@ -52,6 +52,9 @@ key_password =  "<%= @key_store_key_password %>"
 #alias =  "wso2carbon"
 #key_password =  "wso2carbon"
 
+[apim]
+gateway_type = "<%= @gateway_types %>"
+
 <% @gateway_environments.each do |environment| %>
 [[apim.gateway.environment]]
 name = "<%= environment['name'] %>"
@@ -68,8 +71,8 @@ ws_endpoint = "<%= environment['ws_endpoint'] %>"
 wss_endpoint = "<%= environment['wss_endpoint'] %>"
 http_endpoint = "<%= environment['http_endpoint'] %>"
 https_endpoint = "<%= environment['https_endpoint'] %>"
-websub_event_receiver_http_endpoint = "<%= environment['websub_event_receiver_http_endpoint'] %>"
-websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_https_endpoint'] %>"
+#websub_event_receiver_http_endpoint = "<%= environment['websub_event_receiver_http_endpoint'] %>"
+#websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_https_endpoint'] %>"
 <% end %>
 
 
@@ -100,11 +103,6 @@ websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_h
 
 #[apim.cache.tags]
 #expiry_time = "2m"
-
-[apim.ai]
-enable = <%= @ai_enabled %>
-token = "<%= @ai_token %>"
-endpoint = "<%= @ai_endpoint %>"
 
 #[apim.key_manager]
 #service_url = "https://localhost:${mgt.transport.https.port}/services/"

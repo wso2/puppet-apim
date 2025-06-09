@@ -51,25 +51,32 @@ class apim_common::params {
   # ----- Profile configs -----
   case $profile {
     'apim_gateway': {
-      $pack = "wso2am-${version}"
+      $pack = "wso2am-universal-gw-${version}"
       # $remote_pack = "<URL_TO_APIM_GATEWAY_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/gateway.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=gateway-worker"
+      $optimize_params = ""
     }
     'apim_control_plane': {
-      $pack = "wso2am-${version}"
+      $pack = "wso2am-acp-${version}"
       # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/api-cp.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=control-plane"
+      $optimize_params = ""
     }
     'apim_tm': {
-      $pack = "wso2am-${version}"
+      $pack = "wso2am-tm-${version}"
       # $remote_pack = "<URL_TO_APIM_TRAFFICMANAGER_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/traffic-manager.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=traffic-manager"
+      $optimize_params = ""
+    }
+    'apim_km': {
+      $pack = "wso2am-km-${version}"
+      # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK_PACK>"
+      $server_script_path = "${product_dir}/${pack}/bin/key-manager.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+      $optimize_params = ""
     }
     default: {
       $pack = "wso2am-${version}"
@@ -109,6 +116,7 @@ class apim_common::params {
     }
   ]
 
+  $gateway_types = 'Regular,APK,AWS'
   $gateway_environments = [
     {
       type                                  => 'hybrid',

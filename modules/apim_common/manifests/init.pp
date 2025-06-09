@@ -154,6 +154,16 @@ class apim_common inherits apim_common::params {
     user    => $user,
     group   => $user_group,
     cwd     => "${pack_dir}",
+    notify  => Exec['rename-km-dir']
+  }
+
+  # Rename the extracted directory if profile is apim_km
+  if $profile == 'apim_km' {
+    exec { 'rename-km-dir':
+      command => "/bin/mv ${product_dir}/wso2am-acp-${version} ${product_dir}/wso2am-km-${version}",
+      creates => "${product_dir}/wso2am-km-${version}",
+      require => Exec['unzip-update'],
+    }
   }
 
   # Copy the unit file required to deploy the server as a service

@@ -56,7 +56,7 @@ key_password =  "<%= @key_store_key_password %>"
 #key_password =  "wso2carbon"
 
 [apim]
-gateway_type = "Regular,APK,AWS"
+gateway_type = "<%= @gateway_types %>"
 
 <% @gateway_environments.each do |environment| %>
 [[apim.gateway.environment]]

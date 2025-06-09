@@ -14,11 +14,11 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_gateway::params
+# Claas apim_tm::params
 # This class includes all the necessary parameters.
-class apim_gateway::params inherits apim_common::params {
+class apim_km::params inherits apim_common::params {
 
-  $start_script_template = 'bin/gateway.sh'
+  $start_script_template = 'bin/key-manager.sh'
   $jvmxms = '256m'
   $jvmxmx = '1024m'
 
@@ -41,7 +41,4 @@ class apim_gateway::params inherits apim_common::params {
      services deployed on this server instance.
   */
   $hostname = 'localhost'
-
-  # ----- api-manager.xml config params -----
-  $jms_conn_factory = 'amqp://${admin.username}:${admin.password}@clientid/carbon?brokerlist=\'tcp://${carbon.local.ip}:${jms.port}\''
 }

@@ -1,6 +1,6 @@
 [server]
 hostname = "<%= @hostname %>"
-server_role = "gateway-worker"
+server_role = "default"
 offset = "<%= @ports_offset %>"
 
 [user_store]
@@ -41,14 +41,22 @@ service_url = "<%= @key_manager_server_url %>"
 username= "$ref{super_admin.username}"
 password= "$ref{super_admin.password}"
 
+# Event Hub configurations
+#[apim.event_hub]
+#enable = true
+#username = "$ref{super_admin.username}"
+#password = "$ref{super_admin.password}"
+#service_url = "https://localhost:${mgt.transport.https.port}/services/"
+#event_listening_endpoints = ["tcp://localhost:5672"]
+
 # JWT Generation
-[apim.jwt]
-enable = true
-encoding = "base64" # base64,base64url
+#[apim.jwt]
+#enable = true
+#encoding = "base64" # base64,base64url
 #generator_impl = "org.wso2.carbon.apimgt.keymgt.token.JWTGenerator"
-claim_dialect = "http://wso2.org/claims"
-header = "X-JWT-Assertion"
-signing_algorithm = "SHA256withRSA"
+#claim_dialect = "http://wso2.org/claims"
+#header = "X-JWT-Assertion"
+#signing_algorithm = "SHA256withRSA"
 #enable_user_claims = true
 #claims_extractor_impl = "org.wso2.carbon.apimgt.impl.token.DefaultClaimsRetriever"
 
@@ -73,11 +81,6 @@ traffic_manager_auth_urls=[<%= url_group['traffic_manager_auth_urls'] %>]
 enable = <%= @analytics_enabled %>
 config_endpoint = "<%= @analytics_config_endpoint %>"
 auth_token = "<%= @analytics_auth_token %>"
-
-[apim.ai]
-enable = <%= @ai_enabled %>
-token = "<%= @ai_token %>"
-endpoint = "<%= @ai_endpoint %>"
 
 # Caches
 [apim.cache.gateway_token]
