@@ -1,6 +1,6 @@
 # Puppet Modules for WSO2 API Manager
 
-This repository contains the Puppet modules for profiles related to WSO2 API Manager. 
+This repository contains the Puppet modules related to configuring WSO2 API Manager using Puppet. 
 
 
 
@@ -14,8 +14,9 @@ Located in the modules directory, each subfolder represents a Puppet module for 
 
 - ```apim```: Main API Manager (default profile).
 - ```apim_gateway```: Gateway profile for handling API traffic.
-- ```apim_control_plane```: Control Plane profile for API publishing, management, and key management.
+- ```apim_control_plane```: Control Plane profile for API publishing, management, and key management(if key manager is not seperated).
 - ```apim_tm```: Traffic Manager profile for throttling and rate limiting.
+- ```apim_km```: Key Manager Profile for API manager.
 - ```apim_common```: Shared logic, parameters, and files used by all profiles.
 
 ![Module architecture](docs/images/module_architecture.png "Module architecture")
@@ -37,17 +38,17 @@ Before starting the configuration steps, Puppet environment should be created an
 
  -  **Clone or copy this repository into the Puppet environment directory**:
     ```bash
-    git clone https://github.com/wso2/puppet-apim.git
+    git clone --single-branch --branch 4.5.x https://github.com/wso2/puppet-apim.git
     ```
-- Ensure all required modules and manifests ( `apim`, `apim_gateway`, `apim_control_plane`, `apim_tm`, and `apim_common`) are present in the `modules` directory.
-
+- Ensure all required modules and manifests ( `apim`, `apim_gateway`, `apim_control_plane`, `apim_tm`, `apim_km`, and `apim_common`) are present in the `modules` directory.
+<br>
 - Edit the agent's ```puppet.conf``` to use this copied/cloned directory as the environment.
 
 > **Note:**  
 > In the following instructions, the prepared Puppet environment directory will be referred to as `<puppet_environment>`.
 
 2. Download a product package. Product packages can be downloaded and copied to the directory manually, or downloaded from a remote location. Depending on the approach follow the relevant instruction.
-    * **Manual Approach**: Download wso2am-4.4.0.zip from [here](https://github.com/wso2/product-apim/releases/download/v4.4.0/wso2am-4.4.0.zip) and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
+    * **Manual Approach**: Download wso2am-4.5.0.zip from [here](https://wso2.com/api-manager/) and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
     * **Download from Remote**:
         1. Change the value *$pack_location* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `remote`.
         2. Change the value *$remote_pack* variable of the relevant profile in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the package should be downloaded from, and remove it as a comment.
@@ -63,15 +64,16 @@ Before starting the configuration steps, Puppet environment should be created an
 
     - For that, populate the ```params.pp``` and the ```deployment.toml.erb``` within each module. Follow the Official APIM Documentation to find the required configurations that should be there in the deployment.toml for each profile.
     
-        > [WSO2 API Manager Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/deployment-overview/)
-        >    - [All-in-One Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/all-in-one-deployment-overview/)
-        >        - [Configure Single Node Deployment](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/configuring-a-single-node/)
-        >        - [Configure Active - Active Deployment](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/single-node/configuring-an-active-active-deployment/)
-        >    - [Distributed Deployment Overview](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/understanding-the-distributed-deployment-of-wso2-api-m/)
-        >       - [Configuring a Distributed Deployment with Gateway and Control Plane](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup/)
-        >       - [Configuring a Distributed Deployment with Traffic Manager Separated from the Control Plane](https://apim.docs.wso2.com/en/4.4.0/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup-with-tm-separated/)
+        > [Deployment Patterns Overview](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/deployment-overview/)
+        >    - [All-in-One Deployment Overview](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/single-node/deployment-overview/)
+        >        - [Configure Single Node Deployment](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/single-node/configuring-a-single-node/)
+        >        - [Configure Active - Active Deployment](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/single-node/configuring-an-active-active-deployment/)
+        >    - [Distributed Deployment Overview](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/distributed-deployment/understanding-the-distributed-deployment-of-wso2-api-m/)
+        >       - [Configuring a Distributed Deployment with Gateway and Control Plane](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-simple-scalable-setup/)
+        >       - [Configuring a Distributed Deployment with Traffic Manager Separated from the Control Plane](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup/)
+        >       - [Configuring a Distributed Deployment with Key Manager Separated from the Control Plane](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup-with-km-separated/)
 
-    - Refer to the ```docs/samples/distributed_tm_seperated``` folder in this repo for some example params.pp and deployment.toml.erbs created for configuring a TM separated distributed API-M deployment using an external MySQL DB.
+    - Refer to the ```docs/samples/distributed_km_seperated``` folder in this repo for some example params.pp and deployment.toml.erbs created for configuring a KM separated distributed API-M deployment using an external MySQL DB.
 <br>
 
 5. In the **agents**, the profile that is desired to be configured on it should be added and this can be done in two ways. 
@@ -114,6 +116,10 @@ Before starting the configuration steps, Puppet environment should be created an
        ```bash
        profile=apim_tm
        ```
+    - Key Manager profile:
+       ```bash
+       profile=apim_km
+       ```
     
 6. After configuring the profile, to pull the configurations and run the relevant profile on the **puppet agent**.
     ```bash
@@ -130,11 +136,11 @@ System files that will be updated when performance tuning is enabled are availab
 ## Common Issues & Possible Fixes
 
 1. **Permissions Issues:**
-The service runs as ```User=wso2carbon``` and ```Group=wso2```. Make sure ```/mnt/apim/wso2am-4.4.0/``` and all its contents are owned by ```wso2carbon:wso2``` and are writable by that user.
+The service runs as ```User=wso2carbon``` and ```Group=wso2```. Make sure ```/mnt/<PROFILE_NAME>/<PACK_NAME>/``` and all its contents are owned by ```wso2carbon:wso2``` and are writable by that user.
     Fix:
     ```bash
-    sudo chown -R wso2carbon:wso2 /mnt/<PROFILE_NAME>/wso2am-4.4.0
-    sudo chmod -R 755 /mnt/<PROFILE_NAME>/wso2am-4.4.0
+    sudo chown -R wso2carbon:wso2 /mnt/<PROFILE_NAME>/<PACK_NAME>
+    sudo chmod -R 755 /mnt/<PROFILE_NAME>/<PACK_NAME>
     ```
 <br>
 
@@ -148,13 +154,13 @@ The script expects JAVA_HOME to be set (it is set in the script, but make sure /
 <br>
 
 3. **Script Fails Silently:**
-The api-manager.sh script may exit early due to a missing dependency or misconfiguration, so the PID file is never created.
+The starter script(Ex: api-manager.sh) may exit early due to a missing dependency or misconfiguration, so the PID file is never created.
     Fix:
     - Try running the script manually as the wso2carbon user and see if it starts or prints errors:
         ```bash
-        sudo -u wso2carbon /mnt/<PROFILE_NAME>/wso2am-4.4.0/bin/api-manager.sh start
+        sudo -u wso2carbon /mnt/<PROFILE_NAME>/<PACK_NAME>/bin/api-manager.sh start
         ```
-    - Check for errors in ```/mnt/<PROFILE_NAME>/wso2am-4.4.0/repository/logs/wso2carbon.log``` or similar log files.
+    - Check for errors in ```/mnt/<PROFILE_NAME>/<PACK_NAME>/repository/logs/wso2carbon.log``` or similar log files.
 <br>
 
 4. **Systemd Type Mismatch:**
