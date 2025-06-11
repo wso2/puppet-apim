@@ -62,9 +62,9 @@ password= "$ref{super_admin.password}"
 
 # Traffic Manager configurations
 [apim.throttling]
-username= "$ref{super_admin.username}"
-password= "$ref{super_admin.password}"
-service_url = "<%= @throttle_service_url %>"
+#username= "$ref{super_admin.username}"
+#password= "$ref{super_admin.password}"
+#service_url = "<%= @throttle_service_url %>"
 throttle_decision_endpoints = [<%= @throttle_decision_endpoints %>]
 #enable_unlimited_tier = true
 #enable_header_based_throttling = false

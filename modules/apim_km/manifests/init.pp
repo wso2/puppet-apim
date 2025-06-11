@@ -24,14 +24,14 @@ class apim_km inherits apim_km::params {
   exec { 'setup-key-manager-profile':
     command => "sh ${carbon_home}/bin/profileSetup.sh -Dprofile=key-manager",
     path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-    user    => $wso2_user,
-    group   => $wso2_group,
+    owner    => $user,
+    group   => $user_group,
     cwd     => $carbon_home,
     onlyif  => "test ! -f ${carbon_home}/.km_profile_setup_complete",
     creates => "${carbon_home}/.km_profile_setup_complete",
     require => [
-      File[$carbon_home],
-      User[$wso2_user]
+      Exec['rename-km-dir'],
+      User[$user]
     ],
     notify  => Service[$wso2_service_name],
   }
@@ -39,8 +39,8 @@ class apim_km inherits apim_km::params {
   # Create marker file after profile setup
   file { "${carbon_home}/.km_profile_setup_complete":
     ensure  => present,
-    owner   => $wso2_user,
-    group   => $wso2_group,
+    owner   => $user,
+    group   => $user_group,
     mode    => '0644',
     require => Exec['setup-key-manager-profile'],
   }
