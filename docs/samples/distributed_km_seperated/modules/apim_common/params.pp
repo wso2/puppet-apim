@@ -1,23 +1,7 @@
-#----------------------------------------------------------------------------
-#  Copyright (c) 2021 WSO2, Inc. http://www.wso2.org
-#
-#  Licensed under the Apache License, Version 2.0 (the "License");
-#  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
-#  limitations under the License.
-#----------------------------------------------------------------------------
-
 class apim_common::params {
 
   $packages = ["unzip"]
-  $version = "4.4.0"
+  $version = "4.5.0"
 
   # Set the location the product packages should reside in (eg: "local" in the /files directory, "remote" in a remote location)
   $pack_location = "local"
@@ -51,25 +35,32 @@ class apim_common::params {
   # ----- Profile configs -----
   case $profile {
     'apim_gateway': {
-      $pack = "wso2am-${version}"
+      $pack = "wso2am-universal-gw-${version}"
       # $remote_pack = "<URL_TO_APIM_GATEWAY_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/gateway.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=gateway-worker"
+      $optimize_params = ""
     }
     'apim_control_plane': {
-      $pack = "wso2am-${version}"
+      $pack = "wso2am-acp-${version}"
       # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/api-cp.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=control-plane"
+      $optimize_params = ""
     }
     'apim_tm': {
-      $pack = "wso2am-${version}"
+      $pack = "wso2am-tm-${version}"
       # $remote_pack = "<URL_TO_APIM_TRAFFICMANAGER_PACK>"
-      $server_script_path = "${product_dir}/${pack}/bin/api-manager.sh"
+      $server_script_path = "${product_dir}/${pack}/bin/traffic-manager.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
-      $optimize_params = "-Dprofile=traffic-manager"
+      $optimize_params = ""
+    }
+    'apim_km': {
+      $pack = "wso2am-km-${version}"
+      # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK_PACK>"
+      $server_script_path = "${product_dir}/${pack}/bin/key-manager.sh"
+      $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
+      $optimize_params = ""
     }
     default: {
       $pack = "wso2am-${version}"
@@ -105,6 +96,7 @@ class apim_common::params {
     }
   ]
 
+  $gateway_types = 'Regular,APK,AWS'
   $gateway_environments = [
     {
       type                                  => 'hybrid',
@@ -124,7 +116,7 @@ class apim_common::params {
 
   $gateway_labels = ["Default"]
 
-  $key_manager_server_url = 'https://cp.wso2.com:${mgt.transport.https.port}${carbon.context}services/'
+  $key_manager_server_url = 'https://km.wso2.com:${mgt.transport.https.port}${carbon.context}services/'
   $key_validator_thrift_server_host = 'localhost'
 
   $api_devportal_url = 'https://cp.wso2.com:${mgt.transport.https.port}/devportal'

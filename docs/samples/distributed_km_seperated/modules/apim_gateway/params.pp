@@ -14,11 +14,11 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_control_plane::params
+# Class apim_gateway::params
 # This class includes all the necessary parameters.
-class apim_control_plane::params inherits apim_common::params {
+class apim_gateway::params inherits apim_common::params {
 
-  $start_script_template = 'bin/api-manager.sh'
+  $start_script_template = 'bin/gateway.sh'
   $jvmxms = '1024m'
   $jvmxmx = '2048m'
 
@@ -40,5 +40,8 @@ class apim_control_plane::params inherits apim_common::params {
      This is will become part of the End Point Reference of the
      services deployed on this server instance.
   */
-  $hostname = 'cp.wso2.com'
+  $hostname = 'gw.wso2.com'
+
+  # ----- api-manager.xml config params -----
+  $jms_conn_factory = 'amqp://${admin.username}:${admin.password}@clientid/carbon?brokerlist=\'tcp://${carbon.local.ip}:${jms.port}\''
 }

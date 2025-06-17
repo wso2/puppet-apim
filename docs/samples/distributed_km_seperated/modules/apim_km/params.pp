@@ -16,9 +16,9 @@
 
 # Claas apim_tm::params
 # This class includes all the necessary parameters.
-class apim_tm::params inherits apim_common::params {
+class apim_km::params inherits apim_common::params {
 
-  $start_script_template = 'bin/api-manager.sh'
+  $start_script_template = 'bin/key-manager.sh'
   $jvmxms = '1024m'
   $jvmxmx = '2048m'
 
@@ -40,5 +40,5 @@ class apim_tm::params inherits apim_common::params {
      This is will become part of the End Point Reference of the
      services deployed on this server instance.
   */
-  $hostname = 'tm.wso2.com'
+  $hostname = 'km.wso2.com'
 }
