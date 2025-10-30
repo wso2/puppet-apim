@@ -97,8 +97,7 @@ class apim_common::params {
 
   # ----- api-manager.xml config params -----
   $analytics_enabled = 'false'
-  $analytics_config_endpoint = 'https://localhost:8080/auth/v1'
-  $analytics_auth_token = ''
+  $analytics_type = 'moesif'
 
   $ai_enabled = 'true'
   $ai_endpoint = ''
@@ -116,7 +115,7 @@ class apim_common::params {
     }
   ]
 
-  $gateway_types = 'Regular,APK,AWS'
+  $gateway_types = 'Regular,APK,,Azure,Kong,Envoy'
   $gateway_environments = [
     {
       type                                  => 'hybrid',
