@@ -24,7 +24,7 @@ class apim_km inherits apim_km::params {
   exec { 'setup-key-manager-profile':
     command => "sh ${carbon_home}/bin/profileSetup.sh -Dprofile=key-manager",
     path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-    owner    => $user,
+    user    => $user,
     group   => $user_group,
     cwd     => $carbon_home,
     onlyif  => "test ! -f ${carbon_home}/.km_profile_setup_complete",
