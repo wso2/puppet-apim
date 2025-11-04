@@ -81,8 +81,7 @@ class apim_common::params {
 
   # ----- api-manager.xml config params -----
   $analytics_enabled = 'false'
-  $analytics_config_endpoint = 'https://localhost:8080/auth/v1'
-  $analytics_auth_token = ''
+  $analytics_type = 'moesif'
 
   $ai_enabled = 'true'
   $ai_endpoint = ''
