@@ -115,7 +115,7 @@ class apim_common::params {
     }
   ]
 
-  $gateway_types = 'Regular,APK,,Azure,Kong,Envoy'
+  $gateway_types = 'Regular,APK,AWS,Azure,Kong,Envoy'
   $gateway_environments = [
     {
       type                                  => 'hybrid',
