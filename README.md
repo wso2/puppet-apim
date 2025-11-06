@@ -144,6 +144,8 @@ Each Puppet module manifest contains the following .pp files.
 
     After running the profile, check the status of the service to ensure it is up and running.
 
+    > **Note:**  If you are configuring a separate database server ensure that the relevant database connector .jar files are placed within the pack components in the puppetserver.
+
 ## Performance Tuning
 System configurations can be changed through Puppet to optimize OS level performance. Performance tuning can be enabled by changing `$enable_performance_tuning` in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `true`.
 
