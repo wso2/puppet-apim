@@ -73,7 +73,7 @@ class apim_common::params {
     }
     'apim_km': {
       $pack = "wso2am-km-${version}"
-      # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK_PACK>"
+      # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/key-manager.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = ""

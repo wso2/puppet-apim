@@ -39,10 +39,10 @@ The run stages for Puppet are described in `<puppet_environment>/manifests/site.
 
 Each Puppet module manifest contains the following .pp files.
 * Main
-    * ```params.pp```: Contains all the parameters necessary for the main configuration and template.
-    * ```init.pp```: Contains the main script of the module.
+  * ```params.pp```: Contains all the parameters necessary for the main configuration and template.
+  * ```init.pp```: Contains the main script of the module.
 * Custom
-    * ```custom.pp```: Used to add custom configurations to the Puppet module.
+  * ```custom.pp```: Used to add custom configurations to the Puppet module.
 
 ## General Configuration Steps
 
@@ -106,7 +106,7 @@ Each Puppet module manifest contains the following .pp files.
 
 5. In the **agents**, the profile that is desired to be configured on it should be added and this can be done in two ways. 
 
-    ##### a. Using an Environment Variable (Ephemeral)
+    #### a. Using an Environment Variable (Ephemeral)
 
     Set the profile for just the current session or command run. <i>**Note that this only applies for that session or command execution.**</i>
 
@@ -115,7 +115,7 @@ Each Puppet module manifest contains the following .pp files.
     puppet agent -vt
     ```
 
-    ##### b. Using an External Fact File (Persistent)
+    #### b. Using an External Fact File (Persistent)
 
     Create a file on the agent to always set the profile. This way it will persist across reboots and all agent runs.
 
