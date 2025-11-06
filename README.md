@@ -115,7 +115,6 @@ Each Puppet module manifest contains the following .pp files.
     puppet agent -vt
     ```
 
-
     ##### b. Using an External Fact File (Persistent)
 
     Create a file on the agent to always set the profile. This way it will persist across reboots and all agent runs.
@@ -127,29 +126,18 @@ Each Puppet module manifest contains the following .pp files.
 
     Following are the ```PROFILE_NAME``` values that can be added depending on which profile that is intended to run on a particular **puppet agent**.
     
-    - For Default Profile (All-in-one):
-        ```bash
-        profile=apim
-        ```
+    - Default Profile (All-in-one):
+        ```profile=apim```
+    - Gateway Profile:
+        ```profile=apim_gateway```
+    - Control Plane Profile:
+        ```profile=apim_control_plane```
+    - Traffic Manager Profile:
+        ```profile=apim_tm```
+    - Key Manager Profile:
+        ```profile=apim_km```
 
-    - Gateway profile:
-       ```bash
-       profile=apim_gateway
-       ```
-    - Control Plane profile:
-       ```bash
-       profile=apim_control_plane
-       ```
-    - Traffic Manager profile:
-       ```bash
-       profile=apim_tm
-       ```
-    - Key Manager profile:
-       ```bash
-       profile=apim_km
-       ```
-    
-6. After configuring the profile, to pull the configurations and run the relevant profile on the **puppet agent**.
+6. After configuring the profile, execute the following command to pull the configurations and run the relevant profile on the **puppet agent**.
     ```bash
     puppet agent -vt
     ```
