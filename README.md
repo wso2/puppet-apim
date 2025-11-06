@@ -8,6 +8,20 @@ This repository contains the Puppet modules related to configuring WSO2 API Mana
 
 - Puppet 8.x.x
 
+## Prerequisites
+A working Puppet Master and Puppet Agent setup. Refer to the [Puppet documentation](https://puppet.com/docs/puppet/latest/puppet_index.html) for guidance on setting up Puppet.
+
+E.g.
+If you are deploying the API Manager in a distributed setup with separate Gateway, Control Plane, Traffic Manager, and Key Manager nodes, you would have Puppet Agents installed on each of these nodes. A separate node would act as the Puppet Master, managing the configurations for all these nodes.
+
+The Puppet Master host file should have entries for all the Puppet Agents with their respective hostnames and IP addresses.
+Ensure that certificates of the Puppet Agents are signed by the Puppet Master to allow communication and configuration management.
+This can be done by running the following command on the Puppet Master after the Puppet Agents have requested certificates:
+
+```bash
+sudo /opt/puppetlabs/bin/puppetserver ca sign --all
+``` 
+
 ## Manifests in a module
 
 Located in the modules directory, each subfolder represents a Puppet module for a specific API Manager profile or shared logic:
@@ -30,34 +44,48 @@ Each Puppet module manifest contains the following .pp files.
 * Custom
     * ```custom.pp```: Used to add custom configurations to the Puppet module.
 
-## General Confiuration Steps
+## General Configuration Steps
 
-1.Preparing the Puppet Environment:
+1. Preparing the Puppet Environment:
 
-Before starting the configuration steps, Puppet environment should be created and the necessary modules, manifests, and scripts should be added:
+        Before starting the configuration steps, Puppet environment should be created and the necessary modules, manifests, and scripts should be added:
+    -  **Navigate to the Puppet environment directory** on the Puppet Master.  
+        ```bash
+        cd /etc/puppetlabs/code/environments/
+        ```
+    -  **Clone or copy this repository into the Puppet environment directory**:
+        ```bash
+        git clone --single-branch --branch 4.6.x https://github.com/wso2/puppet-apim.git
+        ```
+    - Ensure all required modules and manifests ( `apim`, `apim_gateway`, `apim_control_plane`, `apim_tm`, `apim_km`, and `apim_common`) are present in the `modules` directory.
+    <br>
+    - Edit the agent's ```puppet.conf``` to use this copied/cloned directory as the environment.
+        ```
+        [main]
+        certname = <component_certname>
+        server = <puppet_master_hostname>
+        [agent]
+        environment = <puppet_environment_name>
+        ```
 
- -  **Clone or copy this repository into the Puppet environment directory**:
-    ```bash
-    git clone --single-branch --branch 4.6.x https://github.com/wso2/puppet-apim.git
-    ```
-- Ensure all required modules and manifests ( `apim`, `apim_gateway`, `apim_control_plane`, `apim_tm`, `apim_km`, and `apim_common`) are present in the `modules` directory.
-<br>
-- Edit the agent's ```puppet.conf``` to use this copied/cloned directory as the environment.
+        > **Note:**  
+        > In the following instructions, the above prepared Puppet environment directory will be referred to as `<puppet_environment>`.
 
-> **Note:**  
-> In the following instructions, the prepared Puppet environment directory will be referred to as `<puppet_environment>`.
 
-2. Download a product package. Product packages can be downloaded and copied to the directory manually, or downloaded from a remote location. Depending on the approach follow the relevant instruction.
+
+2. Downloading the Product Packs:
+
+    Download a product package. Product packages can be downloaded and copied to the directory manually, or downloaded from a remote location. Depending on the approach follow the relevant instruction.
     * **Manual Approach**: Download wso2am-4.6.0.zip from [here](https://wso2.com/api-manager/) and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
     * **Download from Remote**:
-        1. Change the value *$pack_location* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `remote`.
-        2. Change the value *$remote_pack* variable of the relevant profile in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the package should be downloaded from, and remove it as a comment.
-<br>
+        1. Change the value ```*$pack_location*``` variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `remote`.
+        2. Change the value ```*$remote_pack*``` variable of the relevant profile in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the package should be downloaded from, and remove it as a comment.
+    <br>
 3. Set up the JDK distribution as follows:
 
    The Puppet modules for WSO2 products use Amazon Corretto as the JDK distribution. However, you can use any [supported JDK distribution](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/reference/product-compatibility/#tested-jdks). Similar to the product pack, the JDK Distribution can also be downloaded and copied to the directory manually, or can be downloaded from a remote location.
    * **Manual Approach**: Download Amazon Corretto for Linux x64 from [here](https://corretto.aws/downloads/resources/17.0.6.10.1/amazon-corretto-17.0.6.10.1-linux-x64.tar.gz) and copy .tar into the `<puppet_environment>/modules/apim_common/files/jdk` directory.
-   * **Download from Remote**: Change the value *$remote_jdk* variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the JDK should be downloaded from, and remove it as a comment.
+   * **Download from Remote**: Change the value ```*$remote_jdk*``` variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the JDK should be downloaded from, and remove it as a comment.
    * To use a different jdk distribution, reassign the *$jdk_name* and the *$java_home* variables in `<puppet_environment>/modules/apim_common/manifests/params.pp` accordingly.
 <br>
 4. Depending on the Deployment Pattern going to be followed, add the necessary configurations in the modules in the **puppet server**. 
