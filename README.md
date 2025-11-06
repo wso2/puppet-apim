@@ -38,7 +38,7 @@ Before starting the configuration steps, Puppet environment should be created an
 
  -  **Clone or copy this repository into the Puppet environment directory**:
     ```bash
-    git clone --single-branch --branch 4.5.x https://github.com/wso2/puppet-apim.git
+    git clone --single-branch --branch 4.6.x https://github.com/wso2/puppet-apim.git
     ```
 - Ensure all required modules and manifests ( `apim`, `apim_gateway`, `apim_control_plane`, `apim_tm`, `apim_km`, and `apim_common`) are present in the `modules` directory.
 <br>
