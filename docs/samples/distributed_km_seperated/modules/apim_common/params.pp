@@ -124,6 +124,8 @@ class apim_common::params {
   $traffic_manager_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
   $traffic_manager_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
 
+  $eventhub_service_url_host = 'localhost'
+  
   # ----- Master-datasources config params -----
 
   $wso2am_db_url = 'jdbc:mysql://<DB_HOST>:3306/apim_db?useSSL=false'

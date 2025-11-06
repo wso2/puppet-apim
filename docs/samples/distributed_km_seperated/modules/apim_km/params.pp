@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Claas apim_tm::params
+# Class apim_km::params
 # This class includes all the necessary parameters.
 class apim_km::params inherits apim_common::params {
 
