@@ -28,7 +28,7 @@ Located in the modules directory, each subfolder represents a Puppet module for 
 
 - ```apim```: Main API Manager (default profile).
 - ```apim_gateway```: Gateway profile for handling API traffic.
-- ```apim_control_plane```: Control Plane profile for API publishing, management, and key management(if key manager is not seperated).
+- ```apim_control_plane```: Control Plane profile for API publishing, management, and key management(if key manager is not separated).
 - ```apim_tm```: Traffic Manager profile for throttling and rate limiting.
 - ```apim_km```: Key Manager Profile for API manager.
 - ```apim_common```: Shared logic, parameters, and files used by all profiles.
@@ -101,7 +101,7 @@ Each Puppet module manifest contains the following .pp files.
         >       - [Configuring a Distributed Deployment with Traffic Manager Separated from the Control Plane](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup/)
         >       - [Configuring a Distributed Deployment with Key Manager Separated from the Control Plane](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup-with-km-separated/)
 
-    - Refer to the ```docs/samples/distributed_km_seperated``` folder in this repo for some example params.pp and deployment.toml.erbs created for configuring a KM separated distributed API-M deployment using an external MySQL DB.
+    - Refer to the ```docs/samples/distributed_km_separated``` folder in this repo for some example params.pp and deployment.toml.erbs created for configuring a KM separated distributed API-M deployment using an external MySQL DB.
 <br>
 
 5. In the **agents**, the profile that is desired to be configured on it should be added and this can be done in two ways. 
