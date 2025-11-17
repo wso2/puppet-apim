@@ -105,14 +105,21 @@ class apim_common inherits apim_common::params {
 
   # Copy binary to distribution path
   if $pack_location == "local" {
+
+    if $profile == 'apim_km' {
+      $binary_source = "puppet:///modules/${module_name}/packs/wso2am-acp-${version}.zip"
+    } else {
+      $binary_source = "puppet:///modules/${module_name}/packs/${product_binary}"
+    }
+
     file { "wso2-binary":
       path    => "${pack_dir}/${product_binary}",
       owner   => $user,
       group   => $user_group,
       mode    => '0644',
-      source  => "puppet:///modules/${module_name}/packs/${product_binary}",
+      source  => $binary_source,
       require => File["${product_dir}", "${pack_dir}"],
-      notify  => [Exec["stop-server"], Exec["unzip-update"]],
+      notify  => [Exec["copy-acp-zip-for-km"], Exec["stop-server"], Exec["unzip-update"]],
     }
   }
   elsif $pack_location == "remote" {
@@ -154,6 +161,23 @@ class apim_common inherits apim_common::params {
     user    => $user,
     group   => $user_group,
     cwd     => "${pack_dir}",
+    notify  => Exec['rename-km-dir']
+  }
+
+  # Create a copy of the ACP zip file for KM profile
+  exec { 'copy-acp-zip-for-km':
+    command => "/bin/cp ${pack_dir}/wso2am-acp-${version}.zip ${pack_dir}/wso2am-km-${version}.zip",
+    creates => "${pack_dir}/wso2am-km-${version}.zip",
+    require => File['wso2-binary'],
+    onlyif  => "/usr/bin/test '${profile}' = 'apim_km'",
+  }
+
+  # Rename the extracted directory if profile is apim_km
+  exec { 'rename-km-dir':
+    command => "/bin/mv ${product_dir}/wso2am-acp-${version} ${product_dir}/wso2am-km-${version}",
+    creates => "${product_dir}/wso2am-km-${version}",
+    require => Exec['unzip-update'],
+    onlyif  => "/usr/bin/test '${profile}' = 'apim_km'",
   }
 
   # Copy the unit file required to deploy the server as a service

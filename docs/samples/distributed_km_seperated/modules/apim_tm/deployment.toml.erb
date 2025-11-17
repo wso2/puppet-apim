@@ -16,6 +16,7 @@ type = "<%= @wso2am_db_type %>"
 url = "<%= @wso2am_db_url %>"
 username = "<%= @wso2am_db_username %>"
 password = "<%= @wso2am_db_password %>"
+driver="com.mysql.cj.jdbc.Driver"
 
 [database.apim_db.pool_options]
 validationQuery = "<%= @wso2am_db_validation_query %>"
@@ -25,6 +26,7 @@ type = "<%= @wso2shared_db_type %>"
 url = "<%= @wso2shared_db_url %>"
 username = "<%= @wso2shared_db_username %>"
 password = "<%= @wso2shared_db_password %>"
+driver="com.mysql.cj.jdbc.Driver"
 
 [database.shared_db.pool_options]
 validationQuery = "<%= @wso2shared_db_validation_query %>"
@@ -55,5 +57,5 @@ enable_token_hashing = false
 enable = true
 username = "$ref{super_admin.username}"
 password = "$ref{super_admin.password}"
-service_url = "https://localhost:${mgt.transport.https.port}/services/"
-event_listening_endpoints = ["tcp://localhost:5672"]
+service_url = "https://cp.wso2.com:${mgt.transport.https.port}/services/"
+event_listening_endpoints = ["tcp://cp.wso2.com:5672"]

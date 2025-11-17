@@ -14,11 +14,11 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class apim_tm::params
+# Class apim_km::params
 # This class includes all the necessary parameters.
-class apim_tm::params inherits apim_common::params {
+class apim_km::params inherits apim_common::params {
 
-  $start_script_template = 'bin/traffic-manager.sh'
+  $start_script_template = 'bin/key-manager.sh'
   $jvmxms = '256m'
   $jvmxmx = '1024m'
 

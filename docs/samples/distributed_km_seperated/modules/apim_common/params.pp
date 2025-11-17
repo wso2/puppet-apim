@@ -1,19 +1,3 @@
-#----------------------------------------------------------------------------
-#  Copyright (c) 2021 WSO2, Inc. http://www.wso2.org
-#
-#  Licensed under the Apache License, Version 2.0 (the "License");
-#  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
-#  limitations under the License.
-#----------------------------------------------------------------------------
-
 class apim_common::params {
 
   $packages = ["unzip"]
@@ -73,7 +57,7 @@ class apim_common::params {
     }
     'apim_km': {
       $pack = "wso2am-km-${version}"
-      # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK>"
+      # $remote_pack = "<URL_TO_APIM_CONTROL_PLANE_PACK_PACK>"
       $server_script_path = "${product_dir}/${pack}/bin/key-manager.sh"
       $pid_file_path = "${product_dir}/${pack}/wso2carbon.pid"
       $optimize_params = ""
@@ -103,15 +87,11 @@ class apim_common::params {
   $ai_endpoint = ''
   $ai_token = ''
 
-  $throttle_decision_endpoints = '"tcp://tm1.local:5672","tcp://tm2.local:5672"'
+  $throttle_decision_endpoints = '"tcp://tm.wso2.com:5672"'
   $throttling_url_group = [
     {
-      traffic_manager_urls      => '"tcp://tm1.local:9611"',
-      traffic_manager_auth_urls => '"ssl://tm1.local:9711"'
-    },
-    {
-      traffic_manager_urls      => '"tcp://tm2.local:9611"',
-      traffic_manager_auth_urls => '"ssl://tm2.local:9711"'
+      traffic_manager_urls      => '"tcp://tm.wso2.com:9611"',
+      traffic_manager_auth_urls => '"ssl://tm.wso2.com:9711"'
     }
   ]
 
@@ -123,11 +103,11 @@ class apim_common::params {
       gateway_type                          => 'Regular',
       provider                              => 'wso2',
       description                           => 'This is a hybrid gateway that handles both production and sandbox token traffic.',
-      server_url                            => 'https://localhost:${mgt.transport.https.port}${carbon.context}services/',
-      ws_endpoint                           => 'ws://localhost:9099',
-      wss_endpoint                          => 'wss://localhost:8099',
-      http_endpoint                         => 'http://localhost:8280',
-      https_endpoint                        => 'https://localhost:8243',
+      server_url                            => 'https://gw.wso2.com:${mgt.transport.https.port}${carbon.context}services/',
+      ws_endpoint                           => 'ws://gw.wso2.com:9099',
+      wss_endpoint                          => 'wss://gw.wso2.com:8099',
+      http_endpoint                         => 'http://gw.wso2.com:8280',
+      https_endpoint                        => 'https://gw.wso2.com:8243',
       websub_event_receiver_http_endpoint   => 'http://localhost:9021',
       websub_event_receiver_https_endpoint  => 'https://localhost:8021'
     }
@@ -135,27 +115,28 @@ class apim_common::params {
 
   $gateway_labels = ["Default"]
 
-  $key_manager_server_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $key_manager_server_url = 'https://km.wso2.com:${mgt.transport.https.port}${carbon.context}services/'
   $key_validator_thrift_server_host = 'localhost'
 
-  $api_devportal_url = 'https://localhost:${mgt.transport.https.port}/devportal'
-  $throttle_service_url = 'https://localhost:${mgt.transport.https.port}${carbon.context}services/'
+  $api_devportal_url = 'https://cp.wso2.com:${mgt.transport.https.port}/devportal'
+  $throttle_service_url = 'https://tm.wso2.com:${mgt.transport.https.port}${carbon.context}services/'
 
   $traffic_manager_receiver_url = 'tcp://${carbon.local.ip}:${receiver.url.port}'
   $traffic_manager_auth_url = 'ssl://${carbon.local.ip}:${auth.url.port}'
 
+
   # ----- Master-datasources config params -----
 
-  $wso2am_db_url = 'jdbc:h2:./repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE'
-  $wso2am_db_username = 'wso2carbon'
-  $wso2am_db_password = 'wso2carbon'
-  $wso2am_db_type = 'h2'
+  $wso2am_db_url = 'jdbc:mysql://<DB_HOST>:3306/apim_db?useSSL=false'
+  $wso2am_db_username = 'apimadmin'
+  $wso2am_db_password = 'apimadmin'
+  $wso2am_db_type = 'mysql'
   $wso2am_db_validation_query = 'SELECT 1'
 
-  $wso2shared_db_url = 'jdbc:h2:./repository/database/WSO2SHARED_DB;DB_CLOSE_ON_EXIT=FALSE'
-  $wso2shared_db_username = 'wso2carbon'
-  $wso2shared_db_password = 'wso2carbon'
-  $wso2shared_db_type = 'h2'
+  $wso2shared_db_url = 'jdbc:mysql://<DB_HOST>:3306/shared_db?useSSL=false'
+  $wso2shared_db_username = 'sharedadmin'
+  $wso2shared_db_password = 'sharedadmin'
+  $wso2shared_db_type = 'mysql'
   $wso2shared_db_validation_query = 'SELECT 1'
 
   # ----- Carbon.xml config params -----

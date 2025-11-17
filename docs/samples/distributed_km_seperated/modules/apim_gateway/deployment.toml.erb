@@ -16,6 +16,7 @@ type = "<%= @wso2shared_db_type %>"
 url = "<%= @wso2shared_db_url %>"
 username = "<%= @wso2shared_db_username %>"
 password = "<%= @wso2shared_db_password %>"
+driver="com.mysql.cj.jdbc.Driver"
 
 [database.shared_db.pool_options]
 validationQuery = "<%= @wso2shared_db_validation_query %>"
@@ -46,8 +47,8 @@ password= "$ref{super_admin.password}"
 enable = true
 username = "$ref{super_admin.username}"
 password = "$ref{super_admin.password}"
-service_url = "https://localhost:${mgt.transport.https.port}/services/"
-event_listening_endpoints = ["tcp://localhost:5672"]
+service_url = "https://cp.wso2.com:${mgt.transport.https.port}/services/"
+event_listening_endpoints = ["tcp://cp.wso2.com:5672"]
 
 # JWT Generation
 #[apim.jwt]
@@ -62,9 +63,6 @@ event_listening_endpoints = ["tcp://localhost:5672"]
 
 # Traffic Manager configurations
 [apim.throttling]
-#username= "$ref{super_admin.username}"
-#password= "$ref{super_admin.password}"
-#service_url = "<%= @throttle_service_url %>"
 throttle_decision_endpoints = [<%= @throttle_decision_endpoints %>]
 #enable_unlimited_tier = true
 #enable_header_based_throttling = false
