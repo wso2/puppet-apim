@@ -14,11 +14,36 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-# Class: apim_gateway
-# Init class of API Manager gateway profile
-class apim_gateway inherits apim_gateway::params {
+# Class: apim_km
+# Init class of API Manager - Key Manager profile
+class apim_km inherits apim_km::params {
 
   include apim_common
+
+  # Run profile setup before starting the service
+  exec { 'setup-key-manager-profile':
+    command => "sh ${carbon_home}/bin/profileSetup.sh -Dprofile=key-manager",
+    path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    user    => $user,
+    group   => $user_group,
+    cwd     => $carbon_home,
+    onlyif  => "test ! -f ${carbon_home}/.km_profile_setup_complete",
+    creates => "${carbon_home}/.km_profile_setup_complete",
+    require => [
+      Exec['rename-km-dir'],
+      User[$user]
+    ],
+    notify  => Service[$wso2_service_name],
+  }
+
+  # Create marker file after profile setup
+  file { "${carbon_home}/.km_profile_setup_complete":
+    ensure  => present,
+    owner   => $user,
+    group   => $user_group,
+    mode    => '0644',
+    require => Exec['setup-key-manager-profile'],
+  }
 
   # Copy configuration changes to the installed directory
   $template_list.each |String $template| {
@@ -45,7 +70,7 @@ class apim_gateway inherits apim_gateway::params {
     }
   }
 
-  # Delete files to carbon home directory
+  # Delete files from carbon home directory
   $file_removelist.each | String $removefile | {
     file { "${carbon_home}/${removefile}":
       ensure => absent,
@@ -56,7 +81,7 @@ class apim_gateway inherits apim_gateway::params {
     }
   }
 
-  # Copy gateway.sh to installed directory
+  # Copy key-manager.sh to installed directory
   file { "${carbon_home}/${start_script_template}":
     ensure  => file,
     owner   => $user,
@@ -70,7 +95,7 @@ class apim_gateway inherits apim_gateway::params {
   /*
     Following script can be used to copy file to a given location.
     This will copy some_file to install_path -> repository.
-    Note: Ensure that file is available in modules -> apim_gateway -> files
+    Note: Ensure that file is available in modules -> apim_km -> files
   */
   # file { "${install_path}/repository/some_file":
   #   owner  => $user,
