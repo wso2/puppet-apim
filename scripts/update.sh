@@ -22,7 +22,7 @@
 set -e
 
 # Build artifacts and versions
-: ${version:="4.2.0"}
+: ${version:="4.7.0"}
 : ${packs_dir:=$(pwd)/../modules/apim_common/files/packs/}
 
 usage() { echo "Usage: $0 -p <profile_name>" 1>&2; exit 1; }
@@ -65,6 +65,18 @@ print_conflicts() {
     fi
 }
 
+setup_update_tool() {
+    local setup_script="${carbon_home}/bin/update_tool_setup.sh"
+    if [[ -f "${setup_script}" ]]
+    then
+        echo "Running update tool setup..."
+        chmod +x "${setup_script}"
+        cd ${carbon_home}/bin
+        "${setup_script}"
+        cd ${packs_dir}
+    fi
+}
+
 while getopts ":p:" o; do
     case "${o}" in
         p)
@@ -85,26 +97,32 @@ fi
 case "${profile}" in
     apim)
         pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_control_plane" "apim_tm")
+        updated_modules=("apim")
         ;;
     apim_gateway)
-        pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_control_plane" "apim_tm")
+        pack="wso2am-universal-gw-"${version}
+        updated_modules=("apim_gateway")
         ;;
     apim_control_plane)
-        pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_control_plane" "apim_tm")
+        pack="wso2am-acp-"${version}
+        updated_modules=("apim_control_plane" "apim_km")
         ;;
     apim_tm)
-        pack="wso2am-"${version}
-        updated_modules=("apim" "apim_gateway" "apim_control_plane" "apim_tm")
+        pack="wso2am-tm-"${version}
+        updated_modules=("apim_tm")
+        ;;
+    apim_km)
+        pack="wso2am-acp-"${version}
+        updated_modules=("apim_control_plane" "apim_km")
+        echo "Note: Key Manager uses the ACP (Access Control Plane) pack. Updating ACP pack..."
         ;;
     *)
         echo "Invalid profile. Please provide one of the following profiles:
             apim
             apim_gateway
             apim_control_plane
-            apim_tm"
+            apim_tm
+            apim_km"
         exit 1
         ;;
 esac
@@ -136,6 +154,9 @@ if [[ ${status} -ne 3 ]]
 then
     unzip_pack ${pack}
 fi
+
+# Setup update tool if needed (for APIM 4.5.0+)
+setup_update_tool
 
 if [[ ! -f ${carbon_home}/bin/wso2update_linux ]]
 then

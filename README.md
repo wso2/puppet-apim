@@ -55,7 +55,7 @@ Each Puppet module manifest contains the following .pp files.
         ```
     -  **Clone or copy this repository into the Puppet environment directory**:
         ```bash
-        git clone --single-branch --branch 4.6.x https://github.com/wso2/puppet-apim.git
+        git clone --single-branch --branch 4.7.x https://github.com/wso2/puppet-apim.git
         ```
     - Ensure all required modules and manifests ( `apim`, `apim_gateway`, `apim_control_plane`, `apim_tm`, `apim_km`, and `apim_common`) are present in the `modules` directory.
     <br>
@@ -76,7 +76,7 @@ Each Puppet module manifest contains the following .pp files.
 2. Downloading the Product Packs:
 
     Download a product package. Product packages can be downloaded and copied to the directory manually, or downloaded from a remote location. Depending on the approach follow the relevant instruction.
-    * **Manual Approach**: Download wso2am-4.6.0.zip from [here](https://wso2.com/api-manager/) and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
+    * **Manual Approach**: Download wso2am-4.7.0.zip from [here](https://wso2.com/api-manager/) and copy it to the `<puppet_environment>/modules/apim_common/files/packs` directory in the **Puppetmaster**.
     * **Download from Remote**:
         1. Change the value ```*$pack_location*``` variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to `remote`.
         2. Change the value ```*$remote_pack*``` variable of the relevant profile in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the package should be downloaded from, and remove it as a comment.
@@ -84,9 +84,9 @@ Each Puppet module manifest contains the following .pp files.
 3. Set up the JDK distribution as follows:
 
    The Puppet modules for WSO2 products use Amazon Corretto as the JDK distribution. However, you can use any [supported JDK distribution](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/reference/product-compatibility/#tested-jdks). Similar to the product pack, the JDK Distribution can also be downloaded and copied to the directory manually, or can be downloaded from a remote location.
-   * **Manual Approach**: Download Amazon Corretto for Linux x64 from [here](https://corretto.aws/downloads/resources/17.0.6.10.1/amazon-corretto-17.0.6.10.1-linux-x64.tar.gz) and copy .tar into the `<puppet_environment>/modules/apim_common/files/jdk` directory.
-   * **Download from Remote**: Change the value ```*$remote_jdk*``` variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the JDK should be downloaded from, and remove it as a comment.
-   * To use a different jdk distribution, reassign the *$jdk_name* and the *$java_home* variables in `<puppet_environment>/modules/apim_common/manifests/params.pp` accordingly.
+   * **Manual Approach**: Download Amazon Corretto for Linux x64 from [here](https://corretto.aws/downloads/resources/21.0.10.7.1/amazon-corretto-21.0.10.7.1-linux-x64.tar.gz) and copy .tar into the `<puppet_environment>/modules/apim_common/files/jdk` directory.
+   * **Download from Remote**: Change the value `$remote_jdk` variable in `<puppet_environment>/modules/apim_common/manifests/params.pp` to the URL in which the JDK should be downloaded from, and remove it as a comment.
+   * To use a different jdk distribution, reassign the `$jdk_name` and the `$java_home` variables in `<puppet_environment>/modules/apim_common/manifests/params.pp` accordingly.
 <br>
 4. Depending on the Deployment Pattern going to be followed, add the necessary configurations in the modules in the **puppet server**. 
 
