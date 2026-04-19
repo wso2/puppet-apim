@@ -171,7 +171,7 @@ if [ "$CMD" = "--debug" ]; then
     echo "Warning !!!. User specified JAVA_OPTS will be ignored, once you give the --debug option."
   fi
   CMD="RUN"
-  JAVA_OPTS="-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=$PORT"
+  JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:$PORT"
   echo "Please start the remote debugging client to continue..."
 elif [ "$CMD" = "start" ]; then
   if [ -e "$CARBON_HOME/wso2carbon.pid" ]; then
@@ -298,10 +298,14 @@ echo "Using Java memory options: $JVM_MEM_OPTS"
 #To monitor a Carbon server in remote JMX mode on linux host machines, set the below system property.
 #   -Djava.rmi.server.hostname="your.IP.goes.here"
 
-JAVA_VER_BASED_OPTS="--add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens java.rmi/sun.rmi.transport=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED "
+JAVA_VER_BASED_OPTS="--add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens java.rmi/sun.rmi.transport=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED"
 
 if [ $java_version_formatted -ge 1700 ]; then
     JAVA_VER_BASED_OPTS="$JAVA_VER_BASED_OPTS --add-opens=java.naming/com.sun.jndi.ldap=ALL-UNNAMED --add-opens=java.base/sun.security.x509=ALL-UNNAMED"
+fi
+
+if [ $java_version_formatted -ge 2500 ]; then
+    JAVA_VER_BASED_OPTS="$JAVA_VER_BASED_OPTS --sun-misc-unsafe-memory-access=allow"
 fi
 
 # start diagnostic tool in background in diagnostic-tool/bin/diagnostic
@@ -314,6 +318,8 @@ cleanup() {
 }
 trap 'cleanup' EXIT INT
 
+"$JAVACMD" -cp "$CARBON_HOME/bin/*" org.wso2.carbon.apimgt.encryption.key.generator.EncryptionKeyGenerator "$CARBON_HOME/repository/conf"
+
 while [ "$status" = "$START_EXIT_STATUS" ]
 do
     $JAVACMD \
@@ -322,6 +328,7 @@ do
     -XX:+HeapDumpOnOutOfMemoryError \
     -XX:HeapDumpPath="$CARBON_HOME/repository/logs/heap-dump.hprof" \
     $JAVA_OPTS \
+    --enable-native-access=ALL-UNNAMED \
     -Dcom.sun.management.jmxremote \
     -classpath "$CARBON_CLASSPATH" \
     $JAVA_VER_BASED_OPTS \
