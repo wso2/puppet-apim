@@ -81,6 +81,10 @@ websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_h
 [apim.sync_runtime_artifacts.gateway]
 gateway_labels =<%= @gateway_labels %>
 
+[[oauth.extensions.token_types]]
+name = "JWT"
+issuer = "org.wso2.is.key.manager.tokenpersistence.issuer.ExtendedJWTTokenIssuer"
+
 #[apim.cache.gateway_token]
 #enable = true
 #expiry_time = "900s"
