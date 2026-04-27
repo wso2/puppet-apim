@@ -75,6 +75,9 @@ https_endpoint = "<%= environment['https_endpoint'] %>"
 #websub_event_receiver_https_endpoint = "<%= environment['websub_event_receiver_https_endpoint'] %>"
 <% end %>
 
+[[oauth.extensions.token_types]]
+name = "JWT"
+issuer = "org.wso2.is.key.manager.tokenpersistence.issuer.ExtendedJWTTokenIssuer"
 
 #[apim.cache.gateway_token]
 #enable = true
